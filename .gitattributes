@@ -1,0 +1,15 @@
+# Keep LF everywhere. Registry JSON embeds source file contents, so line
+# endings must not depend on the machine that ran `shadcn build`.
+* text=auto eol=lf
+
+*.ico binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.gif binary
+*.woff binary
+*.woff2 binary
+*.zip binary
+*.fig binary
