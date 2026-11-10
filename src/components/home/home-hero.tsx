@@ -3,8 +3,9 @@ import { ArrowRight, Sparkles } from "lucide-react"
 
 import { CommandBlock } from "@/components/site/command-block"
 import { Button } from "@/components/ui/button"
+import { HeroRotatingWords } from "@/components/home/hero-rotating-words"
+import { HeroSurface } from "@/components/home/hero-surface"
 import { installCommandByUrl } from "@/config/site"
-import { GradientText } from "@/registry/default/ui/gradient-text"
 import { GridPattern } from "@/registry/default/ui/grid-pattern"
 import { NumberTicker } from "@/registry/default/ui/number-ticker"
 
@@ -23,7 +24,7 @@ export function HomeHero({ components, blocks, threeD }: HomeHeroProps) {
   ]
 
   return (
-    <section className="relative overflow-hidden border-b">
+    <HeroSurface className="border-b">
       <GridPattern fade size={44} highlight={[[3, 2], [7, 1], [12, 3], [18, 2], [23, 1]]} className="text-foreground/[0.07]" />
       <div className="relative mx-auto flex max-w-5xl flex-col items-center px-4 pt-20 pb-16 text-center sm:px-6 sm:pt-28 sm:pb-20">
         <Link
@@ -36,7 +37,8 @@ export function HomeHero({ components, blocks, threeD }: HomeHeroProps) {
         </Link>
 
         <h1 className="mt-7 max-w-4xl text-5xl font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl">
-          React components that make interfaces <GradientText>feel alive</GradientText>
+          React components that make interfaces{" "}
+          <HeroRotatingWords words={["feel alive", "stand out", "move", "shine"]} />
         </h1>
         <p className="mt-6 max-w-2xl text-base text-pretty text-muted-foreground sm:text-lg">
           Animated, accessible components and page blocks for React and Tailwind CSS. Install any of them with one
@@ -72,6 +74,6 @@ export function HomeHero({ components, blocks, threeD }: HomeHeroProps) {
           ))}
         </dl>
       </div>
-    </section>
+    </HeroSurface>
   )
 }
