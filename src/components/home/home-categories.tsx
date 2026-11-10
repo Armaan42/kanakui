@@ -17,6 +17,7 @@ import {
   type LucideIcon,
 } from "lucide-react"
 
+import { GlowGrid } from "@/components/home/glow-grid"
 import { getCategories, getItems } from "@/lib/registry"
 
 const ICONS: Record<string, LucideIcon> = {
@@ -46,14 +47,14 @@ export function HomeCategories() {
         <h2 id="categories" className="max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
           Everything you need to build a modern product
         </h2>
-        <ul className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+        <GlowGrid className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
           {categories.map((category) => {
             const Icon = ICONS[category.slug] ?? Component
             return (
               <li key={category.slug}>
                 <Link
                   href={`/components/category/${category.slug}`}
-                  className="group flex h-full flex-col gap-3 rounded-xl border bg-card p-4 transition-colors hover:border-foreground/20 hover:bg-muted/40 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+                  className="glow-card group flex h-full flex-col gap-3 rounded-xl border bg-card p-4 transition-colors hover:border-foreground/20 hover:bg-muted/40 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
                 >
                   <span className="flex items-center justify-between">
                     <Icon aria-hidden="true" className="size-5 text-muted-foreground transition-colors group-hover:text-foreground" />
@@ -68,7 +69,7 @@ export function HomeCategories() {
           <li>
             <Link
               href="/blocks"
-              className="group flex h-full flex-col gap-3 rounded-xl border border-dashed bg-card p-4 transition-colors hover:border-foreground/30 hover:bg-muted/40 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+              className="glow-card group flex h-full flex-col gap-3 rounded-xl border border-dashed bg-card p-4 transition-colors hover:border-foreground/30 hover:bg-muted/40 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
             >
               <span className="flex items-center justify-between">
                 <LayoutTemplate aria-hidden="true" className="size-5 text-muted-foreground transition-colors group-hover:text-foreground" />
@@ -81,14 +82,14 @@ export function HomeCategories() {
           <li>
             <Link
               href="/docs"
-              className="group flex h-full flex-col gap-3 rounded-xl border border-dashed bg-card p-4 transition-colors hover:border-foreground/30 hover:bg-muted/40 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+              className="glow-card group flex h-full flex-col gap-3 rounded-xl border border-dashed bg-card p-4 transition-colors hover:border-foreground/30 hover:bg-muted/40 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
             >
               <Layers aria-hidden="true" className="size-5 text-muted-foreground transition-colors group-hover:text-foreground" />
               <span className="font-medium">Docs</span>
               <span className="text-sm text-muted-foreground">Installation, CLI and troubleshooting guides.</span>
             </Link>
           </li>
-        </ul>
+        </GlowGrid>
       </div>
     </section>
   )

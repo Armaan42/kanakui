@@ -208,3 +208,95 @@
     padding-inline: 1.5rem;
   }
 }
+/* Homepage motion. Every animation is switched off with reduced motion where it's used. */
+@theme {
+  --animate-word-in: word-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-beam-in: beam-in 2.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-beam-fall: beam-fall 6s linear infinite backwards;
+  --animate-glow-spin: glow-spin 4s linear infinite;
+
+  @keyframes word-in {
+    from {
+      opacity: 0;
+      filter: blur(14px);
+      transform: translateY(0.35em);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: none;
+    }
+  }
+  @keyframes beam-in {
+    from {
+      opacity: 0;
+      transform: var(--beam-from);
+    }
+    to {
+      opacity: 1;
+      transform: var(--beam-to);
+    }
+  }
+  @keyframes beam-fall {
+    from {
+      transform: translateY(-140%);
+    }
+    to {
+      transform: translateY(var(--beam-fall, 24rem));
+    }
+  }
+  @keyframes glow-spin {
+    to {
+      rotate: 1turn;
+    }
+  }
+}
+
+/*
+ * A card whose border lights up near the pointer. A parent sets --glow (0/1)
+ * and each card's --glow-x / --glow-y, relative to the card.
+ */
+@layer components {
+  .glow-card {
+    position: relative;
+    isolation: isolate;
+  }
+  .glow-card::before,
+  .glow-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: var(--glow, 0);
+    transition: opacity 0.4s;
+  }
+  /* The lit border. */
+  .glow-card::before {
+    padding: 1px;
+    background: radial-gradient(
+      260px circle at var(--glow-x, -999px) var(--glow-y, -999px),
+      oklch(0.78 0.16 300),
+      oklch(0.8 0.13 220) 35%,
+      transparent 70%
+    );
+    mask:
+      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0);
+  }
+  /* A faint wash inside. */
+  .glow-card::after {
+    z-index: -1;
+    background: radial-gradient(
+      320px circle at var(--glow-x, -999px) var(--glow-y, -999px),
+      color-mix(in oklch, oklch(0.75 0.15 290) 9%, transparent),
+      transparent 70%
+    );
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .glow-card::before,
+    .glow-card::after {
+      transition: none;
+    }
+  }
+}
