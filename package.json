@@ -11,7 +11,7 @@
     "build": "npm run registry:build && next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "registry:generate": "node --env-file-if-exists=.env.local scripts/registry.mts generate",
     "registry:build": "npm run registry:generate && shadcn build && node scripts/registry.mts verify",
     "registry:test": "node scripts/test-registry-install.mts"

@@ -36,6 +36,11 @@ export interface RegistryEntry {
   description: string
   /** Semver of this item's source. Bump on every published change. */
   version: string
+  /** Date this item was first published, YYYY-MM-DD. Used for "Latest releases". */
+  releasedAt: string
+  /** Shown in the homepage "Featured" section. Site-only; not written to registry JSON. */
+  featured?: boolean
+  /** Slugs from registry/categories.ts. */
   categories: string[]
   files: RegistryEntryFile[]
   /** npm packages, optionally with a version: `motion@^12`. */
