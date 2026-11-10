@@ -4,13 +4,22 @@ import type { RegistryItemDefinition } from "./types.ts"
 import item_animated_card from "./items/animated-card.ts"
 import item_border_beam from "./items/border-beam.ts"
 import item_compose_refs from "./items/compose-refs.ts"
+import item_cta_01 from "./items/cta-01.ts"
 import item_dot_pattern from "./items/dot-pattern.ts"
 import item_dots_loader from "./items/dots-loader.ts"
+import item_faq_01 from "./items/faq-01.ts"
+import item_features_01 from "./items/features-01.ts"
+import item_features_02 from "./items/features-02.ts"
+import item_flip_card from "./items/flip-card.ts"
 import item_footer_01 from "./items/footer-01.ts"
 import item_grid_pattern from "./items/grid-pattern.ts"
 import item_hero_01 from "./items/hero-01.ts"
+import item_hero_02 from "./items/hero-02.ts"
+import item_hero_03 from "./items/hero-03.ts"
+import item_logo_cloud_01 from "./items/logo-cloud-01.ts"
 import item_magnetic from "./items/magnetic.ts"
 import item_marquee from "./items/marquee.ts"
+import item_navbar_01 from "./items/navbar-01.ts"
 import item_number_ticker from "./items/number-ticker.ts"
 import item_pricing_01 from "./items/pricing-01.ts"
 import item_ripple_button from "./items/ripple-button.ts"
@@ -18,6 +27,9 @@ import item_segmented_control from "./items/segmented-control.ts"
 import item_shimmer_button from "./items/shimmer-button.ts"
 import item_spinner from "./items/spinner.ts"
 import item_spotlight_card from "./items/spotlight-card.ts"
+import item_stats_01 from "./items/stats-01.ts"
+import item_testimonials_01 from "./items/testimonials-01.ts"
+import item_testimonials_02 from "./items/testimonials-02.ts"
 import item_text_reveal from "./items/text-reveal.ts"
 import item_typewriter from "./items/typewriter.ts"
 import item_use_pointer_position from "./items/use-pointer-position.ts"
@@ -26,13 +38,22 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_animated_card,
   item_border_beam,
   item_compose_refs,
+  item_cta_01,
   item_dot_pattern,
   item_dots_loader,
+  item_faq_01,
+  item_features_01,
+  item_features_02,
+  item_flip_card,
   item_footer_01,
   item_grid_pattern,
   item_hero_01,
+  item_hero_02,
+  item_hero_03,
+  item_logo_cloud_01,
   item_magnetic,
   item_marquee,
+  item_navbar_01,
   item_number_ticker,
   item_pricing_01,
   item_ripple_button,
@@ -40,6 +61,9 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_shimmer_button,
   item_spinner,
   item_spotlight_card,
+  item_stats_01,
+  item_testimonials_01,
+  item_testimonials_02,
   item_text_reveal,
   item_typewriter,
   item_use_pointer_position,
