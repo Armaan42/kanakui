@@ -10,7 +10,11 @@ export function SiteFooter() {
     <footer className="border-t">
       <div className="page-container flex flex-col gap-4 py-8 text-sm sm:flex-row sm:items-center sm:justify-between">
         <p className="text-muted-foreground">
-          {siteConfig.name}: components in the open shadcn registry format.
+          {siteConfig.name}: components in the open shadcn registry format. Free components are{" "}
+          <a href={siteConfig.license.url} target="_blank" rel="noreferrer" className={linkClass + " underline underline-offset-4"}>
+            {siteConfig.license.name} licensed
+          </a>
+          .
         </p>
         <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-2">
           <Link href="/components" className={linkClass}>

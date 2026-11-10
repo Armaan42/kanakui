@@ -57,6 +57,11 @@ export const siteConfig = {
   links: {
     github: process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com/Armaan42/kanakui",
   },
+  /** License of the free registry items. Must match the LICENSE file. */
+  license: {
+    name: "MIT",
+    url: `${process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com/Armaan42/kanakui"}/blob/main/LICENSE`,
+  },
   /**
    * Main navigation. Only list pages that exist; sections such as Blocks,
    * Templates and Docs are added here when their phase ships.

@@ -7,6 +7,7 @@ import { ComponentGrid } from "@/components/site/component-card"
 import { ComponentPreview } from "@/components/site/component-preview"
 import { InstallTabs } from "@/components/site/install-tabs"
 import { Badge } from "@/components/ui/badge"
+import { siteConfig } from "@/config/site"
 import { formatDate } from "@/lib/format"
 import {
   getCategoryTitle,
@@ -168,6 +169,17 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
             <dd>{formatDate(component.releasedAt)}</dd>
             <dt className="text-muted-foreground">Version</dt>
             <dd className="font-mono text-[13px]">{component.version}</dd>
+            <dt className="text-muted-foreground">License</dt>
+            <dd>
+              <a
+                href={siteConfig.license.url}
+                target="_blank"
+                rel="noreferrer"
+                className="underline-offset-4 hover:underline"
+              >
+                {siteConfig.license.name}
+              </a>
+            </dd>
           </dl>
         </aside>
       </div>

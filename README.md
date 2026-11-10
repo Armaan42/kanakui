@@ -91,3 +91,8 @@ npx shadcn@latest add @kanakui/animated-card
 # 3. By namespace with zero setup. This only works once @kanakui is accepted into
 #    shadcn's public registry index (a PR to shadcn-ui/ui, Phase 8).
 ```
+
+## License
+
+The free components in this registry are released under the [MIT License](LICENSE). Premium resources (later phases) will be distributed under separate commercial terms and will not be stored in this repository.
+
