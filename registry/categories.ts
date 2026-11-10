@@ -22,5 +22,15 @@ export const registryCategories: RegistryCategory[] = [
   { slug: "loaders", title: "Loaders", description: "Spinners, skeletons and progress indicators." },
   { slug: "interactive", title: "Interactive", description: "Components that respond to the pointer or keyboard." },
   { slug: "hooks", title: "Hooks", description: "React hooks used by components." },
+  // Block categories
+  { slug: "hero", title: "Hero sections", description: "The first section of a landing page: headline, pitch and calls to action." },
+  { slug: "features", title: "Features", description: "Sections that explain what a product does." },
+  { slug: "pricing", title: "Pricing", description: "Plans, prices and feature comparisons." },
+  { slug: "testimonials", title: "Testimonials", description: "Quotes and social proof from customers." },
+  { slug: "cta", title: "Calls to action", description: "Sections that ask the visitor to take the next step." },
+  { slug: "footers", title: "Footers", description: "Site footers with links, legal text and social links." },
+  { slug: "navbars", title: "Navigation bars", description: "Site headers and top navigation." },
+  { slug: "logo-clouds", title: "Logo clouds", description: "Rows of customer or partner logos." },
+  { slug: "stats", title: "Statistics", description: "Sections that highlight key numbers." },
   { slug: "utilities", title: "Utilities", description: "Small helper functions used by components." },
 ]

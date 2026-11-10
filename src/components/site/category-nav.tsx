@@ -1,20 +1,21 @@
 import Link from "next/link"
 
-import type { CategoryWithCount } from "@/lib/registry"
+import type { CategoryWithCount, ItemKind } from "@/lib/registry"
 import { cn } from "@/lib/utils"
 
 interface CategoryNavProps {
+  kind: ItemKind
   categories: CategoryWithCount[]
   total: number
-  /** Slug of the current category; undefined on /components. */
+  /** Slug of the current category; undefined on the section's index page. */
   active?: string
 }
 
-export function CategoryNav({ categories, total, active }: CategoryNavProps) {
+export function CategoryNav({ kind, categories, total, active }: CategoryNavProps) {
   const items = [
-    { href: "/components", label: "All", count: total, current: active === undefined },
+    { href: `/${kind}`, label: "All", count: total, current: active === undefined },
     ...categories.map((c) => ({
-      href: `/components/category/${c.slug}`,
+      href: `/${kind}/category/${c.slug}`,
       label: c.title,
       count: c.count,
       current: c.slug === active,

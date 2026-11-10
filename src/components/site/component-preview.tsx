@@ -18,10 +18,12 @@ interface ComponentPreviewProps {
    * component at once.
    */
   eager?: boolean
+  /** Full-width, unpadded canvas for blocks (page sections). */
+  fill?: boolean
   className?: string
 }
 
-export function ComponentPreview({ name, eager = false, className }: ComponentPreviewProps) {
+export function ComponentPreview({ name, eager = false, fill = false, className }: ComponentPreviewProps) {
   const Demo = lazyDemos[name]
   const ref = React.useRef<HTMLDivElement>(null)
   const [inView, setInView] = React.useState(eager)
@@ -48,8 +50,9 @@ export function ComponentPreview({ name, eager = false, className }: ComponentPr
       ref={ref}
       data-slot="component-preview"
       className={cn(
-        "relative flex items-center justify-center overflow-hidden bg-background p-6",
-        "bg-[radial-gradient(var(--border)_1px,transparent_1px)] bg-size-[16px_16px]",
+        fill
+          ? "relative w-full bg-background"
+          : "relative flex items-center justify-center overflow-hidden bg-background p-6 bg-[radial-gradient(var(--border)_1px,transparent_1px)] bg-size-[16px_16px]",
         className
       )}
     >

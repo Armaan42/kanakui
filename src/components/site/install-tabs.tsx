@@ -29,17 +29,32 @@ function Step({ number, title, children }: StepProps) {
 interface InstallTabsProps {
   name: string
   npmDependencies: string[]
+  /** shadcn built-ins the item imports, e.g. `button`. */
+  shadcnDependencies?: string[]
 }
 
 /**
  * CLI (by URL) and Namespace installs were verified end to end against the
  * live registry. Manual shows exactly the files and CSS the CLI would write.
  */
-export async function InstallTabs({ name, npmDependencies }: InstallTabsProps) {
+export async function InstallTabs({ name, npmDependencies, shadcnDependencies = [] }: InstallTabsProps) {
   const [sourceFiles, css] = await Promise.all([getSourceFiles(name), getItemCss(name)])
 
   const manualSteps: Omit<StepProps, "number">[] = [
     { title: "Make sure your project has a `cn` helper at `@/lib/utils`. `npx shadcn@latest init` creates it." },
+    ...(shadcnDependencies.length > 0
+      ? [
+          {
+            title: "Add the shadcn components this uses.",
+            children: (
+              <CommandBlock
+                command={`npx shadcn@latest add ${shadcnDependencies.join(" ")}`}
+                copyLabel="Copy shadcn add command"
+              />
+            ),
+          },
+        ]
+      : []),
     ...(npmDependencies.length > 0
       ? [
           {

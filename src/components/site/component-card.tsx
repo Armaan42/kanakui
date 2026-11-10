@@ -2,14 +2,14 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 import { ComponentPreview } from "@/components/site/component-preview"
-import type { ComponentSummary } from "@/lib/registry"
+import type { ItemSummary } from "@/lib/registry"
 
 /**
  * The preview stays interactive (buttons, hover effects), so the card is not
  * one big link. The title and the arrow link to the component page.
  */
-export function ComponentCard({ component }: { component: ComponentSummary }) {
-  const href = `/components/${component.name}`
+export function ComponentCard({ component }: { component: ItemSummary }) {
+  const href = component.href
   return (
     <article className="flex flex-col overflow-hidden rounded-xl border bg-card">
       <ComponentPreview name={component.name} className="h-52 border-b" />
@@ -38,7 +38,7 @@ export function ComponentCard({ component }: { component: ComponentSummary }) {
   )
 }
 
-export function ComponentGrid({ components }: { components: ComponentSummary[] }) {
+export function ComponentGrid({ components }: { components: ItemSummary[] }) {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {components.map((component) => (

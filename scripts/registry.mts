@@ -104,6 +104,9 @@ function validateEntries(entries: RegistryEntry[]) {
       if ((file.type === "registry:page" || file.type === "registry:file") && !file.target) {
         error(`"${entry.name}": ${file.path} is ${file.type} and needs a "target"`)
       }
+      if (entry.type === "registry:block" && !file.path.startsWith(`registry/default/blocks/${entry.name}/components/`)) {
+        error(`"${entry.name}": block files must be in registry/default/blocks/${entry.name}/components/ (got ${file.path})`)
+      }
       fileOwner.set(abs, entry.name)
     }
   }
@@ -143,6 +146,16 @@ function validateEntries(entries: RegistryEntry[]) {
             )
           } else if (spec.startsWith(".") && owner !== entry.name) {
             error(`${file.path}: use "@/registry/..." (not a relative path) to import from "${owner}"`)
+          }
+          continue
+        }
+
+        // shadcn built-ins (e.g. button) are imported from the consumer's ui
+        // alias and must be declared so the CLI installs them.
+        const shadcnUi = spec.match(/^@\/components\/ui\/([a-z0-9-]+)$/)
+        if (shadcnUi) {
+          if (!(entry.registryDependencies ?? []).includes(shadcnUi[1])) {
+            error(`"${entry.name}": ${file.path} imports "${spec}"; add "${shadcnUi[1]}" to registryDependencies`)
           }
           continue
         }

@@ -7,4 +7,7 @@ export const demos: Record<string, DemoLoader> = {
   "spotlight-card": () => import("@/registry/default/examples/spotlight-card-demo"),
   "animated-card": () => import("@/registry/default/examples/animated-card-demo"),
   "shimmer-button": () => import("@/registry/default/examples/shimmer-button-demo"),
+  "hero-01": () => import("@/registry/default/examples/hero-01-demo"),
+  "pricing-01": () => import("@/registry/default/examples/pricing-01-demo"),
+  "footer-01": () => import("@/registry/default/examples/footer-01-demo"),
 }

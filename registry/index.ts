@@ -83,4 +83,49 @@ export const registryItems: RegistryEntry[] = [
       },
     },
   },
+
+  // ------------------------------------------------------------- blocks
+  // Block files live in registry/default/blocks/<name>/components/ so the CLI
+  // installs them to @/components/ and their imports of each other resolve.
+  {
+    name: "hero-01",
+    type: "registry:block",
+    featured: true,
+    title: "Centered Hero",
+    description: "A centered hero with an announcement link, two calls to action and a product window placeholder.",
+    version: "0.1.0",
+    releasedAt: "2026-11-10",
+    categories: ["hero"],
+    registryDependencies: ["button"],
+    dependencies: ["lucide-react"],
+    internalDependencies: ["shimmer-button"],
+    files: [{ path: "registry/default/blocks/hero-01/components/hero-01.tsx", type: "registry:component" }],
+  },
+  {
+    name: "pricing-01",
+    type: "registry:block",
+    featured: true,
+    title: "Pricing Tiers",
+    description: "Three pricing plans with a monthly and yearly switch and a highlighted plan.",
+    version: "0.1.0",
+    releasedAt: "2026-11-10",
+    categories: ["pricing"],
+    registryDependencies: ["button"],
+    dependencies: ["lucide-react"],
+    files: [
+      { path: "registry/default/blocks/pricing-01/components/pricing-01.tsx", type: "registry:component" },
+      { path: "registry/default/blocks/pricing-01/components/pricing-01-plans.ts", type: "registry:component" },
+    ],
+  },
+  {
+    name: "footer-01",
+    type: "registry:block",
+    featured: true,
+    title: "Multi-column Footer",
+    description: "A footer with a brand column, three link columns and a legal bar.",
+    version: "0.1.0",
+    releasedAt: "2026-11-10",
+    categories: ["footers"],
+    files: [{ path: "registry/default/blocks/footer-01/components/footer-01.tsx", type: "registry:component" }],
+  },
 ]

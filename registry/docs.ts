@@ -141,4 +141,76 @@ export const componentDocs: Record<string, ComponentDocs> = {
       },
     ],
   },
+
+  // ------------------------------------------------------------- blocks
+  "hero-01": {
+    props: [],
+    extends: "No props. The text, links and layout are in the file. It's your code, so edit it directly.",
+    requirements: [
+      "shadcn `button` and kanakui `shimmer-button`. The CLI installs both.",
+      "React 19 and Tailwind CSS v4, with a `cn` helper at `@/lib/utils`.",
+    ],
+    customization: [
+      "Replace the headline, paragraph and button labels, and point the announcement link (`href=\"#\"`) at your changelog.",
+      "Swap the product window placeholder (marked with a comment) for an `<img>`, `next/image` or a video.",
+      "Use `Button` for both actions if you don’t want the shimmer effect.",
+    ],
+    accessibility: [
+      "Uses one `h1`. Keep it the only `h1` on the page.",
+      "The product window placeholder is `aria-hidden`. Give a real screenshot meaningful `alt` text.",
+      "The shimmer effect stops when the user prefers reduced motion.",
+    ],
+    troubleshooting: [
+      {
+        problem: "The outline button looks different from the preview.",
+        solution: "The block uses your project’s own shadcn `button`, so it follows your style and theme. Previews on this site use the Nova style.",
+      },
+    ],
+  },
+
+  "pricing-01": {
+    props: [],
+    extends: "No props. Plans are in `pricing-01-plans.ts`; the layout and billing switch are in `pricing-01.tsx`.",
+    requirements: [
+      "shadcn `button`. The CLI installs it.",
+      "React 19 and Tailwind CSS v4, with a `cn` helper at `@/lib/utils`.",
+    ],
+    customization: [
+      "Edit plans in `pricing-01-plans.ts`: `monthly` and `yearly` are prices per month, and `highlighted` marks the recommended plan.",
+      "Prices are formatted as USD by `formatPrice` at the bottom of `pricing-01.tsx`. Change the currency there, e.g. `currency: \"INR\"` with locale `en-IN`.",
+      "The “Save 20%” label is text. Update it if you change the yearly discount.",
+      "The plan buttons have no action yet. Wrap them in links to your sign-up or checkout pages.",
+    ],
+    accessibility: [
+      "The billing switch is a group of two buttons with `aria-pressed`, so screen readers announce which period is selected.",
+      "Plans are a list, and each plan’s features are a nested list.",
+    ],
+    troubleshooting: [
+      {
+        problem: "`Module not found: Can't resolve '@/components/pricing-01-plans'`.",
+        solution: "Both files must be in the same folder, `@/components/`. The CLI puts them there; after a manual install, check you created both.",
+      },
+    ],
+  },
+
+  "footer-01": {
+    props: [],
+    extends: "No props. Brand, link columns and legal links are arrays at the top of the file.",
+    requirements: ["React 19 and Tailwind CSS v4. No other dependencies."],
+    customization: [
+      "Edit the `columns` and `legal` arrays to change links. Replace each `href=\"#\"` with real URLs, or use `next/link` for internal pages.",
+      "Replace the square logo placeholder and the name “Acme” with your logo.",
+      "Update the copyright line, which is plain text so it never changes unexpectedly.",
+    ],
+    accessibility: [
+      "Each link column is a `nav` labelled by its heading, so screen reader users can jump between them.",
+      "Uses a `footer` element, which is announced as the content information landmark.",
+    ],
+    troubleshooting: [
+      {
+        problem: "The footer headings don’t fit my page outline.",
+        solution: "Column titles are `h2`. Change them to `h3` or plain text if your page needs a different heading structure.",
+      },
+    ],
+  },
 }
