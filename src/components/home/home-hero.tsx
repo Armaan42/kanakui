@@ -58,7 +58,7 @@ export function HomeHero({ components, blocks, threeD }: HomeHeroProps) {
         <CommandBlock
           command={installCommandByUrl("dotted-globe")}
           copyLabel="Copy install command for Dotted Globe"
-          className="mt-8 w-full max-w-xl text-left"
+          className="mt-8 w-full max-w-2xl text-left"
         />
 
         <dl className="mt-14 grid w-full max-w-lg grid-cols-3 divide-x rounded-xl border bg-background/60">
