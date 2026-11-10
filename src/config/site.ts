@@ -23,7 +23,28 @@ function normalizeUrl(value: string): string {
   return value.replace(/\/+$/, "");
 }
 
-const url = normalizeUrl(process.env.NEXT_PUBLIC_SITE_URL ?? DEFAULT_SITE_URL);
+/**
+ * Resolution order:
+ * 1. NEXT_PUBLIC_SITE_URL: explicit override (local dev, tests, custom setups).
+ * 2. The project's production domain, which Vercel provides at build time:
+ *    NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL is exposed to Next.js apps
+ *    (and inlined for the browser); VERCEL_PROJECT_PRODUCTION_URL is the
+ *    system variable that the registry script sees. Both are a bare hostname
+ *    (e.g. "kanakui.vercel.app") and switch to the custom domain once one is
+ *    added. Preview deployments use it too, because preview URLs sit behind
+ *    Vercel's deployment protection and the shadcn CLI cannot fetch from them.
+ * 3. http://localhost:3000.
+ */
+function resolveSiteUrl(): string {
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+  const vercelHost =
+    process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL ??
+    process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  if (vercelHost) return `https://${vercelHost}`;
+  return DEFAULT_SITE_URL;
+}
+
+const url = normalizeUrl(resolveSiteUrl());
 const namespace = normalizeNamespace(
   process.env.NEXT_PUBLIC_REGISTRY_NAMESPACE ?? DEFAULT_NAMESPACE,
 );
