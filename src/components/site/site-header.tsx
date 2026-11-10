@@ -9,7 +9,7 @@ import { siteConfig } from "@/config/site"
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b bg-background">
-      <div className="page-container flex h-14 items-center gap-4 sm:gap-6">
+      <div className="mx-auto flex w-full max-w-[90rem] px-4 sm:px-6 h-14 items-center gap-4 sm:gap-6">
         <Link
           href="/"
           className="flex items-center gap-2 rounded-md font-semibold tracking-tight focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"

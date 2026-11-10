@@ -67,6 +67,7 @@ export const siteConfig = {
    * Templates and Docs are added here when their phase ships.
    */
   nav: [
+    { title: "Docs", href: "/docs" },
     { title: "Components", href: "/components" },
     { title: "Blocks", href: "/blocks" },
   ],

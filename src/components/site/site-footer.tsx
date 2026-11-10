@@ -8,7 +8,7 @@ const linkClass =
 export function SiteFooter() {
   return (
     <footer className="border-t">
-      <div className="page-container flex flex-col gap-4 py-8 text-sm sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex w-full max-w-[90rem] px-4 sm:px-6 flex-col gap-4 py-8 text-sm sm:flex-row sm:items-center sm:justify-between">
         <p className="text-muted-foreground">
           {siteConfig.name}: components in the open shadcn registry format. Free components are{" "}
           <a href={siteConfig.license.url} target="_blank" rel="noreferrer" className={linkClass + " underline underline-offset-4"}>
