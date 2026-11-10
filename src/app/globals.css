@@ -133,6 +133,43 @@
   html.dark {
     color-scheme: dark;
   }
+
+  /*
+   * Slim, rounded, theme-colored scrollbars on every scrolling area, with no
+   * arrow buttons. Scrolling itself is unchanged.
+   *
+   * Chrome, Edge and Safari use the ::-webkit-scrollbar rules (they allow a
+   * rounded thumb). Those browsers ignore these rules if `scrollbar-color` is
+   * set, so the standard properties are applied to Firefox only.
+   */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track,
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 9999px;
+    background-color: color-mix(in oklch, var(--foreground) 18%, transparent);
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in oklch, var(--foreground) 32%, transparent);
+  }
+  ::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  @supports (-moz-appearance: none) {
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: color-mix(in oklch, var(--foreground) 22%, transparent) transparent;
+    }
+  }
 }
 
 /* Shiki output carries both themes as variables; pick one per site theme. */
