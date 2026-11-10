@@ -31,13 +31,15 @@ function useSiteTheme(): Theme {
 interface PreviewFrameProps {
   name: string
   title: string
+  /** Taller frame for blocks (full page sections). */
+  tall?: boolean
 }
 
 /**
  * Renders the component in an iframe (/view/<name>), so CSS breakpoints react
  * to the chosen device width exactly as they would in a real page.
  */
-export function PreviewFrame({ name, title }: PreviewFrameProps) {
+export function PreviewFrame({ name, title, tall = false }: PreviewFrameProps) {
   const siteTheme = useSiteTheme()
   const [viewport, setViewport] = React.useState<ViewportId>("desktop")
   const [themeOverride, setThemeOverride] = React.useState<Theme | null>(null)
@@ -107,7 +109,10 @@ export function PreviewFrame({ name, title }: PreviewFrameProps) {
           src={src}
           title={`${title} preview`}
           loading="lazy"
-          className="block h-96 max-w-full border-x border-transparent bg-background transition-[width] duration-300 motion-reduce:transition-none sm:h-[28rem] data-[narrow=true]:border-border"
+          className={cn(
+            "block max-w-full border-x border-transparent bg-background transition-[width] duration-300 motion-reduce:transition-none data-[narrow=true]:border-border",
+            tall ? "h-128 sm:h-160" : "h-96 sm:h-112"
+          )}
           data-narrow={viewport !== "desktop"}
           style={{ width }}
         />

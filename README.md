@@ -75,6 +75,25 @@ category pages and the source shown in the Manual install tab are all generated 
 these files. The Manual tab and Usage code show imports rewritten to the paths a user
 gets after installing (`@/components/ui/...`, `@/hooks/...`, `@/lib/...`).
 
+### Adding a block
+
+Blocks are page sections (hero, pricing, footer…) with `type: "registry:block"`.
+
+1. Put every file in `registry/default/blocks/<name>/components/` with
+   `type: "registry:component"`. The CLI installs them to `@/components/<file>`, and imports
+   between them (`@/registry/default/blocks/<name>/components/<file>`) are rewritten to
+   `@/components/<file>`. Prefix file names with the block name (`pricing-01-plans.ts`) so
+   they don't collide with the user's own components.
+2. To use a shadcn component, import it from `@/components/ui/<name>` and list it in
+   `registryDependencies` (e.g. `["button"]`). The build fails if you import one without
+   declaring it. Avoid `asChild` and other Radix-only props, because Base UI projects get
+   a different `button`.
+3. Add a demo, docs and the registry entry as for components. Blocks appear under `/blocks`,
+   with scaled thumbnails on the listing and a taller preview on their page.
+
+`npm run registry:test` (Radix) and `TEST_BASE=base npm run registry:test` (Base UI) install
+every component and block into a fresh app and type-check them.
+
 ### Why `registry/default/{ui,hooks,lib}`?
 
 The shadcn CLI rewrites imports matching `@/registry/<style>/ui|hooks|lib|components/...`

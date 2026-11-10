@@ -1,21 +1,34 @@
 /**
  * Read-only access to registry metadata for the website.
- * Server-side only: pages pass plain `ComponentSummary` objects to client
+ * Server-side only: pages pass plain `ItemSummary` objects to client
  * components, so registry/index.ts is never bundled for the browser.
  */
 import { registryCategories, type RegistryCategory } from "@/registry/categories"
 import { registryItems } from "@/registry/index"
 import type { RegistryEntry, RegistryEntryType } from "@/registry/types"
 
-const PAGE_TYPES: RegistryEntryType[] = ["registry:ui", "registry:block", "registry:component"]
+/** Site sections that list registry items. Each maps to /<kind>/... routes. */
+export type ItemKind = "components" | "blocks"
 
-/** Serializable data a component card needs. Safe to pass to client components. */
-export interface ComponentSummary {
+const KIND_TYPES: Record<ItemKind, RegistryEntryType[]> = {
+  components: ["registry:ui", "registry:component"],
+  blocks: ["registry:block"],
+}
+
+export const KIND_LABEL: Record<ItemKind, { singular: string; plural: string }> = {
+  components: { singular: "component", plural: "components" },
+  blocks: { singular: "block", plural: "blocks" },
+}
+
+/** Serializable data a card needs. Safe to pass to client components. */
+export interface ItemSummary {
   name: string
   title: string
   description: string
   categories: string[]
   releasedAt: string
+  kind: ItemKind
+  href: string
 }
 
 export interface CategoryWithCount extends RegistryCategory {
@@ -30,72 +43,91 @@ export interface InstalledFile {
 
 const byName = new Map(registryItems.map((item) => [item.name, item]))
 
-function toSummary(item: RegistryEntry): ComponentSummary {
+export function kindOf(item: RegistryEntry): ItemKind | undefined {
+  return (Object.keys(KIND_TYPES) as ItemKind[]).find((kind) => KIND_TYPES[kind].includes(item.type))
+}
+
+function toSummary(item: RegistryEntry): ItemSummary {
+  const kind = kindOf(item) ?? "components"
   return {
     name: item.name,
     title: item.title,
     description: item.description,
     categories: item.categories,
     releasedAt: item.releasedAt,
+    kind,
+    href: `/${kind}/${item.name}`,
   }
 }
 
-function hasPage(item: RegistryEntry) {
-  return PAGE_TYPES.includes(item.type)
+function entriesOf(kind: ItemKind): RegistryEntry[] {
+  return registryItems.filter((item) => KIND_TYPES[kind].includes(item.type))
 }
 
-/** Every item that has a page under /components, sorted by title. */
-export function getComponents(): ComponentSummary[] {
-  return registryItems
-    .filter(hasPage)
+/** Every item of `kind`, sorted by title. */
+export function getItems(kind: ItemKind): ItemSummary[] {
+  return entriesOf(kind)
     .sort((a, b) => a.title.localeCompare(b.title))
     .map(toSummary)
 }
 
-export function getComponent(name: string): RegistryEntry | undefined {
+export function getItem(kind: ItemKind, name: string): RegistryEntry | undefined {
   const item = byName.get(name)
-  return item && hasPage(item) ? item : undefined
+  return item && kindOf(item) === kind ? item : undefined
 }
 
-export function getFeaturedComponents(): ComponentSummary[] {
-  return registryItems.filter((i) => hasPage(i) && i.featured).map(toSummary)
+/** Any item that has a page and a preview (component or block). */
+export function getPreviewableItem(name: string): RegistryEntry | undefined {
+  const item = byName.get(name)
+  return item && kindOf(item) ? item : undefined
 }
 
-export function getLatestComponents(limit: number): ComponentSummary[] {
+export function getAllPreviewableItems(): ItemSummary[] {
+  return registryItems.filter((item) => kindOf(item)).map(toSummary)
+}
+
+export function getFeatured(kind: ItemKind): ItemSummary[] {
+  return entriesOf(kind).filter((i) => i.featured).map(toSummary)
+}
+
+/** Newest items across all kinds. */
+export function getLatest(limit: number): ItemSummary[] {
   return registryItems
-    .filter(hasPage)
+    .filter((item) => kindOf(item))
     .sort((a, b) => b.releasedAt.localeCompare(a.releasedAt) || a.title.localeCompare(b.title))
     .slice(0, limit)
     .map(toSummary)
 }
 
-/** Categories that contain at least one component with a page. */
-export function getCategories(): CategoryWithCount[] {
-  const pageItems = registryItems.filter(hasPage)
+/** Categories that contain at least one item of `kind`. */
+export function getCategories(kind: ItemKind): CategoryWithCount[] {
+  const items = entriesOf(kind)
   return registryCategories
     .map((category) => ({
       ...category,
-      count: pageItems.filter((i) => i.categories.includes(category.slug)).length,
+      count: items.filter((i) => i.categories.includes(category.slug)).length,
     }))
     .filter((category) => category.count > 0)
 }
 
-export function getCategory(slug: string): CategoryWithCount | undefined {
-  return getCategories().find((c) => c.slug === slug)
+export function getCategory(kind: ItemKind, slug: string): CategoryWithCount | undefined {
+  return getCategories(kind).find((c) => c.slug === slug)
 }
 
-export function getComponentsByCategory(slug: string): ComponentSummary[] {
-  return getComponents().filter((c) => c.categories.includes(slug))
+export function getItemsByCategory(kind: ItemKind, slug: string): ItemSummary[] {
+  return getItems(kind).filter((c) => c.categories.includes(slug))
 }
 
 export function getCategoryTitle(slug: string): string {
   return registryCategories.find((c) => c.slug === slug)?.title ?? slug
 }
 
-/** Components sharing the most categories with `item`. */
-export function getRelatedComponents(item: RegistryEntry, limit: number): ComponentSummary[] {
-  return registryItems
-    .filter((other) => hasPage(other) && other.name !== item.name)
+/** Items of the same kind sharing the most categories with `item`. */
+export function getRelated(item: RegistryEntry, limit: number): ItemSummary[] {
+  const kind = kindOf(item)
+  if (!kind) return []
+  return entriesOf(kind)
+    .filter((other) => other.name !== item.name)
     .map((other) => ({
       other,
       shared: other.categories.filter((c) => item.categories.includes(c)).length,
@@ -122,7 +154,13 @@ export function getInternalDependencies(item: RegistryEntry): RegistryEntry[] {
   return result
 }
 
-/** npm packages installed for `item` and everything it pulls in. */
+/** shadcn built-in items (e.g. `button`) that `item` or its dependencies need. */
+export function getShadcnDependencies(item: RegistryEntry): string[] {
+  const all = [item, ...getInternalDependencies(item)].flatMap((i) => i.registryDependencies ?? [])
+  return [...new Set(all.filter((dep) => !dep.startsWith("@") && !dep.includes("/")))].sort()
+}
+
+/** npm packages installed for `item` and everything of ours it pulls in. */
 export function getNpmDependencies(item: RegistryEntry): string[] {
   const all = [item, ...getInternalDependencies(item)].flatMap((i) => i.dependencies ?? [])
   return [...new Set(all)].sort()
@@ -137,8 +175,8 @@ const TARGET_DIR: Partial<Record<RegistryEntryType, string>> = {
 }
 
 /**
- * Where the shadcn CLI writes each file, using the default aliases. Matches
- * what the install tests observed for registry:ui, registry:hook and registry:lib.
+ * Where the shadcn CLI writes each of our files, using the default aliases.
+ * Matches what the install tests observed for every item type we publish.
  */
 export function getInstalledFiles(item: RegistryEntry): InstalledFile[] {
   return [...getInternalDependencies(item), item].flatMap((entry) =>

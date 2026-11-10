@@ -20,6 +20,9 @@ export function SiteFooter() {
           <Link href="/components" className={linkClass}>
             Components
           </Link>
+          <Link href="/blocks" className={linkClass}>
+            Blocks
+          </Link>
           <a href={`${siteConfig.registry.basePath}/registry.json`} className={linkClass}>
             Registry index
           </a>

@@ -1,13 +1,14 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
+import { BlockGrid } from "@/components/site/block-card"
 import { GitHubIcon } from "@/components/site/icons"
 import { CommandBlock } from "@/components/site/command-block"
 import { ComponentGrid } from "@/components/site/component-card"
 import { Button } from "@/components/ui/button"
 import { installCommandByUrl, registrySetupCommand, siteConfig } from "@/config/site"
 import { formatDate } from "@/lib/format"
-import { getComponents, getFeaturedComponents, getLatestComponents } from "@/lib/registry"
+import { getFeatured, getItems, getLatest, KIND_LABEL } from "@/lib/registry"
 
 const steps = [
   {
@@ -25,10 +26,12 @@ const steps = [
 ]
 
 export default function HomePage() {
-  const featured = getFeaturedComponents()
-  const latest = getLatestComponents(5)
-  const total = getComponents().length
-  const heroItem = featured[0] ?? latest[0]
+  const featured = getFeatured("components")
+  const featuredBlocks = getFeatured("blocks")
+  const latest = getLatest(5)
+  const total = getItems("components").length
+  const totalBlocks = getItems("blocks").length
+  const heroItem = featured[0] ?? getItems("components")[0]
 
   return (
     <>
@@ -37,6 +40,7 @@ export default function HomePage() {
           <div className="space-y-5">
             <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
               shadcn registry · {total} {total === 1 ? "component" : "components"}
+              {totalBlocks > 0 ? ` · ${totalBlocks} ${totalBlocks === 1 ? "block" : "blocks"}` : null}
             </p>
             <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-balance sm:text-5xl md:text-6xl">
               React components you install, then own.
@@ -90,27 +94,54 @@ export default function HomePage() {
         </section>
       ) : null}
 
+      {featuredBlocks.length > 0 ? (
+        <section aria-labelledby="blocks" className="border-t">
+          <div className="page-container space-y-6 py-14 sm:py-20">
+            <div className="flex items-end justify-between gap-4">
+              <div className="space-y-1">
+                <h2 id="blocks" className="text-2xl font-semibold tracking-tight">
+                  Blocks
+                </h2>
+                <p className="text-muted-foreground">Whole page sections, ready to drop into a page and edit.</p>
+              </div>
+              <Link
+                href="/blocks"
+                className="hidden shrink-0 text-sm text-muted-foreground hover:text-foreground sm:inline-flex sm:items-center sm:gap-1"
+              >
+                View all <ArrowRight aria-hidden="true" className="size-3.5" />
+              </Link>
+            </div>
+            <BlockGrid blocks={featuredBlocks.slice(0, 4)} />
+          </div>
+        </section>
+      ) : null}
+
       <section aria-labelledby="latest" className="border-t">
         <div className="page-container grid gap-10 py-14 sm:py-20 lg:grid-cols-[16rem_minmax(0,1fr)]">
           <div className="space-y-1">
             <h2 id="latest" className="text-2xl font-semibold tracking-tight">
               Latest releases
             </h2>
-            <p className="text-muted-foreground">New and updated components.</p>
+            <p className="text-muted-foreground">New and updated components and blocks.</p>
           </div>
           <ul className="min-w-0 divide-y rounded-xl border">
-            {latest.map((component) => (
-              <li key={component.name}>
+            {latest.map((item) => (
+              <li key={item.name}>
                 <Link
-                  href={`/components/${component.name}`}
+                  href={item.href}
                   className="flex flex-col gap-1 px-4 py-3.5 transition-colors hover:bg-muted/50 focus-visible:bg-muted/50 focus-visible:outline-none sm:flex-row sm:items-center sm:justify-between sm:gap-6"
                 >
                   <span className="min-w-0">
-                    <span className="block font-medium">{component.title}</span>
-                    <span className="block truncate text-sm text-muted-foreground">{component.description}</span>
+                    <span className="flex items-center gap-2 font-medium">
+                      {item.title}
+                      <span className="rounded border px-1.5 py-px text-[11px] font-normal text-muted-foreground capitalize">
+                        {KIND_LABEL[item.kind].singular}
+                      </span>
+                    </span>
+                    <span className="block truncate text-sm text-muted-foreground">{item.description}</span>
                   </span>
-                  <time dateTime={component.releasedAt} className="shrink-0 font-mono text-xs text-muted-foreground">
-                    {formatDate(component.releasedAt)}
+                  <time dateTime={item.releasedAt} className="shrink-0 font-mono text-xs text-muted-foreground">
+                    {formatDate(item.releasedAt)}
                   </time>
                 </Link>
               </li>

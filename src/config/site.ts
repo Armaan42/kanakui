@@ -66,7 +66,10 @@ export const siteConfig = {
    * Main navigation. Only list pages that exist; sections such as Blocks,
    * Templates and Docs are added here when their phase ships.
    */
-  nav: [{ title: "Components", href: "/components" }],
+  nav: [
+    { title: "Components", href: "/components" },
+    { title: "Blocks", href: "/blocks" },
+  ],
   registry: {
     namespace,
     /** Public path where `shadcn build` output is served (public/r → /r). */
