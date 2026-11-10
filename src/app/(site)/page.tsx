@@ -1,3 +1,4 @@
+import { HomeAgents } from "@/components/home/home-agents"
 import { HomeBlocks } from "@/components/home/home-blocks"
 import { HomeCategories } from "@/components/home/home-categories"
 import { HomeCta } from "@/components/home/home-cta"
@@ -18,6 +19,7 @@ export default function HomePage() {
     <>
       <HomeHero components={components} blocks={blocks} threeD={threeD} />
       <HomeDevice />
+      <HomeAgents />
       <HomeBlocks />
       <HomeShowcase />
       <HomePlayground />
