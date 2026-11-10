@@ -4,31 +4,39 @@ import type { RegistryItemDefinition } from "./types.ts"
 import item_accordion_smooth from "./items/accordion-smooth.ts"
 import item_animated_card from "./items/animated-card.ts"
 import item_animated_tabs from "./items/animated-tabs.ts"
+import item_aurora_background from "./items/aurora-background.ts"
 import item_avatar_stack from "./items/avatar-stack.ts"
+import item_banner_01 from "./items/banner-01.ts"
 import item_bar_loader from "./items/bar-loader.ts"
 import item_bento_01 from "./items/bento-01.ts"
 import item_border_beam from "./items/border-beam.ts"
+import item_card_stack from "./items/card-stack.ts"
 import item_carousel_3d from "./items/carousel-3d.ts"
+import item_changelog_01 from "./items/changelog-01.ts"
 import item_compose_refs from "./items/compose-refs.ts"
 import item_contact_01 from "./items/contact-01.ts"
 import item_copy_button from "./items/copy-button.ts"
 import item_cta_01 from "./items/cta-01.ts"
 import item_cta_02 from "./items/cta-02.ts"
 import item_cta_03 from "./items/cta-03.ts"
+import item_cta_04 from "./items/cta-04.ts"
 import item_cube_3d from "./items/cube-3d.ts"
 import item_dock from "./items/dock.ts"
 import item_dot_pattern from "./items/dot-pattern.ts"
 import item_dots_loader from "./items/dots-loader.ts"
 import item_dotted_globe from "./items/dotted-globe.ts"
 import item_faq_01 from "./items/faq-01.ts"
+import item_faq_02 from "./items/faq-02.ts"
 import item_features_01 from "./items/features-01.ts"
 import item_features_02 from "./items/features-02.ts"
 import item_features_03 from "./items/features-03.ts"
 import item_features_04 from "./items/features-04.ts"
+import item_features_05 from "./items/features-05.ts"
 import item_flip_card from "./items/flip-card.ts"
 import item_floating_label_input from "./items/floating-label-input.ts"
 import item_footer_01 from "./items/footer-01.ts"
 import item_footer_02 from "./items/footer-02.ts"
+import item_footer_03 from "./items/footer-03.ts"
 import item_gradient_text from "./items/gradient-text.ts"
 import item_grid_pattern from "./items/grid-pattern.ts"
 import item_hero_01 from "./items/hero-01.ts"
@@ -37,8 +45,12 @@ import item_hero_03 from "./items/hero-03.ts"
 import item_hero_04 from "./items/hero-04.ts"
 import item_hero_05 from "./items/hero-05.ts"
 import item_hero_06 from "./items/hero-06.ts"
+import item_hero_07 from "./items/hero-07.ts"
+import item_hero_08 from "./items/hero-08.ts"
 import item_image_compare from "./items/image-compare.ts"
 import item_kbd from "./items/kbd.ts"
+import item_like_button from "./items/like-button.ts"
+import item_login_01 from "./items/login-01.ts"
 import item_logo_cloud_01 from "./items/logo-cloud-01.ts"
 import item_logo_cloud_02 from "./items/logo-cloud-02.ts"
 import item_magnetic from "./items/magnetic.ts"
@@ -47,7 +59,11 @@ import item_marquee from "./items/marquee.ts"
 import item_meteors from "./items/meteors.ts"
 import item_navbar_01 from "./items/navbar-01.ts"
 import item_navbar_02 from "./items/navbar-02.ts"
+import item_noise_background from "./items/noise-background.ts"
+import item_not_found_01 from "./items/not-found-01.ts"
+import item_number_stepper from "./items/number-stepper.ts"
 import item_number_ticker from "./items/number-ticker.ts"
+import item_orbiting_circles from "./items/orbiting-circles.ts"
 import item_otp_input from "./items/otp-input.ts"
 import item_particle_wave from "./items/particle-wave.ts"
 import item_password_input from "./items/password-input.ts"
@@ -55,25 +71,34 @@ import item_pricing_01 from "./items/pricing-01.ts"
 import item_pricing_02 from "./items/pricing-02.ts"
 import item_pricing_03 from "./items/pricing-03.ts"
 import item_progress_ring from "./items/progress-ring.ts"
+import item_rating from "./items/rating.ts"
 import item_retro_grid from "./items/retro-grid.ts"
 import item_reveal_card from "./items/reveal-card.ts"
 import item_ripple_background from "./items/ripple-background.ts"
 import item_ripple_button from "./items/ripple-button.ts"
 import item_rotating_words from "./items/rotating-words.ts"
 import item_scramble_text from "./items/scramble-text.ts"
+import item_scroll_progress from "./items/scroll-progress.ts"
 import item_segmented_control from "./items/segmented-control.ts"
 import item_shimmer_button from "./items/shimmer-button.ts"
+import item_skeleton_shimmer from "./items/skeleton-shimmer.ts"
 import item_slide_arrow_button from "./items/slide-arrow-button.ts"
+import item_sparkles from "./items/sparkles.ts"
 import item_spinner from "./items/spinner.ts"
 import item_spotlight_card from "./items/spotlight-card.ts"
 import item_stats_01 from "./items/stats-01.ts"
 import item_stats_02 from "./items/stats-02.ts"
+import item_status_dot from "./items/status-dot.ts"
+import item_stepper from "./items/stepper.ts"
+import item_tag_input from "./items/tag-input.ts"
 import item_team_01 from "./items/team-01.ts"
 import item_testimonials_01 from "./items/testimonials-01.ts"
 import item_testimonials_02 from "./items/testimonials-02.ts"
+import item_testimonials_03 from "./items/testimonials-03.ts"
 import item_text_3d from "./items/text-3d.ts"
 import item_text_reveal from "./items/text-reveal.ts"
 import item_timeline from "./items/timeline.ts"
+import item_toggle_switch from "./items/toggle-switch.ts"
 import item_typewriter from "./items/typewriter.ts"
 import item_use_pointer_position from "./items/use-pointer-position.ts"
 import item_use_scene_state from "./items/use-scene-state.ts"
@@ -83,31 +108,39 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_accordion_smooth,
   item_animated_card,
   item_animated_tabs,
+  item_aurora_background,
   item_avatar_stack,
+  item_banner_01,
   item_bar_loader,
   item_bento_01,
   item_border_beam,
+  item_card_stack,
   item_carousel_3d,
+  item_changelog_01,
   item_compose_refs,
   item_contact_01,
   item_copy_button,
   item_cta_01,
   item_cta_02,
   item_cta_03,
+  item_cta_04,
   item_cube_3d,
   item_dock,
   item_dot_pattern,
   item_dots_loader,
   item_dotted_globe,
   item_faq_01,
+  item_faq_02,
   item_features_01,
   item_features_02,
   item_features_03,
   item_features_04,
+  item_features_05,
   item_flip_card,
   item_floating_label_input,
   item_footer_01,
   item_footer_02,
+  item_footer_03,
   item_gradient_text,
   item_grid_pattern,
   item_hero_01,
@@ -116,8 +149,12 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_hero_04,
   item_hero_05,
   item_hero_06,
+  item_hero_07,
+  item_hero_08,
   item_image_compare,
   item_kbd,
+  item_like_button,
+  item_login_01,
   item_logo_cloud_01,
   item_logo_cloud_02,
   item_magnetic,
@@ -126,7 +163,11 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_meteors,
   item_navbar_01,
   item_navbar_02,
+  item_noise_background,
+  item_not_found_01,
+  item_number_stepper,
   item_number_ticker,
+  item_orbiting_circles,
   item_otp_input,
   item_particle_wave,
   item_password_input,
@@ -134,25 +175,34 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_pricing_02,
   item_pricing_03,
   item_progress_ring,
+  item_rating,
   item_retro_grid,
   item_reveal_card,
   item_ripple_background,
   item_ripple_button,
   item_rotating_words,
   item_scramble_text,
+  item_scroll_progress,
   item_segmented_control,
   item_shimmer_button,
+  item_skeleton_shimmer,
   item_slide_arrow_button,
+  item_sparkles,
   item_spinner,
   item_spotlight_card,
   item_stats_01,
   item_stats_02,
+  item_status_dot,
+  item_stepper,
+  item_tag_input,
   item_team_01,
   item_testimonials_01,
   item_testimonials_02,
+  item_testimonials_03,
   item_text_3d,
   item_text_reveal,
   item_timeline,
+  item_toggle_switch,
   item_typewriter,
   item_use_pointer_position,
   item_use_scene_state,
