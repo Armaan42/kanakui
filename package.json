@@ -2,16 +2,25 @@
   "name": "ui-library",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "npm run registry:build && next dev",
+    "build": "npm run registry:build && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "registry:generate": "node --env-file-if-exists=.env.local scripts/registry.mts generate",
+    "registry:build": "npm run registry:generate && shadcn build && node scripts/registry.mts verify",
+    "registry:test": "node scripts/test-registry-install.mts"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "cn": "^0.5.2",
     "lucide-react": "^1.71.0",
+    "motion": "^14.11.1",
     "next": "16.4.6",
     "radix-ui": "^1.8.1",
     "react": "19.3.0",
