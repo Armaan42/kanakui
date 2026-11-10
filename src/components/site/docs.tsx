@@ -2,7 +2,9 @@ import type * as React from "react"
 
 import type { PropDoc } from "@/registry/docs"
 
-const inlineCodeClass = "rounded bg-muted px-1 py-0.5 font-mono text-[0.85em]"
+// wrap-anywhere: long commands and URLs in inline code may break mid-token
+// instead of pushing the page wider than a phone screen.
+const inlineCodeClass = "rounded bg-muted px-1 py-0.5 font-mono text-[0.85em] wrap-anywhere"
 
 /** Renders text where `backticks` mark inline code. */
 export function InlineText({ text }: { text: string }) {
