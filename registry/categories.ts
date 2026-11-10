@@ -38,5 +38,8 @@ export const registryCategories: RegistryCategory[] = [
   { slug: "faq", title: "FAQ", description: "Frequently asked questions." },
   { slug: "team", title: "Team", description: "Introduce the people behind the product." },
   { slug: "contact", title: "Contact", description: "Contact forms and ways to get in touch." },
+  { slug: "auth", title: "Authentication", description: "Sign-in and sign-up screens." },
+  { slug: "banners", title: "Banners", description: "Announcement bars and notices." },
+  { slug: "content", title: "Content", description: "Changelogs, error pages and other content sections." },
   { slug: "utilities", title: "Utilities", description: "Small helper functions used by components." },
 ]
