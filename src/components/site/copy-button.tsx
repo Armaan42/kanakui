@@ -12,10 +12,12 @@ interface CopyButtonProps {
   value: string
   /** Accessible name, e.g. "Copy install command". */
   label?: string
+  /** Visible text. When set, renders a small text button instead of an icon button. */
+  text?: string
   className?: string
 }
 
-export function CopyButton({ value, label = "Copy to clipboard", className }: CopyButtonProps) {
+export function CopyButton({ value, label = "Copy to clipboard", text, className }: CopyButtonProps) {
   const [state, setState] = React.useState<CopyState>("idle")
 
   React.useEffect(() => {
@@ -33,16 +35,20 @@ export function CopyButton({ value, label = "Copy to clipboard", className }: Co
     }
   }
 
+  const icon =
+    state === "copied" ? <Check aria-hidden="true" /> : state === "error" ? <X aria-hidden="true" /> : <Copy aria-hidden="true" />
+
   return (
     <Button
       type="button"
       variant="ghost"
-      size="icon-sm"
+      size={text ? "sm" : "icon-sm"}
       onClick={copy}
-      aria-label={label}
+      aria-label={text ? undefined : label}
       className={cn("text-muted-foreground hover:text-foreground", className)}
     >
-      {state === "copied" ? <Check aria-hidden="true" /> : state === "error" ? <X aria-hidden="true" /> : <Copy aria-hidden="true" />}
+      {icon}
+      {text ? (state === "copied" ? "Copied" : text) : null}
       <span className="sr-only" aria-live="polite">
         {state === "copied" ? "Copied" : state === "error" ? "Copy failed. Select the text and copy it manually." : ""}
       </span>

@@ -3,10 +3,14 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ChevronRight } from "lucide-react"
 
+import { componentDocs } from "@/registry/docs"
+import { CodeViewer } from "@/components/site/code-viewer"
 import { ComponentGrid } from "@/components/site/component-card"
-import { ComponentPreview } from "@/components/site/component-preview"
+import { BulletList, DocsSection, InlineText, PropsTable } from "@/components/site/docs"
 import { InstallTabs } from "@/components/site/install-tabs"
+import { PreviewFrame } from "@/components/site/preview-frame"
 import { Badge } from "@/components/ui/badge"
+import { registrySetupCommand, siteConfig } from "@/config/site"
 import { formatDate } from "@/lib/format"
 import {
   getCategoryTitle,
@@ -17,6 +21,7 @@ import {
   getNpmDependencies,
   getRelatedComponents,
 } from "@/lib/registry"
+import { getUsageExample } from "@/lib/source"
 
 export function generateStaticParams() {
   return getComponents().map((component) => ({ name: component.name }))
@@ -37,16 +42,42 @@ const TYPE_LABEL: Record<string, string> = {
   "registry:block": "Block",
 }
 
+/** Applies to every component, so it lives here rather than in each item's docs. */
+const COMMON_TROUBLESHOOTING = [
+  {
+    problem: `\`Unknown registry "${siteConfig.registry.namespace}"\``,
+    solution: `Your project doesn't know the namespace yet. Run \`${registrySetupCommand()}\` once, or install by URL from the CLI tab.`,
+  },
+  {
+    problem: "`No components.json found`",
+    solution: "Run `npx shadcn@latest init` in your project first.",
+  },
+]
+
 export default async function ComponentPage({ params }: PageProps<"/components/[name]">) {
   const { name } = await params
   const component = getComponent(name)
   if (!component) notFound()
 
+  const docs = componentDocs[component.name]
   const primaryCategory = component.categories[0]
   const npmDependencies = getNpmDependencies(component)
   const internalDependencies = getInternalDependencies(component)
   const installedFiles = getInstalledFiles(component)
   const related = getRelatedComponents(component, 3)
+  const usage = await getUsageExample(component.name)
+  const troubleshooting = [...(docs?.troubleshooting ?? []), ...COMMON_TROUBLESHOOTING]
+
+  const toc = [
+    { id: "installation", title: "Installation" },
+    { id: "files", title: "Files" },
+    ...(usage ? [{ id: "usage", title: "Usage" }] : []),
+    ...(docs ? [{ id: "api", title: "API reference" }] : []),
+    ...(docs ? [{ id: "requirements", title: "Requirements" }] : []),
+    ...(docs ? [{ id: "customization", title: "Customization" }] : []),
+    ...(docs ? [{ id: "accessibility", title: "Accessibility" }] : []),
+    { id: "troubleshooting", title: "Troubleshooting" },
+  ]
 
   return (
     <div className="page-container space-y-10 py-8 sm:py-12">
@@ -93,25 +124,18 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
       </div>
 
       <section aria-label="Preview">
-        <ComponentPreview name={component.name} eager className="min-h-80 rounded-xl border sm:min-h-96" />
+        <PreviewFrame name={component.name} title={component.title} />
       </section>
 
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_16rem]">
-        <div className="min-w-0 space-y-10">
-          <section aria-labelledby="installation" className="space-y-4">
-            <h2 id="installation" className="text-xl font-semibold tracking-tight">
-              Installation
-            </h2>
-            <InstallTabs name={component.name} />
-          </section>
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_15rem]">
+        <div className="min-w-0 space-y-12">
+          <DocsSection id="installation" title="Installation">
+            <InstallTabs name={component.name} npmDependencies={npmDependencies} />
+          </DocsSection>
 
-          <section aria-labelledby="files" className="space-y-4">
-            <h2 id="files" className="text-xl font-semibold tracking-tight">
-              Files added to your project
-            </h2>
+          <DocsSection id="files" title="Files added to your project">
             <p className="text-sm text-muted-foreground">
-              Paths use the default shadcn aliases. The CLI follows the aliases in your{" "}
-              <code className="rounded bg-muted px-1 py-0.5 font-mono text-[13px]">components.json</code>.
+              <InlineText text="Paths use the default shadcn aliases. The CLI follows the aliases in your `components.json`." />
             </p>
             <ul className="divide-y rounded-lg border">
               {installedFiles.map((file) => (
@@ -123,10 +147,62 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
                 </li>
               ))}
             </ul>
-          </section>
+          </DocsSection>
+
+          {usage ? (
+            <DocsSection id="usage" title="Usage">
+              <p className="text-sm text-muted-foreground">The code behind the preview above.</p>
+              <CodeViewer files={[usage]} label="Usage example" />
+            </DocsSection>
+          ) : null}
+
+          {docs ? (
+            <>
+              <DocsSection id="api" title="API reference">
+                <PropsTable props={docs.props} extendsText={docs.extends} />
+              </DocsSection>
+              <DocsSection id="requirements" title="Requirements">
+                <BulletList items={docs.requirements} />
+              </DocsSection>
+              <DocsSection id="customization" title="Customization">
+                <BulletList items={docs.customization} />
+              </DocsSection>
+              <DocsSection id="accessibility" title="Accessibility">
+                <BulletList items={docs.accessibility} />
+              </DocsSection>
+            </>
+          ) : null}
+
+          <DocsSection id="troubleshooting" title="Troubleshooting">
+            <dl className="divide-y rounded-lg border">
+              {troubleshooting.map((item) => (
+                <div key={item.problem} className="space-y-1 px-4 py-3 text-sm">
+                  <dt className="font-medium">
+                    <InlineText text={item.problem} />
+                  </dt>
+                  <dd className="leading-6 text-muted-foreground">
+                    <InlineText text={item.solution} />
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </DocsSection>
         </div>
 
-        <aside className="space-y-8 text-sm">
+        <aside className="space-y-8 text-sm lg:sticky lg:top-20 lg:max-h-[calc(100svh-6rem)] lg:self-start lg:overflow-y-auto">
+          <nav aria-label="On this page" className="hidden space-y-3 lg:block">
+            <h2 className="font-medium">On this page</h2>
+            <ul className="space-y-1.5">
+              {toc.map((entry) => (
+                <li key={entry.id}>
+                  <a href={`#${entry.id}`} className="text-muted-foreground hover:text-foreground">
+                    {entry.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
           <div className="space-y-3">
             <h2 className="font-medium">npm packages</h2>
             {npmDependencies.length > 0 ? (
@@ -168,6 +244,12 @@ export default async function ComponentPage({ params }: PageProps<"/components/[
             <dd>{formatDate(component.releasedAt)}</dd>
             <dt className="text-muted-foreground">Version</dt>
             <dd className="font-mono text-[13px]">{component.version}</dd>
+            <dt className="text-muted-foreground">License</dt>
+            <dd>
+              <a href={siteConfig.license.url} target="_blank" rel="noreferrer" className="underline-offset-4 hover:underline">
+                {siteConfig.license.name}
+              </a>
+            </dd>
           </dl>
         </aside>
       </div>

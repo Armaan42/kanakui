@@ -135,6 +135,32 @@
   }
 }
 
+/* Shiki output carries both themes as variables; pick one per site theme. */
+@layer components {
+  .shiki {
+    margin: 0;
+    padding: 1rem;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    background-color: transparent !important;
+    tab-size: 2;
+  }
+  .shiki,
+  .shiki span {
+    color: var(--shiki-light);
+  }
+  .dark .shiki,
+  .dark .shiki span {
+    color: var(--shiki-dark);
+  }
+  .shiki:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: -2px;
+  }
+}
+
 /* Centered page column with a 16px gutter on phones. */
 @utility page-container {
   margin-inline: auto;

@@ -1,45 +1,107 @@
+import type * as React from "react"
+
+import { CodeViewer } from "@/components/site/code-viewer"
 import { CommandBlock } from "@/components/site/command-block"
+import { InlineText } from "@/components/site/docs"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { installCommand, installCommandByUrl, registrySetupCommand, siteConfig } from "@/config/site"
+import { getItemCss, getSourceFiles } from "@/lib/source"
+
+interface StepProps {
+  number: number
+  /** Instruction text; `backticks` mark inline code. */
+  title: string
+  children?: React.ReactNode
+}
+
+function Step({ number, title, children }: StepProps) {
+  return (
+    <li className="min-w-0 space-y-3">
+      <p className="text-sm">
+        <span className="mr-1.5 font-mono text-muted-foreground">{number}.</span>
+        <InlineText text={title} />
+      </p>
+      {children}
+    </li>
+  )
+}
+
+interface InstallTabsProps {
+  name: string
+  npmDependencies: string[]
+}
 
 /**
- * Both install paths were verified end to end against the live registry:
- * - by URL: works in any project set up with shadcn, no configuration;
- * - by namespace: needs the one-time `registry add` until the namespace is
- *   listed in shadcn's public registry index.
+ * CLI (by URL) and Namespace installs were verified end to end against the
+ * live registry. Manual shows exactly the files and CSS the CLI would write.
  */
-export function InstallTabs({ name }: { name: string }) {
+export async function InstallTabs({ name, npmDependencies }: InstallTabsProps) {
+  const [sourceFiles, css] = await Promise.all([getSourceFiles(name), getItemCss(name)])
+
+  const manualSteps: Omit<StepProps, "number">[] = [
+    { title: "Make sure your project has a `cn` helper at `@/lib/utils`. `npx shadcn@latest init` creates it." },
+    ...(npmDependencies.length > 0
+      ? [
+          {
+            title: "Install the npm packages.",
+            children: <CommandBlock command={`npm install ${npmDependencies.join(" ")}`} copyLabel="Copy npm install command" />,
+          },
+        ]
+      : []),
+    {
+      title:
+        sourceFiles.length > 1
+          ? `Create these ${sourceFiles.length} files and paste in the code.`
+          : "Create this file and paste in the code.",
+      children: <CodeViewer files={sourceFiles} label="Source files" />,
+    },
+    ...(css
+      ? [
+          {
+            title: "Add this CSS to your global stylesheet, for example `app/globals.css`.",
+            children: <CodeViewer files={[css]} label="CSS to add" />,
+          },
+        ]
+      : []),
+    { title: "If your aliases differ from `@/components`, `@/hooks` and `@/lib`, update the import paths to match." },
+  ]
+
   return (
     <Tabs defaultValue="cli" className="gap-4">
       <TabsList variant="line">
         <TabsTrigger value="cli">CLI</TabsTrigger>
         <TabsTrigger value="namespace">Namespace</TabsTrigger>
+        <TabsTrigger value="manual">Manual</TabsTrigger>
       </TabsList>
 
       <TabsContent value="cli" className="space-y-3">
         <CommandBlock command={installCommandByUrl(name)} copyLabel="Copy install command" />
         <p className="text-sm text-muted-foreground">
-          Run this in a project set up with shadcn. If you haven’t set it up yet, run{" "}
-          <code className="rounded bg-muted px-1 py-0.5 font-mono text-[13px]">npx shadcn@latest init</code> first.
+          <InlineText text="Run this in a project set up with shadcn. If you haven’t set it up yet, run `npx shadcn@latest init` first." />
         </p>
       </TabsContent>
 
-      <TabsContent value="namespace" className="space-y-4">
-        <ol className="space-y-4">
-          <li className="space-y-2">
-            <p className="text-sm">
-              <span className="text-muted-foreground">1.</span> Add the{" "}
-              <code className="rounded bg-muted px-1 py-0.5 font-mono text-[13px]">{siteConfig.registry.namespace}</code>{" "}
-              registry to your project. You only need to do this once.
-            </p>
+      <TabsContent value="namespace">
+        <ol className="space-y-5">
+          <Step
+            number={1}
+            title={`Add the \`${siteConfig.registry.namespace}\` registry to your project. You only need to do this once.`}
+          >
             <CommandBlock command={registrySetupCommand()} copyLabel="Copy registry setup command" />
-          </li>
-          <li className="space-y-2">
-            <p className="text-sm">
-              <span className="text-muted-foreground">2.</span> Install the component.
-            </p>
+          </Step>
+          <Step number={2} title="Install the component.">
             <CommandBlock command={installCommand(name)} copyLabel="Copy namespaced install command" />
-          </li>
+          </Step>
+        </ol>
+      </TabsContent>
+
+      <TabsContent value="manual">
+        <ol className="space-y-5">
+          {manualSteps.map((step, index) => (
+            <Step key={step.title} number={index + 1} title={step.title}>
+              {step.children}
+            </Step>
+          ))}
         </ol>
       </TabsContent>
     </Tabs>
