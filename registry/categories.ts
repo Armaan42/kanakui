@@ -20,6 +20,8 @@ export const registryCategories: RegistryCategory[] = [
   { slug: "effects", title: "Effects", description: "Visual effects such as glows, lights and reveals." },
   { slug: "animations", title: "Animations", description: "Components built around motion." },
   { slug: "text", title: "Text animations", description: "Animated headings, counters and typing effects." },
+  { slug: "3d", title: "3D", description: "WebGL scenes and CSS 3D effects: globes, orbs, cubes and carousels." },
+  { slug: "data-display", title: "Data display", description: "Timelines, avatars, keys and other ways to present information." },
   { slug: "loaders", title: "Loaders", description: "Spinners, skeletons and progress indicators." },
   { slug: "interactive", title: "Interactive", description: "Components that respond to the pointer or keyboard." },
   { slug: "hooks", title: "Hooks", description: "React hooks used by components." },
