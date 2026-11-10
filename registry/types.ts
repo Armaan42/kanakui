@@ -56,3 +56,29 @@ export interface RegistryEntry {
   /** Message the CLI shows after installation. */
   docs?: string
 }
+
+/** One row of a component's props table. */
+export interface PropDoc {
+  name: string
+  type: string
+  default?: string
+  description: string
+}
+
+/** Documentation shown on an item's page. Text may use `backticks` for inline code. */
+export interface ComponentDocs {
+  /** Props the component adds. */
+  props: PropDoc[]
+  /** Props passed through to the underlying element, e.g. "All `<div>` props". */
+  extends: string
+  requirements: string[]
+  customization: string[]
+  accessibility: string[]
+  troubleshooting: { problem: string; solution: string }[]
+}
+
+/** What each file in registry/items/ default-exports: the registry entry plus its page docs. */
+export interface RegistryItemDefinition extends RegistryEntry {
+  /** Required for components and blocks (they get a page); optional for hooks and libs. */
+  pageDocs?: ComponentDocs
+}
