@@ -87,3 +87,9 @@ export async function getItemCss(name: string): Promise<CodeFile | null> {
   const css = entriesCss([...getInternalDependencies(item), item])
   return css ? toCodeFile("globals.css", css, "css") : null
 }
+
+/** Highlights a code snippet for docs pages, e.g. a config file. */
+export async function getSnippet(code: string, lang: CodeLanguage, label: string): Promise<CodeFile> {
+  "use cache"
+  return toCodeFile(label, code, lang)
+}

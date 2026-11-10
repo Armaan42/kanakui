@@ -2,6 +2,7 @@
 @theme inline {
   --animate-bar-loader: bar-loader 1.4s ease-in-out infinite;
   --animate-border-beam: border-beam var(--border-beam-duration) linear infinite;
+  --animate-cube-3d: cube-3d 14s linear infinite;
   --animate-dots-loader: dots-loader 1.2s ease-in-out infinite;
   --animate-gradient-text: gradient-text 6s linear infinite;
   --animate-marquee: marquee var(--marquee-duration) linear infinite;
@@ -29,6 +30,14 @@
 @keyframes border-beam {
   to {
     --border-beam-angle: 360deg;
+  }
+}
+@keyframes cube-3d {
+  from {
+    transform: rotateX(-20deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(340deg) rotateY(360deg);
   }
 }
 @keyframes dots-loader {
