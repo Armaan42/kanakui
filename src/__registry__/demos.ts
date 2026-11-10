@@ -4,10 +4,22 @@ import type { ComponentType } from "react"
 export type DemoLoader = () => Promise<{ default: ComponentType }>
 
 export const demos: Record<string, DemoLoader> = {
-  "spotlight-card": () => import("@/registry/default/examples/spotlight-card-demo"),
   "animated-card": () => import("@/registry/default/examples/animated-card-demo"),
-  "shimmer-button": () => import("@/registry/default/examples/shimmer-button-demo"),
-  "hero-01": () => import("@/registry/default/examples/hero-01-demo"),
-  "pricing-01": () => import("@/registry/default/examples/pricing-01-demo"),
+  "border-beam": () => import("@/registry/default/examples/border-beam-demo"),
+  "dot-pattern": () => import("@/registry/default/examples/dot-pattern-demo"),
+  "dots-loader": () => import("@/registry/default/examples/dots-loader-demo"),
   "footer-01": () => import("@/registry/default/examples/footer-01-demo"),
+  "grid-pattern": () => import("@/registry/default/examples/grid-pattern-demo"),
+  "hero-01": () => import("@/registry/default/examples/hero-01-demo"),
+  "magnetic": () => import("@/registry/default/examples/magnetic-demo"),
+  "marquee": () => import("@/registry/default/examples/marquee-demo"),
+  "number-ticker": () => import("@/registry/default/examples/number-ticker-demo"),
+  "pricing-01": () => import("@/registry/default/examples/pricing-01-demo"),
+  "ripple-button": () => import("@/registry/default/examples/ripple-button-demo"),
+  "segmented-control": () => import("@/registry/default/examples/segmented-control-demo"),
+  "shimmer-button": () => import("@/registry/default/examples/shimmer-button-demo"),
+  "spinner": () => import("@/registry/default/examples/spinner-demo"),
+  "spotlight-card": () => import("@/registry/default/examples/spotlight-card-demo"),
+  "text-reveal": () => import("@/registry/default/examples/text-reveal-demo"),
+  "typewriter": () => import("@/registry/default/examples/typewriter-demo"),
 }

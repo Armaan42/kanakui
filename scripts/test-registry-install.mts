@@ -7,7 +7,7 @@
  *     2. Serves public/r over HTTP (a tiny static server, so no Next.js build is needed).
  *     3. Creates a fresh Next.js app in the OS temp folder and runs `shadcn init`.
  *     4. Installs EVERY registry item by URL, exactly as a user would.
- *     5. Type-checks and lints the consumer app.
+ *     5. Type-checks, lints and production-builds the consumer app.
  *
  *   TEST_REGISTRY_ORIGIN=https://kanakui.vercel.app npm run registry:test
  *     Remote mode: the same steps 3 to 5 against a deployed registry. It also checks
@@ -140,8 +140,11 @@ async function main() {
     await run(`npx shadcn@latest add ${urls.join(" ")} --yes --overwrite`, APP_DIR)
     await run("npx tsc --noEmit", APP_DIR)
     await run("npm run lint", APP_DIR)
+    // A production build also compiles the CSS the CLI merged into globals.css
+    // (keyframes, @property, theme variables), which type checking can't catch.
+    await run("npm run build", APP_DIR)
 
-    console.log(`\n✓ Installed and type-checked ${urls.length} items from ${ORIGIN} in ${APP_DIR}`)
+    console.log(`\n✓ Installed, type-checked and built ${urls.length} items from ${ORIGIN} in ${APP_DIR}`)
   } finally {
     if (server) {
       server.close()
