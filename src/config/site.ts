@@ -54,6 +54,14 @@ export const siteConfig = {
   description:
     "Production-ready React components, blocks and templates you can install with the shadcn CLI.",
   url,
+  links: {
+    github: process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com/Armaan42/kanakui",
+  },
+  /**
+   * Main navigation. Only list pages that exist; sections such as Blocks,
+   * Templates and Docs are added here when their phase ships.
+   */
+  nav: [{ title: "Components", href: "/components" }],
   registry: {
     namespace,
     /** Public path where `shadcn build` output is served (public/r → /r). */

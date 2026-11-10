@@ -16,6 +16,7 @@ export const registryItems: RegistryEntry[] = [
     title: "Compose Refs",
     description: "Merge multiple React refs into a single callback ref.",
     version: "0.1.0",
+    releasedAt: "2026-11-10",
     categories: ["utilities"],
     files: [{ path: "registry/default/lib/compose-refs.ts", type: "registry:lib" }],
   },
@@ -28,6 +29,7 @@ export const registryItems: RegistryEntry[] = [
     description:
       "Expose the pointer position over an element as CSS variables, without re-rendering.",
     version: "0.1.0",
+    releasedAt: "2026-11-10",
     categories: ["hooks", "interactive"],
     files: [
       { path: "registry/default/hooks/use-pointer-position.ts", type: "registry:hook" },
@@ -37,30 +39,36 @@ export const registryItems: RegistryEntry[] = [
   // ----------------------------------------------------------------- ui
   {
     name: "spotlight-card",
+    featured: true,
     type: "registry:ui",
     title: "Spotlight Card",
     description: "A card with a soft light that follows the pointer.",
     version: "0.1.0",
+    releasedAt: "2026-11-10",
     categories: ["cards", "effects", "interactive"],
     internalDependencies: ["use-pointer-position", "compose-refs"],
     files: [{ path: "registry/default/ui/spotlight-card.tsx", type: "registry:ui" }],
   },
   {
     name: "animated-card",
+    featured: true,
     type: "registry:ui",
     title: "Animated Card",
     description: "A card that tilts in 3D toward the pointer with spring physics.",
     version: "0.1.0",
+    releasedAt: "2026-11-10",
     categories: ["cards", "animations", "interactive"],
     dependencies: ["motion"],
     files: [{ path: "registry/default/ui/animated-card.tsx", type: "registry:ui" }],
   },
   {
     name: "shimmer-button",
+    featured: true,
     type: "registry:ui",
     title: "Shimmer Button",
     description: "A primary button with a light sweep across its surface.",
     version: "0.1.0",
+    releasedAt: "2026-11-10",
     categories: ["buttons", "animations"],
     files: [{ path: "registry/default/ui/shimmer-button.tsx", type: "registry:ui" }],
     cssVars: {
