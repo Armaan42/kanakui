@@ -212,7 +212,6 @@
 /* Homepage motion. Every animation is switched off with reduced motion where it's used. */
 @theme {
   --animate-word-in: word-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
-  --animate-beam-in: beam-in 2.2s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-beam-fall: beam-fall 6s linear infinite backwards;
   --animate-glow-spin: glow-spin 4s linear infinite;
 
@@ -226,16 +225,6 @@
       opacity: 1;
       filter: blur(0);
       transform: none;
-    }
-  }
-  @keyframes beam-in {
-    from {
-      opacity: 0;
-      transform: var(--beam-from);
-    }
-    to {
-      opacity: 1;
-      transform: var(--beam-to);
     }
   }
   @keyframes beam-fall {
