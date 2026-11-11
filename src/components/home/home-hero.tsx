@@ -114,7 +114,7 @@ export function HomeHero({ components, blocks, threeD }: HomeHeroProps) {
               aria-hidden="true"
               className="absolute top-1/2 left-1/2 aspect-square w-[200%] -translate-x-1/2 -translate-y-1/2 animate-glow-spin bg-[conic-gradient(from_0deg,transparent_0%,oklch(0.78_0.16_300)_15%,oklch(0.8_0.13_220)_30%,transparent_45%,transparent_100%)] motion-reduce:animate-none"
             />
-            <span className="relative inline-flex size-full items-center gap-2 rounded-[11px] bg-foreground px-7 text-sm font-medium text-background transition-colors group-hover:bg-foreground/90">
+            <span className="relative inline-flex size-full items-center justify-center gap-2 rounded-[11px] bg-foreground px-7 text-sm font-medium text-background transition-colors group-hover:bg-foreground/90">
               Browse components
               <ArrowRight aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-0.5" />
             </span>
