@@ -69,7 +69,7 @@ export function BeamRain() {
             <span
               key={beam.left}
               onAnimationIteration={() => land(beam.left)}
-              className="absolute top-0 w-px animate-beam-fall rounded-full bg-linear-to-b from-transparent via-violet-300/80 to-cyan-100 shadow-[0_0_6px_0_oklch(0.8_0.12_250/0.7)]"
+              className="absolute top-0 w-px animate-beam-fall rounded-full bg-linear-to-b from-transparent via-violet-500/70 to-sky-500 shadow-[0_0_6px_0_oklch(0.6_0.18_270/0.45)] dark:via-violet-300/80 dark:to-cyan-100 dark:shadow-[0_0_6px_0_oklch(0.8_0.12_250/0.7)]"
               style={
                 {
                   left: `${beam.left}%`,
@@ -89,7 +89,7 @@ export function BeamRain() {
       {bursts.map((burst) => (
         <span key={burst.id} className="absolute bottom-0" style={{ left: `${burst.left}%` }}>
           <motion.span
-            className="absolute bottom-0 left-1/2 h-6 w-24 -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_bottom,oklch(0.85_0.12_250/0.8),transparent_70%)] blur-sm"
+            className="absolute bottom-0 left-1/2 h-6 w-24 -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_bottom,oklch(0.65_0.17_265/0.55),transparent_70%)] blur-sm dark:bg-[radial-gradient(ellipse_at_bottom,oklch(0.85_0.12_250/0.8),transparent_70%)]"
             initial={{ opacity: 1, scale: 0.4 }}
             animate={{ opacity: 0, scale: 1.3 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -97,7 +97,7 @@ export function BeamRain() {
           {burst.sparks.map((spark, i) => (
             <motion.span
               key={i}
-              className="absolute bottom-0 rounded-full bg-linear-to-b from-white to-violet-300"
+              className="absolute bottom-0 rounded-full bg-linear-to-b from-sky-400 to-violet-500 dark:from-white dark:to-violet-300"
               style={{ width: spark.size, height: spark.size }}
               initial={{ x: 0, y: 0, opacity: 1 }}
               animate={{ x: spark.x, y: spark.y, opacity: 0 }}
@@ -107,8 +107,8 @@ export function BeamRain() {
         </span>
       ))}
 
-      <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-violet-300/60 to-transparent" />
-      <div className="absolute inset-x-[10%] bottom-0 h-16 bg-[radial-gradient(ellipse_at_bottom,oklch(0.7_0.15_280/0.25),transparent_70%)]" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-violet-500/50 to-transparent dark:via-violet-300/60" />
+      <div className="absolute inset-x-[10%] bottom-0 h-16 bg-[radial-gradient(ellipse_at_bottom,oklch(0.65_0.17_280/0.18),transparent_70%)] dark:bg-[radial-gradient(ellipse_at_bottom,oklch(0.7_0.15_280/0.25),transparent_70%)]" />
     </div>
   )
 }
