@@ -38,6 +38,11 @@ export const docsPages: DocsPageMeta[] = [
     description: "Set up shadcn: components.json, theme variables and the cn helper every component uses.",
   },
   {
+    title: "Theming",
+    href: "/docs/theming",
+    description: "Change colors and radius with CSS variables, pick a theme, and how dark mode works.",
+  },
+  {
     title: "CLI and namespace",
     navTitle: "CLI",
     href: "/docs/cli",

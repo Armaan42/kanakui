@@ -44,7 +44,7 @@ function ToggleSwitch({ checked: controlled, defaultChecked = false, onCheckedCh
           "relative inline-flex shrink-0 items-center rounded-full border-2 border-transparent transition-colors outline-none",
           "focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50",
           small ? "h-5 w-9" : "h-6 w-11",
-          checked ? "bg-foreground" : "bg-muted-foreground/30"
+          checked ? "bg-primary" : "bg-muted-foreground/30"
         )}
         {...props}
       >

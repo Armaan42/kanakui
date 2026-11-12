@@ -59,7 +59,7 @@ function ScrollProgress({ target, label = "Reading progress", className }: Scrol
       data-slot="scroll-progress"
       className={cn("h-1 w-full overflow-hidden bg-transparent", className)}
     >
-      <div ref={bar} className="h-full w-full origin-left scale-x-0 bg-foreground" />
+      <div ref={bar} className="h-full w-full origin-left scale-x-0 bg-primary" />
     </div>
   )
 }

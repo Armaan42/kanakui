@@ -2,6 +2,7 @@ import Link from "next/link"
 
 import { GitHubIcon, LogoMark } from "@/components/site/icons"
 import { MainNav } from "@/components/site/main-nav"
+import { ThemeMenu } from "@/components/site/theme-menu"
 import { ThemeToggle } from "@/components/site/theme-toggle"
 import { Button } from "@/components/ui/button"
 import { siteConfig } from "@/config/site"
@@ -20,11 +21,13 @@ export function SiteHeader() {
         </Link>
         <MainNav items={siteConfig.nav} />
         <div className="ml-auto flex items-center gap-1">
-          <Button asChild variant="ghost" size="icon">
+          {/* Hidden on phones to make room; the footer links to GitHub too. */}
+          <Button asChild variant="ghost" size="icon" className="max-sm:hidden">
             <a href={siteConfig.links.github} target="_blank" rel="noreferrer" aria-label="Source code on GitHub">
               <GitHubIcon />
             </a>
           </Button>
+          <ThemeMenu />
           <ThemeToggle />
         </div>
       </div>

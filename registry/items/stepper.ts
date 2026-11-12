@@ -5,7 +5,7 @@ export default defineItem({
   type: "registry:ui",
   title: "Stepper",
   description: "Progress through a multi-step flow, horizontal or vertical.",
-  version: "0.1.0",
+  version: "0.1.1",
   releasedAt: "2026-11-10",
   categories: ["navigation", "data-display"],
   dependencies: ["lucide-react"],

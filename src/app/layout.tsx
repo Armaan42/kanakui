@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ThemeSync } from "@/components/site/theme-config";
 import { siteConfig } from "@/config/site";
 import { themeScript } from "@/lib/theme";
 import "./globals.css";
@@ -44,7 +45,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <ThemeSync />
+        {children}
+      </body>
     </html>
   );
 }

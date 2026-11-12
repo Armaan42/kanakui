@@ -50,7 +50,7 @@ function ProgressRing({ value, max = 100, size = 96, strokeWidth = 8, label, chi
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={circumference * (1 - clamped / max)}
-          className="stroke-foreground transition-[stroke-dashoffset] duration-500 ease-out motion-reduce:transition-none"
+          className="stroke-primary transition-[stroke-dashoffset] duration-500 ease-out motion-reduce:transition-none"
         />
       </svg>
       <span aria-hidden="true" className="absolute text-sm font-semibold tabular-nums">

@@ -5,7 +5,7 @@ export default defineItem({
   type: "registry:ui",
   title: "Progress Ring",
   description: "Circular progress with the value in the middle, exposed as an accessible progress bar.",
-  version: "0.1.0",
+  version: "0.1.1",
   releasedAt: "2026-11-10",
   categories: ["loaders"],
   files: [{ path: "registry/default/ui/progress-ring.tsx", type: "registry:ui" }],
@@ -21,7 +21,7 @@ export default defineItem({
     extends: "All `<div>` props except `children`, which is listed above.",
     requirements: ["Tailwind CSS v4, with a `cn` helper at `@/lib/utils`. Works in Server Components."],
     customization: [
-      "Color the ring with stroke classes: change `stroke-foreground` in the file, or pass `className=\"[&_circle:last-child]:stroke-emerald-500\"`.",
+      "Color the ring with stroke classes: it uses `stroke-primary` (your theme’s primary color); edit it in the file, or pass `className=\"[&_circle:last-child]:stroke-emerald-500\"`.",
       "Show steps instead of percent with `max={5}` and `children=\"3/5\"`.",
     ],
     accessibility: ["Uses `role=\"progressbar\"` with min, max and current value, so screen readers announce progress.", "The ring animates between values unless the user prefers reduced motion."],

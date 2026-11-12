@@ -32,7 +32,7 @@ function Timeline({ entries, className, ...props }: TimelineProps) {
             aria-hidden="true"
             className={cn(
               "absolute top-1.5 -left-[1.95rem] size-3 rounded-full border-2 border-background",
-              entry.current ? "bg-foreground ring-4 ring-foreground/15" : "bg-muted-foreground/50"
+              entry.current ? "bg-primary ring-4 ring-primary/20" : "bg-muted-foreground/50"
             )}
           />
           <time dateTime={entry.dateTime} className="font-mono text-xs text-muted-foreground">

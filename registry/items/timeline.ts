@@ -5,7 +5,7 @@ export default defineItem({
   type: "registry:ui",
   title: "Timeline",
   description: "A vertical timeline for changelogs, roadmaps and history.",
-  version: "0.1.0",
+  version: "0.1.1",
   releasedAt: "2026-11-10",
   categories: ["data-display"],
   files: [{ path: "registry/default/ui/timeline.tsx", type: "registry:ui" }],
