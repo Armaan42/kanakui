@@ -8,14 +8,14 @@ const MCP_INIT = "npx shadcn@latest mcp init --client claude"
 /**
  * "Copy, paste, or let your AI agent install it": the heading and the two
  * commands that connect an agent through the shadcn MCP server, beside a
- * collage of live blocks and components. A dark stage in both themes.
+ * collage of live blocks and components. Follows the site theme.
  */
 export function HomeAgents() {
   const heading = (
     <div className="max-w-xl">
       <h2 id="agents" className="text-4xl font-semibold tracking-tighter text-balance sm:text-5xl">
         Copy, paste, or let your{" "}
-        <span className="bg-linear-to-r from-violet-300 to-sky-300 bg-clip-text whitespace-nowrap text-transparent">AI agent</span>{" "}
+        <span className="bg-linear-to-r from-violet-600 to-sky-600 dark:from-violet-300 dark:to-sky-300 bg-clip-text whitespace-nowrap text-transparent">AI agent</span>{" "}
         install it.
       </h2>
       <p className="mt-5 text-pretty text-muted-foreground">
@@ -26,11 +26,11 @@ export function HomeAgents() {
       <ol className="mt-7 space-y-3">
         <li className="space-y-1.5">
           <p className="font-mono text-[11px] tracking-widest text-muted-foreground uppercase">1 · Add the registry</p>
-          <CommandBlock command={registrySetupCommand()} copyLabel="Copy registry setup command" className="border-white/10 bg-black/40" />
+          <CommandBlock command={registrySetupCommand()} copyLabel="Copy registry setup command" className="border-foreground/10 bg-background/60" />
         </li>
         <li className="space-y-1.5">
           <p className="font-mono text-[11px] tracking-widest text-muted-foreground uppercase">2 · Connect your agent</p>
-          <CommandBlock command={MCP_INIT} copyLabel="Copy MCP setup command" className="border-white/10 bg-black/40" />
+          <CommandBlock command={MCP_INIT} copyLabel="Copy MCP setup command" className="border-foreground/10 bg-background/60" />
           <p className="text-xs text-muted-foreground">
             Using another agent? Swap <code className="font-mono">claude</code> for <code className="font-mono">cursor</code>,{" "}
             <code className="font-mono">vscode</code>, <code className="font-mono">codex</code> or{" "}
@@ -42,7 +42,7 @@ export function HomeAgents() {
   )
 
   return (
-    <section aria-labelledby="agents" className="dark relative isolate overflow-hidden border-b bg-background text-foreground">
+    <section aria-labelledby="agents" className="relative isolate overflow-hidden border-b bg-background text-foreground">
       <Collage heading={heading} />
       <div
         aria-hidden="true"
