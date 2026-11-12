@@ -1,3 +1,6 @@
+import Link from "next/link"
+import { ChevronRight } from "lucide-react"
+
 import { CategoryNav } from "@/components/site/category-nav"
 import { ItemsBrowser } from "@/components/site/items-browser"
 import { PageHeader } from "@/components/site/page-header"
@@ -25,17 +28,52 @@ const INTRO: Record<ItemKind, { title: string; description: (count: number) => s
 export function ItemsIndex({ kind, category }: { kind: ItemKind; category?: CategoryWithCount }) {
   const all = getItems(kind)
   const items = category ? getItemsByCategory(kind, category.slug) : all
+  const categories = getCategories(kind)
+  // The grouped view is only for a section's index, and only when it has several categories.
+  const groups =
+    !category && kind !== "templates"
+      ? categories.map((c) => ({ slug: c.slug, title: c.title, description: c.description, items: getItemsByCategory(kind, c.slug) }))
+      : undefined
+
+  const crumbs = [
+    { href: "/", label: "Home" },
+    { href: `/${kind}`, label: INTRO[kind].title },
+    ...(category ? [{ href: `/${kind}/category/${category.slug}`, label: category.title }] : []),
+  ]
 
   return (
     <div className="page-container space-y-8 py-10 sm:py-14">
-      <PageHeader
-        title={category ? category.title : INTRO[kind].title}
-        description={category ? category.description : INTRO[kind].description(all.length)}
-      />
+      <div className="space-y-5">
+        <nav aria-label="Breadcrumb">
+          <ol className="flex flex-wrap items-center gap-1 text-sm text-muted-foreground">
+            {crumbs.map((crumb, index) => {
+              const last = index === crumbs.length - 1
+              return (
+                <li key={crumb.href} className="flex items-center gap-1">
+                  {index > 0 ? <ChevronRight aria-hidden="true" className="size-3.5" /> : null}
+                  {last ? (
+                    <span aria-current="page" className="text-foreground">
+                      {crumb.label}
+                    </span>
+                  ) : (
+                    <Link href={crumb.href} className="hover:text-foreground">
+                      {crumb.label}
+                    </Link>
+                  )}
+                </li>
+              )
+            })}
+          </ol>
+        </nav>
+        <PageHeader
+          title={category ? category.title : INTRO[kind].title}
+          description={category ? category.description : INTRO[kind].description(all.length)}
+        />
+      </div>
       {kind === "templates" ? null : (
-        <CategoryNav kind={kind} categories={getCategories(kind)} total={all.length} active={category?.slug} />
+        <CategoryNav kind={kind} categories={categories} total={all.length} active={category?.slug} />
       )}
-      <ItemsBrowser items={items} kind={kind} />
+      <ItemsBrowser items={items} kind={kind} groups={groups} />
     </div>
   )
 }
