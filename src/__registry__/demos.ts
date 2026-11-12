@@ -5,8 +5,6 @@ export type DemoLoader = () => Promise<{ default: ComponentType }>
 
 export const demos: Record<string, DemoLoader> = {
   "accordion-smooth": () => import("@/registry/default/examples/accordion-smooth-demo"),
-  "agency": () => import("@/registry/default/examples/agency-demo"),
-  "ai-startup": () => import("@/registry/default/examples/ai-startup-demo"),
   "animated-card": () => import("@/registry/default/examples/animated-card-demo"),
   "animated-tabs": () => import("@/registry/default/examples/animated-tabs-demo"),
   "arc-globe": () => import("@/registry/default/examples/arc-globe-demo"),
@@ -30,7 +28,6 @@ export const demos: Record<string, DemoLoader> = {
   "cta-04": () => import("@/registry/default/examples/cta-04-demo"),
   "cta-05": () => import("@/registry/default/examples/cta-05-demo"),
   "cube-3d": () => import("@/registry/default/examples/cube-3d-demo"),
-  "developer-tool": () => import("@/registry/default/examples/developer-tool-demo"),
   "dock": () => import("@/registry/default/examples/dock-demo"),
   "dot-pattern": () => import("@/registry/default/examples/dot-pattern-demo"),
   "dots-loader": () => import("@/registry/default/examples/dots-loader-demo"),
@@ -89,7 +86,6 @@ export const demos: Record<string, DemoLoader> = {
   "pricing-01": () => import("@/registry/default/examples/pricing-01-demo"),
   "pricing-02": () => import("@/registry/default/examples/pricing-02-demo"),
   "pricing-03": () => import("@/registry/default/examples/pricing-03-demo"),
-  "product-launch": () => import("@/registry/default/examples/product-launch-demo"),
   "progress-ring": () => import("@/registry/default/examples/progress-ring-demo"),
   "rating": () => import("@/registry/default/examples/rating-demo"),
   "retro-grid": () => import("@/registry/default/examples/retro-grid-demo"),

@@ -1,62 +1,70 @@
 import { defineItem } from "../define.ts"
 
+const files = ["", "-navbar", "-hero", "-dashboard", "-logos", "-features", "-customers", "-pricing", "-faq", "-cta", "-footer", "-logo"]
+
 export default defineItem({
-  "name": "saas-landing",
-  "type": "registry:block",
-  "title": "SaaS Landing",
-  "description": "A complete landing page for a SaaS product: navbar, hero, logos, features, stats, pricing, testimonials, FAQ, call to action and footer.",
-  "version": "0.1.0",
-  "releasedAt": "2026-11-12",
-  "categories": [
-    "templates"
+  name: "saas-landing",
+  type: "registry:block",
+  title: "SaaS Landing",
+  description:
+    "A complete marketing site for a product analytics startup, with real photos, a product dashboard, feature mockups, a customer story, pricing, FAQ and footer.",
+  version: "0.2.0",
+  releasedAt: "2026-11-12",
+  categories: ["templates"],
+  registryDependencies: ["button", "input"],
+  // The template's brand colors: indigo and emerald, lighter in dark mode.
+  cssVars: {
+    theme: { "color-saas-primary": "var(--saas-primary)", "color-saas-accent": "var(--saas-accent)" },
+    light: { "saas-primary": "oklch(0.511 0.262 276.966)", "saas-accent": "oklch(0.596 0.145 163.225)" },
+    dark: { "saas-primary": "oklch(0.673 0.182 276.935)", "saas-accent": "oklch(0.765 0.177 163.223)" },
+  },
+  dependencies: ["lucide-react"],
+  files: [
+    ...files.map((suffix) => ({
+      path: `registry/default/blocks/saas-landing/components/saas-landing${suffix}.tsx`,
+      type: "registry:component" as const,
+    })),
+    { path: "registry/default/blocks/saas-landing/components/saas-landing-media.ts", type: "registry:component" },
   ],
-  "internalDependencies": [
-    "navbar-01",
-    "hero-01",
-    "logo-cloud-01",
-    "features-01",
-    "features-03",
-    "stats-01",
-    "pricing-01",
-    "testimonials-01",
-    "faq-01",
-    "cta-01",
-    "footer-01"
-  ],
-  "files": [
-    {
-      "path": "registry/default/blocks/saas-landing/components/saas-landing.tsx",
-      "type": "registry:component"
-    }
-  ],
-  "pageDocs": {
-    "props": [],
-    "extends": "No props. The page is 11 blocks in order: `navbar-01`, `hero-01`, `logo-cloud-01`, `features-01`, `features-03`, `stats-01`, `pricing-01`, `testimonials-01`, `faq-01`, `cta-01`, `footer-01`.",
-    "requirements": [
-      "The 11 kanakui blocks it is made of, and their components. The CLI installs all of them with this one command.",
-      "React 19 and Tailwind CSS v4, with a `cn` helper at `@/lib/utils`."
+  pageDocs: {
+    props: [],
+    extends:
+      "No props. `saas-landing.tsx` puts the sections in order; each section is its own `saas-landing-*.tsx` file with its copy inside.",
+    requirements: [
+      "shadcn `button` and `input`, and `lucide-react`. The CLI installs them.",
+      "React 19 and Tailwind CSS v4, with a `cn` helper at `@/lib/utils`. The CLI adds the template’s two brand colors to your `globals.css`.",
+      "An internet connection for the photos, which load from Unsplash’s image CDN.",
     ],
-    "customization": [
-      "Sections: Hero, logo cloud, feature grid, alternating features, stats, pricing tiers, testimonials, FAQ and a boxed call to action.",
-      "Render `<SaasLanding />` from `app/page.tsx` (or any route) to use it as that page.",
-      "Every section is a separate file in `@/components/`. Edit the text and links there, or remove a section by deleting its line in the template.",
-      "Swap any section for another block of the same kind, e.g. a different hero from the Blocks page.",
-      "Colors, radius and dark mode come from your theme. Pick one on the Themes page and copy its CSS."
+    customization: [
+      "Render `<SaasLanding />` from `app/page.tsx`, or render single sections such as `<SaasLandingPricing />` on other pages.",
+      "Pulsewise and its customers are made up. Change the name and mark in `saas-landing-logo.tsx`, then the copy in each section file.",
+      "Photos are free Unsplash images listed in `saas-landing-media.ts`. Swap in your own photos there, and keep the `alt` text accurate.",
+      "To serve photos through `next/image`, add `images.unsplash.com` to `images.remotePatterns` in `next.config.ts`, or move your own photos into `public/`.",
+      "The hero dashboard (`saas-landing-dashboard.tsx`) is HTML, so it follows your theme. Replace it with a screenshot of your product when you have one.",
+      "Plans and prices are in `saas-landing-pricing.tsx`. Prices are per month in USD, with a yearly price per plan.",
+      "Brand colors are `--saas-primary` (indigo) and `--saas-accent` (emerald) in your `globals.css`, with lighter values for dark mode. Change them there; everything else follows your theme.",
     ],
-    "accessibility": [
-      "The hero has the page's only `h1`; every other section starts at `h2`.",
-      "Sections sit inside one `<main>`, with the navbar before it and the footer after it.",
-      "Animated sections respect the user's reduced-motion setting."
+    accessibility: [
+      "One `h1` in the hero; every section is labelled by its own `h2`.",
+      "The navbar collapses into a disclosure menu on small screens that closes on Escape and returns focus to its toggle.",
+      "The dashboard and feature mockups are announced as one image with a text description, not as dozens of numbers.",
+      "The billing switch uses `aria-pressed`, FAQ items are native `<details>` elements, and the newsletter field has a visible label.",
+      "Testimonial photos have empty `alt` text because the person’s name is right next to them; the case study photo is described.",
     ],
-    "troubleshooting": [
+    troubleshooting: [
       {
-        "problem": "The install asks to overwrite a file.",
-        "solution": "Another kanakui item already added that file. Choose to overwrite only if you haven't edited it; otherwise keep yours."
+        problem: "Photos don’t show up.",
+        solution:
+          "They load from `images.unsplash.com`. Check your network and any Content Security Policy (`img-src`), or replace them with local images.",
       },
       {
-        "problem": "A section looks different from the preview.",
-        "solution": "Templates use your project's theme and your own shadcn components, so they follow your styles."
-      }
-    ]
-  }
+        problem: "The indigo and emerald accents are missing.",
+        solution: "The CLI adds `--saas-primary` and `--saas-accent` to `globals.css`, plus `--color-saas-*` in `@theme inline`. If you installed by hand, copy them from the registry JSON.",
+      },
+      {
+        problem: "Lint warns about `<img>` elements.",
+        solution: "Next.js suggests `next/image`. The template uses `<img>` so it works in any React app; switch to `next/image` if you like (see Customization).",
+      },
+    ],
+  },
 })

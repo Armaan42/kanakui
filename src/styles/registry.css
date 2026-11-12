@@ -20,10 +20,20 @@
   --animate-retro-grid: retro-grid 15s linear infinite;
   --animate-ripple-ring: ripple-ring 3s ease-in-out infinite;
   --animate-ripple: ripple 600ms ease-out forwards;
+  --color-saas-primary: var(--saas-primary);
+  --color-saas-accent: var(--saas-accent);
   --animate-shimmer: shimmer 2.5s linear infinite;
   --animate-skeleton-shimmer: skeleton-shimmer 1.6s ease-in-out infinite;
   --animate-sparkle: sparkle 1.8s ease-in-out infinite;
   --animate-typewriter-caret: typewriter-caret 1s steps(1) infinite;
+}
+:root {
+  --saas-primary: oklch(0.511 0.262 276.966);
+  --saas-accent: oklch(0.596 0.145 163.225);
+}
+.dark {
+  --saas-primary: oklch(0.673 0.182 276.935);
+  --saas-accent: oklch(0.765 0.177 163.223);
 }
 @keyframes aurora {
   0% {

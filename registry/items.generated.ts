@@ -2,8 +2,6 @@
 import type { RegistryItemDefinition } from "./types.ts"
 
 import item_accordion_smooth from "./items/accordion-smooth.ts"
-import item_agency from "./items/agency.ts"
-import item_ai_startup from "./items/ai-startup.ts"
 import item_animated_card from "./items/animated-card.ts"
 import item_animated_tabs from "./items/animated-tabs.ts"
 import item_arc_globe from "./items/arc-globe.ts"
@@ -28,7 +26,6 @@ import item_cta_03 from "./items/cta-03.ts"
 import item_cta_04 from "./items/cta-04.ts"
 import item_cta_05 from "./items/cta-05.ts"
 import item_cube_3d from "./items/cube-3d.ts"
-import item_developer_tool from "./items/developer-tool.ts"
 import item_dock from "./items/dock.ts"
 import item_dot_pattern from "./items/dot-pattern.ts"
 import item_dots_loader from "./items/dots-loader.ts"
@@ -87,7 +84,6 @@ import item_password_input from "./items/password-input.ts"
 import item_pricing_01 from "./items/pricing-01.ts"
 import item_pricing_02 from "./items/pricing-02.ts"
 import item_pricing_03 from "./items/pricing-03.ts"
-import item_product_launch from "./items/product-launch.ts"
 import item_progress_ring from "./items/progress-ring.ts"
 import item_rating from "./items/rating.ts"
 import item_retro_grid from "./items/retro-grid.ts"
@@ -128,8 +124,6 @@ import item_wireframe_orb from "./items/wireframe-orb.ts"
 
 export const itemDefinitions: RegistryItemDefinition[] = [
   item_accordion_smooth,
-  item_agency,
-  item_ai_startup,
   item_animated_card,
   item_animated_tabs,
   item_arc_globe,
@@ -154,7 +148,6 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_cta_04,
   item_cta_05,
   item_cube_3d,
-  item_developer_tool,
   item_dock,
   item_dot_pattern,
   item_dots_loader,
@@ -213,7 +206,6 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_pricing_01,
   item_pricing_02,
   item_pricing_03,
-  item_product_launch,
   item_progress_ring,
   item_rating,
   item_retro_grid,
