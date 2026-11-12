@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { ChevronRight } from "lucide-react"
 
-import { CategoryNav } from "@/components/site/category-nav"
 import { ItemsBrowser } from "@/components/site/items-browser"
 import { PageHeader } from "@/components/site/page-header"
 import { getCategories, getItems, getItemsByCategory, type CategoryWithCount, type ItemKind } from "@/lib/registry"
@@ -70,10 +69,14 @@ export function ItemsIndex({ kind, category }: { kind: ItemKind; category?: Cate
           description={category ? category.description : INTRO[kind].description(all.length)}
         />
       </div>
-      {kind === "templates" ? null : (
-        <CategoryNav kind={kind} categories={categories} total={all.length} active={category?.slug} />
-      )}
-      <ItemsBrowser items={items} kind={kind} groups={groups} />
+      <ItemsBrowser
+        items={items}
+        kind={kind}
+        groups={groups}
+        total={all.length}
+        categories={kind === "templates" ? undefined : categories.map(({ slug, title, count }) => ({ slug, title, count }))}
+        activeCategory={category?.slug}
+      />
     </div>
   )
 }
