@@ -7,9 +7,12 @@ import item_animated_tabs from "./items/animated-tabs.ts"
 import item_arc_globe from "./items/arc-globe.ts"
 import item_aurora_background from "./items/aurora-background.ts"
 import item_avatar_stack from "./items/avatar-stack.ts"
+import item_background_beams from "./items/background-beams.ts"
 import item_banner_01 from "./items/banner-01.ts"
 import item_bar_loader from "./items/bar-loader.ts"
+import item_beam_rain from "./items/beam-rain.ts"
 import item_bento_01 from "./items/bento-01.ts"
+import item_blur_text from "./items/blur-text.ts"
 import item_border_beam from "./items/border-beam.ts"
 import item_card_stack from "./items/card-stack.ts"
 import item_carousel_3d from "./items/carousel-3d.ts"
@@ -21,6 +24,7 @@ import item_cta_01 from "./items/cta-01.ts"
 import item_cta_02 from "./items/cta-02.ts"
 import item_cta_03 from "./items/cta-03.ts"
 import item_cta_04 from "./items/cta-04.ts"
+import item_cta_05 from "./items/cta-05.ts"
 import item_cube_3d from "./items/cube-3d.ts"
 import item_dock from "./items/dock.ts"
 import item_dot_pattern from "./items/dot-pattern.ts"
@@ -33,11 +37,15 @@ import item_features_02 from "./items/features-02.ts"
 import item_features_03 from "./items/features-03.ts"
 import item_features_04 from "./items/features-04.ts"
 import item_features_05 from "./items/features-05.ts"
+import item_features_06 from "./items/features-06.ts"
+import item_features_07 from "./items/features-07.ts"
 import item_flip_card from "./items/flip-card.ts"
 import item_floating_label_input from "./items/floating-label-input.ts"
 import item_footer_01 from "./items/footer-01.ts"
 import item_footer_02 from "./items/footer-02.ts"
 import item_footer_03 from "./items/footer-03.ts"
+import item_glow_border_button from "./items/glow-border-button.ts"
+import item_glow_grid from "./items/glow-grid.ts"
 import item_gradient_text from "./items/gradient-text.ts"
 import item_grid_pattern from "./items/grid-pattern.ts"
 import item_hero_01 from "./items/hero-01.ts"
@@ -48,8 +56,12 @@ import item_hero_05 from "./items/hero-05.ts"
 import item_hero_06 from "./items/hero-06.ts"
 import item_hero_07 from "./items/hero-07.ts"
 import item_hero_08 from "./items/hero-08.ts"
+import item_hero_09 from "./items/hero-09.ts"
+import item_hero_10 from "./items/hero-10.ts"
+import item_hero_11 from "./items/hero-11.ts"
 import item_image_compare from "./items/image-compare.ts"
 import item_kbd from "./items/kbd.ts"
+import item_lamp from "./items/lamp.ts"
 import item_like_button from "./items/like-button.ts"
 import item_login_01 from "./items/login-01.ts"
 import item_logo_cloud_01 from "./items/logo-cloud-01.ts"
@@ -66,6 +78,7 @@ import item_number_stepper from "./items/number-stepper.ts"
 import item_number_ticker from "./items/number-ticker.ts"
 import item_orbiting_circles from "./items/orbiting-circles.ts"
 import item_otp_input from "./items/otp-input.ts"
+import item_particle_galaxy from "./items/particle-galaxy.ts"
 import item_particle_wave from "./items/particle-wave.ts"
 import item_password_input from "./items/password-input.ts"
 import item_pricing_01 from "./items/pricing-01.ts"
@@ -79,6 +92,7 @@ import item_ripple_background from "./items/ripple-background.ts"
 import item_ripple_button from "./items/ripple-button.ts"
 import item_rotating_words from "./items/rotating-words.ts"
 import item_scramble_text from "./items/scramble-text.ts"
+import item_scroll_device from "./items/scroll-device.ts"
 import item_scroll_progress from "./items/scroll-progress.ts"
 import item_segmented_control from "./items/segmented-control.ts"
 import item_shimmer_button from "./items/shimmer-button.ts"
@@ -93,11 +107,13 @@ import item_status_dot from "./items/status-dot.ts"
 import item_stepper from "./items/stepper.ts"
 import item_tag_input from "./items/tag-input.ts"
 import item_team_01 from "./items/team-01.ts"
+import item_terminal from "./items/terminal.ts"
 import item_testimonials_01 from "./items/testimonials-01.ts"
 import item_testimonials_02 from "./items/testimonials-02.ts"
 import item_testimonials_03 from "./items/testimonials-03.ts"
 import item_text_3d from "./items/text-3d.ts"
 import item_text_reveal from "./items/text-reveal.ts"
+import item_tilt_card from "./items/tilt-card.ts"
 import item_timeline from "./items/timeline.ts"
 import item_toggle_switch from "./items/toggle-switch.ts"
 import item_typewriter from "./items/typewriter.ts"
@@ -112,9 +128,12 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_arc_globe,
   item_aurora_background,
   item_avatar_stack,
+  item_background_beams,
   item_banner_01,
   item_bar_loader,
+  item_beam_rain,
   item_bento_01,
+  item_blur_text,
   item_border_beam,
   item_card_stack,
   item_carousel_3d,
@@ -126,6 +145,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_cta_02,
   item_cta_03,
   item_cta_04,
+  item_cta_05,
   item_cube_3d,
   item_dock,
   item_dot_pattern,
@@ -138,11 +158,15 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_features_03,
   item_features_04,
   item_features_05,
+  item_features_06,
+  item_features_07,
   item_flip_card,
   item_floating_label_input,
   item_footer_01,
   item_footer_02,
   item_footer_03,
+  item_glow_border_button,
+  item_glow_grid,
   item_gradient_text,
   item_grid_pattern,
   item_hero_01,
@@ -153,8 +177,12 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_hero_06,
   item_hero_07,
   item_hero_08,
+  item_hero_09,
+  item_hero_10,
+  item_hero_11,
   item_image_compare,
   item_kbd,
+  item_lamp,
   item_like_button,
   item_login_01,
   item_logo_cloud_01,
@@ -171,6 +199,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_number_ticker,
   item_orbiting_circles,
   item_otp_input,
+  item_particle_galaxy,
   item_particle_wave,
   item_password_input,
   item_pricing_01,
@@ -184,6 +213,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_ripple_button,
   item_rotating_words,
   item_scramble_text,
+  item_scroll_device,
   item_scroll_progress,
   item_segmented_control,
   item_shimmer_button,
@@ -198,11 +228,13 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_stepper,
   item_tag_input,
   item_team_01,
+  item_terminal,
   item_testimonials_01,
   item_testimonials_02,
   item_testimonials_03,
   item_text_3d,
   item_text_reveal,
+  item_tilt_card,
   item_timeline,
   item_toggle_switch,
   item_typewriter,
