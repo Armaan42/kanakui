@@ -32,9 +32,9 @@ function Words({ text, start = 0, className }: { text: string; start?: number; c
 }
 
 /**
- * The homepage hero: a dark stage in both themes, with the headline on the
- * left and a 3D globe with glowing routes between cities on the right. Every
- * number is counted from the registry at build time.
+ * The homepage hero: the headline on the left and a 3D globe with glowing
+ * routes between cities on the right. It follows the site theme, light or
+ * dark. Every number is counted from the registry at build time.
  */
 export function HomeHero({ components, blocks, threeD }: HomeHeroProps) {
   const stats = [
@@ -44,23 +44,23 @@ export function HomeHero({ components, blocks, threeD }: HomeHeroProps) {
   ]
 
   return (
-    <section className="dark relative isolate overflow-hidden border-b bg-background text-foreground">
+    <section className="relative isolate overflow-hidden border-b bg-background text-foreground">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(color-mix(in_oklch,var(--foreground)_14%,transparent)_1px,transparent_1px)] bg-size-[22px_22px] [mask-image:radial-gradient(ellipse_70%_60%_at_60%_45%,black,transparent)]"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[36rem] w-[70rem] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,oklch(0.6_0.18_285/0.18),transparent_65%)]"
+        className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[36rem] w-[70rem] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,oklch(0.7_0.15_285/0.16),transparent_65%)] dark:bg-[radial-gradient(ellipse_at_top,oklch(0.6_0.18_285/0.18),transparent_65%)]"
       />
 
       <div className="mx-auto grid min-h-[calc(100svh-3.5rem)] w-full max-w-7xl grid-cols-[minmax(0,1fr)] items-center gap-4 px-4 pt-16 pb-12 sm:px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-8 lg:py-12">
         <div className="flex min-w-0 flex-col items-center text-center lg:items-start lg:text-left">
           <Link
             href="/components/category/3d"
-            className="inline-flex animate-word-in items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs text-muted-foreground backdrop-blur-md transition-colors hover:border-white/25 hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none motion-reduce:animate-none"
+            className="inline-flex animate-word-in items-center gap-2 rounded-full border border-foreground/10 bg-foreground/[0.03] px-3.5 py-1.5 text-xs text-muted-foreground backdrop-blur-md transition-colors hover:border-foreground/25 hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none motion-reduce:animate-none"
           >
-            <Sparkles aria-hidden="true" className="size-3.5 text-violet-300" />
+            <Sparkles aria-hidden="true" className="size-3.5 text-violet-500 dark:text-violet-300" />
             New: 3D components
             <ArrowRight aria-hidden="true" className="size-3" />
           </Link>
@@ -68,7 +68,14 @@ export function HomeHero({ components, blocks, threeD }: HomeHeroProps) {
           <h1 className="mt-7 text-5xl leading-[1.02] font-semibold tracking-tighter text-balance sm:text-6xl xl:text-7xl">
             <Words text="Build interfaces people" start={1} />
             <span className="inline-block animate-word-in motion-reduce:animate-none" style={{ animationDelay: `${4 * WORD_MS}ms` }}>
-              <GradientText colors={["oklch(0.78 0.16 300)", "oklch(0.8 0.13 230)", "oklch(0.85 0.12 190)"]} className="pb-[0.08em]">
+              {/* Deeper colors on light backgrounds, pastel on dark; only one is displayed. */}
+              <GradientText colors={["oklch(0.52 0.24 300)", "oklch(0.52 0.19 255)", "oklch(0.56 0.13 200)"]} className="pb-[0.08em] dark:hidden">
+                remember
+              </GradientText>
+              <GradientText
+                colors={["oklch(0.78 0.16 300)", "oklch(0.8 0.13 230)", "oklch(0.85 0.12 190)"]}
+                className="hidden pb-[0.08em] dark:inline-block"
+              >
                 remember
               </GradientText>
             </span>
@@ -101,7 +108,7 @@ export function HomeHero({ components, blocks, threeD }: HomeHeroProps) {
             </Link>
             <Link
               href="/docs/installation"
-              className="inline-flex h-12 items-center justify-center rounded-xl border border-white/15 bg-black/45 px-7 text-sm font-medium backdrop-blur-md transition-colors outline-none hover:bg-white/10 focus-visible:ring-3 focus-visible:ring-ring/50"
+              className="inline-flex h-12 items-center justify-center rounded-xl border border-foreground/15 bg-background/60 px-7 text-sm font-medium backdrop-blur-md transition-colors outline-none hover:bg-foreground/5 focus-visible:ring-3 focus-visible:ring-ring/50"
             >
               Installation guide
             </Link>
@@ -111,7 +118,7 @@ export function HomeHero({ components, blocks, threeD }: HomeHeroProps) {
             <CommandBlock
               command={installCommandByUrl("arc-globe")}
               copyLabel="Copy install command for Arc Globe"
-              className="border-white/10 bg-black/40 text-left backdrop-blur-md"
+              className="border-foreground/10 bg-background/60 text-left backdrop-blur-md"
             />
           </div>
 
@@ -135,7 +142,7 @@ export function HomeHero({ components, blocks, threeD }: HomeHeroProps) {
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-violet-300/50 to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-violet-500/40 to-transparent dark:via-violet-300/50"
       />
     </section>
   )
