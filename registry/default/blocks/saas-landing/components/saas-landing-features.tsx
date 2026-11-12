@@ -20,7 +20,24 @@ const cohorts = [
   { week: "Oct 20", values: [100, 76, 66] },
 ]
 
-const replayEvents = [8, 21, 34, 47, 63, 71, 88]
+/** Events on the replay timeline, as a percentage of the session. */
+const replayEvents = [
+  { at: 5, type: "view" },
+  { at: 14, type: "click" },
+  { at: 26, type: "click" },
+  { at: 37, type: "view" },
+  { at: 49, type: "click" },
+  { at: 63, type: "rage" },
+  { at: 72, type: "error" },
+  { at: 88, type: "click" },
+] as const
+
+const replayEventColor = {
+  view: "bg-muted-foreground/60",
+  click: "bg-saas-primary",
+  rage: "bg-red-500",
+  error: "bg-amber-500",
+}
 
 const moreFeatures = [
   { icon: MousePointerClick, title: "Autocapture", text: "Clicks, page views and form submits are tracked from day one, no tagging plan needed." },
@@ -125,33 +142,96 @@ export function SaasLandingFeatures() {
             title="Session replays, one click away"
             text="Jump from any chart to the recordings behind it and watch exactly where people hesitate."
           >
-            <div className="overflow-hidden rounded-xl border bg-background">
-              <div className="relative h-36 bg-muted/40 p-4">
-                <div className="h-2.5 w-24 rounded-full bg-foreground/15" />
-                <div className="mt-3 h-2 w-40 rounded-full bg-foreground/10" />
-                <div className="mt-2 h-2 w-32 rounded-full bg-foreground/10" />
-                <div className="mt-4 flex gap-2">
-                  <div className="h-7 w-20 rounded-md bg-primary" />
-                  <div className="h-7 w-16 rounded-md border bg-background" />
-                </div>
-                <svg viewBox="0 0 200 100" className="absolute inset-0 size-full" preserveAspectRatio="none">
-                  <path d="M180 20 C150 40 120 30 100 50 S55 66 30 62" fill="none" stroke="var(--saas-primary)" strokeWidth="1.5" strokeDasharray="3 3" vectorEffect="non-scaling-stroke" />
-                </svg>
-                <span className="absolute top-[62%] left-[15%] size-5 -translate-1/2 rounded-full border-2 border-saas-primary bg-saas-primary/20" />
-              </div>
-              <div className="flex items-center gap-3 border-t px-3 py-2.5">
-                <span className="grid size-6 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground">
-                  <svg viewBox="0 0 12 12" className="size-2.5 fill-current">
-                    <path d="M3 2v8l7-4Z" />
-                  </svg>
+            <div className="overflow-hidden rounded-xl border bg-background text-[11px]">
+              {/* Who the recording is from */}
+              <div className="flex items-center gap-2.5 border-b px-3 py-2">
+                <span className="grid size-7 shrink-0 place-items-center rounded-full bg-saas-accent/15 text-[10px] font-semibold text-saas-accent">
+                  JK
                 </span>
-                <div className="relative h-1.5 flex-1 rounded-full bg-muted">
-                  <div className="h-full w-[63%] rounded-full bg-primary" />
-                  {replayEvents.map((at) => (
-                    <span key={at} className="absolute top-1/2 size-1.5 -translate-1/2 rounded-full bg-saas-primary" style={{ left: `${at}%` }} />
-                  ))}
+                <div className="min-w-0">
+                  <p className="truncate font-medium">jonas.k@fernway.io</p>
+                  <p className="truncate text-[10px] text-muted-foreground">Berlin · Chrome on macOS · 2 days ago</p>
                 </div>
-                <span className="font-mono text-[10px] text-muted-foreground">01:52 / 02:58</span>
+                <span className="ml-auto shrink-0 rounded-full bg-red-500/10 px-2 py-0.5 text-[10px] font-medium text-red-600 dark:text-red-400">
+                  Rage click
+                </span>
+              </div>
+
+              {/* The recorded screen */}
+              <div className="relative bg-muted/50 px-4 pt-4 pb-5">
+                <div className="rounded-lg border bg-background p-3.5 shadow-sm">
+                  <div className="flex items-center justify-between text-[10px] text-muted-foreground">
+                    <span>Step 3 of 4</span>
+                    <span>app.pulsewise.io/onboarding</span>
+                  </div>
+                  <div className="mt-2 grid grid-cols-4 gap-1">
+                    {[0, 1, 2, 3].map((step) => (
+                      <span key={step} className={cn("h-1 rounded-full", step < 3 ? "bg-saas-primary" : "bg-muted")} />
+                    ))}
+                  </div>
+                  <p className="mt-3 text-[13px] font-semibold">Invite your teammates</p>
+                  <p className="mt-0.5 text-muted-foreground">Pulsewise works best when your whole team can see it.</p>
+                  <div className="mt-3 space-y-1.5">
+                    <div className="rounded-md border px-2 py-1.5">maria@fernway.io</div>
+                    <div className="flex items-center rounded-md border border-saas-primary px-2 py-1.5 ring-2 ring-saas-primary/20">
+                      <span className="text-muted-foreground">name@company.com</span>
+                    </div>
+                  </div>
+                  <div className="mt-3 flex items-center justify-between">
+                    <span className="relative text-muted-foreground underline underline-offset-2">
+                      Skip for now
+                      {/* Rage-click rings, the cursor trail and the cursor itself, anchored to the link. */}
+                      <span className="absolute top-1/2 left-[85%] size-8 -translate-1/2 rounded-full border-2 border-red-500/70 bg-red-500/10" />
+                      <span className="absolute top-1/2 left-[85%] size-8 -translate-1/2 animate-ping rounded-full border-2 border-red-500/60 motion-reduce:hidden" />
+                      <svg viewBox="0 0 160 70" className="absolute bottom-1/2 left-[85%] h-[70px] w-40 overflow-visible">
+                        <path
+                          d="M0 70 C18 54 40 50 70 53 S125 62 160 56"
+                          fill="none"
+                          stroke="var(--saas-primary)"
+                          strokeWidth="1.5"
+                          strokeDasharray="3 4"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <svg viewBox="0 0 14 20" className="absolute top-1/2 left-[85%] h-5 w-3.5 drop-shadow">
+                        <path d="M1 1v15.5l4-3.6 2.7 6 2.6-1.1-2.7-5.9H13Z" fill="white" stroke="black" strokeWidth="1.2" strokeLinejoin="round" />
+                      </svg>
+                      <span className="absolute top-full left-[85%] mt-3 ml-2 rounded-md bg-red-500 px-1.5 py-0.5 text-[10px] font-medium whitespace-nowrap text-white no-underline shadow">
+                        4 clicks in 1.2s
+                      </span>
+                    </span>
+                    <span className="rounded-md bg-primary px-2.5 py-1.5 font-medium text-primary-foreground">Send invites</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Player */}
+              <div className="space-y-2.5 border-t px-3 py-2.5">
+                <div className="relative h-1.5 rounded-full bg-muted">
+                  <div className="h-full w-[63%] rounded-full bg-foreground/70" />
+                  {replayEvents.map((event) => (
+                    <span
+                      key={event.at}
+                      className={cn("absolute top-1/2 size-2 -translate-1/2 rounded-full ring-2 ring-background", replayEventColor[event.type])}
+                      style={{ left: `${event.at}%` }}
+                    />
+                  ))}
+                  <span className="absolute top-1/2 left-[63%] h-3.5 w-1 -translate-1/2 rounded-full bg-foreground" />
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="grid size-6 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground">
+                    <svg viewBox="0 0 12 12" className="size-2.5 fill-current">
+                      <path d="M3 2v8l7-4Z" />
+                    </svg>
+                  </span>
+                  <span className="font-mono text-[10px] text-muted-foreground tabular-nums">01:52 / 02:58</span>
+                  <span className="rounded border px-1 font-mono text-[10px]">1×</span>
+                  <span className="ml-auto hidden items-center gap-2.5 text-[10px] text-muted-foreground sm:flex">
+                    <span className="inline-flex items-center gap-1"><span className="size-1.5 rounded-full bg-saas-primary" />Click</span>
+                    <span className="inline-flex items-center gap-1"><span className="size-1.5 rounded-full bg-red-500" />Rage</span>
+                    <span className="inline-flex items-center gap-1"><span className="size-1.5 rounded-full bg-amber-500" />Error</span>
+                  </span>
+                </div>
               </div>
             </div>
           </Card>
