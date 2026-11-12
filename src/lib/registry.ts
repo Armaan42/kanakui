@@ -37,6 +37,10 @@ export interface ItemSummary {
   releasedAt: string
   kind: ItemKind
   href: string
+  /** Picked for the homepage; listed first in the "Curated" sort. */
+  featured: boolean
+  /** Every item is free today; "pro" is reserved for paid items. */
+  pricing: "free" | "pro"
 }
 
 export interface CategoryWithCount extends RegistryCategory {
@@ -66,6 +70,8 @@ function toSummary(item: RegistryEntry): ItemSummary {
     releasedAt: item.releasedAt,
     kind,
     href: `/${kind}/${item.name}`,
+    featured: Boolean(item.featured),
+    pricing: "free",
   }
 }
 
