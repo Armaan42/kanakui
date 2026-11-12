@@ -14,6 +14,11 @@ const INTRO: Record<ItemKind, { title: string; description: (count: number) => s
     description: (n) =>
       `${n} ready-made page ${n === 1 ? "section" : "sections"} (heroes, pricing, footers and more). Each installs with one command and is built from components you can edit.`,
   },
+  templates: {
+    title: "Templates",
+    description: (n) =>
+      `${n} complete ${n === 1 ? "page" : "pages"} built from kanakui blocks. One command adds the page and every section in it to your project, ready to edit.`,
+  },
 }
 
 /** Index (/<kind>) or category (/<kind>/category/<slug>) listing. */
@@ -27,7 +32,9 @@ export function ItemsIndex({ kind, category }: { kind: ItemKind; category?: Cate
         title={category ? category.title : INTRO[kind].title}
         description={category ? category.description : INTRO[kind].description(all.length)}
       />
-      <CategoryNav kind={kind} categories={getCategories(kind)} total={all.length} active={category?.slug} />
+      {kind === "templates" ? null : (
+        <CategoryNav kind={kind} categories={getCategories(kind)} total={all.length} active={category?.slug} />
+      )}
       <ItemsBrowser items={items} kind={kind} />
     </div>
   )

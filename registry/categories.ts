@@ -41,5 +41,6 @@ export const registryCategories: RegistryCategory[] = [
   { slug: "auth", title: "Authentication", description: "Sign-in and sign-up screens." },
   { slug: "banners", title: "Banners", description: "Announcement bars and notices." },
   { slug: "content", title: "Content", description: "Changelogs, error pages and other content sections." },
+  { slug: "templates", title: "Templates", description: "Full pages assembled from blocks, ready to use as a starting point." },
   { slug: "utilities", title: "Utilities", description: "Small helper functions used by components." },
 ]

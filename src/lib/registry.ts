@@ -8,16 +8,24 @@ import { registryItems } from "@/registry/index"
 import type { RegistryEntry, RegistryEntryType } from "@/registry/types"
 
 /** Site sections that list registry items. Each maps to /<kind>/... routes. */
-export type ItemKind = "components" | "blocks"
+export type ItemKind = "components" | "blocks" | "templates"
 
 const KIND_TYPES: Record<ItemKind, RegistryEntryType[]> = {
   components: ["registry:ui", "registry:component"],
   blocks: ["registry:block"],
+  templates: ["registry:block"],
 }
+
+/**
+ * Templates are blocks (so the shadcn CLI installs them the same way) in the
+ * "templates" category: a whole page made of other blocks.
+ */
+export const TEMPLATE_CATEGORY = "templates"
 
 export const KIND_LABEL: Record<ItemKind, { singular: string; plural: string }> = {
   components: { singular: "component", plural: "components" },
   blocks: { singular: "block", plural: "blocks" },
+  templates: { singular: "template", plural: "templates" },
 }
 
 /** Serializable data a card needs. Safe to pass to client components. */
@@ -44,7 +52,8 @@ export interface InstalledFile {
 const byName = new Map(registryItems.map((item) => [item.name, item]))
 
 export function kindOf(item: RegistryEntry): ItemKind | undefined {
-  return (Object.keys(KIND_TYPES) as ItemKind[]).find((kind) => KIND_TYPES[kind].includes(item.type))
+  if (item.type === "registry:block" && item.categories.includes(TEMPLATE_CATEGORY)) return "templates"
+  return (["components", "blocks"] as const).find((kind) => KIND_TYPES[kind].includes(item.type))
 }
 
 function toSummary(item: RegistryEntry): ItemSummary {
@@ -61,7 +70,7 @@ function toSummary(item: RegistryEntry): ItemSummary {
 }
 
 function entriesOf(kind: ItemKind): RegistryEntry[] {
-  return registryItems.filter((item) => KIND_TYPES[kind].includes(item.type))
+  return registryItems.filter((item) => kindOf(item) === kind)
 }
 
 /** Every item of `kind`, sorted by title. */

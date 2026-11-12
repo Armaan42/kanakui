@@ -3,12 +3,12 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Blocks, ChevronDown, Download, LayoutGrid, Menu, X } from "lucide-react"
+import { Blocks, ChevronDown, Download, LayoutGrid, LayoutTemplate, Menu, X } from "lucide-react"
 
 import type { NavGroup } from "@/lib/docs-nav"
 import { cn } from "@/lib/utils"
 
-const GROUP_ICON = { installation: Download, components: LayoutGrid, blocks: Blocks } as const
+const GROUP_ICON = { installation: Download, components: LayoutGrid, blocks: Blocks, templates: LayoutTemplate } as const
 
 function isActive(pathname: string, href: string) {
   // Section index links ("/components") only match exactly; others also match sub-paths.
