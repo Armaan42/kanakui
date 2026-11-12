@@ -27,7 +27,8 @@ export default async function ViewPage({ params }: PageProps<"/view/[name]">) {
   const { name } = await params
   const item = getPreviewableItem(name)
   if (!item) notFound()
-  const isBlock = kindOf(item) === "blocks"
+  const kind = kindOf(item)
+  const isBlock = kind === "blocks" || kind === "templates"
 
   // No heading of our own: blocks bring their own (e.g. the hero's h1), and the
   // document title already names the preview.

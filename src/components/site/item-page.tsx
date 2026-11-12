@@ -9,11 +9,13 @@ import { ComponentGrid } from "@/components/site/component-card"
 import { BulletList, DocsSection, InlineText, PropsTable } from "@/components/site/docs"
 import { InstallTabs } from "@/components/site/install-tabs"
 import { PreviewFrame } from "@/components/site/preview-frame"
+import { TemplateGrid } from "@/components/site/template-card"
 import { Badge } from "@/components/ui/badge"
 import { registrySetupCommand, siteConfig } from "@/config/site"
 import { formatDate } from "@/lib/format"
 import {
   getCategoryTitle,
+  getItem,
   getInstalledFiles,
   getInternalDependencies,
   getNpmDependencies,
@@ -31,7 +33,7 @@ const TYPE_LABEL: Record<string, string> = {
   "registry:block": "Block",
 }
 
-const SECTION_TITLE: Record<ItemKind, string> = { components: "Components", blocks: "Blocks" }
+const SECTION_TITLE: Record<ItemKind, string> = { components: "Components", blocks: "Blocks", templates: "Templates" }
 
 /** Applies to every item, so it lives here rather than in each item's docs. */
 const COMMON_TROUBLESHOOTING = [
@@ -45,20 +47,28 @@ const COMMON_TROUBLESHOOTING = [
   },
 ]
 
-/** The detail page shared by /components/[name] and /blocks/[name]. */
+/** The detail page shared by /components/[name], /blocks/[name] and /templates/[name]. */
 export async function ItemPage({ item, kind }: { item: RegistryEntry; kind: ItemKind }) {
   const docs = componentDocs[item.name]
-  const primaryCategory = item.categories[0]
+  const isTemplate = kind === "templates"
+  // Templates all share one category, so it adds nothing to the breadcrumb or badges.
+  const categories = isTemplate ? [] : item.categories
+  const primaryCategory = categories[0]
+  // A template's direct dependencies are its sections, in page order.
+  const sections = isTemplate
+    ? (item.internalDependencies ?? []).flatMap((name) => getItem("blocks", name) ?? [])
+    : []
   const npmDependencies = getNpmDependencies(item)
   const shadcnDependencies = getShadcnDependencies(item)
   const internalDependencies = getInternalDependencies(item)
   const installedFiles = getInstalledFiles(item)
-  const related = getRelated(item, kind === "blocks" ? 2 : 3)
+  const related = getRelated(item, kind === "components" ? 3 : 2)
   const usage = await getUsageExample(item.name)
   const troubleshooting = [...(docs?.troubleshooting ?? []), ...COMMON_TROUBLESHOOTING]
 
   const toc = [
     { id: "installation", title: "Installation" },
+    ...(sections.length ? [{ id: "sections", title: "Sections" }] : []),
     { id: "files", title: "Files" },
     ...(usage ? [{ id: "usage", title: "Usage" }] : []),
     ...(docs
@@ -107,7 +117,8 @@ export async function ItemPage({ item, kind }: { item: RegistryEntry; kind: Item
             <Badge variant="outline" className="font-mono">
               v{item.version}
             </Badge>
-            {item.categories.map((category) => (
+            {sections.length ? <Badge variant="outline">{sections.length} sections</Badge> : null}
+            {categories.map((category) => (
               <Badge key={category} asChild variant="outline">
                 <Link href={`/${kind}/category/${category}`}>{getCategoryTitle(category)}</Link>
               </Badge>
@@ -117,7 +128,7 @@ export async function ItemPage({ item, kind }: { item: RegistryEntry; kind: Item
       </div>
 
       <section aria-label="Preview">
-        <PreviewFrame name={item.name} title={item.title} tall={kind === "blocks"} />
+        <PreviewFrame name={item.name} title={item.title} tall={kind !== "components"} />
       </section>
 
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_15rem]">
@@ -125,6 +136,33 @@ export async function ItemPage({ item, kind }: { item: RegistryEntry; kind: Item
           <DocsSection id="installation" title="Installation">
             <InstallTabs name={item.name} npmDependencies={npmDependencies} shadcnDependencies={shadcnDependencies} />
           </DocsSection>
+
+          {sections.length ? (
+            <DocsSection id="sections" title="Sections">
+              <p className="text-sm text-muted-foreground">
+                The blocks this page is made of, top to bottom. Each one is also on its own page.
+              </p>
+              <ol className="divide-y rounded-lg border">
+                {sections.map((block, index) => (
+                  <li key={block.name}>
+                    <Link
+                      href={`/blocks/${block.name}`}
+                      className="group flex items-center gap-4 px-4 py-2.5 text-sm outline-none hover:bg-muted/40 focus-visible:ring-3 focus-visible:ring-ring/50"
+                    >
+                      <span className="w-5 shrink-0 font-mono text-xs text-muted-foreground tabular-nums">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="font-medium group-hover:underline group-hover:underline-offset-4">{block.title}</span>
+                        <span className="ml-2 font-mono text-xs text-muted-foreground">{block.name}</span>
+                      </span>
+                      <ChevronRight aria-hidden="true" className="size-4 shrink-0 text-muted-foreground" />
+                    </Link>
+                  </li>
+                ))}
+              </ol>
+            </DocsSection>
+          ) : null}
 
           <DocsSection id="files" title="Files added to your project">
             <p className="text-sm text-muted-foreground">
@@ -263,9 +301,15 @@ export async function ItemPage({ item, kind }: { item: RegistryEntry; kind: Item
       {related.length > 0 ? (
         <section aria-labelledby="related" className="space-y-4 border-t pt-10">
           <h2 id="related" className="text-xl font-semibold tracking-tight">
-            Related {kind}
+            {isTemplate ? "More templates" : `Related ${kind}`}
           </h2>
-          {kind === "blocks" ? <BlockGrid blocks={related} /> : <ComponentGrid components={related} />}
+          {isTemplate ? (
+            <TemplateGrid templates={related} />
+          ) : kind === "blocks" ? (
+            <BlockGrid blocks={related} />
+          ) : (
+            <ComponentGrid components={related} />
+          )}
         </section>
       ) : null}
     </div>

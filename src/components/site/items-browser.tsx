@@ -5,6 +5,7 @@ import { Search } from "lucide-react"
 
 import { BlockGrid } from "@/components/site/block-card"
 import { ComponentGrid } from "@/components/site/component-card"
+import { TemplateGrid } from "@/components/site/template-card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import type { ItemKind, ItemSummary } from "@/lib/registry"
@@ -16,7 +17,7 @@ import type { ItemKind, ItemSummary } from "@/lib/registry"
 export function ItemsBrowser({ items, kind }: { items: ItemSummary[]; kind: ItemKind }) {
   const [query, setQuery] = React.useState("")
   const q = query.trim().toLowerCase()
-  const noun = kind === "blocks" ? "blocks" : "components"
+  const noun = kind
 
   const results = q
     ? items.filter((item) =>
@@ -43,7 +44,13 @@ export function ItemsBrowser({ items, kind }: { items: ItemSummary[]; kind: Item
       </p>
 
       {results.length > 0 ? (
-        kind === "blocks" ? <BlockGrid blocks={results} /> : <ComponentGrid components={results} />
+        kind === "templates" ? (
+          <TemplateGrid templates={results} />
+        ) : kind === "blocks" ? (
+          <BlockGrid blocks={results} />
+        ) : (
+          <ComponentGrid components={results} />
+        )
       ) : (
         <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed px-6 py-16 text-center">
           <p className="text-sm text-muted-foreground">

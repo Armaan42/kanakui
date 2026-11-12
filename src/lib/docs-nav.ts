@@ -7,7 +7,7 @@ export interface NavLink {
 }
 
 export interface NavGroup {
-  id: "installation" | "components" | "blocks"
+  id: "installation" | "components" | "blocks" | "templates"
   title: string
   links: NavLink[]
 }
@@ -34,6 +34,14 @@ export function getDocsNav(): NavGroup[] {
       links: [
         { title: "All blocks", href: "/blocks" },
         ...getItems("blocks").map((item) => ({ title: item.title, href: item.href })),
+      ],
+    },
+    {
+      id: "templates",
+      title: "Templates",
+      links: [
+        { title: "All templates", href: "/templates" },
+        ...getItems("templates").map((item) => ({ title: item.title, href: item.href })),
       ],
     },
   ]
