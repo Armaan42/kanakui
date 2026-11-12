@@ -4,6 +4,7 @@ import type { RegistryItemDefinition } from "./types.ts"
 import item_accordion_smooth from "./items/accordion-smooth.ts"
 import item_animated_card from "./items/animated-card.ts"
 import item_animated_tabs from "./items/animated-tabs.ts"
+import item_arc_globe from "./items/arc-globe.ts"
 import item_aurora_background from "./items/aurora-background.ts"
 import item_avatar_stack from "./items/avatar-stack.ts"
 import item_banner_01 from "./items/banner-01.ts"
@@ -108,6 +109,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_accordion_smooth,
   item_animated_card,
   item_animated_tabs,
+  item_arc_globe,
   item_aurora_background,
   item_avatar_stack,
   item_banner_01,

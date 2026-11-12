@@ -7,6 +7,7 @@ export const demos: Record<string, DemoLoader> = {
   "accordion-smooth": () => import("@/registry/default/examples/accordion-smooth-demo"),
   "animated-card": () => import("@/registry/default/examples/animated-card-demo"),
   "animated-tabs": () => import("@/registry/default/examples/animated-tabs-demo"),
+  "arc-globe": () => import("@/registry/default/examples/arc-globe-demo"),
   "aurora-background": () => import("@/registry/default/examples/aurora-background-demo"),
   "avatar-stack": () => import("@/registry/default/examples/avatar-stack-demo"),
   "banner-01": () => import("@/registry/default/examples/banner-01-demo"),
