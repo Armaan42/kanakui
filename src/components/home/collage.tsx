@@ -51,8 +51,8 @@ function LiveBlock({ name, theme, scale = 1, className }: { name: string; theme:
 
 /**
  * One card in the collage, with dashed guide lines running along its top and
- * bottom edges across the whole section. Light cards switch to the light
- * theme inside the dark stage.
+ * bottom edges across the whole section. `light` cards stay light in dark
+ * mode too, so the wall mixes both themes there.
  */
 function Tile({
   label,
@@ -72,12 +72,12 @@ function Tile({
 }) {
   return (
     <div className={cn("relative flex flex-col", labelEnd && "items-end")}>
-      <span aria-hidden="true" className="pointer-events-none absolute -inset-x-[200vw] top-0 border-t border-dashed border-white/10" />
-      <span aria-hidden="true" className="pointer-events-none absolute -inset-x-[200vw] bottom-7 border-t border-dashed border-white/10" />
+      <span aria-hidden="true" className="pointer-events-none absolute -inset-x-[200vw] top-0 border-t border-dashed border-foreground/10" />
+      <span aria-hidden="true" className="pointer-events-none absolute -inset-x-[200vw] bottom-7 border-t border-dashed border-foreground/10" />
       <div
         className={cn(
-          "relative w-full overflow-hidden rounded-2xl border shadow-[0_30px_80px_-40px_rgb(0_0_0/0.8)]",
-          light ? "light border-black/5 bg-background text-foreground" : "border-white/10 bg-card",
+          "relative w-full overflow-hidden rounded-2xl border shadow-[0_30px_80px_-40px_rgb(0_0_0/0.25)] dark:shadow-[0_30px_80px_-40px_rgb(0_0_0/0.8)]",
+          light ? "light border-black/5 bg-background text-foreground" : "border-foreground/10 bg-card",
           className
         )}
       >
@@ -196,13 +196,13 @@ export function Collage({ heading }: { heading: React.ReactNode }) {
     >
       <div className="lg:col-span-2 lg:row-start-1 lg:px-12 lg:pt-24 lg:pb-12 xl:px-20">{heading}</div>
 
-      <div className="lg:col-start-1 lg:row-start-2 lg:-ml-14 lg:border-r lg:border-dashed lg:border-white/10 lg:pt-8">
+      <div className="lg:col-start-1 lg:row-start-2 lg:-ml-14 lg:border-r lg:border-dashed lg:border-foreground/10 lg:pt-8">
         <Column y={move ? y1 : undefined}>
           {loginTile}
           {large ? otpTile : null}
         </Column>
       </div>
-      <div className="lg:col-start-2 lg:row-start-2 lg:border-r lg:border-dashed lg:border-white/10 lg:pt-28">
+      <div className="lg:col-start-2 lg:row-start-2 lg:border-r lg:border-dashed lg:border-foreground/10 lg:pt-28">
         <Column y={move ? y2 : undefined}>
           {globeTile}
           {stackTile}
@@ -210,9 +210,10 @@ export function Collage({ heading }: { heading: React.ReactNode }) {
       </div>
 
       <div className="flex flex-col gap-10 lg:col-span-2 lg:col-start-3 lg:row-span-2 lg:row-start-1 lg:gap-0">
-        <div className="lg:border-b lg:border-dashed lg:border-white/10 lg:px-4 lg:pt-16 lg:pb-10">
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-neutral-950 shadow-[0_40px_120px_-40px_rgb(0_0_0/0.9)]">
-            <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
+        <div className="lg:border-b lg:border-dashed lg:border-foreground/10 lg:px-4 lg:pt-16 lg:pb-10">
+          {/* A dark window in both themes: `dark` scopes the theme variables inside it. */}
+          <div className="dark overflow-hidden rounded-2xl border border-foreground/10 bg-neutral-950 text-foreground shadow-[0_40px_120px_-40px_rgb(0_0_0/0.35)] dark:shadow-[0_40px_120px_-40px_rgb(0_0_0/0.9)]">
+            <div className="flex items-center gap-1.5 border-b border-foreground/10 px-4 py-3">
               <span aria-hidden="true" className="size-2.5 rounded-full bg-white/15" />
               <span aria-hidden="true" className="size-2.5 rounded-full bg-white/15" />
               <span aria-hidden="true" className="size-2.5 rounded-full bg-white/15" />
@@ -231,7 +232,7 @@ export function Collage({ heading }: { heading: React.ReactNode }) {
           </Link>
         </div>
         <div className="grid flex-1 lg:grid-cols-2">
-          <div className="lg:border-r lg:border-dashed lg:border-white/10 lg:pt-10">
+          <div className="lg:border-r lg:border-dashed lg:border-foreground/10 lg:pt-10">
             <Column y={move ? y3 : undefined}>
               {orbitTile}
               {large ? ratingTile : null}
