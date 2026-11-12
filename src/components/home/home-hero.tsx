@@ -109,8 +109,8 @@ export function HomeHero({ components, blocks, threeD }: HomeHeroProps) {
 
           <div className="mt-7 w-full max-w-xl animate-word-in motion-reduce:animate-none" style={{ animationDelay: "950ms" }}>
             <CommandBlock
-              command={installCommandByUrl("dotted-globe")}
-              copyLabel="Copy install command for Dotted Globe"
+              command={installCommandByUrl("arc-globe")}
+              copyLabel="Copy install command for Arc Globe"
               className="border-white/10 bg-black/40 text-left backdrop-blur-md"
             />
           </div>
