@@ -70,6 +70,8 @@ export const siteConfig = {
     { title: "Docs", href: "/docs" },
     { title: "Components", href: "/components" },
     { title: "Blocks", href: "/blocks" },
+    // On phones, /themes is linked from the theme popover instead.
+    { title: "Themes", href: "/themes", wide: true },
   ],
   registry: {
     namespace,

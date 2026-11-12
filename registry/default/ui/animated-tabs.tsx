@@ -84,7 +84,7 @@ function AnimatedTabs({ tabs, defaultValue, onValueChange, label, className }: A
                   <motion.span
                     layoutId="animated-tabs-underline"
                     aria-hidden="true"
-                    className="absolute inset-x-0 -bottom-px h-0.5 bg-foreground"
+                    className="absolute inset-x-0 -bottom-px h-0.5 bg-primary"
                     transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 500, damping: 40 }}
                   />
                 ) : null}

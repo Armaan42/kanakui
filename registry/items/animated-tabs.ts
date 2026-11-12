@@ -5,7 +5,7 @@ export default defineItem({
   type: "registry:ui",
   title: "Animated Tabs",
   description: "Tabs with a sliding underline and fading panels, following the WAI-ARIA tabs pattern.",
-  version: "0.1.0",
+  version: "0.1.1",
   releasedAt: "2026-11-10",
   categories: ["navigation", "animations"],
   dependencies: ["motion"],

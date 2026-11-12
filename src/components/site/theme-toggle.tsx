@@ -2,8 +2,8 @@
 
 import { Moon, Sun } from "lucide-react"
 
+import { setMode } from "@/components/site/theme-config"
 import { Button } from "@/components/ui/button"
-import { THEME_STORAGE_KEY } from "@/lib/theme"
 
 /**
  * Switches between dark and light. The icons swap with CSS (`dark:`), so the
@@ -13,13 +13,7 @@ import { THEME_STORAGE_KEY } from "@/lib/theme"
  */
 export function ThemeToggle() {
   function toggle() {
-    const root = document.documentElement
-    const isDark = root.classList.toggle("dark")
-    try {
-      localStorage.setItem(THEME_STORAGE_KEY, isDark ? "dark" : "light")
-    } catch {
-      // Storage unavailable (private mode, blocked). The change still applies for this page view.
-    }
+    setMode(document.documentElement.classList.contains("dark") ? "light" : "dark")
   }
 
   return (

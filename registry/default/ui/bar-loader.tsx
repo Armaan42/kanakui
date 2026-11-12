@@ -21,7 +21,7 @@ function BarLoader({ label = "Loading", className, ...props }: BarLoaderProps) {
       className={cn("relative h-1 w-full overflow-hidden rounded-full bg-muted", className)}
       {...props}
     >
-      <span className="absolute inset-y-0 left-0 w-1/3 animate-bar-loader rounded-full bg-foreground motion-reduce:w-full motion-reduce:animate-pulse" />
+      <span className="absolute inset-y-0 left-0 w-1/3 animate-bar-loader rounded-full bg-primary motion-reduce:w-full motion-reduce:animate-pulse" />
     </div>
   )
 }

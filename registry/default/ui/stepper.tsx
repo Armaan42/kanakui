@@ -42,7 +42,7 @@ function Stepper({ steps, current, orientation = "horizontal", className, ...pro
                 className={cn(
                   "absolute bg-border",
                   vertical ? "top-8 left-3.5 h-[calc(100%-1rem)] w-px" : "top-3.5 left-[calc(50%+1rem)] h-px w-[calc(100%-2rem)]",
-                  index < current && "bg-foreground"
+                  index < current && "bg-primary"
                 )}
               />
             ) : null}
@@ -50,8 +50,8 @@ function Stepper({ steps, current, orientation = "horizontal", className, ...pro
               aria-hidden="true"
               className={cn(
                 "relative z-10 flex size-7 shrink-0 items-center justify-center rounded-full border text-xs font-medium",
-                state === "complete" && "border-foreground bg-foreground text-background",
-                state === "current" && "border-foreground bg-background ring-4 ring-foreground/10",
+                state === "complete" && "border-primary bg-primary text-primary-foreground",
+                state === "current" && "border-primary bg-background ring-4 ring-primary/15",
                 state === "upcoming" && "bg-background text-muted-foreground"
               )}
             >

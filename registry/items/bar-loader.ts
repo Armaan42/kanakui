@@ -5,7 +5,7 @@ export default defineItem({
   type: "registry:ui",
   title: "Bar Loader",
   description: "A thin indeterminate progress bar for pages and cards that are loading.",
-  version: "0.1.0",
+  version: "0.1.1",
   releasedAt: "2026-11-10",
   categories: ["loaders", "animations"],
   files: [{ path: "registry/default/ui/bar-loader.tsx", type: "registry:ui" }],
@@ -22,7 +22,7 @@ export default defineItem({
     requirements: ["Tailwind CSS v4. The CLI adds the `bar-loader` keyframes and `--animate-bar-loader` to your CSS. Works in Server Components."],
     customization: [
       "Pin it to the top of the page with `className=\"fixed inset-x-0 top-0 z-50 rounded-none\"`.",
-      "Change the bar color by editing `bg-foreground` in the file.",
+      "The bar uses your theme’s primary color; edit `bg-primary` in the file to change it.",
     ],
     accessibility: [
       "Uses `role=\"progressbar\"` without a value, which screen readers announce as busy or indeterminate.",
