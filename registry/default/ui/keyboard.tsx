@@ -144,6 +144,10 @@ const ARROWS = {
 /** Keys a real keyboard reports that this layout shows once. */
 const ALIASES: Record<string, string> = { ControlRight: "ControlLeft", OSLeft: "MetaLeft", OSRight: "MetaRight" }
 
+const SIZES = new Map<string, KeySize>(
+  [...ROWS.flat(), ...BOTTOM_LEFT].map((k) => [k.code, (k.w ?? 1) >= 5 ? "space" : (k.w ?? 1) >= 1.5 ? "wide" : "normal"])
+)
+
 const NAMES = new Map([...ROWS.flat(), ...BOTTOM_LEFT, ...Object.values(ARROWS)].map((k) => [k.code, k.name]))
 
 /** Width of a key `w` units wide, including the gaps it spans. */
@@ -233,27 +237,161 @@ function KeyLegend({ legend, capsOn }: { legend: Legend; capsOn: boolean }) {
   }
 }
 
-/** A short, soft "thock": filtered noise with a fast decay, generated on the fly. */
-function useClickSound(enabled: boolean) {
-  const context = React.useRef<AudioContext | null>(null)
-  return React.useCallback(() => {
-    if (!enabled || typeof window === "undefined") return
-    const ac = (context.current ??= new AudioContext())
-    const length = Math.floor(ac.sampleRate * 0.035)
-    const buffer = ac.createBuffer(1, length, ac.sampleRate)
-    const data = buffer.getChannelData(0)
-    for (let i = 0; i < length; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / length) ** 4
-    const source = ac.createBufferSource()
-    source.buffer = buffer
-    const filter = ac.createBiquadFilter()
-    filter.type = "bandpass"
-    filter.frequency.value = 1800 + Math.random() * 700
-    filter.Q.value = 0.9
-    const gain = ac.createGain()
-    gain.gain.value = 0.35
-    source.connect(filter).connect(gain).connect(ac.destination)
-    source.start()
-  }, [enabled])
+/** Switch sounds: `thock` is a deep, muted linear switch; `clicky` a bright, crisp click switch. */
+export type KeyboardSound = "thock" | "clicky"
+
+/** Key sizes sound different: long keys are deeper, and the space bar's stabilizers rattle. */
+type KeySize = "normal" | "wide" | "space"
+
+interface Burst {
+  /** Seconds after the key event. */
+  at: number
+  /** Seconds until the burst fades out. */
+  length: number
+  filter: BiquadFilterType
+  frequency: number
+  q?: number
+  gain: number
+}
+
+interface Thump {
+  at: number
+  length: number
+  /** Pitch sweeps down from `from` to `to` Hz, like a keycap bottoming out. */
+  from: number
+  to: number
+  gain: number
+}
+
+interface SoundShape {
+  bursts: Burst[]
+  thumps: Thump[]
+}
+
+/**
+ * Each sound is filtered noise bursts (the click and the plastic body) plus
+ * short pitch-dropping tones (the bottom-out thump).
+ */
+const SHAPES: Record<KeyboardSound, Record<"down" | "up", (size: KeySize) => SoundShape>> = {
+  thock: {
+    down: (size) => ({
+      bursts: [
+        { at: 0, length: 0.006, filter: "highpass", frequency: 4200, gain: 0.07 },
+        {
+          at: 0.002,
+          length: size === "space" ? 0.08 : 0.05,
+          filter: "bandpass",
+          frequency: size === "normal" ? 650 : size === "wide" ? 480 : 360,
+          q: 1.3,
+          gain: 0.42,
+        },
+        ...(size === "space" ? [{ at: 0.018, length: 0.02, filter: "bandpass" as const, frequency: 2200, q: 3, gain: 0.035 }] : []),
+      ],
+      thumps: [
+        {
+          at: 0.001,
+          length: size === "space" ? 0.1 : 0.06,
+          from: size === "normal" ? 240 : size === "wide" ? 180 : 150,
+          to: size === "normal" ? 105 : size === "wide" ? 80 : 62,
+          gain: 0.55,
+        },
+      ],
+    }),
+    up: (size) => ({
+      bursts: [{ at: 0, length: 0.028, filter: "bandpass", frequency: size === "normal" ? 1400 : 1100, q: 1.4, gain: 0.13 }],
+      thumps: [{ at: 0, length: 0.03, from: 420, to: 260, gain: 0.08 }],
+    }),
+  },
+  clicky: {
+    down: (size) => ({
+      bursts: [
+        { at: 0, length: 0.011, filter: "highpass", frequency: 3400, gain: 0.5 },
+        { at: 0.006, length: 0.008, filter: "bandpass", frequency: 5200, q: 1.5, gain: 0.28 },
+        {
+          at: 0.012,
+          length: size === "space" ? 0.05 : 0.035,
+          filter: "bandpass",
+          frequency: size === "normal" ? 1900 : size === "wide" ? 1400 : 1100,
+          q: 1.1,
+          gain: 0.3,
+        },
+        ...(size === "space" ? [{ at: 0.026, length: 0.02, filter: "bandpass" as const, frequency: 2600, q: 3, gain: 0.04 }] : []),
+      ],
+      thumps: [{ at: 0.012, length: 0.04, from: size === "normal" ? 320 : size === "wide" ? 240 : 190, to: size === "space" ? 100 : 150, gain: 0.22 }],
+    }),
+    up: () => ({
+      bursts: [
+        { at: 0, length: 0.01, filter: "highpass", frequency: 3000, gain: 0.32 },
+        { at: 0.004, length: 0.025, filter: "bandpass", frequency: 2300, q: 1.2, gain: 0.14 },
+      ],
+      thumps: [],
+    }),
+  },
+}
+
+/**
+ * One shared audio engine for every keyboard on the page, created on the
+ * first sound (browsers only allow audio after the user interacts).
+ */
+let audio: { context: AudioContext; noise: AudioBuffer; output: AudioNode } | null = null
+
+function getAudio() {
+  if (!audio) {
+    const context = new AudioContext({ latencyHint: "interactive" })
+    // One second of white noise, reused from random offsets.
+    const noise = context.createBuffer(1, context.sampleRate, context.sampleRate)
+    const data = noise.getChannelData(0)
+    for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1
+    // A compressor keeps fast typing from clipping.
+    const compressor = context.createDynamicsCompressor()
+    compressor.threshold.value = -14
+    compressor.ratio.value = 4
+    const master = context.createGain()
+    master.gain.value = 3
+    compressor.connect(master).connect(context.destination)
+    audio = { context, noise, output: compressor }
+  }
+  if (audio.context.state === "suspended") void audio.context.resume()
+  return audio
+}
+
+function playKeySound(sound: KeyboardSound, phase: "down" | "up", size: KeySize) {
+  const { context, noise, output } = getAudio()
+  // Every press sounds slightly different, like a real board.
+  const pitch = 0.92 + Math.random() * 0.16
+  const level = 0.85 + Math.random() * 0.3
+  const now = context.currentTime + 0.002
+  const shape = SHAPES[sound][phase](size)
+
+  for (const b of shape.bursts) {
+    const start = now + b.at
+    const source = context.createBufferSource()
+    source.buffer = noise
+    const filter = context.createBiquadFilter()
+    filter.type = b.filter
+    filter.frequency.value = b.frequency * pitch
+    filter.Q.value = b.q ?? 0.7
+    const gain = context.createGain()
+    gain.gain.setValueAtTime(0.0001, start)
+    gain.gain.linearRampToValueAtTime(b.gain * level, start + 0.0008)
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + b.length)
+    source.connect(filter).connect(gain).connect(output)
+    source.start(start, Math.random() * 0.9, b.length + 0.02)
+  }
+
+  for (const t of shape.thumps) {
+    const start = now + t.at
+    const oscillator = context.createOscillator()
+    oscillator.frequency.setValueAtTime(t.from * pitch, start)
+    oscillator.frequency.exponentialRampToValueAtTime(t.to * pitch, start + t.length)
+    const gain = context.createGain()
+    gain.gain.setValueAtTime(0.0001, start)
+    gain.gain.linearRampToValueAtTime(t.gain * level, start + 0.002)
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + t.length)
+    oscillator.connect(gain).connect(output)
+    oscillator.start(start)
+    oscillator.stop(start + t.length + 0.02)
+  }
 }
 
 /** The key next to `from` in an arrow-key direction, judged by on-screen position. */
@@ -285,8 +423,12 @@ export interface KeyboardProps extends Omit<React.ComponentProps<"div">, "onKeyP
   onKeyPress?: (key: KeyboardKeyPress) => void
   /** Light up keys as they are pressed on the user's real keyboard. */
   listen?: boolean
-  /** Play a soft click sound for each press. */
-  sound?: boolean
+  /**
+   * Play a mechanical keyboard sound on each press and release: `"thock"`
+   * (deep, linear switches; also what `true` plays) or `"clicky"` (bright
+   * click switches). Off by default.
+   */
+  sound?: boolean | KeyboardSound
 }
 
 /**
@@ -300,7 +442,13 @@ export function Keyboard({ onKeyPress, listen = true, sound = false, className, 
   const [capsOn, setCapsOn] = React.useState(false)
   const [focusCode, setFocusCode] = React.useState("Escape")
   const groupRef = React.useRef<HTMLDivElement>(null)
-  const click = useClickSound(sound)
+  const profile: KeyboardSound | null = sound === true ? "thock" : sound || null
+  const playSound = React.useCallback(
+    (code: string, phase: "down" | "up") => {
+      if (profile) playKeySound(profile, phase, SIZES.get(code) ?? "normal")
+    },
+    [profile]
+  )
   const onKeyPressRef = React.useRef(onKeyPress)
 
   React.useEffect(() => {
@@ -330,7 +478,7 @@ export function Keyboard({ onKeyPress, listen = true, sound = false, className, 
       const code = ALIASES[event.code] ?? event.code
       if (!NAMES.has(code)) return
       if (!event.repeat) {
-        click()
+        playSound(code, "down")
         onKeyPressRef.current?.({ code, name: NAMES.get(code) ?? code, source: "keyboard" })
       }
       press(code)
@@ -338,6 +486,7 @@ export function Keyboard({ onKeyPress, listen = true, sound = false, className, 
     }
     const onUp = (event: KeyboardEvent) => {
       const code = ALIASES[event.code] ?? event.code
+      if (!inside(event) && NAMES.has(code)) playSound(code, "up")
       // While ⌘ is held, macOS doesn't send keyup for other keys: clear them all.
       if (code === "MetaLeft" || code === "MetaRight") setPressed(new Set())
       else release(code)
@@ -352,7 +501,7 @@ export function Keyboard({ onKeyPress, listen = true, sound = false, className, 
       window.removeEventListener("keyup", onUp)
       window.removeEventListener("blur", clear)
     }
-  }, [listen, click, press, release])
+  }, [listen, playSound, press, release])
 
   const onArrowNavigate = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) return
@@ -377,18 +526,30 @@ export function Keyboard({ onKeyPress, listen = true, sound = false, className, 
         aria-pressed={key.code === "CapsLock" ? capsOn : undefined}
         tabIndex={focusCode === key.code ? 0 : -1}
         onFocus={() => setFocusCode(key.code)}
-        onPointerDown={() => press(key.code)}
-        onPointerUp={() => release(key.code)}
-        onPointerLeave={() => release(key.code)}
+        onPointerDown={() => {
+          press(key.code)
+          playSound(key.code, "down")
+        }}
+        onPointerUp={() => {
+          if (pressed.has(key.code)) playSound(key.code, "up")
+          release(key.code)
+        }}
+        onPointerLeave={() => {
+          if (pressed.has(key.code)) playSound(key.code, "up")
+          release(key.code)
+        }}
         onPointerCancel={() => release(key.code)}
         onClick={(event) => {
           if (key.code === "CapsLock") setCapsOn((on) => !on)
           // Activated with Enter or Space while focused: show a brief press.
           if (event.detail === 0) {
             press(key.code)
-            setTimeout(() => release(key.code), 120)
+            playSound(key.code, "down")
+            setTimeout(() => {
+              release(key.code)
+              playSound(key.code, "up")
+            }, 110)
           }
-          click()
           onKeyPress?.({ code: key.code, name: key.name, source: "click" })
         }}
         className={cn(
