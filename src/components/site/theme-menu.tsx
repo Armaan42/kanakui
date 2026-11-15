@@ -8,11 +8,11 @@ import { Button } from "@/components/ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
 /** The header's theme button: opens the theme customizer in a popover. */
-export function ThemeMenu() {
+export function ThemeMenu({ className }: { className?: string }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button type="button" variant="ghost" size="icon" aria-label="Customize theme">
+        <Button type="button" variant="ghost" size="icon" aria-label="Customize theme" className={className}>
           <Palette aria-hidden="true" />
         </Button>
       </PopoverTrigger>
