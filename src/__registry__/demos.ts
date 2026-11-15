@@ -28,6 +28,7 @@ export const demos: Record<string, DemoLoader> = {
   "cta-04": () => import("@/registry/default/examples/cta-04-demo"),
   "cta-05": () => import("@/registry/default/examples/cta-05-demo"),
   "cube-3d": () => import("@/registry/default/examples/cube-3d-demo"),
+  "depth-card": () => import("@/registry/default/examples/depth-card-demo"),
   "dock": () => import("@/registry/default/examples/dock-demo"),
   "dot-pattern": () => import("@/registry/default/examples/dot-pattern-demo"),
   "dots-loader": () => import("@/registry/default/examples/dots-loader-demo"),

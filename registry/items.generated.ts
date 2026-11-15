@@ -26,6 +26,7 @@ import item_cta_03 from "./items/cta-03.ts"
 import item_cta_04 from "./items/cta-04.ts"
 import item_cta_05 from "./items/cta-05.ts"
 import item_cube_3d from "./items/cube-3d.ts"
+import item_depth_card from "./items/depth-card.ts"
 import item_dock from "./items/dock.ts"
 import item_dot_pattern from "./items/dot-pattern.ts"
 import item_dots_loader from "./items/dots-loader.ts"
@@ -149,6 +150,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_cta_04,
   item_cta_05,
   item_cube_3d,
+  item_depth_card,
   item_dock,
   item_dot_pattern,
   item_dots_loader,
