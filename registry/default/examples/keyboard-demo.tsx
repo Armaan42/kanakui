@@ -1,18 +1,24 @@
 "use client"
 
 import * as React from "react"
-import { Volume2, VolumeX } from "lucide-react"
 
-import { Keyboard, type KeyboardKeyPress } from "@/registry/default/ui/keyboard"
+import { Keyboard, type KeyboardKeyPress, type KeyboardSound } from "@/registry/default/ui/keyboard"
+import { cn } from "@/lib/utils"
+
+const SOUNDS: { value: KeyboardSound | "off"; label: string }[] = [
+  { value: "off", label: "Off" },
+  { value: "thock", label: "Thock" },
+  { value: "clicky", label: "Clicky" },
+]
 
 export default function KeyboardDemo() {
   const [recent, setRecent] = React.useState<(KeyboardKeyPress & { id: number })[]>([])
-  const [sound, setSound] = React.useState(false)
+  const [sound, setSound] = React.useState<KeyboardSound | "off">("thock")
   const nextId = React.useRef(0)
 
   return (
     <div className="flex w-full max-w-3xl flex-col items-center gap-6">
-      <div className="flex w-full items-center justify-between gap-4">
+      <div className="flex w-full flex-wrap items-center justify-between gap-3">
         <p aria-live="polite" className="flex min-h-7 flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
           {recent.length === 0
             ? "Click a key, or type on your keyboard."
@@ -22,18 +28,25 @@ export default function KeyboardDemo() {
                 </kbd>
               ))}
         </p>
-        <button
-          type="button"
-          aria-pressed={sound}
-          onClick={() => setSound((on) => !on)}
-          className="inline-flex shrink-0 items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs text-muted-foreground outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
-        >
-          {sound ? <Volume2 aria-hidden="true" className="size-3.5" /> : <VolumeX aria-hidden="true" className="size-3.5" />}
-          Sound {sound ? "on" : "off"}
-        </button>
+        <div role="group" aria-label="Sound" className="flex shrink-0 items-center gap-0.5 rounded-lg border p-0.5 text-xs">
+          {SOUNDS.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              aria-pressed={sound === option.value}
+              onClick={() => setSound(option.value)}
+              className={cn(
+                "rounded-md px-2.5 py-1 outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
+                sound === option.value ? "bg-muted font-medium text-foreground" : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
       </div>
       <Keyboard
-        sound={sound}
+        sound={sound === "off" ? false : sound}
         onKeyPress={(key) => setRecent((all) => [...all, { ...key, id: nextId.current++ }].slice(-8))}
       />
     </div>
