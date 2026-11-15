@@ -61,6 +61,7 @@ import item_hero_10 from "./items/hero-10.ts"
 import item_hero_11 from "./items/hero-11.ts"
 import item_image_compare from "./items/image-compare.ts"
 import item_kbd from "./items/kbd.ts"
+import item_keyboard from "./items/keyboard.ts"
 import item_lamp from "./items/lamp.ts"
 import item_like_button from "./items/like-button.ts"
 import item_login_01 from "./items/login-01.ts"
@@ -183,6 +184,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_hero_11,
   item_image_compare,
   item_kbd,
+  item_keyboard,
   item_lamp,
   item_like_button,
   item_login_01,
