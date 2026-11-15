@@ -16,7 +16,7 @@ export function MainNav({ items }: { items: readonly NavItem[] }) {
   const pathname = usePathname()
 
   return (
-    <nav aria-label="Main" className="flex items-center gap-1">
+    <nav aria-label="Main" className="flex items-center sm:gap-1">
       {items.map((item) => {
         const active = pathname === item.href || pathname.startsWith(`${item.href}/`)
         return (
@@ -25,7 +25,7 @@ export function MainNav({ items }: { items: readonly NavItem[] }) {
             href={item.href}
             aria-current={active ? "page" : undefined}
             className={cn(
-              "rounded-md px-2.5 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
+              "rounded-md px-2 py-1.5 text-sm max-[359px]:px-1.5 sm:px-2.5 text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
               active && "text-foreground",
               item.wide && "max-sm:hidden"
             )}
