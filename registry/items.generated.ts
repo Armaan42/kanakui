@@ -31,6 +31,9 @@ import item_dock from "./items/dock.ts"
 import item_dot_pattern from "./items/dot-pattern.ts"
 import item_dots_loader from "./items/dots-loader.ts"
 import item_dotted_globe from "./items/dotted-globe.ts"
+import item_dynamic_island from "./items/dynamic-island.ts"
+import item_envelope from "./items/envelope.ts"
+import item_event_ticket from "./items/event-ticket.ts"
 import item_faq_01 from "./items/faq-01.ts"
 import item_faq_02 from "./items/faq-02.ts"
 import item_features_01 from "./items/features-01.ts"
@@ -60,6 +63,7 @@ import item_hero_08 from "./items/hero-08.ts"
 import item_hero_09 from "./items/hero-09.ts"
 import item_hero_10 from "./items/hero-10.ts"
 import item_hero_11 from "./items/hero-11.ts"
+import item_holo_card from "./items/holo-card.ts"
 import item_image_compare from "./items/image-compare.ts"
 import item_kbd from "./items/kbd.ts"
 import item_keyboard from "./items/keyboard.ts"
@@ -76,6 +80,7 @@ import item_navbar_01 from "./items/navbar-01.ts"
 import item_navbar_02 from "./items/navbar-02.ts"
 import item_noise_background from "./items/noise-background.ts"
 import item_not_found_01 from "./items/not-found-01.ts"
+import item_notification_stack from "./items/notification-stack.ts"
 import item_number_stepper from "./items/number-stepper.ts"
 import item_number_ticker from "./items/number-ticker.ts"
 import item_orbiting_circles from "./items/orbiting-circles.ts"
@@ -123,6 +128,7 @@ import item_toggle_switch from "./items/toggle-switch.ts"
 import item_typewriter from "./items/typewriter.ts"
 import item_use_pointer_position from "./items/use-pointer-position.ts"
 import item_use_scene_state from "./items/use-scene-state.ts"
+import item_vinyl_player from "./items/vinyl-player.ts"
 import item_wireframe_orb from "./items/wireframe-orb.ts"
 
 export const itemDefinitions: RegistryItemDefinition[] = [
@@ -156,6 +162,9 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_dot_pattern,
   item_dots_loader,
   item_dotted_globe,
+  item_dynamic_island,
+  item_envelope,
+  item_event_ticket,
   item_faq_01,
   item_faq_02,
   item_features_01,
@@ -185,6 +194,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_hero_09,
   item_hero_10,
   item_hero_11,
+  item_holo_card,
   item_image_compare,
   item_kbd,
   item_keyboard,
@@ -201,6 +211,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_navbar_02,
   item_noise_background,
   item_not_found_01,
+  item_notification_stack,
   item_number_stepper,
   item_number_ticker,
   item_orbiting_circles,
@@ -248,5 +259,6 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_typewriter,
   item_use_pointer_position,
   item_use_scene_state,
+  item_vinyl_player,
   item_wireframe_orb,
 ]
