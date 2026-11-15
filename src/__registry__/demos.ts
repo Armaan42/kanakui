@@ -85,6 +85,7 @@ export const demos: Record<string, DemoLoader> = {
   "particle-galaxy": () => import("@/registry/default/examples/particle-galaxy-demo"),
   "particle-wave": () => import("@/registry/default/examples/particle-wave-demo"),
   "password-input": () => import("@/registry/default/examples/password-input-demo"),
+  "photo-folder": () => import("@/registry/default/examples/photo-folder-demo"),
   "pricing-01": () => import("@/registry/default/examples/pricing-01-demo"),
   "pricing-02": () => import("@/registry/default/examples/pricing-02-demo"),
   "pricing-03": () => import("@/registry/default/examples/pricing-03-demo"),
