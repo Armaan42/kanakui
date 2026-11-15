@@ -83,6 +83,7 @@ import item_otp_input from "./items/otp-input.ts"
 import item_particle_galaxy from "./items/particle-galaxy.ts"
 import item_particle_wave from "./items/particle-wave.ts"
 import item_password_input from "./items/password-input.ts"
+import item_photo_folder from "./items/photo-folder.ts"
 import item_pricing_01 from "./items/pricing-01.ts"
 import item_pricing_02 from "./items/pricing-02.ts"
 import item_pricing_03 from "./items/pricing-03.ts"
@@ -207,6 +208,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_particle_galaxy,
   item_particle_wave,
   item_password_input,
+  item_photo_folder,
   item_pricing_01,
   item_pricing_02,
   item_pricing_03,
