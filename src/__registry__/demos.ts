@@ -63,6 +63,7 @@ export const demos: Record<string, DemoLoader> = {
   "hero-11": () => import("@/registry/default/examples/hero-11-demo"),
   "image-compare": () => import("@/registry/default/examples/image-compare-demo"),
   "kbd": () => import("@/registry/default/examples/kbd-demo"),
+  "keyboard": () => import("@/registry/default/examples/keyboard-demo"),
   "lamp": () => import("@/registry/default/examples/lamp-demo"),
   "like-button": () => import("@/registry/default/examples/like-button-demo"),
   "login-01": () => import("@/registry/default/examples/login-01-demo"),
