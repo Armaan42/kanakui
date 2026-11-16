@@ -17,6 +17,8 @@
   --animate-marquee-vertical: marquee-vertical var(--marquee-duration) linear infinite;
   --animate-meteor: meteor 5s linear infinite;
   --animate-orbit: orbit 24s linear infinite;
+  --animate-polaroid-develop: polaroid-develop 1.6s ease-out both;
+  --animate-pull-cord-lamp-swing: pull-cord-lamp-swing 1.1s ease-out;
   --animate-retro-grid: retro-grid 15s linear infinite;
   --animate-ripple-ring: ripple-ring 3s ease-in-out infinite;
   --animate-ripple: ripple 600ms ease-out forwards;
@@ -191,6 +193,31 @@
     transform: rotate(calc(var(--orbit-angle) * 1deg + 360deg)) translateY(calc(var(--orbit-radius) * 1px)) rotate(calc(var(--orbit-angle) * -1deg - 360deg));
   }
 }
+@keyframes polaroid-develop {
+  from {
+    filter: brightness(1.7) saturate(0.15) contrast(0.7) blur(2px);
+  }
+  to {
+    filter: none;
+  }
+}
+@keyframes pull-cord-lamp-swing {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(4deg);
+  }
+  45% {
+    transform: rotate(-3deg);
+  }
+  70% {
+    transform: rotate(1.5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
 @keyframes retro-grid {
   0% {
     transform: translateY(-50%);
@@ -238,6 +265,22 @@
   50% {
     transform: scale(1) rotate(90deg);
     opacity: 1;
+  }
+}
+@keyframes split-flap-top {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(-90deg);
+  }
+}
+@keyframes split-flap-bottom {
+  from {
+    transform: rotateX(90deg);
+  }
+  to {
+    transform: rotateX(0deg);
   }
 }
 @keyframes typewriter-caret {
