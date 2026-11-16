@@ -101,6 +101,29 @@ function sortItems(items: ItemSummary[], sort: Sort) {
   )
 }
 
+/**
+ * How well `item` matches every word of the query: 0 when any word is
+ * missing, higher when words hit the title. Words can match the title, the
+ * name, the description, category names or keywords (packages it uses).
+ */
+function matchScore(item: ItemSummary, terms: string[]): number {
+  const title = item.title.toLowerCase()
+  const rest = [item.name, item.description, ...item.categories, ...item.keywords].join(" ").toLowerCase()
+  let score = 0
+  for (const term of terms) {
+    if (title.startsWith(term)) score += 3
+    else if (title.includes(term)) score += 2
+    else if (rest.includes(term)) score += 1
+    else return 0
+  }
+  return score
+}
+
+/** True when focus is in a text field, where "/" should type a slash. */
+function isTyping(target: EventTarget | null) {
+  return target instanceof HTMLElement && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))
+}
+
 function Grid({ kind, items }: { kind: ItemKind; items: ItemSummary[] }) {
   if (kind === "templates") return <TemplateGrid templates={items} />
   if (kind === "blocks") return <BlockGrid blocks={items} />
@@ -137,20 +160,45 @@ export function ItemsBrowser({
   const [sort, setSort] = React.useState<Sort>("curated")
   const [price, setPrice] = React.useState<Price>("all")
 
+  const searchRef = React.useRef<HTMLInputElement>(null)
+
+  // On listing pages "/" jumps to this search field instead of opening the site-wide
+  // search (⌘K still opens that). Capturing on window runs before the command menu's
+  // document listener, and stopping propagation keeps it from opening too.
+  React.useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "/" || event.metaKey || event.ctrlKey || event.altKey || isTyping(event.target)) return
+      event.preventDefault()
+      event.stopPropagation()
+      searchRef.current?.focus()
+    }
+    window.addEventListener("keydown", onKeyDown, { capture: true })
+    return () => window.removeEventListener("keydown", onKeyDown, { capture: true })
+  }, [])
+
   const noun = kind
   const Noun = kind[0].toUpperCase() + kind.slice(1)
   const q = query.trim().toLowerCase()
+  const terms = q.split(/\s+/).filter(Boolean)
+  // The price filter only appears once something is paid; until then it would match nothing.
+  const hasPro = items.some((item) => item.pricing === "pro")
   const filtered = q !== "" || price !== "all"
   const showGroups = view === "grouped" && groups !== undefined && !filtered
 
-  const results = sortItems(
-    items.filter(
-      (item) =>
-        (price === "all" || item.pricing === price) &&
-        (!q || [item.title, item.name, item.description, ...item.categories].some((value) => value.toLowerCase().includes(q))),
-    ),
-    sort,
-  )
+  const matching = items
+    .filter((item) => price === "all" || item.pricing === price)
+    .map((item) => ({ item, score: terms.length ? matchScore(item, terms) : 1 }))
+    .filter(({ score }) => score > 0)
+  // With a query and the default sort, the best matches come first.
+  const results =
+    terms.length && sort === "curated"
+      ? matching
+          .sort((a, b) => b.score - a.score || Number(b.item.featured) - Number(a.item.featured) || a.item.title.localeCompare(b.item.title))
+          .map(({ item }) => item)
+      : sortItems(
+          matching.map(({ item }) => item),
+          sort,
+        )
 
   const clear = () => {
     setQuery("")
@@ -194,13 +242,27 @@ export function ItemsBrowser({
             className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground"
           />
           <Input
+            ref={searchRef}
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Escape" && query) {
+                event.preventDefault()
+                setQuery("")
+              }
+            }}
             placeholder={`Search ${total} ${noun}...`}
             aria-label={`Search ${noun}`}
-            className="bg-background pl-8 dark:bg-background"
+            aria-keyshortcuts="/"
+            className="peer bg-background pr-8 pl-8 dark:bg-background"
           />
+          <kbd
+            aria-hidden="true"
+            className="pointer-events-none absolute top-1/2 right-2 -translate-y-1/2 rounded border bg-muted px-1.5 font-mono text-[11px] text-muted-foreground peer-focus:hidden max-sm:hidden"
+          >
+            /
+          </kbd>
         </div>
 
         {categories ? (
@@ -241,19 +303,21 @@ export function ItemsBrowser({
           </SelectContent>
         </Select>
 
-        <Select value={price} onValueChange={(value) => setPrice(value as Price)}>
-          <SelectTrigger aria-label="Price" className={triggerClass}>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {PRICES.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
-                <span aria-hidden="true" className={cn("h-2 w-3.5 rounded-full", option.swatch)} />
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        {hasPro ? (
+          <Select value={price} onValueChange={(value) => setPrice(value as Price)}>
+            <SelectTrigger aria-label="Price" className={triggerClass}>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {PRICES.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  <span aria-hidden="true" className={cn("h-2 w-3.5 rounded-full", option.swatch)} />
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        ) : null}
 
         <p className="ml-auto pr-1.5 text-xs text-muted-foreground tabular-nums" aria-live="polite">
           {showGroups
@@ -300,8 +364,25 @@ export function ItemsBrowser({
           </p>
           {filtered ? (
             <Button type="button" variant="outline" size="sm" onClick={clear}>
-              Clear filters
+              {price === "all" ? "Clear search" : "Clear filters"}
             </Button>
+          ) : null}
+          {categories?.length ? (
+            <nav aria-label="Browse by category" className="mt-3 flex max-w-xl flex-wrap justify-center gap-1.5">
+              <span className="w-full text-xs text-muted-foreground">Or browse a category:</span>
+              {[...categories]
+                .sort((a, b) => b.count - a.count)
+                .slice(0, 8)
+                .map((category) => (
+                  <Link
+                    key={category.slug}
+                    href={`/${kind}/category/${category.slug}`}
+                    className="rounded-full border bg-background px-2.5 py-1 text-xs text-muted-foreground transition-colors outline-none hover:border-foreground/25 hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+                  >
+                    {category.title}
+                  </Link>
+                ))}
+            </nav>
           ) : null}
         </div>
       )}

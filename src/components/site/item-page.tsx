@@ -7,6 +7,7 @@ import { BlockGrid } from "@/components/site/block-card"
 import { CodeViewer } from "@/components/site/code-viewer"
 import { ComponentGrid } from "@/components/site/component-card"
 import { BulletList, DocsSection, InlineText, PropsTable } from "@/components/site/docs"
+import { GitHubIcon } from "@/components/site/icons"
 import { InstallTabs } from "@/components/site/install-tabs"
 import { PreviewFrame } from "@/components/site/preview-frame"
 import { TemplateGrid } from "@/components/site/template-card"
@@ -63,6 +64,8 @@ export async function ItemPage({ item, kind }: { item: RegistryEntry; kind: Item
   const internalDependencies = getInternalDependencies(item)
   const installedFiles = getInstalledFiles(item)
   const related = getRelated(item, kind === "components" ? 3 : 2)
+  // The item's main file in the public repo (blocks and templates list their entry file first).
+  const sourcePath = item.files[0]?.path
   const usage = await getUsageExample(item.name)
   const troubleshooting = [...(docs?.troubleshooting ?? []), ...COMMON_TROUBLESHOOTING]
 
@@ -123,6 +126,17 @@ export async function ItemPage({ item, kind }: { item: RegistryEntry; kind: Item
                 <Link href={`/${kind}/category/${category}`}>{getCategoryTitle(category)}</Link>
               </Badge>
             ))}
+            {sourcePath ? (
+              <a
+                href={`${siteConfig.links.github}/blob/main/${sourcePath}`}
+                target="_blank"
+                rel="noreferrer"
+                className="ml-1 inline-flex items-center gap-1.5 rounded-sm text-sm text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+              >
+                <GitHubIcon aria-hidden="true" className="size-3.5" />
+                Source on GitHub
+              </a>
+            ) : null}
           </div>
         </div>
       </div>

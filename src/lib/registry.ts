@@ -41,6 +41,13 @@ export interface ItemSummary {
   featured: boolean
   /** Every item is free today; "pro" is reserved for paid items. */
   pricing: "free" | "pro"
+  /** Display names of `categories`, in the same order (templates have none). */
+  categoryTitles: string[]
+  /**
+   * Extra words search matches on, taken from what the item really uses:
+   * category names, npm packages (e.g. "three", "motion") and shadcn components.
+   */
+  keywords: string[]
 }
 
 export interface CategoryWithCount extends RegistryCategory {
@@ -62,7 +69,10 @@ export function kindOf(item: RegistryEntry): ItemKind | undefined {
 
 function toSummary(item: RegistryEntry): ItemSummary {
   const kind = kindOf(item) ?? "components"
+  const categoryTitles = kind === "templates" ? [] : item.categories.map(getCategoryTitle)
   return {
+    categoryTitles,
+    keywords: [...new Set([...categoryTitles, ...getNpmDependencies(item), ...getShadcnDependencies(item)])],
     name: item.name,
     title: item.title,
     description: item.description,
