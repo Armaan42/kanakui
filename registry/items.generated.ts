@@ -15,6 +15,8 @@ import item_beam_rain from "./items/beam-rain.ts"
 import item_bento_01 from "./items/bento-01.ts"
 import item_blur_text from "./items/blur-text.ts"
 import item_boarding_pass from "./items/boarding-pass.ts"
+import item_books_01 from "./items/books-01.ts"
+import item_bookshelf from "./items/bookshelf.ts"
 import item_border_beam from "./items/border-beam.ts"
 import item_card_stack from "./items/card-stack.ts"
 import item_carousel_3d from "./items/carousel-3d.ts"
@@ -55,6 +57,8 @@ import item_floating_label_input from "./items/floating-label-input.ts"
 import item_footer_01 from "./items/footer-01.ts"
 import item_footer_02 from "./items/footer-02.ts"
 import item_footer_03 from "./items/footer-03.ts"
+import item_gift_box from "./items/gift-box.ts"
+import item_giveaway_01 from "./items/giveaway-01.ts"
 import item_glow_border_button from "./items/glow-border-button.ts"
 import item_glow_grid from "./items/glow-grid.ts"
 import item_gradient_text from "./items/gradient-text.ts"
@@ -94,18 +98,22 @@ import item_notification_stack from "./items/notification-stack.ts"
 import item_number_stepper from "./items/number-stepper.ts"
 import item_number_ticker from "./items/number-ticker.ts"
 import item_orbiting_circles from "./items/orbiting-circles.ts"
+import item_order_01 from "./items/order-01.ts"
 import item_otp_input from "./items/otp-input.ts"
 import item_particle_galaxy from "./items/particle-galaxy.ts"
 import item_particle_wave from "./items/particle-wave.ts"
+import item_passcode_pad from "./items/passcode-pad.ts"
 import item_password_input from "./items/password-input.ts"
 import item_photo_folder from "./items/photo-folder.ts"
 import item_polaroid_stack from "./items/polaroid-stack.ts"
 import item_pricing_01 from "./items/pricing-01.ts"
 import item_pricing_02 from "./items/pricing-02.ts"
 import item_pricing_03 from "./items/pricing-03.ts"
+import item_prize_wheel from "./items/prize-wheel.ts"
 import item_progress_ring from "./items/progress-ring.ts"
 import item_pull_cord_lamp from "./items/pull-cord-lamp.ts"
 import item_rating from "./items/rating.ts"
+import item_receipt_printer from "./items/receipt-printer.ts"
 import item_retro_grid from "./items/retro-grid.ts"
 import item_reveal_card from "./items/reveal-card.ts"
 import item_ripple_background from "./items/ripple-background.ts"
@@ -114,6 +122,7 @@ import item_rotating_words from "./items/rotating-words.ts"
 import item_saas_landing from "./items/saas-landing.ts"
 import item_score_gauge from "./items/score-gauge.ts"
 import item_scramble_text from "./items/scramble-text.ts"
+import item_scratch_card from "./items/scratch-card.ts"
 import item_scroll_device from "./items/scroll-device.ts"
 import item_scroll_progress from "./items/scroll-progress.ts"
 import item_segmented_control from "./items/segmented-control.ts"
@@ -142,6 +151,7 @@ import item_timeline from "./items/timeline.ts"
 import item_toggle_switch from "./items/toggle-switch.ts"
 import item_trip_01 from "./items/trip-01.ts"
 import item_typewriter from "./items/typewriter.ts"
+import item_unlock_01 from "./items/unlock-01.ts"
 import item_use_pointer_position from "./items/use-pointer-position.ts"
 import item_use_scene_state from "./items/use-scene-state.ts"
 import item_vinyl_player from "./items/vinyl-player.ts"
@@ -166,6 +176,8 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_bento_01,
   item_blur_text,
   item_boarding_pass,
+  item_books_01,
+  item_bookshelf,
   item_border_beam,
   item_card_stack,
   item_carousel_3d,
@@ -206,6 +218,8 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_footer_01,
   item_footer_02,
   item_footer_03,
+  item_gift_box,
+  item_giveaway_01,
   item_glow_border_button,
   item_glow_grid,
   item_gradient_text,
@@ -245,18 +259,22 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_number_stepper,
   item_number_ticker,
   item_orbiting_circles,
+  item_order_01,
   item_otp_input,
   item_particle_galaxy,
   item_particle_wave,
+  item_passcode_pad,
   item_password_input,
   item_photo_folder,
   item_polaroid_stack,
   item_pricing_01,
   item_pricing_02,
   item_pricing_03,
+  item_prize_wheel,
   item_progress_ring,
   item_pull_cord_lamp,
   item_rating,
+  item_receipt_printer,
   item_retro_grid,
   item_reveal_card,
   item_ripple_background,
@@ -265,6 +283,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_saas_landing,
   item_score_gauge,
   item_scramble_text,
+  item_scratch_card,
   item_scroll_device,
   item_scroll_progress,
   item_segmented_control,
@@ -293,6 +312,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_toggle_switch,
   item_trip_01,
   item_typewriter,
+  item_unlock_01,
   item_use_pointer_position,
   item_use_scene_state,
   item_vinyl_player,

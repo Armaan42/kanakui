@@ -8,6 +8,7 @@
   --animate-border-beam: border-beam var(--border-beam-duration) linear infinite;
   --animate-cube-3d: cube-3d 14s linear infinite;
   --animate-dots-loader: dots-loader 1.2s ease-in-out infinite;
+  --animate-gift-box-confetti: gift-box-confetti 1.6s cubic-bezier(0.2, 0.7, 0.4, 1) forwards;
   --animate-glow-border-spin: glow-border-spin 4s linear infinite;
   --animate-gradient-text: gradient-text 6s linear infinite;
   --animate-lamp-open: lamp-open 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -112,6 +113,20 @@
   40% {
     transform: translateY(-0.35em);
     opacity: 1;
+  }
+}
+@keyframes gift-box-confetti {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  45% {
+    transform: translate(calc(var(--x) * 0.7), var(--y)) rotate(calc(var(--r) * 0.5));
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), calc(var(--y) + 260px)) rotate(var(--r));
+    opacity: 0;
   }
 }
 @keyframes glow-border-spin {
