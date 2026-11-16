@@ -5,6 +5,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 import type { ItemSummary } from "@/lib/registry"
+import { cn } from "@/lib/utils"
 
 /** Templates render at laptop width, like block thumbnails. */
 const FRAME_WIDTH = 1280
@@ -60,20 +61,26 @@ function TemplateThumbnail({
   name,
   title,
   frameRef,
+  fill = false,
 }: {
   name: string
   title: string
   frameRef: React.RefObject<HTMLIFrameElement | null>
+  /** Fill the parent's height (at least 16:10) instead of a fixed 16:10 box; the frame grows to match. */
+  fill?: boolean
 }) {
   const ref = React.useRef<HTMLDivElement>(null)
-  const [scale, setScale] = React.useState<number | null>(null)
+  const [size, setSize] = React.useState<{ scale: number; height: number } | null>(null)
   const [inView, setInView] = React.useState(false)
+  const scale = size?.scale
 
   React.useEffect(() => {
     const node = ref.current
     if (!node) return
     const resize = new ResizeObserver(([entry]) => {
-      if (entry) setScale(entry.contentRect.width / FRAME_WIDTH)
+      if (!entry) return
+      const next = entry.contentRect.width / FRAME_WIDTH
+      setSize({ scale: next, height: Math.max(FRAME_HEIGHT, Math.ceil(entry.contentRect.height / next)) })
     })
     const visible = new IntersectionObserver(
       ([entry]) => {
@@ -103,7 +110,7 @@ function TemplateThumbnail({
   }
 
   return (
-    <div ref={ref} className="relative aspect-[16/10] overflow-hidden bg-background">
+    <div ref={ref} className={cn("relative overflow-hidden bg-background", fill ? "aspect-16/10 h-full lg:aspect-auto" : "aspect-16/10")}>
       {inView && scale ? (
         <iframe
           ref={frameRef}
@@ -115,7 +122,7 @@ function TemplateThumbnail({
           loading="lazy"
           onLoad={hideScrollbar}
           className="pointer-events-none absolute top-0 left-0 origin-top-left border-0"
-          style={{ width: FRAME_WIDTH, height: FRAME_HEIGHT, transform: `scale(${scale})` }}
+          style={{ width: FRAME_WIDTH, height: size?.height ?? FRAME_HEIGHT, transform: `scale(${scale})` }}
         />
       ) : (
         <div role="status" className="absolute inset-0 animate-pulse bg-muted/50 motion-reduce:animate-none">
@@ -132,8 +139,11 @@ function TemplateThumbnail({
   )
 }
 
-/** The thumbnail isn't interactive, so the whole card is one link. */
-export function TemplateCard({ template }: { template: ItemSummary }) {
+/**
+ * The thumbnail isn't interactive, so the whole card is one link.
+ * `thumbnailOnly` drops the title and description, for layouts that show them beside the card.
+ */
+export function TemplateCard({ template, thumbnailOnly = false }: { template: ItemSummary; thumbnailOnly?: boolean }) {
   const { frameRef, scroll } = useFrameScroll()
 
   return (
@@ -145,10 +155,11 @@ export function TemplateCard({ template }: { template: ItemSummary }) {
       onBlur={() => scroll("up")}
       className="group flex flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-foreground/20 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
     >
-      <div className="border-b">
-        <TemplateThumbnail name={template.name} title={template.title} frameRef={frameRef} />
+      <div className={thumbnailOnly ? "flex-1" : "border-b"}>
+        <TemplateThumbnail name={template.name} title={template.title} frameRef={frameRef} fill={thumbnailOnly} />
       </div>
-      <div className="flex items-start justify-between gap-3 p-4">
+      {thumbnailOnly ? <span className="sr-only">{template.title}</span> : null}
+      <div className={thumbnailOnly ? "hidden" : "flex items-start justify-between gap-3 p-4"}>
         <div className="min-w-0 space-y-1">
           <h3 className="font-medium group-hover:underline group-hover:underline-offset-4">{template.title}</h3>
           <p className="line-clamp-2 text-sm text-muted-foreground">{template.description}</p>

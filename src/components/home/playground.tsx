@@ -3,11 +3,13 @@
 import * as React from "react"
 import dynamic from "next/dynamic"
 import Link from "next/link"
-import { ArrowUpRight, RotateCcw } from "lucide-react"
+import { ArrowUpRight, FileCode2, Monitor, Moon, RotateCcw, Smartphone, Sun, Tablet } from "lucide-react"
 
 import { CommandBlock } from "@/components/site/command-block"
 import { CopyButton } from "@/components/site/copy-button"
+import { useThemeState, type Mode } from "@/components/site/theme-config"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { cn } from "@/lib/utils"
 import { AuroraBackground } from "@/registry/default/ui/aurora-background"
 import { BorderBeam } from "@/registry/default/ui/border-beam"
 import { SpotlightCard } from "@/registry/default/ui/spotlight-card"
@@ -233,6 +235,77 @@ function SwatchControl({ control, value, onChange }: { control: Extract<Control,
   )
 }
 
+/** Preview widths. The preview is rendered in place, so these narrow its container (not the viewport). */
+const WIDTHS = [
+  { id: "full", label: "Full width", icon: Monitor, maxWidth: undefined },
+  { id: "tablet", label: "Tablet width (600px)", icon: Tablet, maxWidth: 600 },
+  { id: "phone", label: "Phone width (360px)", icon: Smartphone, maxWidth: 360 },
+] as const
+
+type WidthId = (typeof WIDTHS)[number]["id"]
+
+const toolButton =
+  "grid size-7 place-items-center rounded-md text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 aria-pressed:bg-background aria-pressed:text-foreground aria-pressed:shadow-xs"
+
+/** The live preview with its own width and light/dark switches (scoped to the preview only). */
+function PreviewStage({ item, values }: { item: PlaygroundItem; values: Values }) {
+  const site = useThemeState().mode
+  const [width, setWidth] = React.useState<WidthId>("full")
+  const [modeOverride, setModeOverride] = React.useState<Mode | null>(null)
+  const mode = modeOverride ?? site
+  const maxWidth = WIDTHS.find((w) => w.id === width)?.maxWidth
+
+  return (
+    <div className="flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card">
+      <div className="flex items-center justify-between gap-2 border-b px-2 py-1.5">
+        <div role="group" aria-label="Preview width" className="flex items-center gap-0.5 rounded-lg bg-muted p-0.5">
+          {WIDTHS.map(({ id, label, icon: Icon }) => (
+            <button key={id} type="button" aria-label={label} title={label} aria-pressed={width === id} onClick={() => setWidth(id)} className={toolButton}>
+              <Icon aria-hidden="true" className="size-3.5" />
+            </button>
+          ))}
+        </div>
+        <div className="flex items-center gap-2">
+          {maxWidth ? <span className="font-mono text-[11px] text-muted-foreground tabular-nums">{maxWidth}px</span> : null}
+          <div role="group" aria-label="Preview theme" className="flex items-center gap-0.5 rounded-lg bg-muted p-0.5">
+            {(["light", "dark"] as const).map((m) => {
+              const Icon = m === "light" ? Sun : Moon
+              return (
+                <button
+                  key={m}
+                  type="button"
+                  aria-label={m === "light" ? "Light preview" : "Dark preview"}
+                  title={m === "light" ? "Light preview" : "Dark preview"}
+                  aria-pressed={mode === m}
+                  onClick={() => setModeOverride(m === site ? null : m)}
+                  className={toolButton}
+                >
+                  <Icon aria-hidden="true" className="size-3.5" />
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+      {/* `light` / `dark` scope the theme variables (and the dark: variant) to the preview. */}
+      <div
+        className={cn(
+          mode,
+          "flex h-96 justify-center bg-muted bg-[repeating-linear-gradient(135deg,var(--border)_0_1px,transparent_1px_9px)] text-foreground"
+        )}
+      >
+        <div
+          data-width={width}
+          className="relative flex h-full w-full items-center justify-center overflow-hidden bg-background transition-[max-width] duration-300 ease-out data-[width=full]:border-x-0 motion-reduce:transition-none [&:not([data-width=full])]:border-x [&:not([data-width=full])]:border-dashed"
+          style={{ maxWidth: maxWidth ?? "100%" }}
+        >
+          {item.render(values)}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 /** One component's preview, props, code and install command. */
 function PlaygroundPanel({
   item,
@@ -253,9 +326,7 @@ function PlaygroundPanel({
   return (
     <div className="space-y-4">
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_18rem]">
-        <div className="relative flex h-96 items-center justify-center overflow-hidden rounded-xl border bg-card">
-          {item.render(values)}
-        </div>
+        <PreviewStage item={item} values={values} />
 
         <div className="flex flex-col gap-5 rounded-xl border bg-card p-5">
           <div className="flex items-center justify-between">
@@ -277,12 +348,21 @@ function PlaygroundPanel({
               <SwatchControl key={control.key} control={control} value={String(values[control.key])} onChange={(v) => onChange(control.key, v)} />
             )
           )}
-          <Link
-            href={`/components/${item.name}`}
-            className="mt-auto inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
-          >
-            {item.title} docs <ArrowUpRight aria-hidden="true" className="size-3.5" />
-          </Link>
+          <div className="mt-auto flex flex-wrap gap-x-4 gap-y-1 text-sm">
+            <Link
+              href={`/components/${item.name}#files`}
+              className="inline-flex items-center gap-1 rounded-sm text-muted-foreground outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+            >
+              <FileCode2 aria-hidden="true" className="size-3.5" />
+              View source
+            </Link>
+            <Link
+              href={`/components/${item.name}`}
+              className="inline-flex items-center gap-1 rounded-sm text-muted-foreground outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+            >
+              Docs <ArrowUpRight aria-hidden="true" className="size-3.5" />
+            </Link>
+          </div>
         </div>
       </div>
 

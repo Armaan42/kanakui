@@ -2,7 +2,7 @@ import Link from "next/link"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 
 import { ComponentPreview } from "@/components/site/component-preview"
-import { getItem } from "@/lib/registry"
+import { getCategoryTitle, getItem } from "@/lib/registry"
 import { cn } from "@/lib/utils"
 
 /**
@@ -25,7 +25,9 @@ const TILES = [
 export function HomeShowcase() {
   const tiles = TILES.flatMap((tile) => {
     const item = getItem("components", tile.name)
-    return item ? [{ ...tile, title: item.title, description: item.description }] : []
+    return item
+      ? [{ ...tile, title: item.title, description: item.description, category: getCategoryTitle(item.categories[0] ?? "") }]
+      : []
   })
 
   return (
@@ -45,7 +47,7 @@ export function HomeShowcase() {
             href="/components"
             className="inline-flex shrink-0 items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
           >
-            All components <ArrowRight aria-hidden="true" className="size-3.5" />
+            Explore all components <ArrowRight aria-hidden="true" className="size-3.5" />
           </Link>
         </div>
 
@@ -53,13 +55,26 @@ export function HomeShowcase() {
           {tiles.map((tile) => (
             <article key={tile.name} className={cn("flex flex-col overflow-hidden rounded-xl border bg-card", "className" in tile ? tile.className : undefined)}>
               <ComponentPreview name={tile.name} className={cn("min-h-56 flex-1 border-b", tile.preview)} />
-              <div className="flex items-center justify-between gap-3 px-4 py-3">
-                <h3 className="min-w-0 text-sm font-medium">
-                  <Link href={`/components/${tile.name}`} className="hover:underline hover:underline-offset-4">
-                    {tile.title}
-                  </Link>
-                </h3>
-                <ArrowUpRight aria-hidden="true" className="size-4 shrink-0 text-muted-foreground" />
+              {/* The whole footer is the link (the preview above stays interactive). */}
+              <div className="group/tile relative flex items-start justify-between gap-3 px-4 py-3 transition-colors hover:bg-muted/40">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <h3 className="truncate text-sm font-medium">
+                      <Link
+                        href={`/components/${tile.name}`}
+                        className="outline-none after:absolute after:inset-0 after:rounded-b-xl focus-visible:after:ring-3 focus-visible:after:ring-ring/50 focus-visible:after:ring-inset"
+                      >
+                        {tile.title}
+                      </Link>
+                    </h3>
+                    <span className="shrink-0 rounded-full border px-2 py-px text-[11px] text-muted-foreground">{tile.category}</span>
+                  </div>
+                  <p className="mt-1 line-clamp-1 text-xs text-muted-foreground">{tile.description}</p>
+                </div>
+                <ArrowUpRight
+                  aria-hidden="true"
+                  className="mt-0.5 size-4 shrink-0 text-muted-foreground transition-transform group-hover/tile:translate-x-0.5 group-hover/tile:-translate-y-0.5 group-hover/tile:text-foreground"
+                />
               </div>
             </article>
           ))}
