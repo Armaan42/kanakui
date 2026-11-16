@@ -33,7 +33,7 @@ function applyConfig(config: ThemeConfig) {
 // paint, and every change below writes to it. Snapshots are cached by value so
 // useSyncExternalStore sees a stable object between changes.
 let cachedKey = ""
-let cachedState: ThemeState = { ...DEFAULT_THEME, mode: "dark" }
+let cachedState: ThemeState = { ...DEFAULT_THEME, mode: "light" }
 
 function readState(): ThemeState {
   const root = document.documentElement
@@ -47,7 +47,7 @@ function readState(): ThemeState {
   return cachedState
 }
 
-const serverState: ThemeState = { ...DEFAULT_THEME, mode: "dark" }
+const serverState: ThemeState = { ...DEFAULT_THEME, mode: "light" }
 
 function subscribe(onChange: () => void) {
   window.addEventListener(CHANGE_EVENT, onChange)
@@ -98,7 +98,7 @@ export function ThemeSync() {
         applyConfig(parseThemeConfig(value))
       }
       if (event.key === THEME_STORAGE_KEY && !new URLSearchParams(location.search).has("theme")) {
-        document.documentElement.classList.toggle("dark", event.newValue !== "light")
+        document.documentElement.classList.toggle("dark", event.newValue === "dark")
       }
     }
     window.addEventListener("storage", onStorage)

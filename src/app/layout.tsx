@@ -35,11 +35,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    // Dark is the default theme; the script switches to light before paint
+    // Light is the default theme; the script switches to dark before paint
     // when the visitor chose it, hence suppressHydrationWarning.
     <html
       lang="en"
-      className={`dark ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>
