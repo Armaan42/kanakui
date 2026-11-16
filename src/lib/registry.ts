@@ -139,6 +139,12 @@ export function getCategory(kind: ItemKind, slug: string): CategoryWithCount | u
   return getCategories(kind).find((c) => c.slug === slug)
 }
 
+/** Meta description for a category page, e.g. "Frequently asked questions. 2 free, MIT-licensed React blocks…". */
+export function getCategoryDescription(kind: ItemKind, category: CategoryWithCount): string {
+  const noun = KIND_LABEL[kind][category.count === 1 ? "singular" : "plural"]
+  return `${category.description} ${category.count} free, MIT-licensed React ${noun} built with Tailwind CSS that you install into your project with the shadcn CLI.`
+}
+
 export function getItemsByCategory(kind: ItemKind, slug: string): ItemSummary[] {
   return getItems(kind).filter((c) => c.categories.includes(slug))
 }

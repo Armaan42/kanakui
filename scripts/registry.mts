@@ -14,7 +14,7 @@
  *
  * Run through `npm run registry:build`, which does generate → build → verify.
  */
-import { existsSync, readdirSync, readFileSync, writeFileSync, mkdirSync } from "node:fs"
+import { existsSync, readdirSync, readFileSync, rmSync, writeFileSync, mkdirSync } from "node:fs"
 import path from "node:path"
 import { registryItemSchema, registrySchema } from "shadcn/schema"
 
@@ -415,6 +415,16 @@ function verify() {
     }
     for (const f of parsed.data.files ?? []) {
       if (!f.content?.trim()) error(`${rel(file)}: ${f.path} has no content`)
+    }
+  }
+
+  // `shadcn build` never deletes anything, so an item removed from the registry
+  // would keep being served from public/r. Drop outputs that no item produces.
+  const expected = new Set(["registry.json", ...registryItems.map((entry) => `${entry.name}.json`)])
+  for (const file of readdirSync(OUTPUT_DIR)) {
+    if (file.endsWith(".json") && !expected.has(file)) {
+      rmSync(path.join(OUTPUT_DIR, file))
+      console.log(`  removed stale ${rel(path.join(OUTPUT_DIR, file))}`)
     }
   }
 

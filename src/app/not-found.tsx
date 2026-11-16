@@ -1,7 +1,13 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 
 import { SiteShell } from "@/components/site/site-shell"
 import { Button } from "@/components/ui/button"
+
+export const metadata: Metadata = {
+  title: "Page not found",
+  description: "This page doesn’t exist. It may have been renamed or removed. Browse kanakui components, blocks and templates instead.",
+}
 
 // Root not-found renders inside the root layout only (not the (site) layout),
 // so it adds the site shell itself.
