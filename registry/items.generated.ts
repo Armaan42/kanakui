@@ -14,14 +14,17 @@ import item_bar_loader from "./items/bar-loader.ts"
 import item_beam_rain from "./items/beam-rain.ts"
 import item_bento_01 from "./items/bento-01.ts"
 import item_blur_text from "./items/blur-text.ts"
+import item_boarding_pass from "./items/boarding-pass.ts"
 import item_border_beam from "./items/border-beam.ts"
 import item_card_stack from "./items/card-stack.ts"
 import item_carousel_3d from "./items/carousel-3d.ts"
 import item_cassette_player from "./items/cassette-player.ts"
 import item_changelog_01 from "./items/changelog-01.ts"
+import item_chat_thread from "./items/chat-thread.ts"
 import item_compose_refs from "./items/compose-refs.ts"
 import item_contact_01 from "./items/contact-01.ts"
 import item_copy_button from "./items/copy-button.ts"
+import item_credit_01 from "./items/credit-01.ts"
 import item_cta_01 from "./items/cta-01.ts"
 import item_cta_02 from "./items/cta-02.ts"
 import item_cta_03 from "./items/cta-03.ts"
@@ -68,6 +71,7 @@ import item_hero_09 from "./items/hero-09.ts"
 import item_hero_10 from "./items/hero-10.ts"
 import item_hero_11 from "./items/hero-11.ts"
 import item_hero_12 from "./items/hero-12.ts"
+import item_hero_13 from "./items/hero-13.ts"
 import item_holo_card from "./items/holo-card.ts"
 import item_image_compare from "./items/image-compare.ts"
 import item_invitation_01 from "./items/invitation-01.ts"
@@ -108,6 +112,7 @@ import item_ripple_background from "./items/ripple-background.ts"
 import item_ripple_button from "./items/ripple-button.ts"
 import item_rotating_words from "./items/rotating-words.ts"
 import item_saas_landing from "./items/saas-landing.ts"
+import item_score_gauge from "./items/score-gauge.ts"
 import item_scramble_text from "./items/scramble-text.ts"
 import item_scroll_device from "./items/scroll-device.ts"
 import item_scroll_progress from "./items/scroll-progress.ts"
@@ -135,11 +140,16 @@ import item_text_reveal from "./items/text-reveal.ts"
 import item_tilt_card from "./items/tilt-card.ts"
 import item_timeline from "./items/timeline.ts"
 import item_toggle_switch from "./items/toggle-switch.ts"
+import item_trip_01 from "./items/trip-01.ts"
 import item_typewriter from "./items/typewriter.ts"
 import item_use_pointer_position from "./items/use-pointer-position.ts"
 import item_use_scene_state from "./items/use-scene-state.ts"
 import item_vinyl_player from "./items/vinyl-player.ts"
+import item_volume_knob from "./items/volume-knob.ts"
+import item_weather_widget from "./items/weather-widget.ts"
+import item_widgets_01 from "./items/widgets-01.ts"
 import item_wireframe_orb from "./items/wireframe-orb.ts"
+import item_world_clock from "./items/world-clock.ts"
 
 export const itemDefinitions: RegistryItemDefinition[] = [
   item_accordion_smooth,
@@ -155,14 +165,17 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_beam_rain,
   item_bento_01,
   item_blur_text,
+  item_boarding_pass,
   item_border_beam,
   item_card_stack,
   item_carousel_3d,
   item_cassette_player,
   item_changelog_01,
+  item_chat_thread,
   item_compose_refs,
   item_contact_01,
   item_copy_button,
+  item_credit_01,
   item_cta_01,
   item_cta_02,
   item_cta_03,
@@ -209,6 +222,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_hero_10,
   item_hero_11,
   item_hero_12,
+  item_hero_13,
   item_holo_card,
   item_image_compare,
   item_invitation_01,
@@ -249,6 +263,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_ripple_button,
   item_rotating_words,
   item_saas_landing,
+  item_score_gauge,
   item_scramble_text,
   item_scroll_device,
   item_scroll_progress,
@@ -276,9 +291,14 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_tilt_card,
   item_timeline,
   item_toggle_switch,
+  item_trip_01,
   item_typewriter,
   item_use_pointer_position,
   item_use_scene_state,
   item_vinyl_player,
+  item_volume_knob,
+  item_weather_widget,
+  item_widgets_01,
   item_wireframe_orb,
+  item_world_clock,
 ]
