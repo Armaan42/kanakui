@@ -62,7 +62,11 @@ export default async function CliPage() {
 
       <DocsSection id="update" title="Update a component">
         <p className={p}>
-          <InlineText text="Re-run the install command with `--overwrite`. This replaces the file, including any changes you made, so commit your work first and compare with `git diff`." />
+          <InlineText text="First see what changed. `--diff` compares the latest version in the registry with the file in your project and writes nothing. Lines starting with `-` are your file, lines starting with `+` are the registry’s." />
+        </p>
+        <CommandBlock command={`${installCommandByUrl("marquee")} --diff`} />
+        <p className={p}>
+          <InlineText text="To take the new version, re-run the install with `--overwrite`. It replaces the file, including any changes you made, so commit your work first." />
         </p>
         <CommandBlock command={`${installCommandByUrl("marquee")} --overwrite`} />
       </DocsSection>
