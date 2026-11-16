@@ -1,3 +1,4 @@
+import type * as React from "react"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
@@ -15,14 +16,17 @@ export function ComponentCard({ component }: { component: ItemSummary }) {
       <ComponentPreview name={component.name} className="h-52 border-b" />
       <div className="flex flex-1 items-start justify-between gap-3 p-4">
         <div className="min-w-0 space-y-1">
-          <h3 className="font-medium">
-            <Link
-              href={href}
-              className="rounded-sm hover:underline hover:underline-offset-4 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
-            >
-              {component.title}
-            </Link>
-          </h3>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <h3 className="font-medium">
+              <Link
+                href={href}
+                className="rounded-sm hover:underline hover:underline-offset-4 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+              >
+                {component.title}
+              </Link>
+            </h3>
+            {component.categoryTitles[0] ? <CategoryChip>{component.categoryTitles[0]}</CategoryChip> : null}
+          </div>
           <p className="line-clamp-2 text-sm text-muted-foreground">{component.description}</p>
         </div>
         <Link
@@ -36,6 +40,11 @@ export function ComponentCard({ component }: { component: ItemSummary }) {
       </div>
     </article>
   )
+}
+
+/** The item's main category, shown beside its name on cards. */
+export function CategoryChip({ children }: { children: React.ReactNode }) {
+  return <span className="shrink-0 rounded-full border px-2 py-px text-[11px] font-normal text-muted-foreground">{children}</span>
 }
 
 export function ComponentGrid({ components }: { components: ItemSummary[] }) {

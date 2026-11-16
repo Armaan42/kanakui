@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Blocks, ChevronDown, Download, LayoutGrid, LayoutTemplate, Menu, X } from "lucide-react"
+import { Blocks, ChevronDown, Download, LayoutGrid, LayoutTemplate, PanelLeft, X } from "lucide-react"
 
 import type { NavGroup } from "@/lib/docs-nav"
 import { cn } from "@/lib/utils"
@@ -85,7 +85,7 @@ export function DocsSidebar({ groups }: { groups: NavGroup[] }) {
 }
 
 /**
- * Below the `lg` breakpoint the sidebar collapses into a "Menu" bar. The
+ * Below the `lg` breakpoint the sidebar collapses into a "Browse" bar. The
  * toggle exposes `aria-expanded`; choosing a link or pressing Escape closes it.
  */
 export function DocsMobileNav({ groups }: { groups: NavGroup[] }) {
@@ -117,8 +117,9 @@ export function DocsMobileNav({ groups }: { groups: NavGroup[] }) {
         onClick={() => setOpen((value) => !value)}
         className="flex h-11 w-full items-center gap-2 px-4 text-sm outline-none focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:ring-inset sm:px-6"
       >
-        {open ? <X aria-hidden="true" className="size-4" /> : <Menu aria-hidden="true" className="size-4" />}
-        <span className="font-medium">Menu</span>
+        {/* "Browse", not "Menu": the site menu is the header's button; this lists every page in this section. */}
+        {open ? <X aria-hidden="true" className="size-4" /> : <PanelLeft aria-hidden="true" className="size-4" />}
+        <span className="font-medium">Browse</span>
         {current ? <span className="truncate text-muted-foreground">/ {current.title}</span> : null}
       </button>
       <nav

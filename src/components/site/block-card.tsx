@@ -4,6 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
+import { CategoryChip } from "@/components/site/component-card"
 import type { ItemSummary } from "@/lib/registry"
 
 /** Blocks are designed for this width; thumbnails show them as on a laptop screen. */
@@ -76,7 +77,10 @@ export function BlockCard({ block }: { block: ItemSummary }) {
       </div>
       <div className="flex items-start justify-between gap-3 p-4">
         <div className="min-w-0 space-y-1">
-          <h3 className="font-medium group-hover:underline group-hover:underline-offset-4">{block.title}</h3>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <h3 className="font-medium group-hover:underline group-hover:underline-offset-4">{block.title}</h3>
+            {block.categoryTitles[0] ? <CategoryChip>{block.categoryTitles[0]}</CategoryChip> : null}
+          </div>
           <p className="line-clamp-2 text-sm text-muted-foreground">{block.description}</p>
         </div>
         <ArrowRight aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
