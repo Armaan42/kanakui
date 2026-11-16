@@ -9,6 +9,10 @@ import { getAllPreviewableItems, getPreviewableItem, kindOf } from "@/lib/regist
  * iframes (so breakpoints react to the iframe's width), in block thumbnails,
  * and opened directly by "Open full screen". Not part of the site navigation.
  */
+// Wait for the full static page on unknown params, so `notFound()` runs before
+// streaming starts and the response is a real 404 (not the 200 App Shell).
+export const ensureStatic = "navigation"
+
 export function generateStaticParams() {
   return getAllPreviewableItems().map((item) => ({ name: item.name }))
 }
