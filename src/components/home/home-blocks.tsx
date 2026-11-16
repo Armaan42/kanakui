@@ -39,18 +39,18 @@ export function HomeBlocks() {
           <div className="max-w-2xl">
             <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">{blocks.length} blocks</p>
             <h2 id="blocks" className="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-              Whole sections, ready to drop in
+              Whole sections, ready to drop into your project
             </h2>
             <p className="mt-3 text-pretty text-muted-foreground">
-              Heroes, pricing tables, testimonials and footers, built from the same components. Scroll to see them
-              all line up.
+              From hero sections to pricing layouts, complete website sections built from the same components, so they
+              work together. Scroll to see them line up.
             </p>
           </div>
           <Link
             href="/blocks"
             className="inline-flex shrink-0 items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
           >
-            All blocks <ArrowRight aria-hidden="true" className="size-3.5" />
+            Explore all blocks <ArrowRight aria-hidden="true" className="size-3.5" />
           </Link>
         </div>
       </div>

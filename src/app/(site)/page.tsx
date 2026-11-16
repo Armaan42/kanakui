@@ -9,6 +9,7 @@ import { HomeHero } from "@/components/home/home-hero"
 import { HomeHowItWorks } from "@/components/home/home-how-it-works"
 import { HomePlayground } from "@/components/home/home-playground"
 import { HomeShowcase } from "@/components/home/home-showcase"
+import { HomeTemplates } from "@/components/home/home-templates"
 import { getItems, getItemsByCategory } from "@/lib/registry"
 
 export default function HomePage() {
@@ -25,6 +26,7 @@ export default function HomePage() {
       <HomeBlocks />
       <HomeShowcase />
       <HomePlayground />
+      <HomeTemplates />
       <HomeCategories />
       <HomeHowItWorks />
       <HomeFaq />

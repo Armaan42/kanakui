@@ -45,7 +45,7 @@ export function HomeCategories() {
     <section aria-labelledby="categories" className="border-b">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
         <h2 id="categories" className="max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-          Everything you need to build a modern product
+          Browse by category
         </h2>
         <GlowGrid className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
           {categories.map((category) => {
