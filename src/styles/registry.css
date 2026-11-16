@@ -28,6 +28,8 @@
   --animate-skeleton-shimmer: skeleton-shimmer 1.6s ease-in-out infinite;
   --animate-sparkle: sparkle 1.8s ease-in-out infinite;
   --animate-typewriter-caret: typewriter-caret 1s steps(1) infinite;
+  --animate-weather-drift: weather-drift 40s linear infinite;
+  --animate-weather-fall: weather-fall 1s linear infinite;
 }
 :root {
   --saas-primary: oklch(0.511 0.262 276.966);
@@ -289,5 +291,26 @@
   }
   50% {
     opacity: 0;
+  }
+}
+@keyframes weather-drift {
+  from {
+    transform: translateX(-110%);
+  }
+  to {
+    transform: translateX(420%);
+  }
+}
+@keyframes weather-fall {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  to {
+    transform: translateY(380px);
+    opacity: 0.2;
   }
 }
