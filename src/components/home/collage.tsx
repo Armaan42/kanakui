@@ -7,6 +7,7 @@ import { ArrowUpRight } from "lucide-react"
 import { motion, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "motion/react"
 
 import { ComponentPreview } from "@/components/site/component-preview"
+import { useThemeState } from "@/components/site/theme-config"
 import { cn } from "@/lib/utils"
 
 const DottedGlobe = dynamic(() => import("@/registry/default/ui/dotted-globe").then((m) => m.DottedGlobe), { ssr: false })
@@ -151,6 +152,7 @@ export function Collage({ heading }: { heading: React.ReactNode }) {
   const y3 = useTransform(progress, [0, 1], [60, -60])
   const y4 = useTransform(progress, [0, 1], [-10, 110])
   const large = useIsLarge()
+  const { mode } = useThemeState()
   const move = !reduceMotion && large
 
   const loginTile = (
@@ -211,17 +213,17 @@ export function Collage({ heading }: { heading: React.ReactNode }) {
 
       <div className="flex flex-col gap-10 lg:col-span-2 lg:col-start-3 lg:row-span-2 lg:row-start-1 lg:gap-0">
         <div className="lg:border-b lg:border-dashed lg:border-foreground/10 lg:px-4 lg:pt-16 lg:pb-10">
-          {/* A dark window in both themes: `dark` scopes the theme variables inside it. */}
-          <div className="dark overflow-hidden rounded-2xl border border-foreground/10 bg-neutral-950 text-foreground shadow-[0_40px_120px_-40px_rgb(0_0_0/0.35)] dark:shadow-[0_40px_120px_-40px_rgb(0_0_0/0.9)]">
+          {/* A browser window that follows the site theme; the block inside reloads in the new mode. */}
+          <div className="overflow-hidden rounded-2xl border border-foreground/10 bg-card text-foreground shadow-[0_40px_120px_-40px_rgb(0_0_0/0.3)] dark:shadow-[0_40px_120px_-40px_rgb(0_0_0/0.9)]">
             <div className="flex items-center gap-1.5 border-b border-foreground/10 px-4 py-3">
-              <span aria-hidden="true" className="size-2.5 rounded-full bg-white/15" />
-              <span aria-hidden="true" className="size-2.5 rounded-full bg-white/15" />
-              <span aria-hidden="true" className="size-2.5 rounded-full bg-white/15" />
-              <span className="ml-3 truncate rounded-md bg-white/5 px-3 py-1 font-mono text-[11px] text-muted-foreground">
+              <span aria-hidden="true" className="size-2.5 rounded-full bg-foreground/15" />
+              <span aria-hidden="true" className="size-2.5 rounded-full bg-foreground/15" />
+              <span aria-hidden="true" className="size-2.5 rounded-full bg-foreground/15" />
+              <span className="ml-3 truncate rounded-md bg-foreground/5 px-3 py-1 font-mono text-[11px] text-muted-foreground">
                 hero-08 · running live
               </span>
             </div>
-            <LiveBlock name="hero-08" theme="dark" scale={0.62} className="aspect-[16/8.4]" />
+            <LiveBlock name="hero-08" theme={mode} scale={0.62} className="aspect-[16/8.4]" />
           </div>
           <Link
             href="/blocks/hero-08"

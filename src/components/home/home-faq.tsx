@@ -1,38 +1,71 @@
+import Link from "next/link"
+
 import { siteConfig } from "@/config/site"
 import { AccordionSmooth } from "@/registry/default/ui/accordion-smooth"
 
-/** Honest answers only: every statement here is true of the current product. */
+/**
+ * Honest answers only: every statement here is true of the current product.
+ * When something changes (paid items, Figma files, accounts), change the answer.
+ */
 export function HomeFaq() {
+  const ns = siteConfig.registry.namespace
+  const license = siteConfig.license.name
+
   const items = [
     {
-      id: "free",
-      title: "Is kanakui free?",
-      content: `Yes. All components and blocks on the site are free and released under the ${siteConfig.license.name} license, including for commercial projects.`,
+      id: "what",
+      title: `What is ${siteConfig.name}?`,
+      content: `A library of React components, website blocks and full-page templates, published in the open shadcn registry format. You install them with the shadcn CLI and the source code is copied into your project.`,
     },
     {
       id: "install",
-      title: "How do I install a component?",
-      content: "Set up shadcn in your project (npx shadcn@latest init), then run the install command shown on the component’s page. The CLI adds the files, npm packages and CSS.",
+      title: "How do I install components?",
+      content: `Set up shadcn in your project (npx shadcn@latest init), then run the install command from the item’s page. To use short names like ${ns}/shimmer-button, add the ${ns} registry once; the Installation guide shows the command.`,
     },
     {
-      id: "frameworks",
-      title: "Which frameworks are supported?",
-      content: "Every item is tested by installing it into fresh Next.js apps using both shadcn setups (Radix and Base UI). Other React frameworks that shadcn supports should work too, but we haven’t tested them yet.",
+      id: "account",
+      title: "Do I need an account?",
+      content: "No. There’s no sign-up: the registry is public, so the CLI downloads items directly.",
     },
     {
-      id: "requirements",
-      title: "What do I need?",
-      content: "React 19 and Tailwind CSS v4. 3D components also use three.js and React Three Fiber, which the CLI installs for you.",
+      id: "free",
+      title: "Are the components free?",
+      content: `Yes. Every component, block and template on the site is free and released under the ${license} license.`,
+    },
+    {
+      id: "modify",
+      title: "Can I modify the source code?",
+      content: "Yes, that’s the point. The files live in your repo, not in a package, so change anything. To pull an update later, re-run the install command with --overwrite (commit your changes first, because the file is replaced).",
+    },
+    {
+      id: "nextjs",
+      title: `Does ${siteConfig.name} support Next.js?`,
+      content: "Yes. Every item is tested by installing it into fresh Next.js apps with both shadcn setups (Radix and Base UI). You need React 19 and Tailwind CSS v4. Other React frameworks that shadcn supports should work too, but we haven’t tested them yet.",
+    },
+    {
+      id: "responsive",
+      title: "Are the components responsive?",
+      content: "Yes. Each item is checked at phone, tablet and desktop widths, and every preview on the site has width controls so you can check for yourself.",
     },
     {
       id: "accessibility",
       title: "Are the components accessible?",
-      content: "They use real buttons, labels and landmarks, support the keyboard, and stop or reduce motion when people ask for less. Each component page lists its accessibility notes.",
+      content: "They use real buttons, labels and landmarks, work with the keyboard, and stop or reduce motion for people who ask for less. Each page lists its accessibility notes.",
     },
     {
-      id: "update",
-      title: "How do I get updates?",
-      content: "Re-run a component’s install command with --overwrite. Commit your own changes first, because the file is replaced.",
+      id: "commercial",
+      title: "Can I use them in commercial projects?",
+      content: `Yes. The ${license} license allows commercial use. It asks you to keep the copyright and license notice with the code.`,
+    },
+    {
+      id: "figma",
+      title: "Do templates include Figma files?",
+      content: "Not yet. Templates are code only for now: one command adds the page and every section in it.",
+    },
+    {
+      id: "premium",
+      title: "How do I access premium resources?",
+      content: "There aren’t any right now. Everything published is free, with no account needed.",
     },
   ]
 
@@ -45,13 +78,17 @@ export function HomeFaq() {
           </h2>
           <p className="mt-4 text-pretty text-muted-foreground">
             More in the{" "}
-            <a href="/docs/troubleshooting" className="text-foreground underline underline-offset-4">
-              troubleshooting guide
-            </a>
+            <Link href="/docs/installation" className="text-foreground underline underline-offset-4">
+              installation guide
+            </Link>{" "}
+            and{" "}
+            <Link href="/docs/troubleshooting" className="text-foreground underline underline-offset-4">
+              troubleshooting
+            </Link>
             .
           </p>
         </div>
-        <AccordionSmooth items={items} defaultOpen={["free"]} />
+        <AccordionSmooth items={items} defaultOpen={["what"]} />
       </div>
     </section>
   )

@@ -3,6 +3,7 @@ import Link from "next/link"
 import { CommandMenu, type SearchGroup } from "@/components/site/command-menu"
 import { GitHubIcon, LogoMark } from "@/components/site/icons"
 import { MainNav } from "@/components/site/main-nav"
+import { MobileNav } from "@/components/site/mobile-nav"
 import { ThemeMenu } from "@/components/site/theme-menu"
 import { ThemeToggle } from "@/components/site/theme-toggle"
 import { Button } from "@/components/ui/button"
@@ -43,30 +44,45 @@ function searchGroups(): SearchGroup[] {
   ]
 }
 
+/** The menu panel's links: every main section (with live counts) and the setup guides. */
+function mobileLinks() {
+  const counts: Record<string, number> = {
+    "/components": getItems("components").length,
+    "/blocks": getItems("blocks").length,
+    "/templates": getItems("templates").length,
+  }
+  const primary = siteConfig.nav.map((item) => ({ ...item, count: counts[item.href] }))
+  const guides = docsPages.map((page) => ({ title: page.navTitle ?? page.title, href: page.href }))
+  return { primary, guides }
+}
+
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b bg-background">
-      <div className="mx-auto flex h-14 w-full max-w-[90rem] items-center gap-2 px-4 sm:gap-6 sm:px-6">
+    <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur-md supports-backdrop-filter:bg-background/75">
+      <div className="mx-auto flex h-14 w-full max-w-[90rem] items-center gap-2 px-4 sm:px-6 md:gap-6">
         <Link
           href="/"
           className="flex shrink-0 items-center gap-2 rounded-md font-semibold tracking-tight focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
         >
           <LogoMark className="size-5" />
-          {/* Visually hidden on phones so the nav fits; still the link's accessible name. */}
-          <span className="max-sm:sr-only">{siteConfig.name}</span>
+          {siteConfig.name}
         </Link>
-        <MainNav items={siteConfig.nav} />
-        <div className="ml-auto flex items-center sm:gap-1">
+        <MainNav items={siteConfig.nav} className="max-md:hidden" />
+        <div className="ml-auto flex items-center gap-0.5 sm:gap-1">
           <CommandMenu groups={searchGroups()} />
-          {/* Hidden on phones to make room; the footer links to GitHub too. */}
+          {/* On phones GitHub is in the menu panel. */}
           <Button asChild variant="ghost" size="icon" className="max-sm:hidden">
             <a href={siteConfig.links.github} target="_blank" rel="noreferrer" aria-label="Source code on GitHub">
               <GitHubIcon />
             </a>
           </Button>
-          {/* Below 360px there isn't room; the Themes page is in the search menu. */}
+          {/* Below 360px there isn't room; Themes is in the menu panel. */}
           <ThemeMenu className="max-[359px]:hidden" />
           <ThemeToggle />
+          <Button asChild size="sm" className="ml-2 max-xl:hidden">
+            <Link href="/docs/installation">Get started</Link>
+          </Button>
+          <MobileNav siteName={siteConfig.name} github={siteConfig.links.github} {...mobileLinks()} className="md:hidden" />
         </div>
       </div>
     </header>

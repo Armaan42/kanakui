@@ -15,7 +15,7 @@ const VIEWPORTS = [
 type ViewportId = (typeof VIEWPORTS)[number]["id"]
 type Theme = "light" | "dark"
 
-/** Tracks the site theme (the `dark` class on <html>). The server always renders dark. */
+/** Tracks the site theme (the `dark` class on <html>). The server always renders light. */
 function useSiteTheme(): Theme {
   return React.useSyncExternalStore(
     (onChange) => {
@@ -24,7 +24,7 @@ function useSiteTheme(): Theme {
       return () => observer.disconnect()
     },
     () => (document.documentElement.classList.contains("dark") ? "dark" : "light"),
-    () => "dark"
+    () => "light"
   )
 }
 

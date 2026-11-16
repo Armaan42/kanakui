@@ -119,12 +119,12 @@ export function CommandMenu({ groups }: { groups: SearchGroup[] }) {
         aria-keyshortcuts="Meta+K Control+K"
         className={cn(
           "inline-flex h-8 items-center gap-2 rounded-lg text-sm text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50",
-          "size-8 justify-center hover:bg-muted md:w-56 md:justify-start md:border md:bg-muted/40 md:pr-1.5 md:pl-2.5 lg:w-64",
+          "size-8 justify-center hover:bg-muted lg:w-56 lg:justify-start lg:border lg:bg-muted/40 lg:pr-1.5 lg:pl-2.5 xl:w-64",
         )}
       >
         <Search aria-hidden="true" className="size-4 shrink-0" />
-        <span className="hidden flex-1 text-left md:inline">Search…</span>
-        <span className="hidden items-center gap-0.5 md:inline-flex" aria-hidden="true">
+        <span className="hidden flex-1 text-left lg:inline">Search…</span>
+        <span className="hidden items-center gap-0.5 lg:inline-flex" aria-hidden="true">
           <Kbd>{modifier}</Kbd>
           <Kbd>K</Kbd>
         </span>

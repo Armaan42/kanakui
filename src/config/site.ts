@@ -62,15 +62,13 @@ export const siteConfig = {
     name: "MIT",
     url: `${process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com/Armaan42/kanakui"}/blob/main/LICENSE`,
   },
-  /** Main navigation. Only list pages that exist. `wide` items are hidden on phones. */
+  /** Main navigation. Only list pages that exist. Below `md` these move into the menu panel. */
   nav: [
-    { title: "Docs", href: "/docs" },
     { title: "Components", href: "/components" },
     { title: "Blocks", href: "/blocks" },
-    // On phones, /templates is in the docs menu instead.
-    { title: "Templates", href: "/templates", wide: true },
-    // On phones, /themes is linked from the theme popover instead.
-    { title: "Themes", href: "/themes", wide: true },
+    { title: "Templates", href: "/templates" },
+    { title: "Themes", href: "/themes" },
+    { title: "Docs", href: "/docs" },
   ],
   registry: {
     namespace,
