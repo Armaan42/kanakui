@@ -22,6 +22,7 @@ import {
   getNpmDependencies,
   getRelated,
   getShadcnDependencies,
+  kindOf,
   type ItemKind,
 } from "@/lib/registry"
 import { getUsageExample } from "@/lib/source"
@@ -33,6 +34,16 @@ const TYPE_LABEL: Record<string, string> = {
   "registry:component": "Component",
   "registry:block": "Block",
 }
+
+/** Where an "Also installs" entry leads: its own page, or its source when it has none (hooks, utilities). */
+function dependencyHref(dep: RegistryEntry): { href: string; external: boolean } {
+  const depKind = kindOf(dep)
+  if (depKind) return { href: `/${depKind}/${dep.name}`, external: false }
+  return { href: `${siteConfig.links.github}/blob/main/${dep.files[0]?.path ?? ""}`, external: true }
+}
+
+const DEP_LINK =
+  "rounded-sm font-mono text-[13px] text-muted-foreground underline-offset-4 outline-none hover:text-foreground hover:underline focus-visible:ring-3 focus-visible:ring-ring/50"
 
 const SECTION_TITLE: Record<ItemKind, string> = { components: "Components", blocks: "Blocks", templates: "Templates" }
 
@@ -281,15 +292,33 @@ export async function ItemPage({ item, kind }: { item: RegistryEntry; kind: Item
             <div className="space-y-3">
               <h2 className="font-medium">Also installs</h2>
               <ul className="space-y-1.5">
-                {internalDependencies.map((dep) => (
-                  <li key={dep.name} className="flex items-center justify-between gap-2">
-                    <span className="font-mono text-[13px] text-muted-foreground">{dep.name}</span>
-                    <span className="text-xs text-muted-foreground">{TYPE_LABEL[dep.type] ?? dep.type}</span>
-                  </li>
-                ))}
+                {internalDependencies.map((dep) => {
+                  const { href, external } = dependencyHref(dep)
+                  return (
+                    <li key={dep.name} className="flex items-center justify-between gap-2">
+                      {external ? (
+                        <a href={href} target="_blank" rel="noreferrer" className={DEP_LINK}>
+                          {dep.name}
+                        </a>
+                      ) : (
+                        <Link href={href} className={DEP_LINK}>
+                          {dep.name}
+                        </Link>
+                      )}
+                      <span className="text-xs text-muted-foreground">{TYPE_LABEL[dep.type] ?? dep.type}</span>
+                    </li>
+                  )
+                })}
                 {shadcnDependencies.map((dep) => (
                   <li key={dep} className="flex items-center justify-between gap-2">
-                    <span className="font-mono text-[13px] text-muted-foreground">{dep}</span>
+                    <a
+                      href={`https://ui.shadcn.com/docs/components/radix/${dep}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={DEP_LINK}
+                    >
+                      {dep}
+                    </a>
                     <span className="text-xs text-muted-foreground">shadcn</span>
                   </li>
                 ))}
@@ -302,6 +331,18 @@ export async function ItemPage({ item, kind }: { item: RegistryEntry; kind: Item
             <dd>{formatDate(item.releasedAt)}</dd>
             <dt className="text-muted-foreground">Version</dt>
             <dd className="font-mono text-[13px]">{item.version}</dd>
+            <dt className="text-muted-foreground">Registry</dt>
+            <dd>
+              {/* The exact JSON the CLI downloads: files, dependencies and CSS. */}
+              <a
+                href={`${siteConfig.registry.basePath}/${item.name}.json`}
+                target="_blank"
+                rel="noreferrer"
+                className="font-mono text-[13px] underline-offset-4 hover:underline"
+              >
+                {item.name}.json
+              </a>
+            </dd>
             <dt className="text-muted-foreground">License</dt>
             <dd>
               <a href={siteConfig.license.url} target="_blank" rel="noreferrer" className="underline-offset-4 hover:underline">
