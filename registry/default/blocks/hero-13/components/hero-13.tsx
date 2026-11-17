@@ -19,7 +19,7 @@ export function Hero13() {
       <div aria-hidden="true" className="absolute top-[12%] right-[4%] -z-10 size-[26rem] rounded-full bg-sky-400/15 blur-3xl" />
       <div className="mx-auto grid max-w-6xl items-center gap-14 px-4 py-20 sm:px-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:py-24">
         <div>
-          <p className="text-sm font-medium text-sky-600 dark:text-sky-400">Murmur · free for iOS and Android</p>
+          <p className="text-sm font-medium text-sky-700 dark:text-sky-400">Murmur · free for iOS and Android</p>
           <h1 className="mt-3 text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">Messages that feel like talking.</h1>
           <p className="mt-5 max-w-lg text-lg leading-8 text-muted-foreground">
             Murmur is a calm, fast messenger for the people you actually talk to: no ads, no feeds, just your conversations.

@@ -87,7 +87,7 @@ export function Widgets01() {
           </section>
 
           <section aria-label="Today's calendar" className={tile}>
-            <p className="text-xs font-semibold tracking-widest text-red-500 uppercase">Monday</p>
+            <p className="text-xs font-semibold tracking-widest text-red-600 uppercase dark:text-red-500">Monday</p>
             <p className="text-4xl font-light tabular-nums">16</p>
             <ul className="mt-3 space-y-2">
               {events.map((e) => (

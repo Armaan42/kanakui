@@ -4,7 +4,7 @@ import type { PropDoc } from "@/registry/docs"
 
 // wrap-anywhere: long commands and URLs in inline code may break mid-token
 // instead of pushing the page wider than a phone screen.
-const inlineCodeClass = "rounded bg-muted px-1 py-0.5 font-mono text-[0.85em] wrap-anywhere"
+const inlineCodeClass = "rounded bg-muted px-1 py-0.5 font-mono text-[0.85em] text-foreground wrap-anywhere"
 
 /** Renders text where `backticks` mark inline code. */
 export function InlineText({ text }: { text: string }) {
@@ -60,7 +60,7 @@ export function PropsTable({ props, extendsText }: { props: PropDoc[]; extendsTe
   return (
     <div className="space-y-3">
       {props.length > 0 ? (
-        <div className="overflow-x-auto rounded-lg border">
+        <div tabIndex={0} role="region" aria-label="Props" className="overflow-x-auto rounded-lg border outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
           <table className="w-full min-w-[36rem] text-left text-sm">
             <thead className="bg-muted/40 text-xs text-muted-foreground">
               <tr>

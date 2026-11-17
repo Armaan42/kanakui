@@ -5,7 +5,7 @@ export default defineItem({
   "type": "registry:block",
   "title": "Messaging App Hero",
   "description": "A messaging-app hero with the pitch and features beside a live chat on a phone.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "releasedAt": "2026-11-16",
   "categories": [
     "hero"

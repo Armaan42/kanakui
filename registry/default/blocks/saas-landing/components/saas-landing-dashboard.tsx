@@ -81,7 +81,8 @@ export function SaasLandingDashboard({ className }: { className?: string }) {
       </div>
 
       <div className="grid md:grid-cols-[13rem_minmax(0,1fr)]">
-        <aside className="hidden flex-col gap-1 border-r bg-muted/20 p-3 md:flex">
+        {/* A picture of the app's sidebar, not this page's, so no <aside> landmark. */}
+        <div className="hidden flex-col gap-1 border-r bg-muted/20 p-3 md:flex">
           <div className="mb-2 flex items-center gap-2 rounded-md border bg-background px-2 py-1.5 text-xs font-medium">
             <span className="grid size-5 place-items-center rounded bg-saas-accent text-[10px] font-semibold text-white">A</span>
             Acme Inc.
@@ -106,7 +107,7 @@ export function SaasLandingDashboard({ className }: { className?: string }) {
             </div>
             <p className="mt-2 text-[11px] text-muted-foreground">Resets in 9 days</p>
           </div>
-        </aside>
+        </div>
 
         <div className="min-w-0 space-y-4 p-4 sm:p-5">
           <div className="flex flex-wrap items-center gap-2">
@@ -128,7 +129,7 @@ export function SaasLandingDashboard({ className }: { className?: string }) {
                   <p
                     className={cn(
                       "mt-0.5 inline-flex items-center gap-1 text-[11px] font-medium tabular-nums",
-                      positive ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
+                      positive ? "text-emerald-700 dark:text-emerald-400" : "text-red-600 dark:text-red-400"
                     )}
                   >
                     <Trend className="size-3" />

@@ -259,7 +259,7 @@ export function ItemsBrowser({
           />
           <kbd
             aria-hidden="true"
-            className="pointer-events-none absolute top-1/2 right-2 -translate-y-1/2 rounded border bg-muted px-1.5 font-mono text-[11px] text-muted-foreground peer-focus:hidden max-sm:hidden"
+            className="pointer-events-none absolute top-1/2 right-2 -translate-y-1/2 rounded border bg-background px-1.5 font-mono text-[11px] text-muted-foreground peer-focus:hidden max-sm:hidden"
           >
             /
           </kbd>
@@ -354,7 +354,13 @@ export function ItemsBrowser({
           ))}
         </div>
       ) : results.length > 0 ? (
-        <Grid kind={kind} items={results} />
+        // Cards title themselves with h3, so a flat list needs an h2 above them.
+        <section aria-labelledby="results-heading">
+          <h2 id="results-heading" className="sr-only">
+            {q ? `Results for “${query.trim()}”` : `All ${noun}`}
+          </h2>
+          <Grid kind={kind} items={results} />
+        </section>
       ) : (
         <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed px-6 py-16 text-center">
           <p className="text-sm text-muted-foreground">

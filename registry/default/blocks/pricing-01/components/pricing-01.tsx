@@ -40,7 +40,7 @@ export function Pricing01() {
               )}
             >
               {option === "monthly" ? "Monthly" : "Yearly"}
-              {option === "yearly" ? <span className="ml-1.5 text-xs text-emerald-600 dark:text-emerald-400">Save 20%</span> : null}
+              {option === "yearly" ? <span className="ml-1.5 text-xs text-emerald-700 dark:text-emerald-400">Save 20%</span> : null}
             </button>
           ))}
         </div>

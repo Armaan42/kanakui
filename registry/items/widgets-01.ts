@@ -5,7 +5,7 @@ export default defineItem({
   "type": "registry:block",
   "title": "Widget Grid",
   "description": "A home-screen style grid of widgets: weather, world clocks, music, calendar and reminders.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "releasedAt": "2026-11-16",
   "categories": [
     "content"

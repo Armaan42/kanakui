@@ -27,7 +27,7 @@ export default function SplitFlapDemo() {
   }, [])
 
   return (
-    <div className="w-full max-w-2xl overflow-x-auto rounded-2xl bg-neutral-950 p-4 shadow-xl sm:p-6">
+    <div tabIndex={0} role="region" aria-label="Departures board" className="w-full max-w-2xl overflow-x-auto rounded-2xl bg-neutral-950 p-4 shadow-xl sm:p-6 outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
       <div className="mb-3 flex gap-6 font-mono text-[10px] tracking-[0.2em] text-amber-400/80 uppercase sm:text-xs">
         <span className="w-[9.6em] sm:w-[12em]">Destination</span>
         <span className="w-[5.3em] sm:w-[6.5em]">Time</span>

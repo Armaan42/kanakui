@@ -5,7 +5,7 @@ export default defineItem({
   type: "registry:ui",
   title: "Avatar Stack",
   description: "Overlapping avatars with a +N counter that spread apart on hover.",
-  version: "0.1.0",
+  version: "0.1.1",
   releasedAt: "2026-11-10",
   categories: ["data-display"],
   files: [{ path: "registry/default/ui/avatar-stack.tsx", type: "registry:ui" }],

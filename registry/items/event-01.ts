@@ -5,7 +5,7 @@ export default defineItem({
   "type": "registry:block",
   "title": "Festival Section",
   "description": "A festival section over a photo, with the lineup by day in tabs and a tearable ticket.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "releasedAt": "2026-11-16",
   "categories": [
     "content"

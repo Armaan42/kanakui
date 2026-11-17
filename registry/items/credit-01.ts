@@ -5,7 +5,7 @@ export default defineItem({
   "type": "registry:block",
   "title": "Credit Score Card",
   "description": "A credit health section: the score gauge, the factors behind it, the trend and a tip.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "releasedAt": "2026-11-16",
   "categories": [
     "stats"

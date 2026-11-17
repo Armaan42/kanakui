@@ -10,7 +10,7 @@ export default function DocsLayout({ children }: LayoutProps<"/">) {
 
   return (
     <div className="mx-auto flex w-full max-w-[90rem] flex-1">
-      <aside className="sticky top-14 hidden h-[calc(100svh-3.5rem)] w-64 shrink-0 overflow-y-auto border-r px-3 py-6 lg:block">
+      <aside aria-label="Sidebar" className="sticky top-14 hidden h-[calc(100svh-3.5rem)] w-64 shrink-0 overflow-y-auto border-r px-3 py-6 lg:block">
         <DocsSidebar groups={groups} />
       </aside>
       <div className="min-w-0 flex-1">

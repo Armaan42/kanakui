@@ -118,9 +118,28 @@ function useIsLarge() {
   )
 }
 
+/**
+ * True once `ref` comes within `margin` of the viewport. The globe below is a
+ * WebGL scene far down the page; starting it at load cost the homepage a
+ * noticeable slice of main-thread time before anyone could see it.
+ */
+function useNearViewport(ref: React.RefObject<HTMLElement | null>, margin = "600px") {
+  const [near, setNear] = React.useState(false)
+  React.useEffect(() => {
+    const node = ref.current
+    if (!node || near) return
+    const observer = new IntersectionObserver(([entry]) => entry?.isIntersecting && setNear(true), { rootMargin: margin })
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [ref, margin, near])
+  return near
+}
+
 function GlobeCard() {
+  const ref = React.useRef<HTMLDivElement>(null)
+  const near = useNearViewport(ref)
   return (
-    <div className="relative h-96">
+    <div ref={ref} className="relative h-96">
       <div className="p-6">
         <p className="text-lg font-medium tracking-tight">Real 3D, in a card</p>
         <p className="mt-2 text-sm text-pretty text-muted-foreground">
@@ -128,7 +147,11 @@ function GlobeCard() {
         </p>
       </div>
       <div className="absolute inset-x-0 -bottom-40 flex justify-center">
-        <DottedGlobe dots={1800} speed={0.2} className="w-80 text-blue-600" label="Dotted globe" />
+        {near ? (
+          <DottedGlobe dots={1800} speed={0.2} className="w-80 text-blue-600" label="Dotted globe" />
+        ) : (
+          <div aria-hidden="true" className="aspect-square w-80" />
+        )}
       </div>
     </div>
   )
@@ -219,7 +242,7 @@ export function Collage({ heading }: { heading: React.ReactNode }) {
               <span aria-hidden="true" className="size-2.5 rounded-full bg-foreground/15" />
               <span aria-hidden="true" className="size-2.5 rounded-full bg-foreground/15" />
               <span aria-hidden="true" className="size-2.5 rounded-full bg-foreground/15" />
-              <span className="ml-3 truncate rounded-md bg-foreground/5 px-3 py-1 font-mono text-[11px] text-muted-foreground">
+              <span className="ml-3 truncate rounded-md border bg-background px-3 py-1 font-mono text-[11px] text-muted-foreground">
                 hero-08 · running live
               </span>
             </div>

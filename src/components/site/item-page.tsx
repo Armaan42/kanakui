@@ -252,7 +252,7 @@ export async function ItemPage({ item, kind }: { item: RegistryEntry; kind: Item
           </DocsSection>
         </div>
 
-        <aside className="space-y-8 text-sm lg:sticky lg:top-20 lg:max-h-[calc(100svh-6rem)] lg:self-start lg:overflow-y-auto">
+        <aside aria-label="Details" className="space-y-8 text-sm lg:sticky lg:top-20 lg:max-h-[calc(100svh-6rem)] lg:self-start lg:overflow-y-auto">
           <nav aria-label="On this page" className="hidden space-y-3 lg:block">
             <h2 className="font-medium">On this page</h2>
             <ul className="space-y-1.5">

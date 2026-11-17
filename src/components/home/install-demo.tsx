@@ -86,14 +86,11 @@ export function InstallDemo({ command, steps }: { command: string; steps: Step[]
         {steps.map((step, index) => {
           const done = index < activeStep || (finished && index === activeStep)
           const current = index === activeStep && !finished
+          // Upcoming steps grey their title rather than fading the whole step,
+          // so the description keeps readable contrast while the demo runs.
+          const upcoming = !reduceMotion && started && !finished && index > activeStep
           return (
-            <li
-              key={step.title}
-              className={cn(
-                "flex gap-4 transition-opacity duration-500",
-                !reduceMotion && started && !finished && index > activeStep && "opacity-45"
-              )}
-            >
+            <li key={step.title} className="flex gap-4">
               <span
                 aria-hidden="true"
                 className={cn(
@@ -104,7 +101,7 @@ export function InstallDemo({ command, steps }: { command: string; steps: Step[]
                 {done ? <Check className="size-3.5" /> : index + 1}
               </span>
               <div>
-                <h3 className="font-medium">{step.title}</h3>
+                <h3 className={cn("font-medium transition-colors duration-500", upcoming && "text-muted-foreground")}>{step.title}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">{step.body}</p>
               </div>
             </li>

@@ -88,7 +88,7 @@ export function SaasLandingFeatures() {
                   <span className="truncate text-muted-foreground">{row.step}</span>
                   <div className="h-7 overflow-hidden rounded-md bg-muted">
                     <div
-                      className={cn("flex h-full min-w-11 items-center rounded-md px-2 font-mono text-[11px] text-white", row.drop ? "bg-red-500" : "bg-saas-primary dark:text-neutral-950")}
+                      className={cn("flex h-full min-w-11 items-center rounded-md px-2 font-mono text-[11px] text-white", row.drop ? "bg-red-600" : "bg-saas-primary dark:text-neutral-950")}
                       style={{ width: `${row.rate}%` }}
                     >
                       {row.rate}%
@@ -121,11 +121,13 @@ export function SaasLandingFeatures() {
                     <span className="truncate text-muted-foreground">{cohort.week}</span>
                     {Array.from({ length: 8 }, (_, i) => {
                       const value = cohort.values[i]
+                      const tint = value === undefined ? 0 : Math.round(value * 0.85)
                       return (
                         <span
                           key={i}
-                          className="grid h-6 place-items-center rounded-sm text-foreground/80"
-                          style={value === undefined ? undefined : { backgroundColor: `color-mix(in oklab, var(--saas-accent) ${Math.round(value * 0.85)}%, transparent)` }}
+                          // From 64% the (dark-mode) green is bright enough that only dark text keeps 4.5:1; below it, light text does.
+                          className={cn("grid h-6 place-items-center rounded-sm", tint >= 64 ? "text-neutral-950" : "text-foreground")}
+                          style={value === undefined ? undefined : { backgroundColor: `color-mix(in oklab, var(--saas-accent) ${tint}%, transparent)` }}
                         >
                           {value === undefined ? "" : value === 100 ? "" : value}
                         </span>
@@ -145,14 +147,14 @@ export function SaasLandingFeatures() {
             <div className="overflow-hidden rounded-xl border bg-background text-[11px]">
               {/* Who the recording is from */}
               <div className="flex items-center gap-2.5 border-b px-3 py-2">
-                <span className="grid size-7 shrink-0 place-items-center rounded-full bg-saas-accent/15 text-[10px] font-semibold text-saas-accent">
+                <span className="grid size-7 shrink-0 place-items-center rounded-full bg-saas-accent/15 text-[10px] font-semibold text-foreground">
                   JK
                 </span>
                 <div className="min-w-0">
                   <p className="truncate font-medium">jonas.k@fernway.io</p>
                   <p className="truncate text-[10px] text-muted-foreground">Berlin · Chrome on macOS · 2 days ago</p>
                 </div>
-                <span className="ml-auto shrink-0 rounded-full bg-red-500/10 px-2 py-0.5 text-[10px] font-medium text-red-600 dark:text-red-400">
+                <span className="ml-auto shrink-0 rounded-full bg-red-500/10 px-2 py-0.5 text-[10px] font-medium text-red-700 dark:text-red-400">
                   Rage click
                 </span>
               </div>
@@ -196,7 +198,7 @@ export function SaasLandingFeatures() {
                       <svg viewBox="0 0 14 20" className="absolute top-1/2 left-[85%] h-5 w-3.5 drop-shadow">
                         <path d="M1 1v15.5l4-3.6 2.7 6 2.6-1.1-2.7-5.9H13Z" fill="white" stroke="black" strokeWidth="1.2" strokeLinejoin="round" />
                       </svg>
-                      <span className="absolute top-full left-[85%] mt-3 ml-2 rounded-md bg-red-500 px-1.5 py-0.5 text-[10px] font-medium whitespace-nowrap text-white no-underline shadow">
+                      <span className="absolute top-full left-[85%] mt-3 ml-2 rounded-md bg-red-600 px-1.5 py-0.5 text-[10px] font-medium whitespace-nowrap text-white no-underline shadow">
                         4 clicks in 1.2s
                       </span>
                     </span>

@@ -5,7 +5,7 @@ export default defineItem({
   "type": "registry:ui",
   "title": "Passcode Pad",
   "description": "A lock-screen passcode keypad that shakes on a wrong code and unlocks on the right one.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "releasedAt": "2026-11-16",
   "categories": [
     "inputs",

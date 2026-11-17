@@ -35,10 +35,12 @@ export default async function ViewPage({ params }: PageProps<"/view/[name]">) {
   const isBlock = kind === "blocks" || kind === "templates"
 
   // No heading of our own: blocks bring their own (e.g. the hero's h1), and the
-  // document title already names the preview.
+  // document title already names the preview. Templates are whole pages with
+  // their own <main>, so they get a plain wrapper instead of a second one.
+  const Wrapper = kind === "templates" ? "div" : "main"
   return (
-    <main className="flex flex-1 flex-col">
+    <Wrapper className="flex flex-1 flex-col">
       <ComponentPreview name={item.name} eager fill={isBlock} className={isBlock ? "min-h-svh" : "min-h-svh flex-1"} />
-    </main>
+    </Wrapper>
   )
 }

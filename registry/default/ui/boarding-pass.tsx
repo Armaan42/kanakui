@@ -73,7 +73,7 @@ function codeCells(text: string) {
 function Field({ label, value, className }: { label: string; value: string; className?: string }) {
   return (
     <div className={className}>
-      <dt className="text-[10px] tracking-widest text-neutral-500 uppercase">{label}</dt>
+      <dt className="text-[10px] tracking-widest text-neutral-600 uppercase">{label}</dt>
       <dd className="font-semibold">{value}</dd>
     </div>
   )
@@ -137,7 +137,7 @@ function BoardingPass({
           <span className="flex items-center justify-between px-6 pt-6">
             <span>
               <span className="block text-4xl font-semibold tracking-tight">{from.code}</span>
-              <span className="block text-xs text-neutral-500">{from.city}</span>
+              <span className="block text-xs text-neutral-600">{from.city}</span>
               <span className="mt-1 block font-mono text-sm">{departs}</span>
             </span>
             <span aria-hidden="true" className="relative mx-3 flex-1 border-t-2 border-dashed border-neutral-300">
@@ -145,7 +145,7 @@ function BoardingPass({
             </span>
             <span className="text-right">
               <span className="block text-4xl font-semibold tracking-tight">{to.code}</span>
-              <span className="block text-xs text-neutral-500">{to.city}</span>
+              <span className="block text-xs text-neutral-600">{to.city}</span>
               <span className="mt-1 block font-mono text-sm">{arrives}</span>
             </span>
           </span>
@@ -163,7 +163,7 @@ function BoardingPass({
 
           <span className="absolute inset-x-0 top-[75%] bottom-0 flex items-center justify-between gap-4 px-6">
             <span className="text-sm">
-              <span className="block text-[10px] tracking-widest text-neutral-500 uppercase">{cabin}</span>
+              <span className="block text-[10px] tracking-widest text-neutral-600 uppercase">{cabin}</span>
               <span className="block font-mono font-semibold tracking-wider">{reference}</span>
             </span>
             <span aria-hidden="true" className="grid aspect-square h-[62%] grid-cols-[repeat(21,1fr)]">
@@ -177,18 +177,18 @@ function BoardingPass({
         {/* Back */}
         <span className={cn(face, "flex flex-col bg-neutral-50 p-6 text-neutral-900 [transform:rotateY(180deg)] dark:bg-neutral-100")}>
           <span className="text-sm font-semibold">Fare &amp; baggage</span>
-          <span className="text-xs text-neutral-500">
+          <span className="text-xs text-neutral-600">
             {airline} · {flight} · {cabin}
           </span>
           <dl className="mt-5 divide-y divide-neutral-200 text-sm">
             {details.map((row) => (
               <div key={row.label} className="flex justify-between gap-4 py-2.5">
-                <dt className="text-neutral-500">{row.label}</dt>
+                <dt className="text-neutral-600">{row.label}</dt>
                 <dd className="text-right font-medium">{row.value}</dd>
               </div>
             ))}
           </dl>
-          <span className="mt-auto text-[11px] leading-relaxed text-neutral-500">
+          <span className="mt-auto text-[11px] leading-relaxed text-neutral-600">
             Gate closes 20 minutes before departure. Have your passport ready at the gate.
           </span>
         </span>

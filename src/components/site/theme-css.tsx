@@ -15,7 +15,7 @@ export function ThemeCss() {
         <p className="font-mono text-xs text-muted-foreground">globals.css</p>
         <CopyButton value={css} label="Copy theme CSS for globals.css" />
       </div>
-      <pre className="max-h-96 overflow-auto p-4 font-mono text-[12px] leading-5">
+      <pre tabIndex={0} className="max-h-96 overflow-auto p-4 font-mono text-[12px] leading-5 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:ring-inset">
         <code>{css}</code>
       </pre>
     </div>

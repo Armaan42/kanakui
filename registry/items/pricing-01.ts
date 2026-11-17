@@ -6,7 +6,7 @@ export default defineItem({
   featured: true,
   title: "Pricing Tiers",
   description: "Three pricing plans with a monthly and yearly switch and a highlighted plan.",
-  version: "0.1.0",
+  version: "0.1.1",
   releasedAt: "2026-11-10",
   categories: [
     "pricing"

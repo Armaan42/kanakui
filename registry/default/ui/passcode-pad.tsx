@@ -148,7 +148,7 @@ function KeyButton({ onPress, label, letters, disabled }: { onPress: () => void;
       className="flex size-[4.5rem] flex-col items-center justify-center rounded-full bg-muted/70 text-foreground transition-colors outline-none hover:bg-muted active:bg-foreground/15 focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-40"
     >
       <span className="text-[1.7rem] leading-none font-light">{label}</span>
-      {letters ? <span className="mt-0.5 text-[9px] font-semibold tracking-[0.2em] text-muted-foreground">{letters}</span> : null}
+      {letters ? <span className="mt-0.5 text-[9px] font-semibold tracking-[0.2em] text-foreground/65">{letters}</span> : null}
     </button>
   )
 }
