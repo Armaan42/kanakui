@@ -21,7 +21,7 @@ export default defineItem({
       },
     ],
     extends: "Only the prop above.",
-    requirements: ["shadcn `button` and kanakui `floating-label-input`. The CLI installs both.", "`lucide-react`, React 19 and Tailwind CSS v4."],
+    requirements: ["shadcn `button` and VenusUI `floating-label-input`. The CLI installs both.", "`lucide-react`, React 19 and Tailwind CSS v4."],
     customization: [
       "Connect it: `<Contact01 onSubmit={sendMessage} />`, where `sendMessage` is a Server Action that emails you or stores the message.",
       "Validate again on the server; the browser’s `required` and `type=\"email\"` checks are only a convenience.",

@@ -13,7 +13,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Edit the content directly in the file.",
-    requirements: ["kanakui `timeline` (the CLI installs it). Works in Server Components."],
+    requirements: ["VenusUI `timeline` (the CLI installs it). Works in Server Components."],
     customization: ["The releases are placeholders. Mark the newest one with `current`."],
     accessibility: ["An ordered list with `<time>` dates; the current release is announced."],
     troubleshooting: [{"problem":"Something looks different from the preview.","solution":"Blocks use your project’s theme and your own shadcn components, so they follow your styles."}],

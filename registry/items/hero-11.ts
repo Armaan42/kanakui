@@ -14,7 +14,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Edit the content directly in the file.",
-    requirements: ["shadcn `button`, kanakui `particle-galaxy` (three.js) and `blur-text`. The CLI installs them.","It renders inside a `.dark` wrapper so it stays dark in both themes; this relies on shadcn’s class-based dark mode (the default).","A browser with WebGL for the galaxy; the text works without it."],
+    requirements: ["shadcn `button`, VenusUI `particle-galaxy` (three.js) and `blur-text`. The CLI installs them.","It renders inside a `.dark` wrapper so it stays dark in both themes; this relies on shadcn’s class-based dark mode (the default).","A browser with WebGL for the galaxy; the text works without it."],
     customization: ["A dark wash behind the text keeps it readable; adjust it in the file."],
     accessibility: ["One `h1`. The galaxy is a labelled image that pauses off screen and with reduced motion."],
     troubleshooting: [{"problem":"Something looks different from the preview.","solution":"Blocks use your project’s theme and your own shadcn components, so they follow your styles."}],

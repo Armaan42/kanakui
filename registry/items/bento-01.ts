@@ -14,7 +14,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Tiles are written out in the file so each can have its own layout.",
-    requirements: ["kanakui `number-ticker`, `marquee` and `border-beam`. The CLI installs them with their CSS.", "React 19 and Tailwind CSS v4."],
+    requirements: ["VenusUI `number-ticker`, `marquee` and `border-beam`. The CLI installs them with their CSS.", "React 19 and Tailwind CSS v4."],
     customization: [
       "The counter value and integration names are placeholders. Show only real numbers and integrations you actually support.",
       "Tile widths come from `md:col-span-*` on a 6-column grid.",

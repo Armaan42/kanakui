@@ -15,7 +15,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Edit the headline, text and buttons in the file.",
-    requirements: ["shadcn `button` and kanakui `grid-pattern`. The CLI installs both.", "`lucide-react`, React 19 and Tailwind CSS v4."],
+    requirements: ["shadcn `button` and VenusUI `grid-pattern`. The CLI installs both.", "`lucide-react`, React 19 and Tailwind CSS v4."],
     customization: [
       "Wrap the buttons in links (or use your router’s `Link`) to point them at sign-up and sales pages.",
       "Move or remove the highlighted grid cells with the `highlight` prop.",

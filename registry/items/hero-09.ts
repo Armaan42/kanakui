@@ -16,7 +16,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Edit the content directly in the file.",
-    requirements: ["shadcn `button`, kanakui `lamp` and `blur-text`. The CLI installs them with their CSS. Works in Server Components.","It renders inside a `.dark` wrapper so it stays dark in both themes; this relies on shadcn’s class-based dark mode (the default)."],
+    requirements: ["shadcn `button`, VenusUI `lamp` and `blur-text`. The CLI installs them with their CSS. Works in Server Components.","It renders inside a `.dark` wrapper so it stays dark in both themes; this relies on shadcn’s class-based dark mode (the default)."],
     customization: ["Change the light with `Lamp`’s `color`."],
     accessibility: ["One `h1`, real text. The light is decorative and the animations respect reduced motion."],
     troubleshooting: [{"problem":"Something looks different from the preview.","solution":"Blocks use your project’s theme and your own shadcn components, so they follow your styles."}],

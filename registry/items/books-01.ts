@@ -29,7 +29,7 @@ export default defineItem({
     "props": [],
     "extends": "No props. The books are an array at the top of the file.",
     "requirements": [
-      "shadcn `button` and kanakui `bookshelf`. The CLI installs them.",
+      "shadcn `button` and VenusUI `bookshelf`. The CLI installs them.",
       "React 19 and Tailwind CSS v4."
     ],
     "customization": [

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 
 export const metadata: Metadata = {
   title: "Page not found",
-  description: "This page doesn’t exist. It may have been renamed or removed. Browse kanakui components, blocks and templates instead.",
+  description: "This page doesn’t exist. It may have been renamed or removed. Browse VenusUI components, blocks and templates instead.",
 }
 
 // Root not-found renders inside the root layout only (not the (site) layout),

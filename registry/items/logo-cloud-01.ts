@@ -13,7 +13,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Logos are in the `logos` array at the top of the file.",
-    requirements: ["kanakui `marquee` (the CLI installs it with its CSS), React 19 and Tailwind CSS v4."],
+    requirements: ["VenusUI `marquee` (the CLI installs it with its CSS), React 19 and Tailwind CSS v4."],
     customization: [
       "The names are placeholders. Replace them with logos of customers who agreed to be listed, e.g. `<img src=\"/logos/x.svg\" alt=\"X\" className=\"h-6 w-auto\" />`.",
       "Use monochrome logos and lower their opacity so no single brand dominates.",

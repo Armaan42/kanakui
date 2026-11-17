@@ -14,7 +14,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Edit the content directly in the file.",
-    requirements: ["kanakui `orbiting-circles` (the CLI installs it and its CSS), `lucide-react`, Tailwind CSS v4."],
+    requirements: ["VenusUI `orbiting-circles` (the CLI installs it and its CSS), `lucide-react`, Tailwind CSS v4."],
     customization: ["The icons are placeholders. List only integrations you actually support.","Change the ring sizes with `radius` on each `OrbitingCircles`."],
     accessibility: ["Each icon has a visually hidden name. Items rest on the orbit with reduced motion."],
     troubleshooting: [{"problem":"Something looks different from the preview.","solution":"Blocks use your project’s theme and your own shadcn components, so they follow your styles."}],

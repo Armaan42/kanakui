@@ -14,7 +14,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Edit the content directly in the file.",
-    requirements: ["shadcn `button` and kanakui `beam-rain`. The CLI installs them with their CSS.","It renders inside a `.dark` wrapper so it stays dark in both themes; this relies on shadcn’s class-based dark mode (the default)."],
+    requirements: ["shadcn `button` and VenusUI `beam-rain`. The CLI installs them with their CSS.","It renders inside a `.dark` wrapper so it stays dark in both themes; this relies on shadcn’s class-based dark mode (the default)."],
     customization: ["Change the beam colors with `BeamRain`’s `colors`."],
     accessibility: ["The beams are decorative and absent with reduced motion."],
     troubleshooting: [{"problem":"Something looks different from the preview.","solution":"Blocks use your project’s theme and your own shadcn components, so they follow your styles."}],

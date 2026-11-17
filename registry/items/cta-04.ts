@@ -14,7 +14,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Edit the content directly in the file.",
-    requirements: ["shadcn `button`, kanakui `aurora-background` and `sparkles`. The CLI installs them with their CSS."],
+    requirements: ["shadcn `button`, VenusUI `aurora-background` and `sparkles`. The CLI installs them with their CSS."],
     customization: ["Pass brand `colors` to `AuroraBackground` at a low `intensity`."],
     accessibility: ["Sparkles and aurora are decorative; both stop with reduced motion."],
     troubleshooting: [{"problem":"Something looks different from the preview.","solution":"Blocks use your project’s theme and your own shadcn components, so they follow your styles."}],

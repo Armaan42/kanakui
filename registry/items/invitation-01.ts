@@ -31,7 +31,7 @@ export default defineItem({
     "props": [],
     "extends": "No props. Edit the schedule and copy in the file.",
     "requirements": [
-      "shadcn `button` and `input`, and kanakui `envelope`. The CLI installs them.",
+      "shadcn `button` and `input`, and VenusUI `envelope`. The CLI installs them.",
       "React 19 and Tailwind CSS v4."
     ],
     "customization": [

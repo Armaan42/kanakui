@@ -16,7 +16,7 @@ export default defineItem({
     props: [],
     extends: "No props. Edit the badge, headline words and actions in the file.",
     requirements: [
-      "shadcn `button`, kanakui `meteors` and `rotating-words`. The CLI installs them with their CSS.",
+      "shadcn `button`, VenusUI `meteors` and `rotating-words`. The CLI installs them with their CSS.",
       "`lucide-react`, React 19 and Tailwind CSS v4.",
     ],
     customization: [

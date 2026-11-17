@@ -15,7 +15,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Edit the icon, headline, text and button in the file.",
-    requirements: ["shadcn `button` and kanakui `ripple-background`. The CLI installs both.", "`lucide-react`, React 19 and Tailwind CSS v4."],
+    requirements: ["shadcn `button` and VenusUI `ripple-background`. The CLI installs both.", "`lucide-react`, React 19 and Tailwind CSS v4."],
     customization: ["Swap the rocket for any Lucide icon that fits your product.", "Fewer `rings` make the background quieter."],
     accessibility: ["The headline is an `h2`; rings and icon are decorative.", "Rings stay still with reduced motion."],
     troubleshooting: [{ problem: "Rings are cut off unevenly.", solution: "The section has `overflow-hidden` and centers the rings; keep both." }],

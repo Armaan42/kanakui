@@ -14,7 +14,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Edit the headline, text and button label in the file.",
-    requirements: ["kanakui `retro-grid`, `gradient-text` and `slide-arrow-button`. The CLI installs them with their CSS.", "React 19 and Tailwind CSS v4."],
+    requirements: ["VenusUI `retro-grid`, `gradient-text` and `slide-arrow-button`. The CLI installs them with their CSS.", "React 19 and Tailwind CSS v4."],
     customization: [
       "Keep the gradient headline short. Two or three words read best.",
       "Point the button at your sign-up: wrap it in a link or add an `onClick`.",

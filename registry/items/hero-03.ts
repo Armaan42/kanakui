@@ -16,7 +16,7 @@ export default defineItem({
     props: [],
     extends: "No props. Edit the headline, the `words` list and the actions in the file.",
     requirements: [
-      "shadcn `button` and kanakui `typewriter` and `dot-pattern`. The CLI installs them, including the typewriter’s CSS.",
+      "shadcn `button` and VenusUI `typewriter` and `dot-pattern`. The CLI installs them, including the typewriter’s CSS.",
       "`lucide-react`, React 19 and Tailwind CSS v4.",
     ],
     customization: [

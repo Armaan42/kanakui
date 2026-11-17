@@ -14,13 +14,13 @@ export const docsPages: DocsPageMeta[] = [
   {
     title: "Introduction",
     href: "/docs",
-    description: "What kanakui is, how installing a component works, and what you get.",
+    description: "What VenusUI is, how installing a component works, and what you get.",
   },
   {
     title: "Installation",
     navTitle: "Installation guide",
     href: "/docs/installation",
-    description: "Set up a project for kanakui components and install your first one.",
+    description: "Set up a project for VenusUI components and install your first one.",
   },
   {
     title: "Install Next.js",
@@ -52,7 +52,7 @@ export const docsPages: DocsPageMeta[] = [
     title: "Use with AI assistants",
     navTitle: "AI assistants (MCP)",
     href: "/docs/mcp",
-    description: "Let Claude Code, Cursor, VS Code, Codex or OpenCode search and install kanakui components through the shadcn MCP server.",
+    description: "Let Claude Code, Cursor, VS Code, Codex or OpenCode search and install VenusUI components through the shadcn MCP server.",
   },
   {
     title: "Troubleshooting",
@@ -62,7 +62,7 @@ export const docsPages: DocsPageMeta[] = [
   {
     title: "Changelog",
     href: "/docs/changelog",
-    description: "Every component, block and template added to kanakui, newest first.",
+    description: "Every component, block and template added to VenusUI, newest first.",
   },
 ]
 

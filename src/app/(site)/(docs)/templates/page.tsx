@@ -4,7 +4,7 @@ import { ItemsIndex } from "@/components/site/items-index"
 
 export const metadata: Metadata = {
   title: "Templates",
-  description: "Complete landing pages built from kanakui blocks, installed with one shadcn CLI command.",
+  description: "Complete landing pages built from VenusUI blocks, installed with one shadcn CLI command.",
 }
 
 export default function TemplatesPage() {

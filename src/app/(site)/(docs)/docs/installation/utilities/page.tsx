@@ -31,13 +31,13 @@ export default async function UtilitiesPage() {
             <p>It asks a few questions and then:</p>
             <ul className="list-disc space-y-1 pl-5">
               <li><InlineText text="creates `components.json`, which tells the CLI where to put files (your aliases);" /></li>
-              <li><InlineText text="adds theme variables such as `--background`, `--card` and `--muted-foreground` to your global CSS. kanakui components use these, so they match your theme;" /></li>
+              <li><InlineText text="adds theme variables such as `--background`, `--card` and `--muted-foreground` to your global CSS. VenusUI components use these, so they match your theme;" /></li>
               <li><InlineText text="adds a `cn` helper at `@/lib/utils` that merges class names." /></li>
             </ul>
           </Step>
           <Step number={2} title="Pick Radix or Base UI">
             <p>
-              <InlineText text="Both work. kanakui is tested against fresh apps with each. Blocks that need a shadcn primitive, such as `button`, get the version that matches your choice." />
+              <InlineText text="Both work. VenusUI is tested against fresh apps with each. Blocks that need a shadcn primitive, such as `button`, get the version that matches your choice." />
             </p>
           </Step>
         </ol>

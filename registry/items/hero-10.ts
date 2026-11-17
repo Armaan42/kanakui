@@ -15,7 +15,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Edit the content directly in the file.",
-    requirements: ["shadcn `button`, kanakui `arc-globe` (three.js) and `glow-border-button`. The CLI installs them.","It renders inside a `.dark` wrapper so it stays dark in both themes; this relies on shadcn’s class-based dark mode (the default).","A browser with WebGL for the globe."],
+    requirements: ["shadcn `button`, VenusUI `arc-globe` (three.js) and `glow-border-button`. The CLI installs them.","It renders inside a `.dark` wrapper so it stays dark in both themes; this relies on shadcn’s class-based dark mode (the default).","A browser with WebGL for the globe."],
     customization: ["The stats are placeholders. Show only figures you can back up.","Pass your own `routes` to the globe."],
     accessibility: ["The globe can be focused and turned with the arrow keys. Stats are a description list."],
     troubleshooting: [{"problem":"Something looks different from the preview.","solution":"Blocks use your project’s theme and your own shadcn components, so they follow your styles."}],

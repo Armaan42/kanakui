@@ -30,7 +30,7 @@ export default defineItem({
     props: [],
     extends: "No props. The text, links and layout are in the file. It's your code, so edit it directly.",
     requirements: [
-      "shadcn `button` and kanakui `shimmer-button`. The CLI installs both.",
+      "shadcn `button` and VenusUI `shimmer-button`. The CLI installs both.",
       "React 19 and Tailwind CSS v4, with a `cn` helper at `@/lib/utils`."
     ],
     customization: [

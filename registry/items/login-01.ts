@@ -14,7 +14,7 @@ export default defineItem({
   pageDocs: {
     props: [{"name":"onSubmit","type":"(credentials: { email: string; password: string }) => Promise<void> | void","description":"Signs the user in. Throw an Error with a message to show it. Without it, submitting says the form isn’t connected."}],
     extends: "Only the prop above.",
-    requirements: ["shadcn `button` and kanakui `password-input`. The CLI installs both."],
+    requirements: ["shadcn `button` and VenusUI `password-input`. The CLI installs both."],
     customization: ["Connect it to Supabase, Auth.js or your own API in `onSubmit`, and redirect on success.","Never log or store passwords yourself; let your auth provider handle them."],
     accessibility: ["Labelled fields with correct `autocomplete` values; errors are announced through a status region."],
     troubleshooting: [{"problem":"Submitting says the form isn’t connected.","solution":"Pass an `onSubmit` handler. The block never pretends to sign anyone in."}],

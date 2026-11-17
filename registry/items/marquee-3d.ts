@@ -18,7 +18,7 @@ export default defineItem({
       { name: "className", type: "string", description: "Classes for the wall, e.g. a height." },
     ],
     extends: "Only the props above.",
-    requirements: ["kanakui `marquee` (the CLI installs it and its CSS). Works in Server Components."],
+    requirements: ["VenusUI `marquee` (the CLI installs it and its CSS). Works in Server Components."],
     customization: ["Use screenshots of your product as tiles for a showcase wall.", "Change the tilt in the `rotateX`/`rotateZ` transform in the file."],
     accessibility: [
       "Each tile is read once: repeated copies are hidden from screen readers.",

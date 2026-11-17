@@ -16,7 +16,7 @@ export default defineItem({
     props: [],
     extends: "No props. Tiles are written out in the file so each can have its own layout.",
     requirements: [
-      "kanakui `border-beam` (the CLI installs it with its CSS), `lucide-react`, React 19 and Tailwind CSS v4.",
+      "VenusUI `border-beam` (the CLI installs it with its CSS), `lucide-react`, React 19 and Tailwind CSS v4.",
     ],
     customization: [
       "Tile sizes come from `md:col-span-*` and `md:row-span-*`. Change them to rearrange the bento.",

@@ -15,7 +15,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. The included list, price and terms are in the file.",
-    requirements: ["shadcn `button` and kanakui `border-beam`. The CLI installs both.", "`lucide-react`, React 19 and Tailwind CSS v4."],
+    requirements: ["shadcn `button` and VenusUI `border-beam`. The CLI installs both.", "`lucide-react`, React 19 and Tailwind CSS v4."],
     customization: [
       "The price, list and refund terms are placeholders. Make them match your real offer exactly.",
       "Remove `<BorderBeam />` for a calmer card.",

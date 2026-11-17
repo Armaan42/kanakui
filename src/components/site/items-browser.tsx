@@ -64,7 +64,7 @@ const triggerClass = "bg-background dark:bg-background dark:hover:bg-muted"
 
 // The chosen view is remembered across pages and visits. useSyncExternalStore
 // keeps the server render ("grouped") and the stored choice consistent.
-const VIEW_KEY = "kanakui-items-view"
+const VIEW_KEY = "venusui-items-view"
 const viewListeners = new Set<() => void>()
 
 function readView(): View {
@@ -365,7 +365,7 @@ export function ItemsBrowser({
         <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed px-6 py-16 text-center">
           <p className="text-sm text-muted-foreground">
             {price === "pro" && !q
-              ? `No Pro ${noun} yet. Every kanakui ${KIND_SINGULAR[kind]} is free for now.`
+              ? `No Pro ${noun} yet. Every VenusUI ${KIND_SINGULAR[kind]} is free for now.`
               : `No ${noun} match “${query.trim()}”.`}
           </p>
           {filtered ? (

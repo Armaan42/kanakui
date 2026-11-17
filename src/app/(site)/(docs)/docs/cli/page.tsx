@@ -36,7 +36,7 @@ export default async function CliPage() {
         <p className={p}>Works in any project set up with shadcn, with no other configuration.</p>
         <CommandBlock command={installCommandByUrl("marquee")} />
         <p className={p}>
-          <InlineText text="You can pass several URLs at once. Components that depend on other kanakui items install those automatically." />
+          <InlineText text="You can pass several URLs at once. Components that depend on other VenusUI items install those automatically." />
         </p>
       </DocsSection>
 

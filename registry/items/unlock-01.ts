@@ -26,7 +26,7 @@ export default defineItem({
     "props": [],
     "extends": "No props. The demo passcode is 2580; replace `onSubmit` with a call to your server.",
     "requirements": [
-      "kanakui `passcode-pad`. The CLI installs it.",
+      "VenusUI `passcode-pad`. The CLI installs it.",
       "React 19 and Tailwind CSS v4."
     ],
     "customization": [
