@@ -89,7 +89,7 @@ export function HomeTemplates() {
             ) : null}
 
             <div className="mt-auto space-y-3 pt-6">
-              <CommandBlock command={installCommandByUrl(featured.name)} copyLabel={`Copy install command for ${featured.title}`} />
+              <CommandBlock packageManagers={false} command={installCommandByUrl(featured.name)} copyLabel={`Copy install command for ${featured.title}`} />
               <div className="flex flex-wrap gap-2">
                 <Button asChild>
                   <Link href={featured.href}>View details</Link>

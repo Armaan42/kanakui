@@ -59,7 +59,7 @@ export async function InstallTabs({ name, npmDependencies, shadcnDependencies = 
       ? [
           {
             title: "Install the npm packages.",
-            children: <CommandBlock command={`npm install ${npmDependencies.join(" ")}`} copyLabel="Copy npm install command" />,
+            children: <CommandBlock command={`npm install ${npmDependencies.join(" ")}`} copyLabel="Copy package install command" />,
           },
         ]
       : []),

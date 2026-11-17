@@ -377,7 +377,7 @@ function PlaygroundPanel({
         </div>
         <div className="min-w-0 space-y-2">
           <p className="text-sm text-muted-foreground">Install it first:</p>
-          <CommandBlock command={command} copyLabel={`Copy install command for ${item.title}`} />
+          <CommandBlock packageManagers={false} command={command} copyLabel={`Copy install command for ${item.title}`} />
         </div>
       </div>
     </div>

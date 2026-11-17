@@ -49,9 +49,20 @@ export const docsPages: DocsPageMeta[] = [
     description: "Install, preview, search and update components with the shadcn CLI.",
   },
   {
+    title: "Use with AI assistants",
+    navTitle: "AI assistants (MCP)",
+    href: "/docs/mcp",
+    description: "Let Claude Code, Cursor, VS Code, Codex or OpenCode search and install kanakui components through the shadcn MCP server.",
+  },
+  {
     title: "Troubleshooting",
     href: "/docs/troubleshooting",
     description: "Fixes for the errors people run into most often.",
+  },
+  {
+    title: "Changelog",
+    href: "/docs/changelog",
+    description: "Every component, block and template added to kanakui, newest first.",
   },
 ]
 

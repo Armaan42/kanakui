@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { Collage } from "@/components/home/collage"
 import { CommandBlock } from "@/components/site/command-block"
 import { registrySetupCommand } from "@/config/site"
@@ -26,15 +28,18 @@ export function HomeAgents() {
       <ol className="mt-7 space-y-3">
         <li className="space-y-1.5">
           <p className="font-mono text-[11px] tracking-widest text-muted-foreground uppercase">1 · Add the registry</p>
-          <CommandBlock command={registrySetupCommand()} copyLabel="Copy registry setup command" className="border-foreground/10 bg-background/60" />
+          <CommandBlock packageManagers={false} command={registrySetupCommand()} copyLabel="Copy registry setup command" className="border-foreground/10 bg-background/60" />
         </li>
         <li className="space-y-1.5">
           <p className="font-mono text-[11px] tracking-widest text-muted-foreground uppercase">2 · Connect your agent</p>
-          <CommandBlock command={MCP_INIT} copyLabel="Copy MCP setup command" className="border-foreground/10 bg-background/60" />
+          <CommandBlock packageManagers={false} command={MCP_INIT} copyLabel="Copy MCP setup command" className="border-foreground/10 bg-background/60" />
           <p className="text-xs text-muted-foreground">
             Using another agent? Swap <code className="font-mono">claude</code> for <code className="font-mono">cursor</code>,{" "}
             <code className="font-mono">vscode</code>, <code className="font-mono">codex</code> or{" "}
-            <code className="font-mono">opencode</code>.
+            <code className="font-mono">opencode</code>.{" "}
+            <Link href="/docs/mcp" className="text-foreground underline underline-offset-4">
+              Full setup guide
+            </Link>
           </p>
         </li>
       </ol>
