@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     ...KINDS.map((kind) => `/${kind}`),
     "/themes",
+    "/privacy",
     ...docsPages.map((page) => page.href),
     ...KINDS.flatMap((kind) =>
       kind === "templates" ? [] : getCategories(kind).map((category) => `/${kind}/category/${category.slug}`)

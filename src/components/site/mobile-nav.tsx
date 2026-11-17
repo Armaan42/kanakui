@@ -6,8 +6,10 @@ import { usePathname } from "next/navigation"
 import { ArrowUpRight, Menu, X } from "lucide-react"
 import { Dialog as DialogPrimitive } from "radix-ui"
 
+import { UserAvatar } from "@/components/site/account/user-avatar"
 import { GitHubIcon, LogoMark } from "@/components/site/icons"
 import { Button } from "@/components/ui/button"
+import { signOut, useSession } from "@/hooks/use-session"
 import { cn } from "@/lib/utils"
 
 export interface MobileNavLink {
@@ -32,6 +34,48 @@ interface MobileNavProps {
  * main section, the setup guides and GitHub. It's a modal dialog, so focus is
  * trapped inside and Escape closes it; following a link closes it too.
  */
+/** Sign in, or who's signed in with links to the account; hidden when accounts are off. */
+function MobileAccount({ onNavigate }: { onNavigate: () => void }) {
+  const session = useSession()
+  if (session.status === "disabled" || session.status === "loading") return null
+  if (session.status === "signed-out") {
+    return (
+      <Button asChild variant="outline" className="mt-6 w-full">
+        <Link href="/sign-in" onClick={onNavigate}>
+          Sign in
+        </Link>
+      </Button>
+    )
+  }
+  const { user } = session
+  return (
+    <div className="mt-6 flex items-center gap-3 rounded-xl border p-3">
+      <UserAvatar user={user} />
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-sm font-medium">{user.name ?? user.email}</p>
+        <div className="mt-0.5 flex gap-3 text-sm text-muted-foreground">
+          <Link href="/account" onClick={onNavigate} className="hover:text-foreground">
+            Account
+          </Link>
+          <Link href="/account#favorites" onClick={onNavigate} className="hover:text-foreground">
+            Favourites
+          </Link>
+          <button
+            type="button"
+            className="hover:text-foreground"
+            onClick={async () => {
+              onNavigate()
+              await signOut()
+            }}
+          >
+            Sign out
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function MobileNav({ siteName, github, primary, guides, className }: MobileNavProps) {
   const [open, setOpen] = React.useState(false)
   const pathname = usePathname()
@@ -85,6 +129,8 @@ export function MobileNav({ siteName, github, primary, guides, className }: Mobi
                 </li>
               ))}
             </ul>
+
+            <MobileAccount onNavigate={close} />
 
             <p className="mt-8 font-mono text-xs tracking-widest text-muted-foreground uppercase">Get started</p>
             <ul className="mt-3 grid gap-1">

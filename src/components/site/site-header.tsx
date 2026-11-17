@@ -1,5 +1,6 @@
 import Link from "next/link"
 
+import { UserMenu } from "@/components/site/account/user-menu"
 import { CommandMenu, type SearchGroup } from "@/components/site/command-menu"
 import { GitHubIcon, LogoMark } from "@/components/site/icons"
 import { MainNav } from "@/components/site/main-nav"
@@ -79,6 +80,8 @@ export function SiteHeader() {
           {/* Below 360px there isn't room; Themes is in the menu panel. */}
           <ThemeMenu className="max-[359px]:hidden" />
           <ThemeToggle />
+          {/* On phones, signing in lives in the menu panel. */}
+          <UserMenu className="ml-1 max-sm:hidden" />
           <Button asChild size="sm" className="ml-2 max-xl:hidden">
             <Link href="/docs/installation">Get started</Link>
           </Button>

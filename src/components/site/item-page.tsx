@@ -3,6 +3,7 @@ import { ChevronRight } from "lucide-react"
 
 import { componentDocs } from "@/registry/docs"
 import type { RegistryEntry } from "@/registry/types"
+import { FavoriteButton } from "@/components/site/account/favorite-button"
 import { BlockGrid } from "@/components/site/block-card"
 import { CodeViewer } from "@/components/site/code-viewer"
 import { ComponentGrid } from "@/components/site/component-card"
@@ -124,7 +125,10 @@ export async function ItemPage({ item, kind }: { item: RegistryEntry; kind: Item
         </nav>
 
         <div className="space-y-3">
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{item.title}</h1>
+          <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
+            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{item.title}</h1>
+            <FavoriteButton name={item.name} title={item.title} className="sm:mt-1.5" />
+          </div>
           <p className="max-w-2xl text-base text-muted-foreground sm:text-lg">{item.description}</p>
           <div className="flex flex-wrap items-center gap-2">
             <Badge variant="secondary">Free</Badge>

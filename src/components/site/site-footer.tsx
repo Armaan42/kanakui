@@ -60,6 +60,7 @@ export function SiteFooter() {
         { title: "GitHub", href: github, external: true },
         { title: "Report an issue", href: `${github}/issues`, external: true },
         { title: `${siteConfig.license.name} License`, href: siteConfig.license.url, external: true },
+        { title: "Privacy Policy", href: "/privacy" },
       ],
     },
   ]
