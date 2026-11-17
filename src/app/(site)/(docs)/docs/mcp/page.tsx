@@ -65,7 +65,7 @@ export default async function McpPage() {
         <p className={p}>
           <InlineText text="Swap `claude` for your assistant. Each one stores the setup in a different place:" />
         </p>
-        <div className="overflow-x-auto rounded-lg border">
+        <div tabIndex={0} role="region" aria-label="Assistants and where their setup goes" className="overflow-x-auto rounded-lg border outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
           <table className="w-full min-w-xl text-left text-sm">
             <thead className="border-b bg-muted/40 text-xs text-muted-foreground">
               <tr>

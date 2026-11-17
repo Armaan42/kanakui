@@ -8,7 +8,7 @@ export default defineItem({
   title: "SaaS Landing",
   description:
     "A complete marketing site for a product analytics startup, with real photos, a product dashboard, feature mockups, a customer story, pricing, FAQ and footer.",
-  version: "0.2.0",
+  version: "0.2.1",
   releasedAt: "2026-11-12",
   categories: ["templates"],
   registryDependencies: ["button", "input"],

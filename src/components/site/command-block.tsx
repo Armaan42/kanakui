@@ -1,5 +1,7 @@
 "use client"
 
+import * as React from "react"
+
 import { CopyButton } from "@/components/site/copy-button"
 import { usePackageManager } from "@/hooks/use-package-manager"
 import { convertCommand, PACKAGE_MANAGERS } from "@/lib/package-manager"
@@ -25,8 +27,26 @@ export function CommandBlock({ command, copyLabel = "Copy command", packageManag
   const shown = converted ?? command
   const tabs = packageManagers && converted !== null
 
+  // A command wider than its box scrolls sideways; it then takes keyboard focus
+  // so arrow keys can scroll it. Short commands stay out of the tab order.
+  const preRef = React.useRef<HTMLPreElement>(null)
+  const [overflows, setOverflows] = React.useState(false)
+  React.useEffect(() => {
+    const pre = preRef.current
+    if (!pre) return
+    const check = () => setOverflows(pre.scrollWidth > pre.clientWidth + 1)
+    check()
+    const observer = new ResizeObserver(check)
+    observer.observe(pre)
+    return () => observer.disconnect()
+  }, [shown])
+
   const line = (
-    <pre className="min-w-0 flex-1 overflow-x-auto px-4 py-3 font-mono text-[13px] leading-6">
+    <pre
+      ref={preRef}
+      tabIndex={overflows ? 0 : undefined}
+      className="min-w-0 flex-1 overflow-x-auto rounded-lg px-4 py-3 font-mono text-[13px] leading-6 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:ring-inset"
+    >
       <code>
         <span aria-hidden="true" className="text-muted-foreground select-none">
           ${" "}

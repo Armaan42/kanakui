@@ -139,7 +139,9 @@ function ScoreGauge({ value, min = 300, max = 850, label, bands = CREDIT_BANDS, 
           {label}
         </p>
         <p className="text-4xl font-semibold tracking-tight tabular-nums">{Math.round(shown)}</p>
-        <p className="text-sm font-medium" style={{ color: band.color }}>
+        {/* Band colors (lime, yellow…) are too light for text, so the color goes on a dot. */}
+        <p className="inline-flex items-center gap-1.5 text-sm font-medium">
+          <span aria-hidden="true" className="size-2 rounded-full" style={{ backgroundColor: band.color }} />
           {band.label}
         </p>
         {caption ? <p className="mt-0.5 text-xs text-muted-foreground">{caption}</p> : null}

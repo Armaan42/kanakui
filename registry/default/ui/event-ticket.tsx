@@ -93,15 +93,15 @@ function EventTicket({
           <p className="text-lg leading-tight font-semibold tracking-tight text-balance sm:text-xl">{event}</p>
           <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
             <div>
-              <dt className="text-[10px] tracking-widest text-neutral-500 uppercase">Date</dt>
+              <dt className="text-[10px] tracking-widest text-neutral-500 dark:text-neutral-400 uppercase">Date</dt>
               <dd className="font-medium">{date}</dd>
             </div>
             <div>
-              <dt className="text-[10px] tracking-widest text-neutral-500 uppercase">Time</dt>
+              <dt className="text-[10px] tracking-widest text-neutral-500 dark:text-neutral-400 uppercase">Time</dt>
               <dd className="font-medium">{time}</dd>
             </div>
             <div className="col-span-2">
-              <dt className="text-[10px] tracking-widest text-neutral-500 uppercase">Venue</dt>
+              <dt className="text-[10px] tracking-widest text-neutral-500 dark:text-neutral-400 uppercase">Venue</dt>
               <dd className="font-medium">{venue}</dd>
             </div>
           </dl>
@@ -145,7 +145,7 @@ function EventTicket({
         )}
         style={{ ...notchMask("left"), transform: stubTransform, transformOrigin: "0% 100%" }}
       >
-        <span className="text-[10px] font-semibold tracking-[0.25em] text-neutral-500 uppercase">Admit one</span>
+        <span className="text-[10px] font-semibold tracking-[0.25em] text-neutral-500 dark:text-neutral-400 uppercase">Admit one</span>
         <span className="text-center text-sm leading-tight font-medium">{seat}</span>
         <span className="flex w-full flex-col items-center gap-1.5">
           <span aria-hidden="true" className="flex h-10 w-full items-stretch justify-center gap-px overflow-hidden">
@@ -153,7 +153,7 @@ function EventTicket({
               <span key={i} className={i % 2 ? "bg-transparent" : "bg-current"} style={{ width: w }} />
             ))}
           </span>
-          <span className="font-mono text-[10px] tracking-wider text-neutral-500">{code}</span>
+          <span className="font-mono text-[10px] tracking-wider text-neutral-500 dark:text-neutral-400">{code}</span>
         </span>
       </button>
       <p aria-live="polite" className="sr-only">

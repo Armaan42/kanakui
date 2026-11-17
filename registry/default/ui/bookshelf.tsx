@@ -81,7 +81,7 @@ function Bookshelf({ books, selected, onSelect, label = "Bookshelf", className, 
               <span className="min-h-0 flex-1 overflow-hidden py-2 font-serif text-[13px] leading-none text-ellipsis whitespace-nowrap [writing-mode:vertical-rl]">
                 {book.title}
               </span>
-              <span className="mt-2 text-[8px] tracking-wider uppercase opacity-75 [writing-mode:vertical-rl]">{book.author.split(" ").pop()}</span>
+              <span className="mt-2 text-[8px] tracking-wider uppercase opacity-90 [writing-mode:vertical-rl]">{book.author.split(" ").pop()}</span>
               <span aria-hidden="true" className="mt-1 h-[3px] w-full bg-current opacity-40" />
             </button>
           )

@@ -5,7 +5,7 @@ export default defineItem({
   "type": "registry:ui",
   "title": "Boarding Pass",
   "description": "A flight boarding pass with a perforated stub and code that flips to the fare and baggage details.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "releasedAt": "2026-11-16",
   "categories": [
     "cards",

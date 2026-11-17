@@ -42,7 +42,7 @@ function AvatarStack({ people, max = 5, size = 36, className, ...props }: Avatar
         <span
           key={`${person.name}-${index}`}
           aria-hidden="true"
-          className="-ml-2 inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-background bg-muted text-xs font-medium transition-[margin] duration-200 first:ml-0 group-hover:-ml-0.5 motion-reduce:transition-none"
+          className="-ml-2 inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-background bg-muted text-xs font-medium text-foreground transition-[margin] duration-200 first:ml-0 group-hover:-ml-0.5 motion-reduce:transition-none"
           style={{ width: size, height: size }}
         >
           {person.src ? (

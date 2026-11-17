@@ -48,7 +48,7 @@ export function Trip01() {
         </div>
 
         <div>
-          <p className="text-sm font-medium text-sky-600 dark:text-sky-400">Your trip</p>
+          <p className="text-sm font-medium text-sky-700 dark:text-sky-400">Your trip</p>
           <h2 id="trip-01-title" className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
             Japan in spring
           </h2>

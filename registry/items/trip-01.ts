@@ -5,7 +5,7 @@ export default defineItem({
   "type": "registry:block",
   "title": "Trip Itinerary",
   "description": "A trip overview: a boarding pass beside a day-by-day itinerary with photos.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "releasedAt": "2026-11-16",
   "categories": [
     "content"

@@ -98,24 +98,26 @@ export function Event01() {
             ))}
           </div>
 
-          <ol id={`${baseId}-panel`} role="tabpanel" aria-labelledby={`${baseId}-tab-${days[active].id}`} className="mt-6 space-y-2">
-            {days[active].sets.map((set) => (
-              <li
-                key={set.artist}
-                className={cn(
-                  "flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur",
-                  set.headline && "border-amber-300/40 bg-amber-300/10"
-                )}
-              >
-                <span className="w-12 font-mono text-sm text-white/60 tabular-nums">{set.time}</span>
-                <span className="flex-1 font-medium">
-                  {set.artist}
-                  {set.headline ? <span className="ml-2 rounded-full bg-amber-300 px-2 py-0.5 text-[10px] font-semibold text-neutral-900 uppercase">Headliner</span> : null}
-                </span>
-                <span className="text-sm text-white/60">{set.stage}</span>
-              </li>
-            ))}
-          </ol>
+          <div id={`${baseId}-panel`} role="tabpanel" aria-labelledby={`${baseId}-tab-${days[active].id}`} className="mt-6">
+            <ol className="space-y-2">
+              {days[active].sets.map((set) => (
+                <li
+                  key={set.artist}
+                  className={cn(
+                    "flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur",
+                    set.headline && "border-amber-300/40 bg-amber-300/10"
+                  )}
+                >
+                  <span className="w-12 font-mono text-sm text-white/60 tabular-nums">{set.time}</span>
+                  <span className="flex-1 font-medium">
+                    {set.artist}
+                    {set.headline ? <span className="ml-2 rounded-full bg-amber-300 px-2 py-0.5 text-[10px] font-semibold text-neutral-900 uppercase">Headliner</span> : null}
+                  </span>
+                  <span className="text-sm text-white/60">{set.stage}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
 
         <div className="flex flex-col items-center gap-4">

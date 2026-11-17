@@ -37,7 +37,7 @@ export function Credit01() {
           <div className="flex flex-col items-center rounded-3xl border bg-card p-6 sm:p-8">
             <ScoreGauge value={742} label="Credit score" caption="Updated 2 Nov" />
             <div className="mt-6 w-full rounded-2xl bg-muted/50 p-4">
-              <p className="flex items-center gap-1.5 text-sm font-medium text-emerald-600 dark:text-emerald-400">
+              <p className="flex items-center gap-1.5 text-sm font-medium text-emerald-700 dark:text-emerald-400">
                 <TrendingUp aria-hidden="true" className="size-4" /> +44 points in 6 months
               </p>
               <svg viewBox="0 0 100 42" preserveAspectRatio="none" role="img" aria-label={`Score over six months: ${history.join(", ")}`} className="mt-3 h-12 w-full overflow-visible">

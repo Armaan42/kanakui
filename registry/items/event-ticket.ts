@@ -5,7 +5,7 @@ export default defineItem({
   "type": "registry:ui",
   "title": "Event Ticket",
   "description": "A ticket with a perforated stub you can drag or click to tear off.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "releasedAt": "2026-11-16",
   "categories": [
     "interactive",

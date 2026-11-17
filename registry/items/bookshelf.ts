@@ -5,7 +5,7 @@ export default defineItem({
   "type": "registry:ui",
   "title": "Bookshelf",
   "description": "Books on a wooden shelf whose spines lift on hover and pull out when selected, with a matching cover.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "releasedAt": "2026-11-16",
   "categories": [
     "interactive",

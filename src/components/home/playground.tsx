@@ -369,7 +369,7 @@ function PlaygroundPanel({
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <div className="relative min-w-0 rounded-xl border bg-muted/30">
           <CopyButton value={code} label={`Copy ${item.title} code`} className="absolute top-2 right-2" />
-          <pre className="overflow-x-auto p-4 pr-12 font-mono text-[13px] leading-6">
+          <pre tabIndex={0} className="overflow-x-auto p-4 pr-12 font-mono text-[13px] leading-6 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:ring-inset">
             <code>
               <HighlightedCode code={code} />
             </code>
