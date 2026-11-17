@@ -11,7 +11,7 @@ import { getItem } from "@/lib/registry"
 
 export const metadata: Metadata = {
   title: "Themes",
-  description: "Pick a base color, accent and radius. Every kanakui component, block and preview follows it live; copy the CSS into your project.",
+  description: "Pick a base color, accent and radius. Every VenusUI component, block and preview follows it live; copy the CSS into your project.",
 }
 
 /** Live demos shown in the gallery: components that use the primary color, borders and radius. */
@@ -42,7 +42,7 @@ export default function ThemesPage() {
         <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">Themes</p>
         <h1 className="mt-3 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">Make it yours</h1>
         <p className="mt-4 text-pretty text-muted-foreground">
-          Pick a base color, an accent and a corner radius. Every component, block and preview on kanakui follows it
+          Pick a base color, an accent and a corner radius. Every component, block and preview on VenusUI follows it
           live, in light and dark. When you like it, copy the CSS into your project&apos;s <code className="font-mono text-sm">globals.css</code>.
         </p>
       </div>
@@ -102,7 +102,7 @@ export default function ThemesPage() {
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
                 Replace the <code className="font-mono">:root</code> and <code className="font-mono">.dark</code> blocks in
-                your <code className="font-mono">globals.css</code> with these. Every kanakui and shadcn component picks
+                your <code className="font-mono">globals.css</code> with these. Every VenusUI and shadcn component picks
                 them up.
               </p>
             </div>

@@ -30,7 +30,7 @@ export default defineItem({
     "props": [],
     "extends": "No props. Edit the segments and rules in the file.",
     "requirements": [
-      "shadcn `button` and `input`, and kanakui `prize-wheel`. The CLI installs them.",
+      "shadcn `button` and `input`, and VenusUI `prize-wheel`. The CLI installs them.",
       "React 19 and Tailwind CSS v4."
     ],
     "customization": [

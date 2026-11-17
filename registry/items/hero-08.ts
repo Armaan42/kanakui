@@ -15,7 +15,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Edit the content directly in the file.",
-    requirements: ["shadcn `button`, kanakui `dotted-globe` (three.js) and `status-dot`. The CLI installs them.","A browser with WebGL for the globe."],
+    requirements: ["shadcn `button`, VenusUI `dotted-globe` (three.js) and `status-dot`. The CLI installs them.","A browser with WebGL for the globe."],
     customization: ["The regions and status text are placeholders. Show your real regions and real status."],
     accessibility: ["The globe can be focused and turned with the arrow keys. The status has visible text."],
     troubleshooting: [{"problem":"Something looks different from the preview.","solution":"Blocks use your project’s theme and your own shadcn components, so they follow your styles."}],

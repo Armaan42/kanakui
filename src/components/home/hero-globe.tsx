@@ -22,7 +22,7 @@ const SCENE = {
 }
 
 /**
- * The hero's globe: kanakui's own Arc Globe component. Its square box is
+ * The hero's globe: VenusUI's own Arc Globe component. Its square box is
  * reserved from the first paint, so nothing shifts when the globe fades in.
  *
  * Arc Globe has no surface of its own (the page shows through), so in light

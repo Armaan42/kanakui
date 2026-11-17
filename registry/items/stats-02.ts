@@ -13,7 +13,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Figures are in the `stats` array at the top of the file.",
-    requirements: ["kanakui `progress-ring` (the CLI installs it), React 19 and Tailwind CSS v4. Works in Server Components."],
+    requirements: ["VenusUI `progress-ring` (the CLI installs it), React 19 and Tailwind CSS v4. Works in Server Components."],
     customization: ["The figures are placeholders. Use real numbers and say where they come from in `detail`.", "Ring size and thickness are set per ring with `size` and `strokeWidth`."],
     accessibility: ["Each ring is a labelled progress bar with its value, so screen readers announce “Customer satisfaction, 98%”."],
     troubleshooting: [{ problem: "Rings look cramped on tablets.", solution: "Cards stack below `md`; reduce `size` if your labels are long." }],

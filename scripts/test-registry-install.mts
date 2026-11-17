@@ -9,7 +9,7 @@
  *     4. Installs EVERY registry item by URL, exactly as a user would.
  *     5. Type-checks, lints and production-builds the consumer app.
  *
- *   TEST_REGISTRY_ORIGIN=https://kanakui.vercel.app npm run registry:test
+ *   TEST_REGISTRY_ORIGIN=https://venusui.vercel.app npm run registry:test
  *     Remote mode: the same steps 3 to 5 against a deployed registry. It also checks
  *     that every item's registryDependencies point at that same origin.
  *
@@ -31,7 +31,7 @@ const PORT = Number(process.env.TEST_PORT ?? 3210)
 const BASE = process.env.TEST_BASE ?? "radix"
 const REUSE = process.env.TEST_REUSE === "1"
 const ORIGIN = REMOTE_ORIGIN ?? `http://localhost:${PORT}`
-const WORK_DIR = path.join(tmpdir(), "kanakui-registry-test")
+const WORK_DIR = path.join(tmpdir(), "venusui-registry-test")
 const APP_DIR = path.join(WORK_DIR, `consumer-${BASE}`)
 
 type RegistryIndex = { items: { name: string }[] }

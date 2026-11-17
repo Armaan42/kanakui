@@ -13,7 +13,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Set `command` at the top of the file.",
-    requirements: ["kanakui `copy-button` (the CLI installs it), React 19 and Tailwind CSS v4.", "HTTPS (or localhost) for copying to work."],
+    requirements: ["VenusUI `copy-button` (the CLI installs it), React 19 and Tailwind CSS v4.", "HTTPS (or localhost) for copying to work."],
     customization: ["Change `command` to your real getting-started command.", "Long commands scroll sideways inside the box."],
     accessibility: ["The `$` prompt is hidden from screen readers and from text selection.", "The copy result is announced (“Copied”)."],
     troubleshooting: [{ problem: "Copy doesn’t work.", solution: "Browsers only allow clipboard access on HTTPS and localhost." }],

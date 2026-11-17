@@ -7,7 +7,7 @@
  */
 
 const DEFAULT_SITE_URL = "http://localhost:3000";
-const DEFAULT_NAMESPACE = "@kanakui"; // placeholder until the final name is chosen
+const DEFAULT_NAMESPACE = "@venusui";
 
 function normalizeNamespace(value: string): string {
   const ns = value.startsWith("@") ? value : `@${value}`;
@@ -30,7 +30,7 @@ function normalizeUrl(value: string): string {
  *    NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL is exposed to Next.js apps
  *    (and inlined for the browser); VERCEL_PROJECT_PRODUCTION_URL is the
  *    system variable that the registry script sees. Both are a bare hostname
- *    (e.g. "kanakui.vercel.app") and switch to the custom domain once one is
+ *    (e.g. "venusui.vercel.app") and switch to the custom domain once one is
  *    added. Preview deployments use it too, because preview URLs sit behind
  *    Vercel's deployment protection and the shadcn CLI cannot fetch from them.
  * 3. http://localhost:3000.
@@ -50,17 +50,17 @@ const namespace = normalizeNamespace(
 );
 
 export const siteConfig = {
-  name: process.env.NEXT_PUBLIC_SITE_NAME ?? "kanakui",
+  name: process.env.NEXT_PUBLIC_SITE_NAME ?? "VenusUI",
   description:
     "Production-ready React components, blocks and templates you can install with the shadcn CLI.",
   url,
   links: {
-    github: process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com/Armaan42/kanakui",
+    github: process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com/Armaan42/venusui",
   },
   /** License of the free registry items. Must match the LICENSE file. */
   license: {
     name: "MIT",
-    url: `${process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com/Armaan42/kanakui"}/blob/main/LICENSE`,
+    url: `${process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com/Armaan42/venusui"}/blob/main/LICENSE`,
   },
   /** Main navigation. Only list pages that exist. Below `md` these move into the menu panel. */
   nav: [

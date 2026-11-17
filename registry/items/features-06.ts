@@ -14,7 +14,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Edit the content directly in the file.",
-    requirements: ["kanakui `glow-grid` and `lucide-react`. The CLI installs them."],
+    requirements: ["VenusUI `glow-grid` and `lucide-react`. The CLI installs them."],
     customization: ["The features are placeholders. List what your product really does."],
     accessibility: ["Each card has an `h3`. Icons are decorative."],
     troubleshooting: [{"problem":"Something looks different from the preview.","solution":"Blocks use your project’s theme and your own shadcn components, so they follow your styles."}],

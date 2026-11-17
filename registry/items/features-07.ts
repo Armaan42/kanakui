@@ -13,7 +13,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Edit the content directly in the file.",
-    requirements: ["kanakui `scroll-device` (the CLI installs it and `motion`)."],
+    requirements: ["VenusUI `scroll-device` (the CLI installs it and `motion`)."],
     customization: ["The screen shows a mock dashboard built from divs. Replace it with a screenshot or your real UI."],
     accessibility: ["The mock dashboard is `aria-hidden`; describe your product in the heading and text."],
     troubleshooting: [{"problem":"Something looks different from the preview.","solution":"Blocks use your project’s theme and your own shadcn components, so they follow your styles."}],

@@ -14,7 +14,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Features are in the `features` array at the top of the file.",
-    requirements: ["kanakui `spotlight-card` (the CLI installs it and its hook), `lucide-react`, React 19 and Tailwind CSS v4."],
+    requirements: ["VenusUI `spotlight-card` (the CLI installs it and its hook), `lucide-react`, React 19 and Tailwind CSS v4."],
     customization: ["Edit the `features` array; use any Lucide icon.", "Give the spotlight a brand tint with `spotlightColor` on each card."],
     accessibility: ["Each card has an `h3` under the section’s `h2`.", "The light is decorative and hidden with reduced motion."],
     troubleshooting: [{ problem: "No light appears.", solution: "It only shows while a mouse is over a card." }],

@@ -16,7 +16,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Edit the content directly in the file.",
-    requirements: ["shadcn `button` and kanakui `particle-wave` (three.js). The CLI installs them, including `@types/three`.","A browser with WebGL; without it the text and actions still show."],
+    requirements: ["shadcn `button` and VenusUI `particle-wave` (three.js). The CLI installs them, including `@types/three`.","A browser with WebGL; without it the text and actions still show."],
     customization: ["The wave sits in the bottom 20rem; change `h-80` to make it taller.","A muted wave color keeps the headline readable."],
     accessibility: ["One `h1`. The wave is a labelled image that pauses off screen and with reduced motion."],
     troubleshooting: [{"problem":"Something looks different from the preview.","solution":"Blocks use your project’s theme and your own shadcn components, so they follow your styles."}],

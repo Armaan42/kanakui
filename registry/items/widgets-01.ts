@@ -27,7 +27,7 @@ export default defineItem({
     "props": [],
     "extends": "No props. Edit the widgets' content in the file.",
     "requirements": [
-      "kanakui `weather-widget` and `world-clock`. The CLI installs them.",
+      "VenusUI `weather-widget` and `world-clock`. The CLI installs them.",
       "React 19 and Tailwind CSS v4."
     ],
     "customization": [

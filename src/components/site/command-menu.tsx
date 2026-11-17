@@ -134,7 +134,7 @@ export function CommandMenu({ groups }: { groups: SearchGroup[] }) {
           the dialog content and names it for screen readers. */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent showCloseButton={false} className="top-[12svh] translate-y-0 gap-0 overflow-hidden rounded-xl! p-0 sm:max-w-xl">
-          <DialogTitle className="sr-only">Search kanakui</DialogTitle>
+          <DialogTitle className="sr-only">Search VenusUI</DialogTitle>
           <DialogDescription className="sr-only">Search components, blocks, templates and docs</DialogDescription>
           <Command filter={filter} className="rounded-none! bg-transparent">
             <CommandInput placeholder="Search components, blocks, pages…" className="h-10 text-[15px]" />

@@ -13,7 +13,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Edit the content directly in the file.",
-    requirements: ["kanakui `rating` and `avatar-stack`. The CLI installs both."],
+    requirements: ["VenusUI `rating` and `avatar-stack`. The CLI installs both."],
     customization: ["The quote, rating and names are placeholders. Use a real quote with permission, and a real rating."],
     accessibility: ["A `figure` with `blockquote` and `figcaption`; the rating is read as “5 out of 5 stars”."],
     troubleshooting: [{"problem":"Something looks different from the preview.","solution":"Blocks use your project’s theme and your own shadcn components, so they follow your styles."}],

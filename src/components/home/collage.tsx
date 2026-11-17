@@ -158,7 +158,7 @@ function GlobeCard() {
 }
 
 /**
- * A wall of real kanakui blocks and components at staggered heights, with
+ * A wall of real VenusUI blocks and components at staggered heights, with
  * guide lines between them. On large screens the columns drift at different
  * speeds as the section scrolls; with reduced motion, and on small screens
  * (where the wall becomes a shorter, simple stack), they stay put. Tiles shown

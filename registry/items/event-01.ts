@@ -26,7 +26,7 @@ export default defineItem({
     "props": [],
     "extends": "No props. The days and sets are an array at the top of the file.",
     "requirements": [
-      "kanakui `event-ticket`. The CLI installs it.",
+      "VenusUI `event-ticket`. The CLI installs it.",
       "It renders inside a `.dark` wrapper so it stays dark over the photo; this relies on shadcn's class-based dark mode.",
       "React 19 and Tailwind CSS v4."
     ],

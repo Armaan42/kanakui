@@ -19,7 +19,7 @@ const INTRO: Record<ItemKind, { title: string; description: (count: number) => s
   templates: {
     title: "Templates",
     description: (n) =>
-      `${n} complete ${n === 1 ? "page" : "pages"} built from kanakui blocks. One command adds the page and every section in it to your project, ready to edit.`,
+      `${n} complete ${n === 1 ? "page" : "pages"} built from VenusUI blocks. One command adds the page and every section in it to your project, ready to edit.`,
   },
 }
 

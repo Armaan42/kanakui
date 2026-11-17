@@ -43,7 +43,7 @@ export default function InstallationPage() {
           </Step>
           <Step number={3} title="Set up shadcn">
             <p>
-              <InlineText text="This creates `components.json`, the theme variables and the `cn` helper. Choose Radix or Base UI; kanakui works with both." />{" "}
+              <InlineText text="This creates `components.json`, the theme variables and the `cn` helper. Choose Radix or Base UI; VenusUI works with both." />{" "}
               <Link href="/docs/installation/utilities" className={linkClass}>Details</Link>.
             </p>
             <CommandBlock command="npx shadcn@latest init" />

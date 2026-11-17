@@ -15,7 +15,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Copy, checklist and terminal lines are in the file.",
-    requirements: ["shadcn `button` and kanakui `grid-pattern`. The CLI installs both.", "`lucide-react` for icons, React 19 and Tailwind CSS v4."],
+    requirements: ["shadcn `button` and VenusUI `grid-pattern`. The CLI installs both.", "`lucide-react` for icons, React 19 and Tailwind CSS v4."],
     customization: [
       "Edit the `points` array for the checklist and the `<code>` lines for the terminal.",
       "Swap the terminal card for a screenshot by replacing the right-hand `div`.",

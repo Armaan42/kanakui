@@ -26,7 +26,7 @@ export default defineItem({
     "props": [],
     "extends": "No props. The factors and history are arrays at the top of the file.",
     "requirements": [
-      "kanakui `score-gauge`. The CLI installs it.",
+      "VenusUI `score-gauge`. The CLI installs it.",
       "React 19 and Tailwind CSS v4."
     ],
     "customization": [

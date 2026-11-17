@@ -14,7 +14,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Quotes are in the `quotes` array; the first half goes in the top row.",
-    requirements: ["kanakui `marquee` (the CLI installs it with its CSS), React 19 and Tailwind CSS v4."],
+    requirements: ["VenusUI `marquee` (the CLI installs it with its CSS), React 19 and Tailwind CSS v4."],
     customization: [
       "The quotes and names are placeholders. Replace them with real quotes from customers who agreed to be featured.",
       "Slow the rows down with a longer `duration` on each `Marquee`.",

@@ -12,7 +12,7 @@ export interface ThemeState extends ThemeConfig {
 }
 
 /** Fired on window when this page changes the theme, so every picker on the page stays in step. */
-const CHANGE_EVENT = "kanakui-theme-change"
+const CHANGE_EVENT = "venusui-theme-change"
 
 function save(key: string, value: string) {
   try {

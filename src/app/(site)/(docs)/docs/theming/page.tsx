@@ -40,7 +40,7 @@ export default async function ThemingPage() {
     <DocsArticle href={HREF}>
       <DocsSection id="how-it-works" title="How theming works">
         <p className={p}>
-          <InlineText text="kanakui components use the same CSS variables as shadcn/ui: `--background`, `--foreground`, `--primary`, `--muted`, `--border`, `--radius` and the rest, defined in your `globals.css`. Change the variables and every component follows, in light and dark." />
+          <InlineText text="VenusUI components use the same CSS variables as shadcn/ui: `--background`, `--foreground`, `--primary`, `--muted`, `--border`, `--radius` and the rest, defined in your `globals.css`. Change the variables and every component follows, in light and dark." />
         </p>
         <p className={p}>
           <InlineText text="Selected and active states (switches that are on, the current step, progress bars, the active tab) use `--primary`. With shadcn’s default palettes, primary is almost the same as the text color, so components look neutral until you pick an accent." />

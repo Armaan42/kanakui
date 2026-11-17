@@ -19,7 +19,7 @@ export default function IntroductionPage() {
 
   return (
     <DocsArticle href={HREF}>
-      <DocsSection id="what" title="What is kanakui?">
+      <DocsSection id="what" title="What is VenusUI?">
         <p className="leading-7 text-muted-foreground">
           {siteConfig.name} is a collection of {components} components and {blocks} blocks for React and Tailwind CSS.
           It is not a package you install from npm. Each component is source code that the shadcn CLI copies into your

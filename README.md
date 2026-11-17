@@ -1,4 +1,4 @@
-# kanakui
+# VenusUI
 
 A React component registry and marketplace. Components install with the
 official shadcn CLI:
@@ -7,8 +7,10 @@ official shadcn CLI:
 npx shadcn@latest add http://localhost:3000/r/animated-card.json
 ```
 
-> `kanakui` / `@kanakui` is a placeholder name. Change it in `.env.local`
-> (see `.env.example`). It is never hardcoded anywhere else.
+> The site name (`VenusUI`), the registry namespace (`@venusui`) and the site
+> URL come from `src/config/site.ts`, overridable in `.env.local` (see
+> `.env.example`). They are never hardcoded anywhere else. Live at
+> https://venusui.vercel.app.
 
 ## Stack
 
@@ -103,9 +105,9 @@ categories are stored as metadata (`categories`) instead.
 ### Why internal dependencies are URLs
 
 Dependencies between our own items are written as absolute URLs
-(`${NEXT_PUBLIC_SITE_URL}/r/<name>.json`), not `@kanakui/<name>`. Tested with
+(`${NEXT_PUBLIC_SITE_URL}/r/<name>.json`), not `@venusui/<name>`. Tested with
 shadcn 4.23: a namespaced dependency makes a plain URL install fail with
-`Unknown registry "@kanakui"` unless the user has configured the namespace.
+`Unknown registry "@venusui"` unless the user has configured the namespace.
 
 ## Installing (consumer side)
 
@@ -116,10 +118,10 @@ There are three ways, and all of them have been tested:
 npx shadcn@latest add https://YOUR_DOMAIN/r/animated-card.json
 
 # 2. By namespace, after a one-time setup
-npx shadcn@latest registry add @kanakui=https://YOUR_DOMAIN/r/{name}.json
-npx shadcn@latest add @kanakui/animated-card
+npx shadcn@latest registry add @venusui=https://YOUR_DOMAIN/r/{name}.json
+npx shadcn@latest add @venusui/animated-card
 
-# 3. By namespace with zero setup. This only works once @kanakui is accepted into
+# 3. By namespace with zero setup. This only works once @venusui is accepted into
 #    shadcn's public registry index (a PR to shadcn-ui/ui, Phase 8).
 ```
 

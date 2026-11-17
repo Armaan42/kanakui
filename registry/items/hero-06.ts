@@ -14,7 +14,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Copy and the two comparison layers are in the file.",
-    requirements: ["shadcn `button` and kanakui `image-compare`. The CLI installs both.", "React 19 and Tailwind CSS v4."],
+    requirements: ["shadcn `button` and VenusUI `image-compare`. The CLI installs both.", "React 19 and Tailwind CSS v4."],
     customization: [
       "Replace the two `Placeholder` layers with screenshots of the same size: `<img src=\"/before.png\" alt=\"…\" className=\"size-full object-cover\" />`.",
       "Change the starting split with `defaultPosition`.",

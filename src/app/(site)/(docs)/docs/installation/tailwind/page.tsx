@@ -46,7 +46,7 @@ export default async function InstallTailwindPage() {
 
       <DocsSection id="v3" title="Tailwind CSS v3">
         <p className="text-sm leading-6 text-muted-foreground">
-          <InlineText text="kanakui targets Tailwind CSS v4. Components add their animations as v4 theme variables (for example `--animate-marquee`), which v3 doesn’t understand. Upgrade with Tailwind’s official upgrade tool before installing components." />
+          <InlineText text="VenusUI targets Tailwind CSS v4. Components add their animations as v4 theme variables (for example `--animate-marquee`), which v3 doesn’t understand. Upgrade with Tailwind’s official upgrade tool before installing components." />
         </p>
       </DocsSection>
     </DocsArticle>

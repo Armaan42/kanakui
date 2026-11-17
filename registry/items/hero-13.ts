@@ -29,7 +29,7 @@ export default defineItem({
     "props": [],
     "extends": "No props. Edit the copy and the conversation in the file.",
     "requirements": [
-      "shadcn `button` and kanakui `chat-thread`. The CLI installs them.",
+      "shadcn `button` and VenusUI `chat-thread`. The CLI installs them.",
       "React 19 and Tailwind CSS v4."
     ],
     "customization": [

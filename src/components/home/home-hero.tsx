@@ -63,7 +63,7 @@ export function HomeHero({ components, blocks, threeD }: HomeHeroProps) {
       <div className="mx-auto grid min-h-[calc(100svh-3.5rem)] w-full max-w-7xl grid-cols-[minmax(0,1fr)] items-center gap-4 px-4 pt-16 pb-12 sm:px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-8 lg:py-12">
         <div className="flex min-w-0 flex-col items-center text-center lg:items-start lg:text-left">
           <nav
-            aria-label="What's in kanakui"
+            aria-label="What's in VenusUI"
             className="flex animate-word-in items-center gap-2.5 font-mono text-xs tracking-[0.18em] text-muted-foreground uppercase motion-reduce:animate-none"
           >
             {SECTIONS.map((section, i) => (

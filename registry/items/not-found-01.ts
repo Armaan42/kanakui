@@ -14,7 +14,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Edit the content directly in the file.",
-    requirements: ["kanakui `text-3d` and `grid-pattern`. The CLI installs both. Works in Server Components."],
+    requirements: ["VenusUI `text-3d` and `grid-pattern`. The CLI installs both. Works in Server Components."],
     customization: ["Built for Next.js: render it from `app/not-found.tsx`. In other frameworks, replace `Link` with your router's link."],
     accessibility: ["The “404” is visible text; the page title is an `h1`."],
     troubleshooting: [{"problem":"Something looks different from the preview.","solution":"Blocks use your project’s theme and your own shadcn components, so they follow your styles."}],

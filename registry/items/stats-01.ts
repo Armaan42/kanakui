@@ -13,7 +13,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Numbers are in the `stats` array at the top of the file.",
-    requirements: ["kanakui `number-ticker` (the CLI installs it), React 19 and Tailwind CSS v4."],
+    requirements: ["VenusUI `number-ticker` (the CLI installs it), React 19 and Tailwind CSS v4."],
     customization: [
       "The numbers are placeholders. Replace them with real, current figures.",
       "Each stat accepts `decimals` and a `suffix` such as `%` or `ms`.",

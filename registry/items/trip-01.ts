@@ -26,7 +26,7 @@ export default defineItem({
     "props": [],
     "extends": "No props. The days and summary are arrays at the top of the file.",
     "requirements": [
-      "kanakui `boarding-pass`. The CLI installs it.",
+      "VenusUI `boarding-pass`. The CLI installs it.",
       "React 19 and Tailwind CSS v4."
     ],
     "customization": [

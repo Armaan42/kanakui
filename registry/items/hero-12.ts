@@ -29,7 +29,7 @@ export default defineItem({
     "props": [],
     "extends": "No props. Edit the content directly in the file.",
     "requirements": [
-      "shadcn `button` and kanakui `holo-card`. The CLI installs them.",
+      "shadcn `button` and VenusUI `holo-card`. The CLI installs them.",
       "React 19 and Tailwind CSS v4."
     ],
     "customization": [

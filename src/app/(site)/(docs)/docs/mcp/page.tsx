@@ -20,7 +20,7 @@ const link = "text-foreground underline underline-offset-4"
 /*
  * Everything here was run against the live registry with shadcn 4.23
  * (Nov 2026): `mcp init` for every client, then the MCP server's tools
- * called over stdio with @kanakui configured.
+ * called over stdio with @venusui configured.
  */
 const CLIENTS = [
   { client: "claude", name: "Claude Code", result: "Writes `.mcp.json`." },
@@ -43,7 +43,7 @@ export default async function McpPage() {
       <DocsSection id="how" title="How it works">
         <p className={p}>
           <InlineText
-            text={`The shadcn CLI includes an MCP server. Your assistant uses it to list, search and read items from every registry in your \`components.json\`, and to get the command that installs them. Add \`${ns}\` to that file and kanakui shows up next to the official shadcn components.`}
+            text={`The shadcn CLI includes an MCP server. Your assistant uses it to list, search and read items from every registry in your \`components.json\`, and to get the command that installs them. Add \`${ns}\` to that file and VenusUI shows up next to the official shadcn components.`}
           />
         </p>
         <p className={p}>

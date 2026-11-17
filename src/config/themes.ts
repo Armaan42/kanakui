@@ -94,7 +94,7 @@ export interface ThemeConfig {
 export const DEFAULT_THEME: ThemeConfig = { base: "neutral", accent: "default", radius: "0.625" }
 
 /** localStorage key for the chosen theme (JSON). The light/dark mode has its own key in lib/theme. */
-export const THEME_CONFIG_STORAGE_KEY = "kanakui-theme"
+export const THEME_CONFIG_STORAGE_KEY = "venusui-theme"
 
 /** Keeps only known values, falling back to the defaults. */
 export function parseThemeConfig(value: unknown): ThemeConfig {

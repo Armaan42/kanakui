@@ -13,7 +13,7 @@ export default defineItem({
   pageDocs: {
     props: [],
     extends: "No props. Edit the content directly in the file.",
-    requirements: ["kanakui `accordion-smooth` (the CLI installs it)."],
+    requirements: ["VenusUI `accordion-smooth` (the CLI installs it)."],
     customization: ["The answers are placeholders. Replace them with your real policies."],
     accessibility: ["Each question is a button with `aria-expanded`; closed answers are `inert`."],
     troubleshooting: [{"problem":"Something looks different from the preview.","solution":"Blocks use your project’s theme and your own shadcn components, so they follow your styles."}],

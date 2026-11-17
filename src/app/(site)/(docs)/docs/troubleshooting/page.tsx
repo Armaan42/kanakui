@@ -33,11 +33,11 @@ const issues = [
   },
   {
     problem: "TypeScript errors about `ref` props",
-    solution: "kanakui targets React 19, where `ref` is a regular prop. Upgrade React to 19.",
+    solution: "VenusUI targets React 19, where `ref` is a regular prop. Upgrade React to 19.",
   },
   {
     problem: "Tailwind classes from a component have no effect",
-    solution: "kanakui targets Tailwind CSS v4. See Install Tailwind CSS for upgrading from v3.",
+    solution: "VenusUI targets Tailwind CSS v4. See Install Tailwind CSS for upgrading from v3.",
   },
   {
     problem: "3D components show an empty area",
