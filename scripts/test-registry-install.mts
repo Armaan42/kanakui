@@ -9,7 +9,7 @@
  *     4. Installs EVERY registry item by URL, exactly as a user would.
  *     5. Type-checks, lints and production-builds the consumer app.
  *
- *   TEST_REGISTRY_ORIGIN=https://venusui.vercel.app npm run registry:test
+ *   TEST_REGISTRY_ORIGIN=https://venusui.com npm run registry:test
  *     Remote mode: the same steps 3 to 5 against a deployed registry. It also checks
  *     that every item's registryDependencies point at that same origin.
  *

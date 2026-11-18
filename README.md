@@ -10,7 +10,7 @@ npx shadcn@latest add http://localhost:3000/r/animated-card.json
 > The site name (`VenusUI`), the registry namespace (`@venusui`) and the site
 > URL come from `src/config/site.ts`, overridable in `.env.local` (see
 > `.env.example`). They are never hardcoded anywhere else. Live at
-> https://venusui.vercel.app.
+> https://venusui.com.
 
 ## Stack
 
