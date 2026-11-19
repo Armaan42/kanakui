@@ -139,6 +139,35 @@ export const MOTIONS: Record<string, Motion | Motion[]> = {
     { kind: "pop", parts: [1, 2], origin: "18.5 18" },
   ],
   venus: { kind: "pop", origin: "12 9" },
+
+  // Development
+  code: [
+    { kind: "nudge", parts: [0], dx: -1.5 },
+    { kind: "nudge", parts: [1], dx: 1.5 },
+    { kind: "rock", parts: [2], origin: "center" },
+  ],
+  terminal: [
+    { kind: "nudge", parts: [1], dx: 1 },
+    { kind: "wave", parts: [2] },
+  ],
+  "git-branch": { kind: "draw", parts: [4] },
+  "git-merge": { kind: "draw", parts: [4] },
+  "git-pull-request": [
+    { kind: "draw", parts: [4] },
+    { kind: "nudge", parts: [5], dx: -1.5 },
+  ],
+  bug: { kind: "rock", origin: "center" },
+  database: { kind: "bounce", parts: [0] },
+  server: { kind: "wave", parts: [2, 3], each: true, stagger: 0.25 },
+  braces: { kind: "pop", each: true, stagger: 0.12, origin: "center" },
+  package: { kind: "bounce" },
+  rocket: { kind: "nudge", dy: -2 },
+  cpu: { kind: "wave", parts: range(2, 9), each: true, stagger: 0.08 },
+  command: { kind: "pop" },
+  "file-code": { kind: "draw", parts: [2, 3], each: true, stagger: 0.2 },
+  "cloud-upload": { kind: "nudge", parts: [1, 2], dy: -2 },
+  key: { kind: "rock", origin: "8 15.5" },
+  "shield-check": { kind: "draw", parts: [1] },
 }
 
 export function motionsFor(icon: IconDef): Motion[] {

@@ -57,6 +57,7 @@ export const ICON_CATEGORIES = [
   "Weather",
   "Devices",
   "Everyday",
+  "Development",
 ] as const
 export type IconCategory = (typeof ICON_CATEGORIES)[number]
 
@@ -217,6 +218,25 @@ export const icons: IconDef[] = [
   icon("flame", "Flame", "Everyday", ["fire", "hot", "trending"], ["M12 21c-3.6 0-6-2.5-6-5.8 0-3.4 3-5.4 3.7-9.2 2 1.3 3.2 3.2 3.4 5 1-.8 1.6-2 1.7-3.4 2 1.7 3.2 4.3 3.2 7.6 0 3.3-2.4 5.8-6 5.8z"]),
   icon("sparkle", "Sparkle", "Everyday", ["magic", "ai", "new", "shine"], ["M11 3.5c.6 4.4 2.3 6.1 6.8 6.8-4.5.6-6.2 2.3-6.8 6.8-.6-4.5-2.3-6.2-6.8-6.8 4.5-.7 6.2-2.4 6.8-6.8z", line(18.5, 15.5, 18.5, 20.5), line(16, 18, 21, 18)]),
   icon("venus", "Venus", "Everyday", ["female", "symbol", "venusui"], [circle(12, 9, 5.5), line(12, 14.5, 12, 21), line(9, 18, 15, 18)], ["s", "s", "s"]),
+
+  // Development
+  icon("code", "Code", "Development", ["html", "brackets", "developer", "source"], ["M8.5 7 3.5 12l5 5", "M15.5 7l5 5-5 5", line(13.6, 5, 10.4, 19)]),
+  icon("terminal", "Terminal", "Development", ["console", "command line", "shell", "cli"], [rect(2.5, 4, 19, 16, 2), "M6.5 9l3 3-3 3", line(12, 15, 17, 15)], ["f", "c", "c"]),
+  icon("git-branch", "Git Branch", "Development", ["version control", "fork"], [circle(6, 5, 2.2), circle(6, 19, 2.2), circle(18, 6.5, 2.2), line(6, 7.2, 6, 16.8), "M18 8.7c0 5.3-12 3-12 8.1"]),
+  icon("git-merge", "Git Merge", "Development", ["version control", "combine"], [circle(6, 5, 2.2), circle(6, 19, 2.2), circle(18, 14, 2.2), line(6, 7.2, 6, 16.8), "M6 7.2c0 4.5 3.8 6.8 9.8 6.8"]),
+  icon("git-pull-request", "Pull Request", "Development", ["merge request", "review", "git"], [circle(6, 5, 2.2), circle(6, 19, 2.2), circle(18, 19, 2.2), line(6, 7.2, 6, 16.8), "M18 16.8V9a3 3 0 0 0-3-3h-4", "M13.5 3.5 11 6l2.5 2.5"]),
+  icon("bug", "Bug", "Development", ["error", "debug", "issue", "insect"], ["M8 10.5a4 4 0 0 1 8 0V15a4 4 0 0 1-8 0z", "M9.5 7a2.5 2.5 0 0 1 5 0", line(12, 11, 12, 18.5), line(4, 12.5, 8, 12.5), line(16, 12.5, 20, 12.5), line(4.5, 18, 8.3, 16.3), line(19.5, 18, 15.7, 16.3), line(5, 7.5, 8.4, 9.3), line(19, 7.5, 15.6, 9.3)], ["f", "s", "c", "s", "s", "s", "s", "s", "s"]),
+  icon("database", "Database", "Development", ["storage", "sql", "data"], ["M5 6c0-1.7 3.1-3 7-3s7 1.3 7 3-3.1 3-7 3-7-1.3-7-3z", "M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6", "M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"], ["f", { d: "M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6c0 1.7-3.1 3-7 3S5 7.7 5 6z", mode: "f" }, "c"]),
+  icon("server", "Server", "Development", ["hosting", "rack", "backend"], [rect(3, 4, 18, 7, 2), rect(3, 13, 18, 7, 2), line(7, 7.5, 7.5, 7.5), line(7, 16.5, 7.5, 16.5), line(11, 7.5, 17, 7.5), line(11, 16.5, 17, 16.5)], ["f", "f", "c", "c", "c", "c"]),
+  icon("braces", "Braces", "Development", ["json", "api", "object", "curly"], ["M8 4H7a2 2 0 0 0-2 2v3.5A2.5 2.5 0 0 1 2.5 12 2.5 2.5 0 0 1 5 14.5V18a2 2 0 0 0 2 2h1", "M16 4h1a2 2 0 0 1 2 2v3.5a2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0-2.5 2.5V18a2 2 0 0 1-2 2h-1"]),
+  icon("package", "Package", "Development", ["box", "npm", "module", "dependency"], ["M12 2.8 20 7v10l-8 4.2L4 17V7z", "M4 7l8 4.2L20 7", line(12, 11.2, 12, 21.2), line(8, 4.9, 16, 9.1)], ["f", "c", "c", "c"]),
+  icon("rocket", "Rocket", "Development", ["deploy", "launch", "ship", "startup"], ["M12 2.5c3 2.2 4.5 5.5 4.5 9.5v4h-9v-4c0-4 1.5-7.3 4.5-9.5z", circle(12, 9.5, 1.8), "M7.5 12.5 5 15v4l2.5-1.5", "M16.5 12.5 19 15v4l-2.5-1.5", "M10 18.5c0 1.5 1 2.5 2 3.2 1-.7 2-1.7 2-3.2"], ["f", "h", { d: "M7.5 12.5 5 15v4l2.5-1.5z", mode: "f" }, { d: "M16.5 12.5 19 15v4l-2.5-1.5z", mode: "f" }, "s"]),
+  icon("cpu", "CPU", "Development", ["chip", "processor", "hardware"], [rect(6, 6, 12, 12, 2), rect(9.5, 9.5, 5, 5, 1), line(9.5, 2.5, 9.5, 6), line(14.5, 2.5, 14.5, 6), line(9.5, 18, 9.5, 21.5), line(14.5, 18, 14.5, 21.5), line(2.5, 9.5, 6, 9.5), line(2.5, 14.5, 6, 14.5), line(18, 9.5, 21.5, 9.5), line(18, 14.5, 21.5, 14.5)], ["f", "h", "s", "s", "s", "s", "s", "s", "s", "s"]),
+  icon("command", "Command", "Development", ["cmd", "mac", "shortcut", "keyboard"], ["M9 9V6.5A2.5 2.5 0 1 0 6.5 9h11A2.5 2.5 0 1 0 15 6.5v11a2.5 2.5 0 1 0 2.5-2.5h-11A2.5 2.5 0 1 0 9 17.5z"], ["s"]),
+  icon("file-code", "Code File", "Development", ["source", "script", "document"], ["M6 3.5h8l4.5 4.5v12.5H6z", "M14 3.5V8h4.5", "M10.5 12.5l-2 2 2 2", "M14 12.5l2 2-2 2"], ["f", "c", "c", "c"]),
+  icon("cloud-upload", "Cloud Upload", "Development", ["deploy", "sync", "backup"], ["M7 18.5a4.5 4.5 0 0 1-.6-9A6 6 0 0 1 18 10a4.3 4.3 0 0 1-.5 8.5z", line(12, 17.5, 12, 11.5), "M9.5 14l2.5-2.5 2.5 2.5"], ["f", "c", "c"]),
+  icon("key", "Key", "Development", ["password", "token", "auth", "secret"], [circle(8, 15.5, 4.2), line(11, 12.5, 19.5, 4), line(16, 7.5, 18.5, 10), line(18.5, 5, 21, 7.5), circle(7.2, 16.3, 1.1)], ["f", "s", "s", "s", "h"]),
+  icon("shield-check", "Shield Check", "Development", ["security", "safe", "verified", "protected"], ["M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z", "M8.8 12.2l2.2 2.2 4.4-4.6"], ["f", "c"]),
 ]
 
 export function getIcon(name: string) {
