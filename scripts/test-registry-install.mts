@@ -30,6 +30,8 @@ const REMOTE_ORIGIN = process.env.TEST_REGISTRY_ORIGIN?.replace(/\/+$/, "")
 const PORT = Number(process.env.TEST_PORT ?? 3210)
 const BASE = process.env.TEST_BASE ?? "radix"
 const REUSE = process.env.TEST_REUSE === "1"
+/** Items per `shadcn add` command. */
+const BATCH = 60
 const ORIGIN = REMOTE_ORIGIN ?? `http://localhost:${PORT}`
 const WORK_DIR = path.join(tmpdir(), "venusui-registry-test")
 const APP_DIR = path.join(WORK_DIR, `consumer-${BASE}`)
@@ -137,7 +139,10 @@ async function main() {
     }
 
     const urls = names.map((name) => `${ORIGIN}/r/${name}.json`)
-    await run(`npx shadcn@latest add ${urls.join(" ")} --yes --overwrite`, APP_DIR)
+    // Windows caps a command line at 8,191 characters, so add the items in batches.
+    for (let i = 0; i < urls.length; i += BATCH) {
+      await run(`npx shadcn@latest add ${urls.slice(i, i + BATCH).join(" ")} --yes --overwrite`, APP_DIR)
+    }
     await run("npx tsc --noEmit", APP_DIR)
     await run("npm run lint", APP_DIR)
     // A production build also compiles the CSS the CLI merged into globals.css
