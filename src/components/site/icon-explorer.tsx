@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { cn } from "@/lib/utils"
 import { ICON_CATEGORIES, type IconDef } from "@/lib/icons"
+import { ALL_MOTION_KINDS, motionCss } from "@/lib/icon-motion"
 import {
   dataUri,
   downloadBlob,
@@ -39,6 +40,7 @@ const BACKGROUNDS = [
   { value: "#ffffff", label: "White" },
   { value: "#0a0a0a", label: "Black" },
 ]
+const MOTION_CSS = motionCss(ALL_MOTION_KINDS, "page")
 const CHECKERBOARD = "bg-[conic-gradient(var(--muted)_25%,transparent_0_50%,var(--muted)_0_75%,transparent_0)] bg-size-[16px_16px]"
 
 /** Draws one of our icons inline, in any style. */
@@ -117,6 +119,8 @@ export function IconExplorer({ icons, initialIcon = null, initialQuery = "", ini
 
   return (
     <div className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
+      {/* Motions for the Animated style, loaded once; they play on hover, focus or in the preview. */}
+      <style>{MOTION_CSS}</style>
       <div className="min-w-0">
         <div role="radiogroup" aria-label="Icon style" className="mb-4 flex w-fit max-w-full overflow-x-auto rounded-lg bg-muted p-1 [scrollbar-width:none]">
           {ICON_VARIANTS.map((item) => (
@@ -137,7 +141,7 @@ export function IconExplorer({ icons, initialIcon = null, initialQuery = "", ini
                 const group = event.currentTarget.parentElement
                 requestAnimationFrame(() => group?.querySelector<HTMLButtonElement>("[aria-checked=true]")?.focus())
               }}
-              className="flex shrink-0 items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium text-foreground/70 outline-none transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 aria-checked:bg-background aria-checked:text-foreground aria-checked:shadow-sm"
+              className="vi-hover flex shrink-0 items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium text-foreground/70 outline-none transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 aria-checked:bg-background aria-checked:text-foreground aria-checked:shadow-sm"
             >
               <IconGlyph icon={selected} variant={item.value} className="size-4 max-sm:hidden" />
               {item.label}
@@ -185,7 +189,7 @@ export function IconExplorer({ icons, initialIcon = null, initialQuery = "", ini
                   aria-pressed={selected.name === icon.name}
                   aria-label={icon.title}
                   onClick={() => choose(icon)}
-                  className="group flex aspect-square w-full flex-col items-center justify-center gap-2 rounded-xl border bg-card p-2 text-card-foreground outline-none transition-colors hover:border-foreground/30 focus-visible:ring-3 focus-visible:ring-ring/50 aria-pressed:border-foreground aria-pressed:ring-1 aria-pressed:ring-foreground"
+                  className="group vi-hover flex aspect-square w-full flex-col items-center justify-center gap-2 rounded-xl border bg-card p-2 text-card-foreground outline-none transition-colors hover:border-foreground/30 focus-visible:ring-3 focus-visible:ring-ring/50 aria-pressed:border-foreground aria-pressed:ring-1 aria-pressed:ring-foreground"
                 >
                   <IconGlyph icon={icon} variant={style.variant} paint={isColourful(style.variant) ? style.color : "currentColor"} strokeWidth={style.strokeWidth} className="size-7 transition-transform group-hover:scale-110 motion-reduce:transition-none" />
                   <span className="w-full truncate text-center text-[11px] text-muted-foreground">{icon.name}</span>
@@ -278,7 +282,7 @@ function Inspector({ icon, style, onStyleChange }: InspectorProps) {
           className={cn("grid aspect-[4/3] place-items-center rounded-lg border", style.background ? "" : CHECKERBOARD)}
           style={{ background: style.background ?? undefined, color: style.color === "currentColor" ? undefined : style.color }}
         >
-          <IconGlyph icon={icon} variant={style.variant} paint={isColourful(style.variant) ? style.color : "currentColor"} strokeWidth={style.strokeWidth} className="size-28" />
+          <IconGlyph icon={icon} variant={style.variant} paint={isColourful(style.variant) ? style.color : "currentColor"} strokeWidth={style.strokeWidth} className={cn("size-28", style.variant === "animated" && "vi-live")} />
         </div>
         <div className="mt-3 flex items-baseline justify-between gap-3">
           <h2 className="font-medium">
@@ -385,7 +389,9 @@ function Inspector({ icon, style, onStyleChange }: InspectorProps) {
           ))}
         </div>
         <p className="mt-2 text-xs text-muted-foreground">
-          {style.size} px. ICO holds 16, 32, 48 and 256 px. PDF is vector. JPEG gets a white background if none is set.
+          {style.variant === "animated"
+            ? "SVG, JSX and the data URI animate on their own. PNG, JPEG, WebP, ICO and PDF can’t move, so they save the still frame."
+            : `${style.size} px. ICO holds 16, 32, 48 and 256 px. PDF is vector. JPEG gets a white background if none is set.`}
         </p>
       </div>
 
