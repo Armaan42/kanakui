@@ -1,4 +1,4 @@
-import { solidShapes, type IconDef } from "@/lib/icons"
+import { solidShapes, type IconCategory, type IconDef } from "@/lib/icons"
 
 /**
  * Turns an icon into every format the Icons page offers. SVG, JSX and data
@@ -6,22 +6,29 @@ import { solidShapes, type IconDef } from "@/lib/icons"
  * browser; PDF is written by hand as real vector paths.
  */
 
-export type IconVariant = "outline" | "solid" | "duotone"
+export type IconVariant = "outline" | "solid" | "duotone" | "colour" | "3d"
 
 export const ICON_VARIANTS: { value: IconVariant; label: string }[] = [
   { value: "outline", label: "Outline" },
   { value: "solid", label: "Solid" },
   { value: "duotone", label: "Duotone" },
+  { value: "colour", label: "Colour" },
+  { value: "3d", label: "3D" },
 ]
+
+/** Styles that build their own palette from the chosen colour (or the icon's category). */
+export const isColourful = (variant: IconVariant) => variant === "colour" || variant === "3d"
 
 /** Opacity of the tinted fill in the Duotone style. */
 export const DUOTONE_OPACITY = 0.22
+const GLOSS_OPACITY = 0.24
+const SHADOW_OPACITY = 0.35
 
 export interface IconStyle {
   variant: IconVariant
   /** Pixel size of downloads. */
   size: number
-  /** CSS colour, or "currentColor" (resolved to `resolvedColor` for images). */
+  /** CSS colour, or "currentColor" (resolved to `resolvedColor` for images; "by category" in Colour and 3D). */
   color: string
   resolvedColor: string
   strokeWidth: number
@@ -39,49 +46,184 @@ export function iconComponentName(icon: IconDef) {
   return `${pascal(icon.name)}Icon`
 }
 
-/** The SVG elements inside <svg> for a style, one per line. `paint` is the icon colour. */
-export function svgBody(icon: IconDef, variant: IconVariant, paint: string, maskId: string) {
-  if (variant === "outline") return icon.paths.map((d) => `<path d="${d}"/>`)
-  const shapes = solidShapes(icon)
-  if (variant === "duotone") {
-    const tint = shapes.filter((shape) => shape.mode === "f" || shape.mode === "h").map((shape) => `<path d="${shape.d}" fill="${paint}" fill-opacity="${DUOTONE_OPACITY}" stroke="none"/>`)
-    return [...tint, ...icon.paths.map((d) => `<path d="${d}"/>`)]
+// ---------------------------------------------------------------- Colour
+
+/** Each category's base colour, used when no colour is picked. */
+export const CATEGORY_COLORS: Record<IconCategory, string> = {
+  Interface: "#7c3aed",
+  Arrows: "#2563eb",
+  Communication: "#0891b2",
+  Media: "#db2777",
+  Files: "#d97706",
+  Commerce: "#059669",
+  Weather: "#0284c7",
+  Devices: "#475569",
+  Everyday: "#ea580c",
+}
+
+export interface Palette {
+  /** Colour style: fill, outline and detail colours. */
+  light: string
+  dark: string
+  accent: string
+  /** 3D style: tile gradient and the edge below it. */
+  top: string
+  bottom: string
+  depth: string
+}
+
+type Rgb = [number, number, number]
+
+function parseHex(value: string): Rgb | null {
+  const hex = value.trim().replace(/^#/, "")
+  if (/^[0-9a-f]{3}$/i.test(hex)) return [0, 1, 2].map((i) => parseInt(hex[i] + hex[i], 16)) as Rgb
+  if (/^[0-9a-f]{6}$/i.test(hex)) return [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16)) as Rgb
+  return null
+}
+
+const toHex = (rgb: Rgb) => `#${rgb.map((v) => Math.round(Math.min(255, Math.max(0, v))).toString(16).padStart(2, "0")).join("")}`
+const mix = (a: Rgb, b: Rgb, amount: number): Rgb => [0, 1, 2].map((i) => a[i] + (b[i] - a[i]) * amount) as Rgb
+const WHITE: Rgb = [255, 255, 255]
+const BLACK: Rgb = [0, 0, 0]
+
+/** A neighbouring hue for details: distinct from the outline but in harmony with it. */
+function accentOf([r, g, b]: Rgb): Rgb {
+  const max = Math.max(r, g, b) / 255
+  const min = Math.min(r, g, b) / 255
+  const l = (max + min) / 2
+  const d = max - min
+  let h = 0
+  if (d) {
+    if (max === r / 255) h = ((g - b) / 255 / d) % 6
+    else if (max === g / 255) h = (b - r) / 255 / d + 2
+    else h = (r - g) / 255 / d + 4
   }
-  const drawn = shapes
-    .filter((shape) => shape.mode === "f" || shape.mode === "s")
-    .map((shape) => (shape.mode === "f" ? `<path d="${shape.d}" fill="${paint}"/>` : `<path d="${shape.d}"/>`))
-  const cuts = shapes.filter((shape) => shape.mode === "c" || shape.mode === "h")
-  if (!cuts.length) return drawn
+  h = (h * 60 + 42 + 360) % 360
+  const s = d ? 0.78 : 0
+  const light = d ? 0.55 : l
+  const c = (1 - Math.abs(2 * light - 1)) * s
+  const x = c * (1 - Math.abs(((h / 60) % 2) - 1))
+  const m = light - c / 2
+  const [r1, g1, b1] = h < 60 ? [c, x, 0] : h < 120 ? [x, c, 0] : h < 180 ? [0, c, x] : h < 240 ? [0, x, c] : h < 300 ? [x, 0, c] : [c, 0, x]
+  return [(r1 + m) * 255, (g1 + m) * 255, (b1 + m) * 255]
+}
+
+/** The palette for an icon: from a hex colour, or the icon's category colour otherwise. */
+export function paletteFor(icon: IconDef, paint: string): Palette {
+  const base = parseHex(paint) ?? (parseHex(CATEGORY_COLORS[icon.category]) as Rgb)
+  return {
+    light: toHex(mix(base, WHITE, 0.74)),
+    dark: toHex(mix(base, BLACK, 0.18)),
+    accent: toHex(accentOf(base)),
+    top: toHex(mix(base, WHITE, 0.28)),
+    bottom: toHex(mix(base, BLACK, 0.12)),
+    depth: toHex(mix(base, BLACK, 0.45)),
+  }
+}
+
+// ---------------------------------------------------------------- Shapes and SVG
+
+const roundedRect = (x: number, y: number, w: number, h: number, r: number) =>
+  `M${x + r} ${y}h${w - 2 * r}a${r} ${r} 0 0 1 ${r} ${r}v${h - 2 * r}a${r} ${r} 0 0 1 ${-r} ${r}h${-(w - 2 * r)}a${r} ${r} 0 0 1 ${-r} ${-r}v${-(h - 2 * r)}a${r} ${r} 0 0 1 ${r} ${-r}z`
+
+/** The 3D tile, the darker edge below it and the gloss across its top. */
+const TILE = roundedRect(1.5, 1.5, 21, 20.5, 5.5)
+const TILE_EDGE = roundedRect(1.5, 2.7, 21, 20.5, 5.5)
+const GLOSS = "M1.5 7a5.5 5.5 0 0 1 5.5-5.5h10a5.5 5.5 0 0 1 5.5 5.5v2.2c-6.5 2.4-14.5 2.4-21 0z"
+/** Where the icon sits on the tile: [scale, x, y], and how far its shadow drops. */
+const ON_TILE: [number, number, number] = [0.58, 5.04, 4.79]
+const SHADOW_DROP = 1.2
+
+const solidParts = (icon: IconDef) => {
+  const shapes = solidShapes(icon)
+  return {
+    drawn: shapes.filter((shape) => shape.mode === "f" || shape.mode === "s"),
+    cuts: shapes.filter((shape) => shape.mode === "c" || shape.mode === "h"),
+  }
+}
+
+function maskLines(icon: IconDef, maskId: string) {
+  const { cuts } = solidParts(icon)
+  if (!cuts.length) return []
   return [
     `<mask id="${maskId}" maskUnits="userSpaceOnUse" x="-4" y="-4" width="32" height="32">`,
     `<rect x="-4" y="-4" width="32" height="32" fill="#fff" stroke="none"/>`,
     ...cuts.map((shape) => `<path d="${shape.d}" fill="${shape.mode === "h" ? "#000" : "none"}" stroke="#000"/>`),
     `</mask>`,
-    `<g mask="url(#${maskId})">`,
-    ...drawn,
+  ]
+}
+
+/** The Solid icon in one colour, masked by its cut-outs when it has any. */
+function solidLines(icon: IconDef, paint: string, maskId: string, open: string[] = [], { explicitStroke = false } = {}) {
+  const { drawn, cuts } = solidParts(icon)
+  const stroke = explicitStroke ? ` stroke="${paint}"` : ""
+  const paths = drawn.map((shape) => (shape.mode === "f" ? `<path d="${shape.d}" fill="${paint}"${stroke}/>` : `<path d="${shape.d}"${stroke}/>`))
+  const groupAttrs = [...open, cuts.length ? `mask="url(#${maskId})"` : ""].filter(Boolean).join(" ")
+  return groupAttrs ? [`<g ${groupAttrs}>`, ...paths, `</g>`] : paths
+}
+
+/** The SVG elements inside <svg> for a style, one per line. `paint` is the icon colour. */
+export function svgBody(icon: IconDef, variant: IconVariant, paint: string, maskId: string) {
+  if (variant === "outline") return icon.paths.map((d) => `<path d="${d}"/>`)
+  const shapes = solidShapes(icon)
+  const fills = shapes.filter((shape) => shape.mode === "f" || shape.mode === "h")
+
+  if (variant === "duotone") {
+    return [...fills.map((shape) => `<path d="${shape.d}" fill="${paint}" fill-opacity="${DUOTONE_OPACITY}" stroke="none"/>`), ...icon.paths.map((d) => `<path d="${d}"/>`)]
+  }
+
+  if (variant === "solid") return [...maskLines(icon, maskId), ...solidLines(icon, paint, maskId)]
+
+  const palette = paletteFor(icon, paint)
+  if (variant === "colour") {
+    return [
+      ...fills.map((shape) => `<path d="${shape.d}" fill="${palette.light}" stroke="none"/>`),
+      ...icon.paths.map((d, i) => `<path d="${d}" stroke="${shapes[i].mode === "c" || shapes[i].mode === "h" ? palette.accent : palette.dark}"/>`),
+    ]
+  }
+
+  // 3D: a glossy tile with the Solid icon in white and a soft shadow below it.
+  const [scale, x, y] = ON_TILE
+  return [
+    `<linearGradient id="${maskId}-tile" x1="0" y1="0" x2="0" y2="1">`,
+    `<stop offset="0" stop-color="${palette.top}"/>`,
+    `<stop offset="1" stop-color="${palette.bottom}"/>`,
+    `</linearGradient>`,
+    ...maskLines(icon, maskId),
+    `<path d="${TILE_EDGE}" fill="${palette.depth}" stroke="none"/>`,
+    `<path d="${TILE}" fill="url(#${maskId}-tile)" stroke="none"/>`,
+    `<path d="${GLOSS}" fill="#fff" fill-opacity="${GLOSS_OPACITY}" stroke="none"/>`,
+    `<g transform="translate(${x} ${y}) scale(${scale})">`,
+    ...solidLines(icon, palette.depth, maskId, [`transform="translate(0 ${SHADOW_DROP})"`, `opacity="${SHADOW_OPACITY}"`], { explicitStroke: true }),
+    ...solidLines(icon, "#fff", maskId, [], { explicitStroke: true }),
     `</g>`,
   ]
 }
 
 export function svgMarkup(icon: IconDef, style: IconStyle, { forImage = false } = {}) {
-  const color = forImage && style.color === "currentColor" ? style.resolvedColor : style.color
+  const colourful = isColourful(style.variant)
+  const color = forImage && style.color === "currentColor" && !colourful ? style.resolvedColor : style.color
+  const stroke = colourful ? paletteFor(icon, color).dark : color
   const background = style.background ? `<rect width="24" height="24" fill="${style.background}" stroke="none"/>` : ""
-  const body = svgBody(icon, style.variant, color, `venusui-${icon.name}-cut`).join("")
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${style.size}" height="${style.size}" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="${style.strokeWidth}" stroke-linecap="round" stroke-linejoin="round">${background}${body}</svg>`
+  const body = svgBody(icon, style.variant, color, `venusui-${icon.name}-${style.variant}`).join("")
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${style.size}" height="${style.size}" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="${style.strokeWidth}" stroke-linecap="round" stroke-linejoin="round">${background}${body}</svg>`
 }
 
+const JSX_ATTRS: Record<string, string> = { "fill-opacity": "fillOpacity", "stop-color": "stopColor", "stroke-width": "strokeWidth" }
+
 export function jsxSnippet(icon: IconDef, style: IconStyle) {
-  const name = `${iconComponentName(icon).replace(/Icon$/, "")}${style.variant === "outline" ? "" : style.variant[0].toUpperCase() + style.variant.slice(1)}Icon`
+  const suffix = style.variant === "outline" ? "" : style.variant === "3d" ? "3D" : style.variant[0].toUpperCase() + style.variant.slice(1)
+  const name = `${pascal(icon.name)}${suffix}Icon`
   const lines = svgBody(icon, style.variant, style.color, "__ID__")
-  const usesMask = lines.some((line) => line.includes("__ID__"))
-  const background = style.background ? [`<rect width="24" height="24" fill="${style.background}" stroke="none" />`] : []
+  const usesId = lines.some((line) => line.includes("__ID__"))
+  const stroke = isColourful(style.variant) ? paletteFor(icon, style.color).dark : style.color
+  const background = style.background ? [`<rect width="24" height="24" fill="${style.background}" stroke="none"/>`] : []
   let depth = 3
   const body = [...background, ...lines]
     .map((line) => {
       const jsx = line
-        .replace(/fill-opacity=/g, "fillOpacity=")
-        .replace(/ id="__ID__"/, " id={id}")
-        .replace(/ mask="url\(#__ID__\)"/, " mask={`url(#${id})`}")
+        .replace(/([a-z]+-[a-z]+)=/g, (match, attr: string) => (JSX_ATTRS[attr] ? `${JSX_ATTRS[attr]}=` : match))
+        .replace(/(\w+)="([^"]*__ID__[^"]*)"/g, (_, attr: string, value: string) => `${attr}={\`${value.replace(/__ID__/g, "${id}")}\`}`)
         .replace(/"\/>$/, '" />')
       if (jsx.startsWith("</")) depth--
       const out = `${"  ".repeat(depth)}${jsx}`
@@ -89,7 +231,7 @@ export function jsxSnippet(icon: IconDef, style: IconStyle) {
       return out
     })
     .join("\n")
-  return `export function ${name}(props: React.ComponentProps<"svg">) {${usesMask ? "\n  const id = React.useId()" : ""}
+  return `export function ${name}(props: React.ComponentProps<"svg">) {${usesId ? "\n  const id = React.useId()" : ""}
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +239,7 @@ export function jsxSnippet(icon: IconDef, style: IconStyle) {
       height={${style.size}}
       viewBox="0 0 24 24"
       fill="none"
-      stroke="${style.color}"
+      stroke="${stroke}"
       strokeWidth={${style.strokeWidth}}
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -328,69 +470,107 @@ function arcToCubics(from: Point, to: Point, rxIn: number, ryIn: number, rotatio
 }
 
 function pdfColor(color: string) {
+  const parsed = parseHex(color)
+  if (parsed) return parsed.map((v) => (v / 255).toFixed(3)).join(" ")
   const canvas = document.createElement("canvas").getContext("2d")
   if (!canvas) return "0 0 0"
   canvas.fillStyle = "#000"
   canvas.fillStyle = color
-  const hex = canvas.fillStyle
-  const match = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(hex)
-  if (match) return match.slice(1).map((part) => (parseInt(part, 16) / 255).toFixed(3)).join(" ")
-  const rgb = /rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)/.exec(hex)
+  const normalized = parseHex(canvas.fillStyle)
+  if (normalized) return normalized.map((v) => (v / 255).toFixed(3)).join(" ")
+  const rgb = /rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)/.exec(canvas.fillStyle)
   return rgb ? rgb.slice(1, 4).map((part) => (Number(part) / 255).toFixed(3)).join(" ") : "0 0 0"
 }
 
 /**
- * A one-page vector PDF of the icon, `size` points square. Solid cut-outs
- * become a luminosity soft mask; the Duotone tint uses fill transparency.
+ * A one-page vector PDF of the icon, `size` points square. Every layer is
+ * drawn from the page's own coordinates (so soft masks line up): Solid
+ * cut-outs are luminosity soft masks, tints and gloss use /ca, and the 3D
+ * tile is an axial shading.
  */
 export function pdfBlob(icon: IconDef, style: IconStyle) {
-  const color = pdfColor(style.color === "currentColor" ? style.resolvedColor : style.color)
-  const scale = style.size / 24
-  const transform = `${scale} 0 0 ${-scale} 0 ${style.size} cm`
-  const pen = [`${color} RG`, `${color} rg`, `${style.strokeWidth} w`, "1 J", "1 j"]
-  const shapes = solidShapes(icon)
-  const extra: string[] = []
+  const size = style.size
+  const scale = size / 24
+  const base = `${scale} 0 0 ${-scale} 0 ${size} cm`
+  const colourful = isColourful(style.variant)
+  const paint = style.color === "currentColor" && !colourful ? style.resolvedColor : style.color
+  const objects = ["", "", "", "", ""]
+  const add = (body: string) => objects.push(body)
   const states: string[] = []
-  let drawing: string[]
+  const shadings: string[] = []
+  const alphas = new Map<number, string>()
 
-  if (style.variant === "outline") {
-    drawing = icon.paths.map((d) => `${toCubicPath(d)}\nS`)
-  } else if (style.variant === "duotone") {
-    extra.push(`<< /Type /ExtGState /ca ${DUOTONE_OPACITY} >>`)
-    states.push("/Tint 6 0 R")
-    const tint = shapes.filter((shape) => shape.mode === "f" || shape.mode === "h").map((shape) => `${toCubicPath(shape.d)}\nf`)
-    drawing = ["q", "/Tint gs", ...tint, "Q", ...icon.paths.map((d) => `${toCubicPath(d)}\nS`)]
-  } else {
-    const drawn = shapes.filter((shape) => shape.mode === "f" || shape.mode === "s").map((shape) => `${toCubicPath(shape.d)}\n${shape.mode === "f" ? "B" : "S"}`)
-    const cuts = shapes.filter((shape) => shape.mode === "c" || shape.mode === "h")
-    if (cuts.length) {
-      const mask = [transform, "1 g", "-4 -4 32 32 re", "f", "0 G", "0 g", `${style.strokeWidth} w`, "1 J", "1 j", ...cuts.map((shape) => `${toCubicPath(shape.d)}\n${shape.mode === "h" ? "B" : "S"}`)].join("\n")
-      extra.push(`<< /Type /XObject /Subtype /Form /BBox [0 0 ${style.size} ${style.size}] /Group << /S /Transparency /CS /DeviceGray >> /Resources << >> /Length ${mask.length} >>\nstream\n${mask}\nendstream`)
-      extra.push("<< /Type /ExtGState /SMask << /Type /Mask /S /Luminosity /G 6 0 R >> >>")
-      states.push("/Cut 7 0 R")
-      drawing = ["Q", "q", "/Cut gs", transform, ...pen, ...drawn]
-    } else {
-      drawing = drawn
+  const alpha = (value: number) => {
+    if (!alphas.has(value)) {
+      const name = `A${alphas.size}`
+      states.push(`/${name} ${add(`<< /Type /ExtGState /ca ${value} /CA ${value} >>`)} 0 R`)
+      alphas.set(value, name)
     }
+    return alphas.get(value)!
   }
 
-  const content = [
-    "q",
-    transform,
-    ...(style.background ? [`${pdfColor(style.background)} rg`, "0 0 24 24 re", "f"] : []),
-    ...pen,
-    ...drawing,
-    "Q",
-  ].join("\n")
-  const resources = states.length ? `<< /ExtGState << ${states.join(" ")} >> >>` : "<< >>"
-  const objects = [
-    "<< /Type /Catalog /Pages 2 0 R >>",
-    "<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
-    `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${style.size} ${style.size}] /Contents 4 0 R /Resources ${resources} >>`,
-    `<< /Length ${content.length} >>\nstream\n${content}\nendstream`,
-    `<< /Title (${icon.title} icon) /Producer (VenusUI Icons) >>`,
-    ...extra,
-  ]
+  /** A soft mask that hides the icon's cut-outs, drawn with the same transforms as the icon. */
+  const cutMask = (transforms: string[]) => {
+    const { cuts } = solidParts(icon)
+    if (!cuts.length) return null
+    const content = [base, ...transforms, "1 g", "-4 -4 32 32 re", "f", "0 G", "0 g", `${style.strokeWidth} w`, "1 J", "1 j", ...cuts.map((shape) => `${toCubicPath(shape.d)}\n${shape.mode === "h" ? "B" : "S"}`)].join("\n")
+    const form = add(`<< /Type /XObject /Subtype /Form /BBox [0 0 ${size} ${size}] /Group << /S /Transparency /CS /DeviceGray >> /Resources << >> /Length ${content.length} >>\nstream\n${content}\nendstream`)
+    const name = `M${form}`
+    states.push(`/${name} ${add(`<< /Type /ExtGState /SMask << /Type /Mask /S /Luminosity /G ${form} 0 R >> >>`)} 0 R`)
+    return name
+  }
+
+  const pen = (color: string) => [`${pdfColor(color)} RG`, `${pdfColor(color)} rg`, `${style.strokeWidth} w`, "1 J", "1 j"]
+  const blocks: string[] = []
+  const block = (ops: string[], { mask, opacity, transforms = [] }: { mask?: string | null; opacity?: number; transforms?: string[] } = {}) => {
+    blocks.push(["q", ...(mask ? [`/${mask} gs`] : []), ...(opacity !== undefined ? [`/${alpha(opacity)} gs`] : []), base, ...transforms, ...ops, "Q"].join("\n"))
+  }
+
+  const shapes = solidShapes(icon)
+  const fills = shapes.filter((shape) => shape.mode === "f" || shape.mode === "h")
+  const solidOps = (color: string) => [...pen(color), ...solidParts(icon).drawn.map((shape) => `${toCubicPath(shape.d)}\n${shape.mode === "f" ? "B" : "S"}`)]
+  const outlineOps = icon.paths.map((d) => `${toCubicPath(d)}\nS`)
+
+  if (style.background) block([`${pdfColor(style.background)} rg`, "0 0 24 24 re", "f"])
+
+  if (style.variant === "outline") block([...pen(paint), ...outlineOps])
+  if (style.variant === "duotone") {
+    block([`${pdfColor(paint)} rg`, ...fills.map((shape) => `${toCubicPath(shape.d)}\nf`)], { opacity: DUOTONE_OPACITY })
+    block([...pen(paint), ...outlineOps])
+  }
+  if (style.variant === "solid") block(solidOps(paint), { mask: cutMask([]) })
+
+  const palette = paletteFor(icon, paint)
+  if (style.variant === "colour") {
+    block([`${pdfColor(palette.light)} rg`, ...fills.map((shape) => `${toCubicPath(shape.d)}\nf`)])
+    block([
+      `${style.strokeWidth} w`,
+      "1 J",
+      "1 j",
+      ...icon.paths.map((d, i) => `${pdfColor(shapes[i].mode === "c" || shapes[i].mode === "h" ? palette.accent : palette.dark)} RG\n${toCubicPath(d)}\nS`),
+    ])
+  }
+  if (style.variant === "3d") {
+    const shading = add(`<< /ShadingType 2 /ColorSpace /DeviceRGB /Coords [0 1.5 0 22] /Function << /FunctionType 2 /Domain [0 1] /C0 [${pdfColor(palette.top)}] /C1 [${pdfColor(palette.bottom)}] /N 1 >> /Extend [true true] >>`)
+    shadings.push(`/Tile ${shading} 0 R`)
+    const [s, x, y] = ON_TILE
+    const onTile = `${s} 0 0 ${s} ${x} ${y} cm`
+    const drop = `1 0 0 1 0 ${SHADOW_DROP} cm`
+    block([`${pdfColor(palette.depth)} rg`, `${toCubicPath(TILE_EDGE)}\nf`])
+    block([`${toCubicPath(TILE)}\nW n`, "/Tile sh"])
+    block(["1 1 1 rg", `${toCubicPath(GLOSS)}\nf`], { opacity: GLOSS_OPACITY })
+    block(solidOps(palette.depth), { mask: cutMask([onTile, drop]), opacity: SHADOW_OPACITY, transforms: [onTile, drop] })
+    block(solidOps("#ffffff"), { mask: cutMask([onTile]), transforms: [onTile] })
+  }
+
+  const content = blocks.join("\n")
+  const resources = [states.length ? `/ExtGState << ${states.join(" ")} >>` : "", shadings.length ? `/Shading << ${shadings.join(" ")} >>` : ""].filter(Boolean).join(" ")
+  objects[0] = "<< /Type /Catalog /Pages 2 0 R >>"
+  objects[1] = "<< /Type /Pages /Kids [3 0 R] /Count 1 >>"
+  objects[2] = `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${size} ${size}] /Contents 4 0 R /Resources << ${resources} >> >>`
+  objects[3] = `<< /Length ${content.length} >>\nstream\n${content}\nendstream`
+  objects[4] = `<< /Title (${icon.title} icon) /Producer (VenusUI Icons) >>`
+
   let pdf = "%PDF-1.4\n"
   const offsets: number[] = []
   objects.forEach((body, index) => {
