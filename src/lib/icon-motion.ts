@@ -168,6 +168,65 @@ export const MOTIONS: Record<string, Motion | Motion[]> = {
   "cloud-upload": { kind: "nudge", parts: [1, 2], dy: -2 },
   key: { kind: "rock", origin: "8 15.5" },
   "shield-check": { kind: "draw", parts: [1] },
+
+  // Finance
+  wallet: { kind: "pop" },
+  coins: { kind: "bounce", parts: [1] },
+  bank: { kind: "pop" },
+  "piggy-bank": { kind: "bounce" },
+  "trend-up": { kind: "draw", parts: [0] },
+  "trend-down": { kind: "draw", parts: [0] },
+  "pie-chart": { kind: "nudge", parts: [1], dx: 1, dy: -1 },
+  "bar-chart": { kind: "bounce", each: true, stagger: 0.12 },
+  dollar: { kind: "rock", origin: "center" },
+  euro: { kind: "rock", origin: "center" },
+  exchange: [
+    { kind: "nudge", parts: [0, 1], dx: 2 },
+    { kind: "nudge", parts: [2, 3], dx: -2 },
+  ],
+  percent: { kind: "rock", origin: "center" },
+
+  // Social
+  "thumbs-up": { kind: "rock", origin: "7 20" },
+  "thumbs-down": { kind: "rock", origin: "7 4" },
+  comment: [
+    { kind: "wave", parts: [1, 2, 3], each: true, stagger: 0.2 },
+    { kind: "pop", parts: [0] },
+  ],
+  repost: { kind: "spin", duration: 2 },
+  "user-plus": { kind: "pop", parts: [2, 3], origin: "19 11" },
+  users: { kind: "bounce", parts: [2, 3] },
+  hashtag: { kind: "rock", origin: "center" },
+  link: { kind: "pop" },
+  pin: { kind: "bounce" },
+  flag: { kind: "rock", parts: [1], origin: "5 8" },
+  award: { kind: "ring", origin: "12 3" },
+  smile: { kind: "bounce" },
+
+  // Health
+  "heart-pulse": [
+    { kind: "draw", parts: [1] },
+    { kind: "pop", parts: [0] },
+  ],
+  pill: { kind: "rock", origin: "center" },
+  stethoscope: { kind: "rock", origin: "10 4" },
+  "first-aid": { kind: "pop", parts: [2, 3], origin: "12 13" },
+  thermometer: { kind: "wave", parts: [1] },
+  activity: { kind: "draw" },
+  dna: { kind: "turn", origin: "center" },
+  hospital: { kind: "pop", parts: [1, 2], origin: "12 11.5" },
+
+  // Travel
+  plane: { kind: "nudge", dy: -2 },
+  car: { kind: "nudge", dx: 2 },
+  train: { kind: "press" },
+  bike: { kind: "nudge", dx: 2 },
+  luggage: { kind: "rock", origin: "12 21" },
+  compass: { kind: "spin", parts: [1], duration: 3 },
+  map: { kind: "pop" },
+  bed: { kind: "float", parts: [3] },
+  anchor: { kind: "rock", origin: "12 5" },
+  ticket: { kind: "pop" },
 }
 
 export function motionsFor(icon: IconDef): Motion[] {

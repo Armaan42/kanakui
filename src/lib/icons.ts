@@ -58,6 +58,10 @@ export const ICON_CATEGORIES = [
   "Devices",
   "Everyday",
   "Development",
+  "Finance",
+  "Social",
+  "Health",
+  "Travel",
 ] as const
 export type IconCategory = (typeof ICON_CATEGORIES)[number]
 
@@ -237,6 +241,55 @@ export const icons: IconDef[] = [
   icon("cloud-upload", "Cloud Upload", "Development", ["deploy", "sync", "backup"], ["M7 18.5a4.5 4.5 0 0 1-.6-9A6 6 0 0 1 18 10a4.3 4.3 0 0 1-.5 8.5z", line(12, 17.5, 12, 11.5), "M9.5 14l2.5-2.5 2.5 2.5"], ["f", "c", "c"]),
   icon("key", "Key", "Development", ["password", "token", "auth", "secret"], [circle(8, 15.5, 4.2), line(11, 12.5, 19.5, 4), line(16, 7.5, 18.5, 10), line(18.5, 5, 21, 7.5), circle(7.2, 16.3, 1.1)], ["f", "s", "s", "s", "h"]),
   icon("shield-check", "Shield Check", "Development", ["security", "safe", "verified", "protected"], ["M12 3 4.5 6v5.5c0 4.6 3.1 8.2 7.5 9.5 4.4-1.3 7.5-4.9 7.5-9.5V6z", "M8.8 12.2l2.2 2.2 4.4-4.6"], ["f", "c"]),
+  // Finance
+  icon("wallet", "Wallet", "Finance", ["money", "purse", "payment"], [rect(3, 6.5, 18, 13, 2.5), "M16 6.5V4.2a1 1 0 0 0-1.3-1L5.5 6.5", "M21 11h-3.5a2 2 0 0 0 0 4H21"], ["f", "s", "c"]),
+  icon("coins", "Coins", "Finance", ["money", "cash", "savings"], [circle(9, 12, 6), "M12 6.8A6 6 0 1 1 12 17.2", circle(9, 12, 2.6)], ["f", "s", "c"]),
+  icon("bank", "Bank", "Finance", ["finance", "building", "institution"], ["M3 9 12 4l9 5z", line(6, 11.5, 6, 16.5), line(10, 11.5, 10, 16.5), line(14, 11.5, 14, 16.5), line(18, 11.5, 18, 16.5), "M3.5 20h17"]),
+  icon("piggy-bank", "Piggy Bank", "Finance", ["savings", "money", "save"], ["M5 11.5c0-3 2.9-5.5 7-5.5h1.5c3 0 5.5 1.7 6.3 4H21v4h-1.6c-.5 1-1.3 1.8-2.4 2.4V19h-3v-1.6h-3V19H8v-2.2A5 5 0 0 1 5 11.5z", line(10, 9, 14, 9), circle(16.6, 10.6, 0.6), "M5 11.5H3"], ["f", "c", "h", "s"]),
+  icon("trend-up", "Trend Up", "Finance", ["growth", "increase", "chart", "stocks"], ["M3 17l6-6 4 4 8-8", "M15 7h6v6"]),
+  icon("trend-down", "Trend Down", "Finance", ["decline", "decrease", "chart", "stocks"], ["M3 7l6 6 4-4 8 8", "M15 17h6v-6"]),
+  icon("pie-chart", "Pie Chart", "Finance", ["analytics", "share", "report"], ["M11 4a8.5 8.5 0 1 0 9 9h-9z", "M14 3.2a8 8 0 0 1 6.8 6.8H14z"]),
+  icon("bar-chart", "Bar Chart", "Finance", ["analytics", "stats", "report"], [rect(4, 13, 4, 7, 1), rect(10, 5, 4, 15, 1), rect(16, 9, 4, 11, 1)]),
+  icon("dollar", "Dollar", "Finance", ["usd", "money", "currency", "price"], [line(12, 3, 12, 21), "M16.5 7.5c-.5-1.4-2-2.5-4.5-2.5-2.6 0-4.5 1.3-4.5 3.3 0 4.7 9 2.4 9 7.2 0 2-1.9 3.5-4.5 3.5-2.6 0-4.1-1.1-4.6-2.6"]),
+  icon("euro", "Euro", "Finance", ["eur", "money", "currency"], ["M17 6.2A7 7 0 1 0 17 17.8", line(4, 10, 13, 10), line(4, 14, 13, 14)]),
+  icon("exchange", "Exchange", "Finance", ["swap", "convert", "transfer"], ["M4 8h15", "M15 4l4 4-4 4", "M20 16H5", "M9 12l-4 4 4 4"]),
+  icon("percent", "Percent", "Finance", ["discount", "sale", "rate"], [line(19, 5, 5, 19), circle(6.5, 6.5, 2.5), circle(17.5, 17.5, 2.5)]),
+
+  // Social
+  icon("thumbs-up", "Thumbs Up", "Social", ["like", "approve", "good"], ["M7 10.5v10H4.5a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1z", "M7 10.5l3.8-6.6a1.8 1.8 0 0 1 3.3 1.3L13.4 9h5.1a2 2 0 0 1 2 2.3l-1.2 7.4a2 2 0 0 1-2 1.8H7z"]),
+  icon("thumbs-down", "Thumbs Down", "Social", ["dislike", "reject", "bad"], ["M7 13.5v-10H4.5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1z", "M7 13.5l3.8 6.6a1.8 1.8 0 0 0 3.3-1.3L13.4 15h5.1a2 2 0 0 0 2-2.3l-1.2-7.4a2 2 0 0 0-2-1.8H7z"]),
+  icon("comment", "Comment", "Social", ["message", "reply", "bubble", "chat"], ["M12 3.5c4.7 0 8.5 3.4 8.5 7.6s-3.8 7.6-8.5 7.6c-1.1 0-2.2-.2-3.2-.5L4 20l1.4-3.9a7.2 7.2 0 0 1-1.9-5c0-4.2 3.8-7.6 8.5-7.6z", line(8.5, 11, 8.6, 11), line(12, 11, 12.1, 11), line(15.5, 11, 15.6, 11)], ["f", "c", "c", "c"]),
+  icon("repost", "Repost", "Social", ["share", "retweet", "repeat"], ["M17 3.5l3 3-3 3", "M4 11.5v-1a4 4 0 0 1 4-4h12", "M7 20.5l-3-3 3-3", "M20 12.5v1a4 4 0 0 1-4 4H4"]),
+  icon("user-plus", "Add User", "Social", ["invite", "follow", "new user"], [circle(9, 8, 3.6), "M2.8 20c.8-3.6 3.3-5.6 6.2-5.6s5.4 2 6.2 5.6", line(19, 8, 19, 14), line(16, 11, 22, 11)], ["f", { d: "M2.8 20c.8-3.6 3.3-5.6 6.2-5.6s5.4 2 6.2 5.6z", mode: "f" }, "s", "s"]),
+  icon("users", "Users", "Social", ["team", "group", "people", "members"], [circle(9, 8, 3.6), "M2.8 20c.8-3.6 3.3-5.6 6.2-5.6s5.4 2 6.2 5.6", "M15.5 4.6a3.5 3.5 0 0 1 0 6.8", "M17.5 14.6c2 .6 3.4 2.4 3.9 5.4"], ["f", { d: "M2.8 20c.8-3.6 3.3-5.6 6.2-5.6s5.4 2 6.2 5.6z", mode: "f" }, "s", "s"]),
+  icon("hashtag", "Hashtag", "Social", ["tag", "topic", "number"], [line(9.5, 4, 7.5, 20), line(16.5, 4, 14.5, 20), line(4, 9, 20, 9), line(3.5, 15, 19.5, 15)]),
+  icon("link", "Link", "Social", ["url", "chain", "connect"], ["M10 14a4.2 4.2 0 0 0 6 0l3-3a4.2 4.2 0 0 0-6-6l-1 1", "M14 10a4.2 4.2 0 0 0-6 0l-3 3a4.2 4.2 0 0 0 6 6l1-1"]),
+  icon("pin", "Pin", "Social", ["pushpin", "thumbtack", "save"], ["M8.5 3.5h7", "M10 3.5v5L7 13h10l-3-4.5v-5", line(12, 13, 12, 20.5)], ["s", { d: "M10 3.5v5L7 13h10l-3-4.5v-5z", mode: "f" }, "s"]),
+  icon("flag", "Flag", "Social", ["report", "mark", "milestone"], [line(5, 21, 5, 3.5), "M5 4.5h11l-2.3 4.3L16 13H5z"], ["s", "f"]),
+  icon("award", "Award", "Social", ["medal", "badge", "achievement", "prize"], [circle(12, 9, 5.5), "M8.8 13.5 7.5 21l4.5-2.5 4.5 2.5-1.3-7.5", circle(12, 9, 2.2)], ["f", { d: "M8.8 13.5 7.5 21l4.5-2.5 4.5 2.5-1.3-7.5z", mode: "f" }, "h"]),
+  icon("smile", "Smile", "Social", ["happy", "emoji", "face", "feedback"], [circle(12, 12, 8.6), "M8.5 14.5a4.3 4.3 0 0 0 7 0", line(9, 9.5, 9.1, 9.5), line(15, 9.5, 15.1, 9.5)], ["f", "c", "c", "c"]),
+
+  // Health
+  icon("heart-pulse", "Heart Pulse", "Health", ["heartbeat", "health", "cardio", "vital"], ["M12 20s-8-4.7-8-10.3a4.4 4.4 0 0 1 8-2.5 4.4 4.4 0 0 1 8 2.5C20 15.3 12 20 12 20z", "M3.5 12H7l1.5-2.5 3 5L13 12h7.5"], ["f", "c"]),
+  icon("pill", "Pill", "Health", ["medicine", "capsule", "drug", "pharmacy"], ["M4.32 13.32 13.32 4.32A4.5 4.5 0 0 1 19.68 10.68L10.68 19.68A4.5 4.5 0 0 1 4.32 13.32z", line(8.82, 8.82, 15.18, 15.18)], ["f", "c"]),
+  icon("stethoscope", "Stethoscope", "Health", ["doctor", "medical", "checkup"], ["M5.5 3.5v5a4.5 4.5 0 0 0 9 0v-5", "M10 13v2.5a4.5 4.5 0 0 0 9 0V13", circle(19, 11, 2), "M4 3.5h3", "M13 3.5h3"], ["s", "s", "f", "s", "s"]),
+  icon("first-aid", "First Aid", "Health", ["medical kit", "emergency", "health"], [rect(3, 6, 18, 14, 2), "M9 6V4.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1V6", line(12, 10, 12, 16), line(9, 13, 15, 13)], ["f", "s", "c", "c"]),
+  icon("thermometer", "Thermometer", "Health", ["temperature", "fever", "heat"], ["M10 14.5V5a2 2 0 0 1 4 0v9.5a4 4 0 1 1-4 0z", line(12, 9, 12, 17), "M15.5 6.5h2", "M15.5 9.5h2"], ["f", "c", "s", "s"]),
+  icon("activity", "Activity", "Health", ["pulse", "heartbeat", "monitor", "fitness"], ["M3 12h4l2.5-6 5 12 2.5-6h4"]),
+  icon("dna", "DNA", "Health", ["genetics", "science", "biology", "helix"], ["M8 3c0 4.5 8 4.5 8 9s-8 4.5-8 9", "M16 3c0 4.5-8 4.5-8 9s8 4.5 8 9", line(9, 4.8, 15, 4.8), line(9, 12, 15, 12), line(9, 19.2, 15, 19.2)]),
+  icon("hospital", "Hospital", "Health", ["clinic", "medical", "building"], [rect(4, 6, 16, 15, 1.5), line(12, 9, 12, 14), line(9.5, 11.5, 14.5, 11.5), "M10 21v-3.5h4V21"], ["f", "c", "c", "c"]),
+
+  // Travel
+  icon("plane", "Plane", "Travel", ["flight", "airplane", "trip", "airport"], ["M12 2.5c.9 0 1.5.8 1.5 1.8V9l7 4.2v2.3l-7-2v4.3l2.2 1.7V21L12 20.2 8.3 21v-1.5l2.2-1.7v-4.3l-7 2v-2.3l7-4.2V4.3c0-1 .6-1.8 1.5-1.8z"]),
+  icon("car", "Car", "Travel", ["vehicle", "drive", "auto", "transport"], ["M4 15v-2.7l1.6-4.5A2 2 0 0 1 7.5 6.5h9a2 2 0 0 1 1.9 1.3l1.6 4.5V15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z", line(4.6, 11.5, 19.4, 11.5), circle(7.5, 18.4, 1.8), circle(16.5, 18.4, 1.8)], ["f", "c", "f", "f"]),
+  icon("train", "Train", "Travel", ["rail", "metro", "transport", "subway"], [rect(5, 3, 14, 14, 3), line(5, 10, 19, 10), line(8.5, 13.5, 8.6, 13.5), line(15.4, 13.5, 15.5, 13.5), "M8 17l-2.5 4", "M16 17l2.5 4"], ["f", "c", "c", "c", "s", "s"]),
+  icon("bike", "Bike", "Travel", ["bicycle", "cycling", "ride"], [circle(5.5, 16, 3.5), circle(18.5, 16, 3.5), "M5.5 16 9 9h7l2.5 7", "M9 9l3 7 4-7", "M7.5 6.5H11", "M16 9l-.8-3H17"], ["s", "s", "s", "s", "s", "s"]),
+  icon("luggage", "Luggage", "Travel", ["suitcase", "baggage", "trip"], [rect(5, 7, 14, 13, 2), "M9 7V4.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1V7", line(9.5, 7, 9.5, 20), line(14.5, 7, 14.5, 20), line(8, 20, 8, 21), line(16, 20, 16, 21)], ["f", "s", "c", "c", "s", "s"]),
+  icon("compass", "Compass", "Travel", ["direction", "navigation", "explore"], [circle(12, 12, 8.6), "M15.5 8.5l-2 5-5 2 2-5z"], ["f", "h"]),
+  icon("map", "Map", "Travel", ["navigation", "route", "location"], ["M3.5 6.5 9 4l6 2.5L20.5 4v13.5L15 20l-6-2.5-5.5 2.5z", line(9, 4, 9, 17.5), line(15, 6.5, 15, 20)], ["f", "c", "c"]),
+  icon("bed", "Bed", "Travel", ["hotel", "sleep", "stay", "room"], ["M3 19V6", "M3 15h18v4", "M21 15v-3a3 3 0 0 0-3-3h-7v6", circle(6.8, 11.6, 1.8)], ["s", "s", { d: "M21 15v-3a3 3 0 0 0-3-3h-7v6z", mode: "f" }, "f"]),
+  icon("anchor", "Anchor", "Travel", ["ship", "port", "marine", "sea"], [circle(12, 5, 2), line(12, 7, 12, 21), line(8, 10.5, 16, 10.5), "M4.5 13.5a7.5 7.5 0 0 0 15 0", "M3 15.5l1.5-2 2 1.5", "M21 15.5l-1.5-2-2 1.5"], ["s", "s", "s", "s", "s", "s"]),
+  icon("ticket", "Ticket", "Travel", ["pass", "event", "admission", "boarding"], ["M3 7.5a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1V10a2 2 0 0 0 0 4v2.5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V14a2 2 0 0 0 0-4z", line(15, 6.5, 15, 8), line(15, 11.25, 15, 12.75), line(15, 16, 15, 17.5)], ["f", "c", "c", "c"]),
 ]
 
 export function getIcon(name: string) {

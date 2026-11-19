@@ -62,6 +62,10 @@ export const CATEGORY_COLORS: Record<IconCategory, string> = {
   Devices: "#475569",
   Everyday: "#ea580c",
   Development: "#4f46e5",
+  Finance: "#ca8a04",
+  Social: "#e11d48",
+  Health: "#16a34a",
+  Travel: "#0f766e",
 }
 
 export interface Palette {
