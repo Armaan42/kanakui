@@ -1,3 +1,4 @@
+import { animatedLines, motionCss, motionKinds } from "@/lib/icon-motion"
 import { solidShapes, type IconCategory, type IconDef } from "@/lib/icons"
 
 /**
@@ -6,7 +7,7 @@ import { solidShapes, type IconCategory, type IconDef } from "@/lib/icons"
  * browser; PDF is written by hand as real vector paths.
  */
 
-export type IconVariant = "outline" | "solid" | "duotone" | "colour" | "3d"
+export type IconVariant = "outline" | "solid" | "duotone" | "colour" | "3d" | "animated"
 
 export const ICON_VARIANTS: { value: IconVariant; label: string }[] = [
   { value: "outline", label: "Outline" },
@@ -14,6 +15,7 @@ export const ICON_VARIANTS: { value: IconVariant; label: string }[] = [
   { value: "duotone", label: "Duotone" },
   { value: "colour", label: "Colour" },
   { value: "3d", label: "3D" },
+  { value: "animated", label: "Animated" },
 ]
 
 /** Styles that build their own palette from the chosen colour (or the icon's category). */
@@ -162,9 +164,14 @@ function solidLines(icon: IconDef, paint: string, maskId: string, open: string[]
   return groupAttrs ? [`<g ${groupAttrs}>`, ...paths, `</g>`] : paths
 }
 
-/** The SVG elements inside <svg> for a style, one per line. `paint` is the icon colour. */
-export function svgBody(icon: IconDef, variant: IconVariant, paint: string, maskId: string) {
+/**
+ * The SVG elements inside <svg> for a style, one per line. `paint` is the icon
+ * colour. `withCss` adds the Animated style's own <style> so the file plays by
+ * itself (the site loads that CSS once instead).
+ */
+export function svgBody(icon: IconDef, variant: IconVariant, paint: string, maskId: string, { withCss = false } = {}) {
   if (variant === "outline") return icon.paths.map((d) => `<path d="${d}"/>`)
+  if (variant === "animated") return [...(withCss ? [`<style>${motionCss(motionKinds(icon), "always")}</style>`] : []), ...animatedLines(icon)]
   const shapes = solidShapes(icon)
   const fills = shapes.filter((shape) => shape.mode === "f" || shape.mode === "h")
 
@@ -200,28 +207,46 @@ export function svgBody(icon: IconDef, variant: IconVariant, paint: string, mask
   ]
 }
 
-export function svgMarkup(icon: IconDef, style: IconStyle, { forImage = false } = {}) {
+/** `still` draws the Animated style as its resting Outline frame, for formats that can't move. */
+export function svgMarkup(icon: IconDef, styleIn: IconStyle, { forImage = false, still = false } = {}) {
+  const style: IconStyle = still && styleIn.variant === "animated" ? { ...styleIn, variant: "outline" } : styleIn
   const colourful = isColourful(style.variant)
   const color = forImage && style.color === "currentColor" && !colourful ? style.resolvedColor : style.color
   const stroke = colourful ? paletteFor(icon, color).dark : color
   const background = style.background ? `<rect width="24" height="24" fill="${style.background}" stroke="none"/>` : ""
-  const body = svgBody(icon, style.variant, color, `venusui-${icon.name}-${style.variant}`).join("")
+  const body = svgBody(icon, style.variant, color, `venusui-${icon.name}-${style.variant}`, { withCss: true }).join("")
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${style.size}" height="${style.size}" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="${style.strokeWidth}" stroke-linecap="round" stroke-linejoin="round">${background}${body}</svg>`
 }
 
 const JSX_ATTRS: Record<string, string> = { "fill-opacity": "fillOpacity", "stop-color": "stopColor", "stroke-width": "strokeWidth" }
 
+/** `style="a-b:c;--d:e"` → a React style object. */
+function jsxStyle(css: string) {
+  const entries = css.split(";").filter(Boolean).map((rule) => {
+    const [prop, ...rest] = rule.split(":")
+    const key = prop.startsWith("--") ? JSON.stringify(prop) : prop.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase())
+    return `${key}: ${JSON.stringify(rest.join(":"))}`
+  })
+  return `style={{ ${entries.join(", ")} } as React.CSSProperties}`
+}
+
 export function jsxSnippet(icon: IconDef, style: IconStyle) {
   const suffix = style.variant === "outline" ? "" : style.variant === "3d" ? "3D" : style.variant[0].toUpperCase() + style.variant.slice(1)
   const name = `${pascal(icon.name)}${suffix}Icon`
-  const lines = svgBody(icon, style.variant, style.color, "__ID__")
+  const lines = svgBody(icon, style.variant, style.color, "__ID__", { withCss: true })
   const usesId = lines.some((line) => line.includes("__ID__"))
   const stroke = isColourful(style.variant) ? paletteFor(icon, style.color).dark : style.color
   const background = style.background ? [`<rect width="24" height="24" fill="${style.background}" stroke="none"/>`] : []
   let depth = 3
   const body = [...background, ...lines]
     .map((line) => {
+      if (line.startsWith("<style>")) {
+        const out = `${"  ".repeat(depth)}<style>{\`${line.slice(7, -8)}\`}</style>`
+        return out
+      }
       const jsx = line
+        .replace(/ class="/g, ' className="')
+        .replace(/ style="([^"]*)"/g, (_, css: string) => ` ${jsxStyle(css)}`)
         .replace(/([a-z]+-[a-z]+)=/g, (match, attr: string) => (JSX_ATTRS[attr] ? `${JSX_ATTRS[attr]}=` : match))
         .replace(/(\w+)="([^"]*__ID__[^"]*)"/g, (_, attr: string, value: string) => `${attr}={\`${value.replace(/__ID__/g, "${id}")}\`}`)
         .replace(/"\/>$/, '" />')
@@ -261,9 +286,10 @@ export type RasterType = "image/png" | "image/jpeg" | "image/webp"
 
 /** Draws the icon on a canvas and encodes it. Rejects if the browser can't make that format. */
 export async function rasterBlob(icon: IconDef, style: IconStyle, type: RasterType, size = style.size): Promise<Blob> {
+  // Images can't move: the Animated style is saved as its resting frame.
   // JPEG has no transparency, so it always gets a background.
   const background = style.background ?? (type === "image/jpeg" ? "#ffffff" : null)
-  const svg = svgMarkup(icon, { ...style, size, background }, { forImage: true })
+  const svg = svgMarkup(icon, { ...style, size, background }, { forImage: true, still: true })
   const url = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }))
   try {
     const image = new Image()
@@ -488,7 +514,9 @@ function pdfColor(color: string) {
  * cut-outs are luminosity soft masks, tints and gloss use /ca, and the 3D
  * tile is an axial shading.
  */
-export function pdfBlob(icon: IconDef, style: IconStyle) {
+export function pdfBlob(icon: IconDef, styleIn: IconStyle) {
+  // PDF can't move either: Animated is drawn as its resting Outline frame.
+  const style: IconStyle = styleIn.variant === "animated" ? { ...styleIn, variant: "outline" } : styleIn
   const size = style.size
   const scale = size / 24
   const base = `${scale} 0 0 ${-scale} 0 ${size} cm`
