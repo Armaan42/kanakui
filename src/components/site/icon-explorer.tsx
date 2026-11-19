@@ -15,6 +15,7 @@ import {
   jsxSnippet,
   pdfBlob,
   ICON_VARIANTS,
+  isColourful,
   rasterBlob,
   svgBody,
   svgMarkup,
@@ -44,10 +45,11 @@ const CHECKERBOARD = "bg-[conic-gradient(var(--muted)_25%,transparent_0_50%,var(
 export function IconGlyph({
   icon,
   variant = "outline",
+  paint = "currentColor",
   strokeWidth = 2,
   className,
   ...props
-}: { icon: IconDef; variant?: IconVariant; strokeWidth?: number } & Omit<React.ComponentProps<"svg">, "children" | "dangerouslySetInnerHTML">) {
+}: { icon: IconDef; variant?: IconVariant; paint?: string; strokeWidth?: number } & Omit<React.ComponentProps<"svg">, "children" | "dangerouslySetInnerHTML">) {
   const id = React.useId().replace(/[^a-zA-Z0-9]/g, "")
   return (
     <svg
@@ -60,7 +62,7 @@ export function IconGlyph({
       aria-hidden="true"
       className={cn("size-6", className)}
       // The markup comes from our own icon data, never from user input.
-      dangerouslySetInnerHTML={{ __html: svgBody(icon, variant, "currentColor", `i${id}`).join("") }}
+      dangerouslySetInnerHTML={{ __html: svgBody(icon, variant, paint, `i${id}`).join("") }}
       {...props}
     />
   )
@@ -116,7 +118,7 @@ export function IconExplorer({ icons, initialIcon = null, initialQuery = "", ini
   return (
     <div className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
       <div className="min-w-0">
-        <div role="radiogroup" aria-label="Icon style" className="mb-4 inline-flex rounded-lg bg-muted p-1">
+        <div role="radiogroup" aria-label="Icon style" className="mb-4 flex w-fit max-w-full overflow-x-auto rounded-lg bg-muted p-1 [scrollbar-width:none]">
           {ICON_VARIANTS.map((item) => (
             <button
               key={item.value}
@@ -135,9 +137,9 @@ export function IconExplorer({ icons, initialIcon = null, initialQuery = "", ini
                 const group = event.currentTarget.parentElement
                 requestAnimationFrame(() => group?.querySelector<HTMLButtonElement>("[aria-checked=true]")?.focus())
               }}
-              className="flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium text-foreground/70 outline-none transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 aria-checked:bg-background aria-checked:text-foreground aria-checked:shadow-sm"
+              className="flex shrink-0 items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium text-foreground/70 outline-none transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 aria-checked:bg-background aria-checked:text-foreground aria-checked:shadow-sm"
             >
-              <IconGlyph icon={selected} variant={item.value} className="size-4" />
+              <IconGlyph icon={selected} variant={item.value} className="size-4 max-sm:hidden" />
               {item.label}
             </button>
           ))}
@@ -185,7 +187,7 @@ export function IconExplorer({ icons, initialIcon = null, initialQuery = "", ini
                   onClick={() => choose(icon)}
                   className="group flex aspect-square w-full flex-col items-center justify-center gap-2 rounded-xl border bg-card p-2 text-card-foreground outline-none transition-colors hover:border-foreground/30 focus-visible:ring-3 focus-visible:ring-ring/50 aria-pressed:border-foreground aria-pressed:ring-1 aria-pressed:ring-foreground"
                 >
-                  <IconGlyph icon={icon} variant={style.variant} strokeWidth={style.strokeWidth} className="size-7 transition-transform group-hover:scale-110 motion-reduce:transition-none" />
+                  <IconGlyph icon={icon} variant={style.variant} paint={isColourful(style.variant) ? style.color : "currentColor"} strokeWidth={style.strokeWidth} className="size-7 transition-transform group-hover:scale-110 motion-reduce:transition-none" />
                   <span className="w-full truncate text-center text-[11px] text-muted-foreground">{icon.name}</span>
                 </button>
               </li>
@@ -276,7 +278,7 @@ function Inspector({ icon, style, onStyleChange }: InspectorProps) {
           className={cn("grid aspect-[4/3] place-items-center rounded-lg border", style.background ? "" : CHECKERBOARD)}
           style={{ background: style.background ?? undefined, color: style.color === "currentColor" ? undefined : style.color }}
         >
-          <IconGlyph icon={icon} variant={style.variant} strokeWidth={style.strokeWidth} className="size-28" />
+          <IconGlyph icon={icon} variant={style.variant} paint={isColourful(style.variant) ? style.color : "currentColor"} strokeWidth={style.strokeWidth} className="size-28" />
         </div>
         <div className="mt-3 flex items-baseline justify-between gap-3">
           <h2 className="font-medium">
@@ -294,13 +296,17 @@ function Inspector({ icon, style, onStyleChange }: InspectorProps) {
               key={color.value}
               type="button"
               aria-pressed={style.color === color.value}
-              aria-label={color.label}
-              title={color.label}
+              aria-label={color.value === "currentColor" && isColourful(style.variant) ? "By category" : color.label}
+              title={color.value === "currentColor" && isColourful(style.variant) ? "By category" : color.label}
               onClick={() => set("color", color.value)}
               className="grid size-7 place-items-center rounded-full border outline-none focus-visible:ring-3 focus-visible:ring-ring/50 aria-pressed:ring-2 aria-pressed:ring-foreground aria-pressed:ring-offset-2 aria-pressed:ring-offset-background"
               style={{ background: color.value === "currentColor" ? undefined : color.value }}
             >
-              {color.value === "currentColor" ? <span aria-hidden="true" className="text-[10px] font-semibold">Aa</span> : null}
+              {color.value === "currentColor" ? (
+                <span aria-hidden="true" className={cn("text-[10px] font-semibold", isColourful(style.variant) && "bg-[conic-gradient(#7c3aed,#2563eb,#059669,#d97706,#db2777,#7c3aed)] bg-clip-text text-transparent")}>
+                  {isColourful(style.variant) ? "Auto" : "Aa"}
+                </span>
+              ) : null}
             </button>
           ))}
           <label className="relative grid size-7 cursor-pointer place-items-center overflow-hidden rounded-full border bg-[conic-gradient(red,yellow,lime,cyan,blue,magenta,red)] has-focus-visible:ring-3 has-focus-visible:ring-ring/50" title="Custom colour">
