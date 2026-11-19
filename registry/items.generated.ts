@@ -79,6 +79,7 @@ import item_glow_border_button from "./items/glow-border-button.ts"
 import item_glow_grid from "./items/glow-grid.ts"
 import item_gradient_text from "./items/gradient-text.ts"
 import item_grid_pattern from "./items/grid-pattern.ts"
+import item_gumball_machine from "./items/gumball-machine.ts"
 import item_hero_01 from "./items/hero-01.ts"
 import item_hero_02 from "./items/hero-02.ts"
 import item_hero_03 from "./items/hero-03.ts"
@@ -101,6 +102,7 @@ import item_kbd from "./items/kbd.ts"
 import item_keyboard from "./items/keyboard.ts"
 import item_kitchen_timer from "./items/kitchen-timer.ts"
 import item_lamp from "./items/lamp.ts"
+import item_lava_lamp from "./items/lava-lamp.ts"
 import item_light_switch_panel from "./items/light-switch-panel.ts"
 import item_like_button from "./items/like-button.ts"
 import item_login_01 from "./items/login-01.ts"
@@ -115,6 +117,8 @@ import item_marquee from "./items/marquee.ts"
 import item_matchbox from "./items/matchbox.ts"
 import item_menu_01 from "./items/menu-01.ts"
 import item_meteors from "./items/meteors.ts"
+import item_morse_key from "./items/morse-key.ts"
+import item_music_box from "./items/music-box.ts"
 import item_music_equalizer from "./items/music-equalizer.ts"
 import item_navbar_01 from "./items/navbar-01.ts"
 import item_navbar_02 from "./items/navbar-02.ts"
@@ -157,6 +161,7 @@ import item_reveal_card from "./items/reveal-card.ts"
 import item_ripple_background from "./items/ripple-background.ts"
 import item_ripple_button from "./items/ripple-button.ts"
 import item_rolodex from "./items/rolodex.ts"
+import item_rotary_phone from "./items/rotary-phone.ts"
 import item_rotating_words from "./items/rotating-words.ts"
 import item_rubber_stamp from "./items/rubber-stamp.ts"
 import item_saas_landing from "./items/saas-landing.ts"
@@ -214,6 +219,7 @@ import item_wedding_01 from "./items/wedding-01.ts"
 import item_widgets_01 from "./items/widgets-01.ts"
 import item_wireframe_orb from "./items/wireframe-orb.ts"
 import item_world_clock from "./items/world-clock.ts"
+import item_zen_garden from "./items/zen-garden.ts"
 
 export const itemDefinitions: RegistryItemDefinition[] = [
   item_abacus,
@@ -294,6 +300,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_glow_grid,
   item_gradient_text,
   item_grid_pattern,
+  item_gumball_machine,
   item_hero_01,
   item_hero_02,
   item_hero_03,
@@ -316,6 +323,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_keyboard,
   item_kitchen_timer,
   item_lamp,
+  item_lava_lamp,
   item_light_switch_panel,
   item_like_button,
   item_login_01,
@@ -330,6 +338,8 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_matchbox,
   item_menu_01,
   item_meteors,
+  item_morse_key,
+  item_music_box,
   item_music_equalizer,
   item_navbar_01,
   item_navbar_02,
@@ -372,6 +382,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_ripple_background,
   item_ripple_button,
   item_rolodex,
+  item_rotary_phone,
   item_rotating_words,
   item_rubber_stamp,
   item_saas_landing,
@@ -429,4 +440,5 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_widgets_01,
   item_wireframe_orb,
   item_world_clock,
+  item_zen_garden,
 ]
