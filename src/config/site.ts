@@ -68,6 +68,7 @@ export const siteConfig = {
     { title: "Blocks", href: "/blocks" },
     { title: "Templates", href: "/templates" },
     { title: "Themes", href: "/themes" },
+    { title: "Icons", href: "/icons" },
     { title: "Docs", href: "/docs" },
   ],
   registry: {
