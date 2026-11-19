@@ -1,5 +1,5 @@
 import { InstallDemo } from "@/components/home/install-demo"
-import { installCommandByUrl } from "@/config/site"
+import { installCommand } from "@/config/site"
 
 const steps = [
   { title: "Pick a component", body: "Preview it live, read its docs, and check the files and packages it adds." },
@@ -15,7 +15,7 @@ export function HomeHowItWorks() {
         <h2 id="how-it-works" className="mb-10 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
           Copy the command. Own the code.
         </h2>
-        <InstallDemo command={installCommandByUrl("animated-card")} steps={steps} />
+        <InstallDemo command={installCommand("animated-card")} steps={steps} />
       </div>
     </section>
   )

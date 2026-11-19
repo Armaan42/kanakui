@@ -1,5 +1,5 @@
 import { docsPages } from "@/config/docs"
-import { installCommandByUrl, siteConfig } from "@/config/site"
+import { installCommand, installCommandByUrl, siteConfig } from "@/config/site"
 import { getItems, KIND_LABEL, type ItemKind } from "@/lib/registry"
 
 const KINDS: ItemKind[] = ["components", "blocks", "templates"]
@@ -16,8 +16,8 @@ export function GET() {
     "",
     `> ${siteConfig.description} Everything is free under the ${siteConfig.license.name} license.`,
     "",
-    "Every item installs into a project set up with shadcn (components.json) using the command shown next to it.",
-    `To install by name instead, register the namespace once: npx shadcn@latest registry add ${siteConfig.registry.namespace}=${siteConfig.url}${siteConfig.registry.basePath}/{name}.json`,
+    `Every item installs into a project set up with shadcn (components.json) with ${installCommand("<name>")}. ${siteConfig.registry.namespace} is listed in the shadcn registry index, so no setup is needed.`,
+    `With an older shadcn CLI, install by full address instead: ${installCommandByUrl("<name>")}`,
     `Registry index: ${absolute(`${siteConfig.registry.basePath}/registry.json`)}`,
     "",
     "## Docs",
@@ -28,7 +28,7 @@ export function GET() {
       `## ${KIND_LABEL[kind].plural[0].toUpperCase()}${KIND_LABEL[kind].plural.slice(1)}`,
       "",
       ...getItems(kind).map(
-        (item) => `- [${item.title}](${absolute(item.href)}): ${item.description} Install: \`${installCommandByUrl(item.name)}\``
+        (item) => `- [${item.title}](${absolute(item.href)}): ${item.description} Install: \`${installCommand(item.name)}\``
       ),
     ]),
     "",

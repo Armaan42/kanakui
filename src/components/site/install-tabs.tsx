@@ -4,7 +4,7 @@ import { CodeViewer } from "@/components/site/code-viewer"
 import { CommandBlock } from "@/components/site/command-block"
 import { InlineText } from "@/components/site/docs"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { installCommand, installCommandByUrl, registrySetupCommand, siteConfig } from "@/config/site"
+import { installCommand, installCommandByUrl } from "@/config/site"
 import { getItemCss, getSourceFiles } from "@/lib/source"
 
 interface StepProps {
@@ -85,29 +85,22 @@ export async function InstallTabs({ name, npmDependencies, shadcnDependencies = 
     <Tabs defaultValue="cli" className="gap-4">
       <TabsList variant="line">
         <TabsTrigger value="cli">CLI</TabsTrigger>
-        <TabsTrigger value="namespace">Namespace</TabsTrigger>
+        <TabsTrigger value="url">URL</TabsTrigger>
         <TabsTrigger value="manual">Manual</TabsTrigger>
       </TabsList>
 
       <TabsContent value="cli" className="space-y-3">
-        <CommandBlock command={installCommandByUrl(name)} copyLabel="Copy install command" />
+        <CommandBlock command={installCommand(name)} copyLabel="Copy install command" />
         <p className="text-sm text-muted-foreground">
           <InlineText text="Run this in a project set up with shadcn. If you haven’t set it up yet, run `npx shadcn@latest init` first." />
         </p>
       </TabsContent>
 
-      <TabsContent value="namespace">
-        <ol className="space-y-5">
-          <Step
-            number={1}
-            title={`Add the \`${siteConfig.registry.namespace}\` registry to your project. You only need to do this once.`}
-          >
-            <CommandBlock command={registrySetupCommand()} copyLabel="Copy registry setup command" />
-          </Step>
-          <Step number={2} title="Install the component.">
-            <CommandBlock command={installCommand(name)} copyLabel="Copy namespaced install command" />
-          </Step>
-        </ol>
+      <TabsContent value="url" className="space-y-3">
+        <CommandBlock command={installCommandByUrl(name)} copyLabel="Copy install command by URL" />
+        <p className="text-sm text-muted-foreground">
+          <InlineText text="The same install by full address. Use it with an older shadcn CLI, or if your network can’t reach the shadcn registry index." />
+        </p>
       </TabsContent>
 
       <TabsContent value="manual">

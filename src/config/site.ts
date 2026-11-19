@@ -87,17 +87,28 @@ export function registryItemUrl(name: string): string {
   return `${siteConfig.url}${siteConfig.registry.basePath}/${name}.json`;
 }
 
-/** `npx shadcn@latest add @ns/name`: works once the namespace is configured or indexed. */
+/**
+ * `npx shadcn@latest add @venusui/name`: the main install command. @venusui is
+ * listed in the official shadcn registry index (ui.shadcn.com/r/registries.json),
+ * so it works in any shadcn project with no setup. A fork that changes the
+ * namespace or domain must be listed too, or switch the site back to the
+ * by-URL commands.
+ */
 export function installCommand(name: string): string {
   return `npx shadcn@latest add ${siteConfig.registry.namespace}/${name}`;
 }
 
-/** Works with zero consumer configuration. */
+/** The same install by full address: for older CLIs or a registry that isn't indexed. */
 export function installCommandByUrl(name: string): string {
   return `npx shadcn@latest add ${registryItemUrl(name)}`;
 }
 
-/** One-time setup that registers the namespace in the consumer's components.json. */
+/** Adds the namespace to components.json (used by the MCP server). The index supplies the address. */
 export function registrySetupCommand(): string {
+  return `npx shadcn@latest registry add ${siteConfig.registry.namespace}`;
+}
+
+/** Registers the namespace with its address, for CLIs that can't reach the index. */
+export function registrySetupCommandByUrl(): string {
   return `npx shadcn@latest registry add ${siteConfig.registry.namespace}=${registryUrlTemplate()}`;
 }

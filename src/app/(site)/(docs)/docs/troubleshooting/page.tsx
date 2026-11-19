@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { DocsArticle } from "@/components/site/docs-article"
 import { DocsSection, InlineText } from "@/components/site/docs"
 import { getDocsPage } from "@/config/docs"
-import { registrySetupCommand, siteConfig } from "@/config/site"
+import { registrySetupCommandByUrl, siteConfig } from "@/config/site"
 
 const HREF = "/docs/troubleshooting"
 const page = getDocsPage(HREF)
@@ -13,7 +13,7 @@ export const metadata: Metadata = { title: page.title, description: page.descrip
 const issues = [
   {
     problem: `\`Unknown registry "${siteConfig.registry.namespace}"\``,
-    solution: `Your project doesn’t know the namespace yet. Run \`${registrySetupCommand()}\` once, or install by URL.`,
+    solution: `Your shadcn CLI couldn’t find the namespace in the shadcn registry index. Use the latest CLI (\`npx shadcn@latest\`), install by URL, or register it with its address: \`${registrySetupCommandByUrl()}\`.`,
   },
   {
     problem: "`No components.json found`",

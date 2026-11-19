@@ -5,7 +5,7 @@ import { CommandBlock } from "@/components/site/command-block"
 import { DocsArticle, Step } from "@/components/site/docs-article"
 import { DocsSection, InlineText } from "@/components/site/docs"
 import { getDocsPage } from "@/config/docs"
-import { installCommand, installCommandByUrl, registrySetupCommand } from "@/config/site"
+import { installCommand, installCommandByUrl } from "@/config/site"
 
 const HREF = "/docs/installation"
 const page = getDocsPage(HREF)
@@ -49,13 +49,12 @@ export default function InstallationPage() {
             <CommandBlock command="npx shadcn@latest init" />
           </Step>
           <Step number={4} title="Install a component">
-            <p>Install by URL. No other setup needed:</p>
-            <CommandBlock command={installCommandByUrl("animated-card")} copyLabel="Copy install command" />
+            <p>Install any item by name. No other setup needed:</p>
+            <CommandBlock command={installCommand("animated-card")} copyLabel="Copy install command" />
             <p>
-              <InlineText text="Or register the namespace once and install by name:" />
+              <InlineText text="Or use its full address, which also works with older versions of the shadcn CLI:" />
             </p>
-            <CommandBlock command={registrySetupCommand()} copyLabel="Copy registry setup command" />
-            <CommandBlock command={installCommand("animated-card")} copyLabel="Copy namespaced install command" />
+            <CommandBlock command={installCommandByUrl("animated-card")} copyLabel="Copy install command by URL" />
           </Step>
           <Step number={5} title="Use it">
             <p>

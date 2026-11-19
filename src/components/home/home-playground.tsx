@@ -1,5 +1,5 @@
 import { Playground } from "@/components/home/playground"
-import { installCommandByUrl } from "@/config/site"
+import { installCommand } from "@/config/site"
 
 const NAMES = ["dotted-globe", "border-beam", "aurora-background", "spotlight-card"]
 
@@ -8,7 +8,7 @@ const NAMES = ["dotted-globe", "border-beam", "aurora-background", "spotlight-ca
  * where the production site URL is known, and passed to the client.
  */
 export function HomePlayground() {
-  const commands = Object.fromEntries(NAMES.map((name) => [name, installCommandByUrl(name)]))
+  const commands = Object.fromEntries(NAMES.map((name) => [name, installCommand(name)]))
 
   return (
     <section aria-labelledby="playground" className="border-b">
