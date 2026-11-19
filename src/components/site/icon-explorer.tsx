@@ -14,9 +14,12 @@ import {
   iconComponentName,
   jsxSnippet,
   pdfBlob,
+  ICON_VARIANTS,
   rasterBlob,
+  svgBody,
   svgMarkup,
   type IconStyle,
+  type IconVariant,
 } from "@/lib/icon-export"
 
 const SIZES = [16, 24, 32, 48, 64, 128, 256, 512]
@@ -37,14 +40,29 @@ const BACKGROUNDS = [
 ]
 const CHECKERBOARD = "bg-[conic-gradient(var(--muted)_25%,transparent_0_50%,var(--muted)_0_75%,transparent_0)] bg-size-[16px_16px]"
 
-/** Draws one of our icons inline. */
-export function IconGlyph({ icon, strokeWidth = 2, className, ...props }: { icon: IconDef; strokeWidth?: number } & React.ComponentProps<"svg">) {
+/** Draws one of our icons inline, in any style. */
+export function IconGlyph({
+  icon,
+  variant = "outline",
+  strokeWidth = 2,
+  className,
+  ...props
+}: { icon: IconDef; variant?: IconVariant; strokeWidth?: number } & Omit<React.ComponentProps<"svg">, "children" | "dangerouslySetInnerHTML">) {
+  const id = React.useId().replace(/[^a-zA-Z0-9]/g, "")
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className={cn("size-6", className)} {...props}>
-      {icon.paths.map((d) => (
-        <path key={d} d={d} />
-      ))}
-    </svg>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className={cn("size-6", className)}
+      // The markup comes from our own icon data, never from user input.
+      dangerouslySetInnerHTML={{ __html: svgBody(icon, variant, "currentColor", `i${id}`).join("") }}
+      {...props}
+    />
   )
 }
 
@@ -52,20 +70,22 @@ interface ExplorerProps {
   icons: IconDef[]
   initialIcon?: string | null
   initialQuery?: string
+  initialVariant?: IconVariant
 }
 
 /** Reads `?icon=` and `?q=` so a link can open a specific icon or search. */
 export function IconExplorerFromUrl({ icons }: { icons: IconDef[] }) {
   const params = useSearchParams()
-  return <IconExplorer icons={icons} initialIcon={params.get("icon")} initialQuery={params.get("q") ?? ""} />
+  const variant = ICON_VARIANTS.find((item) => item.value === params.get("style"))?.value
+  return <IconExplorer icons={icons} initialIcon={params.get("icon")} initialQuery={params.get("q") ?? ""} initialVariant={variant} />
 }
 
-export function IconExplorer({ icons, initialIcon = null, initialQuery = "" }: ExplorerProps) {
+export function IconExplorer({ icons, initialIcon = null, initialQuery = "", initialVariant = "outline" }: ExplorerProps) {
   const [query, setQuery] = React.useState(initialQuery)
   const [category, setCategory] = React.useState<string>("All")
   const [selected, setSelected] = React.useState(() => icons.find((icon) => icon.name === initialIcon) ?? icons[0])
   const [sheetOpen, setSheetOpen] = React.useState(false)
-  const [style, setStyle] = React.useState<Omit<IconStyle, "resolvedColor">>({ size: 64, color: "currentColor", strokeWidth: 2, background: null })
+  const [style, setStyle] = React.useState<Omit<IconStyle, "resolvedColor">>({ variant: initialVariant, size: 64, color: "currentColor", strokeWidth: 2, background: null })
 
   const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean)
   const shown = icons.filter((icon) => {
@@ -75,17 +95,53 @@ export function IconExplorer({ icons, initialIcon = null, initialQuery = "" }: E
   })
   const counts = Object.fromEntries(ICON_CATEGORIES.map((name) => [name, icons.filter((icon) => icon.category === name).length]))
 
+  const remember = (key: string, value: string | null) => {
+    const url = new URL(window.location.href)
+    if (value) url.searchParams.set(key, value)
+    else url.searchParams.delete(key)
+    window.history.replaceState(null, "", url)
+  }
+
   const choose = (icon: IconDef) => {
     setSelected(icon)
-    const url = new URL(window.location.href)
-    url.searchParams.set("icon", icon.name)
-    window.history.replaceState(null, "", url)
+    remember("icon", icon.name)
     if (!window.matchMedia("(min-width: 1024px)").matches) setSheetOpen(true)
+  }
+
+  const chooseVariant = (variant: IconVariant) => {
+    setStyle((current) => ({ ...current, variant }))
+    remember("style", variant === "outline" ? null : variant)
   }
 
   return (
     <div className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
       <div className="min-w-0">
+        <div role="radiogroup" aria-label="Icon style" className="mb-4 inline-flex rounded-lg bg-muted p-1">
+          {ICON_VARIANTS.map((item) => (
+            <button
+              key={item.value}
+              type="button"
+              role="radio"
+              aria-checked={style.variant === item.value}
+              tabIndex={style.variant === item.value ? 0 : -1}
+              onClick={() => chooseVariant(item.value)}
+              onKeyDown={(event) => {
+                const step = event.key === "ArrowRight" || event.key === "ArrowDown" ? 1 : event.key === "ArrowLeft" || event.key === "ArrowUp" ? -1 : 0
+                if (!step) return
+                event.preventDefault()
+                const index = ICON_VARIANTS.findIndex((variant) => variant.value === style.variant)
+                const next = ICON_VARIANTS[(index + step + ICON_VARIANTS.length) % ICON_VARIANTS.length]
+                chooseVariant(next.value)
+                const group = event.currentTarget.parentElement
+                requestAnimationFrame(() => group?.querySelector<HTMLButtonElement>("[aria-checked=true]")?.focus())
+              }}
+              className="flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium text-foreground/70 outline-none transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 aria-checked:bg-background aria-checked:text-foreground aria-checked:shadow-sm"
+            >
+              <IconGlyph icon={selected} variant={item.value} className="size-4" />
+              {item.label}
+            </button>
+          ))}
+        </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <label className="relative min-w-0 flex-1">
             <span className="sr-only">Search icons</span>
@@ -129,7 +185,7 @@ export function IconExplorer({ icons, initialIcon = null, initialQuery = "" }: E
                   onClick={() => choose(icon)}
                   className="group flex aspect-square w-full flex-col items-center justify-center gap-2 rounded-xl border bg-card p-2 text-card-foreground outline-none transition-colors hover:border-foreground/30 focus-visible:ring-3 focus-visible:ring-ring/50 aria-pressed:border-foreground aria-pressed:ring-1 aria-pressed:ring-foreground"
                 >
-                  <IconGlyph icon={icon} strokeWidth={style.strokeWidth} className="size-7 transition-transform group-hover:scale-110 motion-reduce:transition-none" />
+                  <IconGlyph icon={icon} variant={style.variant} strokeWidth={style.strokeWidth} className="size-7 transition-transform group-hover:scale-110 motion-reduce:transition-none" />
                   <span className="w-full truncate text-center text-[11px] text-muted-foreground">{icon.name}</span>
                 </button>
               </li>
@@ -183,7 +239,7 @@ function Inspector({ icon, style, onStyleChange }: InspectorProps) {
   const set = <K extends keyof typeof style>(key: K, value: (typeof style)[K]) => onStyleChange((current) => ({ ...current, [key]: value }))
 
   const fullStyle = (): IconStyle => ({ ...style, resolvedColor: preview.current ? getComputedStyle(preview.current).color : "#0a0a0a" })
-  const file = (ext: string) => `venusui-${icon.name}.${ext}`
+  const file = (ext: string) => `venusui-${icon.name}${style.variant === "outline" ? "" : `-${style.variant}`}.${ext}`
 
   const copy = async (label: string, text: string) => {
     try {
@@ -220,10 +276,12 @@ function Inspector({ icon, style, onStyleChange }: InspectorProps) {
           className={cn("grid aspect-[4/3] place-items-center rounded-lg border", style.background ? "" : CHECKERBOARD)}
           style={{ background: style.background ?? undefined, color: style.color === "currentColor" ? undefined : style.color }}
         >
-          <IconGlyph icon={icon} strokeWidth={style.strokeWidth} className="size-28" />
+          <IconGlyph icon={icon} variant={style.variant} strokeWidth={style.strokeWidth} className="size-28" />
         </div>
         <div className="mt-3 flex items-baseline justify-between gap-3">
-          <h2 className="font-medium">{icon.title}</h2>
+          <h2 className="font-medium">
+            {icon.title} <span className="font-normal text-muted-foreground">· {ICON_VARIANTS.find((item) => item.value === style.variant)?.label}</span>
+          </h2>
           <span className="font-mono text-xs text-muted-foreground">{iconComponentName(icon)}</span>
         </div>
       </div>

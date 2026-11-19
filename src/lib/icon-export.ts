@@ -1,4 +1,4 @@
-import type { IconDef } from "@/lib/icons"
+import { solidShapes, type IconDef } from "@/lib/icons"
 
 /**
  * Turns an icon into every format the Icons page offers. SVG, JSX and data
@@ -6,7 +6,19 @@ import type { IconDef } from "@/lib/icons"
  * browser; PDF is written by hand as real vector paths.
  */
 
+export type IconVariant = "outline" | "solid" | "duotone"
+
+export const ICON_VARIANTS: { value: IconVariant; label: string }[] = [
+  { value: "outline", label: "Outline" },
+  { value: "solid", label: "Solid" },
+  { value: "duotone", label: "Duotone" },
+]
+
+/** Opacity of the tinted fill in the Duotone style. */
+export const DUOTONE_OPACITY = 0.22
+
 export interface IconStyle {
+  variant: IconVariant
   /** Pixel size of downloads. */
   size: number
   /** CSS colour, or "currentColor" (resolved to `resolvedColor` for images). */
@@ -27,18 +39,57 @@ export function iconComponentName(icon: IconDef) {
   return `${pascal(icon.name)}Icon`
 }
 
+/** The SVG elements inside <svg> for a style, one per line. `paint` is the icon colour. */
+export function svgBody(icon: IconDef, variant: IconVariant, paint: string, maskId: string) {
+  if (variant === "outline") return icon.paths.map((d) => `<path d="${d}"/>`)
+  const shapes = solidShapes(icon)
+  if (variant === "duotone") {
+    const tint = shapes.filter((shape) => shape.mode === "f" || shape.mode === "h").map((shape) => `<path d="${shape.d}" fill="${paint}" fill-opacity="${DUOTONE_OPACITY}" stroke="none"/>`)
+    return [...tint, ...icon.paths.map((d) => `<path d="${d}"/>`)]
+  }
+  const drawn = shapes
+    .filter((shape) => shape.mode === "f" || shape.mode === "s")
+    .map((shape) => (shape.mode === "f" ? `<path d="${shape.d}" fill="${paint}"/>` : `<path d="${shape.d}"/>`))
+  const cuts = shapes.filter((shape) => shape.mode === "c" || shape.mode === "h")
+  if (!cuts.length) return drawn
+  return [
+    `<mask id="${maskId}" maskUnits="userSpaceOnUse" x="-4" y="-4" width="32" height="32">`,
+    `<rect x="-4" y="-4" width="32" height="32" fill="#fff" stroke="none"/>`,
+    ...cuts.map((shape) => `<path d="${shape.d}" fill="${shape.mode === "h" ? "#000" : "none"}" stroke="#000"/>`),
+    `</mask>`,
+    `<g mask="url(#${maskId})">`,
+    ...drawn,
+    `</g>`,
+  ]
+}
+
 export function svgMarkup(icon: IconDef, style: IconStyle, { forImage = false } = {}) {
   const color = forImage && style.color === "currentColor" ? style.resolvedColor : style.color
   const background = style.background ? `<rect width="24" height="24" fill="${style.background}" stroke="none"/>` : ""
-  const paths = icon.paths.map((d) => `<path d="${d}"/>`).join("")
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${style.size}" height="${style.size}" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="${style.strokeWidth}" stroke-linecap="round" stroke-linejoin="round">${background}${paths}</svg>`
+  const body = svgBody(icon, style.variant, color, `venusui-${icon.name}-cut`).join("")
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${style.size}" height="${style.size}" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="${style.strokeWidth}" stroke-linecap="round" stroke-linejoin="round">${background}${body}</svg>`
 }
 
 export function jsxSnippet(icon: IconDef, style: IconStyle) {
-  const name = iconComponentName(icon)
-  const background = style.background ? `\n      <rect width="24" height="24" fill="${style.background}" stroke="none" />` : ""
-  const paths = icon.paths.map((d) => `\n      <path d="${d}" />`).join("")
-  return `export function ${name}(props: React.ComponentProps<"svg">) {
+  const name = `${iconComponentName(icon).replace(/Icon$/, "")}${style.variant === "outline" ? "" : style.variant[0].toUpperCase() + style.variant.slice(1)}Icon`
+  const lines = svgBody(icon, style.variant, style.color, "__ID__")
+  const usesMask = lines.some((line) => line.includes("__ID__"))
+  const background = style.background ? [`<rect width="24" height="24" fill="${style.background}" stroke="none" />`] : []
+  let depth = 3
+  const body = [...background, ...lines]
+    .map((line) => {
+      const jsx = line
+        .replace(/fill-opacity=/g, "fillOpacity=")
+        .replace(/ id="__ID__"/, " id={id}")
+        .replace(/ mask="url\(#__ID__\)"/, " mask={`url(#${id})`}")
+        .replace(/"\/>$/, '" />')
+      if (jsx.startsWith("</")) depth--
+      const out = `${"  ".repeat(depth)}${jsx}`
+      if (!jsx.startsWith("</") && !jsx.endsWith("/>")) depth++
+      return out
+    })
+    .join("\n")
+  return `export function ${name}(props: React.ComponentProps<"svg">) {${usesMask ? "\n  const id = React.useId()" : ""}
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +103,8 @@ export function jsxSnippet(icon: IconDef, style: IconStyle) {
       strokeLinejoin="round"
       aria-hidden="true"
       {...props}
-    >${background}${paths}
+    >
+${body}
     </svg>
   )
 }
@@ -287,27 +339,57 @@ function pdfColor(color: string) {
   return rgb ? rgb.slice(1, 4).map((part) => (Number(part) / 255).toFixed(3)).join(" ") : "0 0 0"
 }
 
-/** A one-page vector PDF of the icon, `size` points square. */
+/**
+ * A one-page vector PDF of the icon, `size` points square. Solid cut-outs
+ * become a luminosity soft mask; the Duotone tint uses fill transparency.
+ */
 export function pdfBlob(icon: IconDef, style: IconStyle) {
-  const color = style.color === "currentColor" ? style.resolvedColor : style.color
+  const color = pdfColor(style.color === "currentColor" ? style.resolvedColor : style.color)
   const scale = style.size / 24
+  const transform = `${scale} 0 0 ${-scale} 0 ${style.size} cm`
+  const pen = [`${color} RG`, `${color} rg`, `${style.strokeWidth} w`, "1 J", "1 j"]
+  const shapes = solidShapes(icon)
+  const extra: string[] = []
+  const states: string[] = []
+  let drawing: string[]
+
+  if (style.variant === "outline") {
+    drawing = icon.paths.map((d) => `${toCubicPath(d)}\nS`)
+  } else if (style.variant === "duotone") {
+    extra.push(`<< /Type /ExtGState /ca ${DUOTONE_OPACITY} >>`)
+    states.push("/Tint 6 0 R")
+    const tint = shapes.filter((shape) => shape.mode === "f" || shape.mode === "h").map((shape) => `${toCubicPath(shape.d)}\nf`)
+    drawing = ["q", "/Tint gs", ...tint, "Q", ...icon.paths.map((d) => `${toCubicPath(d)}\nS`)]
+  } else {
+    const drawn = shapes.filter((shape) => shape.mode === "f" || shape.mode === "s").map((shape) => `${toCubicPath(shape.d)}\n${shape.mode === "f" ? "B" : "S"}`)
+    const cuts = shapes.filter((shape) => shape.mode === "c" || shape.mode === "h")
+    if (cuts.length) {
+      const mask = [transform, "1 g", "-4 -4 32 32 re", "f", "0 G", "0 g", `${style.strokeWidth} w`, "1 J", "1 j", ...cuts.map((shape) => `${toCubicPath(shape.d)}\n${shape.mode === "h" ? "B" : "S"}`)].join("\n")
+      extra.push(`<< /Type /XObject /Subtype /Form /BBox [0 0 ${style.size} ${style.size}] /Group << /S /Transparency /CS /DeviceGray >> /Resources << >> /Length ${mask.length} >>\nstream\n${mask}\nendstream`)
+      extra.push("<< /Type /ExtGState /SMask << /Type /Mask /S /Luminosity /G 6 0 R >> >>")
+      states.push("/Cut 7 0 R")
+      drawing = ["Q", "q", "/Cut gs", transform, ...pen, ...drawn]
+    } else {
+      drawing = drawn
+    }
+  }
+
   const content = [
     "q",
-    `${scale} 0 0 ${-scale} 0 ${style.size} cm`,
+    transform,
     ...(style.background ? [`${pdfColor(style.background)} rg`, "0 0 24 24 re", "f"] : []),
-    `${pdfColor(color)} RG`,
-    `${style.strokeWidth} w`,
-    "1 J",
-    "1 j",
-    ...icon.paths.map((d) => `${toCubicPath(d)}\nS`),
+    ...pen,
+    ...drawing,
     "Q",
   ].join("\n")
+  const resources = states.length ? `<< /ExtGState << ${states.join(" ")} >> >>` : "<< >>"
   const objects = [
     "<< /Type /Catalog /Pages 2 0 R >>",
     "<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
-    `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${style.size} ${style.size}] /Contents 4 0 R /Resources << >> >>`,
+    `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${style.size} ${style.size}] /Contents 4 0 R /Resources ${resources} >>`,
     `<< /Length ${content.length} >>\nstream\n${content}\nendstream`,
     `<< /Title (${icon.title} icon) /Producer (VenusUI Icons) >>`,
+    ...extra,
   ]
   let pdf = "%PDF-1.4\n"
   const offsets: number[] = []
