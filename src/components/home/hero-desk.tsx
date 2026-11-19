@@ -4,6 +4,7 @@ import type * as React from "react"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 
+import { ThemeCard } from "@/components/home/theme-card"
 import { cn } from "@/lib/utils"
 import { InstantCamera } from "@/registry/default/ui/instant-camera"
 import { LightSwitchPanel } from "@/registry/default/ui/light-switch-panel"
@@ -17,6 +18,8 @@ const photo = (id: string, w: number, h = w) => `https://images.unsplash.com/pho
 interface DeskItemProps {
   name: string
   title: string
+  /** Where the tag goes; a component's page by default. */
+  href?: string
   /** Size on the desk: these are full components, shrunk to fit. */
   zoom: number
   /** Where it sits on the desk at extra-large widths. */
@@ -26,13 +29,13 @@ interface DeskItemProps {
 }
 
 /** One object on the desk, with a tag that links to its page. */
-function DeskItem({ name, title, zoom, place, tilt = 0, children }: DeskItemProps) {
+function DeskItem({ name, title, href, zoom, place, tilt = 0, children }: DeskItemProps) {
   return (
     <figure className={cn("flex shrink-0 snap-center flex-col items-center gap-3 xl:absolute", place)}>
       <div style={{ zoom, rotate: `${tilt}deg` }}>{children}</div>
       <figcaption>
         <Link
-          href={`/components/${name}`}
+          href={href ?? `/components/${name}`}
           className="inline-flex items-center gap-1 rounded-full border bg-background/90 px-2.5 py-1 font-mono text-[11px] text-muted-foreground shadow-xs outline-none transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
         >
           {title}
@@ -61,7 +64,10 @@ export function HeroDesk() {
           "dark:bg-[linear-gradient(to_right,rgb(255_255_255/0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgb(255_255_255/0.04)_1px,transparent_1px),linear-gradient(to_right,rgb(255_255_255/0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgb(255_255_255/0.06)_1px,transparent_1px)]"
         )}
       >
-        <div className="flex snap-x snap-mandatory items-end gap-10 overflow-x-auto px-6 pt-10 pb-8 [scrollbar-width:thin] xl:block xl:h-[34rem] xl:overflow-visible xl:p-0">
+        <div className="flex snap-x snap-mandatory items-end gap-10 overflow-x-auto px-6 pt-10 pb-8 [scrollbar-width:thin] xl:block xl:h-[40rem] xl:overflow-visible xl:p-0">
+          <DeskItem name="themes" title="Themes" href="/themes" zoom={1} place="xl:top-6 xl:right-[3%]" tilt={2}>
+            <ThemeCard />
+          </DeskItem>
           <DeskItem name="instant-camera" title="Instant Camera" zoom={0.74} place="xl:top-8 xl:left-[3%]" tilt={-2}>
             <InstantCamera
               defaultTaken={1}
