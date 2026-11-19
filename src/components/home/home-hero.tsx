@@ -27,14 +27,14 @@ export function HomeHero({ components, blocks }: HomeHeroProps) {
             </h1>
             <p className="mt-5 max-w-xl text-base leading-7 text-pretty text-muted-foreground sm:text-lg sm:leading-8">
               VenusUI is a free library of {components} React components and {blocks} blocks for shadcn/ui. Everything on
-              this desk is one of them: strike the match, flip a switch, take a photo.
+              this desk is one of them: strike the match, flip a switch, or give the whole site your own colours.
             </p>
           </div>
           <div className="flex flex-col gap-3 lg:pb-1">
             <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
               <Link
                 href="/components"
-                className="inline-flex h-11 items-center gap-2 rounded-lg bg-foreground px-5 text-sm font-medium text-background outline-none transition-colors hover:bg-foreground/85 focus-visible:ring-3 focus-visible:ring-ring/50"
+                className="inline-flex h-11 items-center gap-2 rounded-lg bg-primary px-5 text-sm font-medium text-primary-foreground outline-none transition-colors hover:bg-primary/85 focus-visible:ring-3 focus-visible:ring-ring/50"
               >
                 Browse components
                 <ArrowRight aria-hidden="true" className="size-4" />
