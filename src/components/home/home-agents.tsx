@@ -21,7 +21,7 @@ export function HomeAgents() {
         install it.
       </h2>
       <p className="mt-5 text-pretty text-muted-foreground">
-        Every component is plain source in the open shadcn registry format. Add the @venusui registry once, connect the
+        Every component is plain source in the open shadcn registry format. Add @venusui to your project, connect the
         shadcn MCP server, and Claude Code, Cursor, VS Code, Codex or OpenCode can find and install VenusUI components
         for you.
       </p>

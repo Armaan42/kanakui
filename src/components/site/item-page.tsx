@@ -13,7 +13,7 @@ import { InstallTabs } from "@/components/site/install-tabs"
 import { PreviewFrame } from "@/components/site/preview-frame"
 import { TemplateGrid } from "@/components/site/template-card"
 import { Badge } from "@/components/ui/badge"
-import { registrySetupCommand, siteConfig } from "@/config/site"
+import { registrySetupCommandByUrl, siteConfig } from "@/config/site"
 import { formatDate } from "@/lib/format"
 import {
   getCategoryTitle,
@@ -52,7 +52,7 @@ const SECTION_TITLE: Record<ItemKind, string> = { components: "Components", bloc
 const COMMON_TROUBLESHOOTING = [
   {
     problem: `\`Unknown registry "${siteConfig.registry.namespace}"\``,
-    solution: `Your project doesn't know the namespace yet. Run \`${registrySetupCommand()}\` once, or install by URL from the CLI tab.`,
+    solution: `Your shadcn CLI couldn’t find the namespace in the shadcn registry index. Use the latest CLI (\`npx shadcn@latest\`), install by URL, or register it with its address: \`${registrySetupCommandByUrl()}\`.`,
   },
   {
     problem: "`No components.json found`",

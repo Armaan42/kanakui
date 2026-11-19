@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react"
 
 import { HeroGlobe } from "@/components/home/hero-globe"
 import { CommandBlock } from "@/components/site/command-block"
-import { installCommandByUrl } from "@/config/site"
+import { installCommand } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { GradientText } from "@/registry/default/ui/gradient-text"
 import { NumberTicker } from "@/registry/default/ui/number-ticker"
@@ -133,7 +133,7 @@ export function HomeHero({ components, blocks, threeD }: HomeHeroProps) {
           <div className="mt-7 w-full max-w-xl animate-word-in motion-reduce:animate-none" style={{ animationDelay: "950ms" }}>
             <CommandBlock
               packageManagers={false}
-              command={installCommandByUrl("arc-globe")}
+              command={installCommand("arc-globe")}
               copyLabel="Copy install command for Arc Globe"
               className="border-foreground/10 bg-background/60 text-left backdrop-blur-md"
             />

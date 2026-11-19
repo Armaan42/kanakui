@@ -8,8 +8,6 @@ import { getDocsPage } from "@/config/docs"
 import {
   installCommand,
   installCommandByUrl,
-  registryItemUrl,
-  registrySetupCommand,
   registryUrlTemplate,
   siteConfig,
 } from "@/config/site"
@@ -32,31 +30,26 @@ export default async function CliPage() {
 
   return (
     <DocsArticle href={HREF}>
-      <DocsSection id="by-url" title="Install by URL">
-        <p className={p}>Works in any project set up with shadcn, with no other configuration.</p>
-        <CommandBlock command={installCommandByUrl("marquee")} />
-        <p className={p}>
-          <InlineText text="You can pass several URLs at once. Components that depend on other VenusUI items install those automatically." />
-        </p>
-      </DocsSection>
-
       <DocsSection id="namespace" title={`Install by name with ${ns}`}>
-        <p className={p}>Register the namespace once per project:</p>
-        <CommandBlock command={registrySetupCommand()} />
         <p className={p}>
-          <InlineText text="This adds an entry to `components.json`:" />
+          <InlineText text={`VenusUI is listed in the shadcn registry index, so ${ns} works in any project set up with shadcn, with no other configuration:`} />
+        </p>
+        <CommandBlock command={installCommand("marquee")} />
+        <p className={p}>
+          <InlineText text="You can pass several names at once. Components that depend on other VenusUI items install those automatically. The first install also adds the registry to `components.json`:" />
         </p>
         <CodeViewer files={[componentsJson]} label="components.json" />
-        <p className={p}>Then install any item by name:</p>
-        <CommandBlock command={installCommand("marquee")} />
+      </DocsSection>
+
+      <DocsSection id="by-url" title="Install by URL">
+        <p className={p}>The same install by full address. Use it with an older shadcn CLI, or on a network that can’t reach the registry index:</p>
+        <CommandBlock command={installCommandByUrl("marquee")} />
       </DocsSection>
 
       <DocsSection id="explore" title="Preview and search">
         <p className={p}>See an item’s files, dependencies and CSS before installing:</p>
-        <CommandBlock command={`npx shadcn@latest view ${registryItemUrl("marquee")}`} />
-        <p className={p}>
-          <InlineText text={`After registering the namespace, search it:`} />
-        </p>
+        <CommandBlock command={`npx shadcn@latest view ${ns}/marquee`} />
+        <p className={p}>Search everything in the registry:</p>
         <CommandBlock command={`npx shadcn@latest search ${ns} --query card`} />
       </DocsSection>
 
@@ -64,11 +57,11 @@ export default async function CliPage() {
         <p className={p}>
           <InlineText text="First see what changed. `--diff` compares the latest version in the registry with the file in your project and writes nothing. Lines starting with `-` are your file, lines starting with `+` are the registry’s." />
         </p>
-        <CommandBlock command={`${installCommandByUrl("marquee")} --diff`} />
+        <CommandBlock command={`${installCommand("marquee")} --diff`} />
         <p className={p}>
           <InlineText text="To take the new version, re-run the install with `--overwrite`. It replaces the file, including any changes you made, so commit your work first." />
         </p>
-        <CommandBlock command={`${installCommandByUrl("marquee")} --overwrite`} />
+        <CommandBlock command={`${installCommand("marquee")} --overwrite`} />
       </DocsSection>
     </DocsArticle>
   )

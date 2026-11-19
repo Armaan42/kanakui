@@ -4,7 +4,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { CommandBlock } from "@/components/site/command-block"
 import { TemplateCard, TemplateGrid } from "@/components/site/template-card"
 import { Button } from "@/components/ui/button"
-import { installCommandByUrl } from "@/config/site"
+import { installCommand } from "@/config/site"
 import { getItem, getItems } from "@/lib/registry"
 
 /** Readable names for a template's section files (`<template>-<section>.tsx`). */
@@ -89,7 +89,7 @@ export function HomeTemplates() {
             ) : null}
 
             <div className="mt-auto space-y-3 pt-6">
-              <CommandBlock packageManagers={false} command={installCommandByUrl(featured.name)} copyLabel={`Copy install command for ${featured.title}`} />
+              <CommandBlock packageManagers={false} command={installCommand(featured.name)} copyLabel={`Copy install command for ${featured.title}`} />
               <div className="flex flex-wrap gap-2">
                 <Button asChild>
                   <Link href={featured.href}>View details</Link>

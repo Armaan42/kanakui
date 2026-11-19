@@ -56,7 +56,7 @@ export default async function McpPage() {
       </DocsSection>
 
       <DocsSection id="registry" title={`1. Add the ${ns} registry`}>
-        <p className={p}>Once per project. It adds one line to the registries in your components.json.</p>
+        <p className={p}>Once per project. It adds VenusUI to the registries in your components.json, so your assistant knows to look there. No address needed: the shadcn registry index supplies it.</p>
         <CommandBlock command={registrySetupCommand()} copyLabel="Copy registry setup command" />
       </DocsSection>
 

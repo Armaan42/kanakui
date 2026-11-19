@@ -5,7 +5,7 @@ import { CommandBlock } from "@/components/site/command-block"
 import { DocsArticle } from "@/components/site/docs-article"
 import { DocsSection, InlineText } from "@/components/site/docs"
 import { getDocsPage } from "@/config/docs"
-import { installCommandByUrl, siteConfig } from "@/config/site"
+import { installCommand, siteConfig } from "@/config/site"
 import { getItems } from "@/lib/registry"
 
 const HREF = "/docs"
@@ -35,7 +35,7 @@ export default function IntroductionPage() {
           </li>
           <li>Import it from your own project and edit it like any other file.</li>
         </ol>
-        <CommandBlock command={installCommandByUrl("animated-card")} copyLabel="Copy example install command" />
+        <CommandBlock command={installCommand("animated-card")} copyLabel="Copy example install command" />
       </DocsSection>
 
       <DocsSection id="what-you-get" title="What you get">
