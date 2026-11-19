@@ -7,6 +7,7 @@ import { HomeFaq } from "@/components/home/home-faq"
 import { HomeFeatures } from "@/components/home/home-features"
 import { HomeHero } from "@/components/home/home-hero"
 import { HomeHowItWorks } from "@/components/home/home-how-it-works"
+import { HomeIcons } from "@/components/home/home-icons"
 import { HomePlayground } from "@/components/home/home-playground"
 import { HomeShowcase } from "@/components/home/home-showcase"
 import { HomeTemplates } from "@/components/home/home-templates"
@@ -27,6 +28,7 @@ export default function HomePage() {
       <HomeShowcase />
       <HomePlayground />
       <HomeTemplates />
+      <HomeIcons />
       <HomeCategories />
       <HomeHowItWorks />
       <HomeFaq />
