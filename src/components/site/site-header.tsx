@@ -32,6 +32,7 @@ function searchGroups(): SearchGroup[] {
         { title: "All blocks", href: "/blocks" },
         { title: "All templates", href: "/templates" },
         { title: "Themes", href: "/themes", keywords: ["colors", "customize", "dark mode"] },
+        { title: "Icons", href: "/icons", keywords: ["svg", "png", "download", "favicon"] },
       ],
     },
     {

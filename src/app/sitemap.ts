@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     ...KINDS.map((kind) => `/${kind}`),
     "/themes",
+    "/icons",
     "/privacy",
     ...docsPages.map((page) => page.href),
     ...KINDS.flatMap((kind) =>

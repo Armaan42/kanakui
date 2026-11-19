@@ -39,6 +39,7 @@ export function SiteFooter() {
         { title: "Blocks", href: "/blocks" },
         { title: "Templates", href: "/templates" },
         { title: "Themes", href: "/themes" },
+        { title: "Icons", href: "/icons" },
       ],
     },
     { title: "Popular", links: popular },
