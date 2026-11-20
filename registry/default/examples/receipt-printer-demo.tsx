@@ -11,7 +11,7 @@ export default function ReceiptPrinterDemo() {
       currency="EUR"
       locale="en-IE"
       taxRate={0.13}
-      paidWith="Visa •• 4821"
+      paidWith="Card •• 4821"
       items={[
         { name: "Flat white", quantity: 2, price: 3.4 },
         { name: "Pastel de nata", quantity: 3, price: 1.6 },

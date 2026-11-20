@@ -3,7 +3,7 @@ import { Aperture, BatteryCharging, Timer, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { InstantCamera, type InstantPhoto } from "@/registry/default/ui/instant-camera"
 
-// Photos: Unsplash (free under the Unsplash License). The product is made up.
+// Sample photos. Swap in your own. The product is made up.
 const photo = (id: string) => `https://images.unsplash.com/photo-${id}?w=500&h=500&fit=crop&auto=format&q=75`
 
 const photos: InstantPhoto[] = [

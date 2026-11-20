@@ -1,9 +1,9 @@
 import { defineItem } from "../define.ts"
 
 export default defineItem({
-  "name": "polaroid-stack",
+  "name": "photo-stack",
   "type": "registry:ui",
-  "title": "Polaroid Stack",
+  "title": "Instant Photo Stack",
   "description": "A stack of instant photos you drag or swipe through; each one develops as it reaches the top.",
   "version": "0.1.0",
   "releasedAt": "2026-11-16",
@@ -16,17 +16,17 @@ export default defineItem({
   ],
   "files": [
     {
-      "path": "registry/default/ui/polaroid-stack.tsx",
+      "path": "registry/default/ui/photo-stack.tsx",
       "type": "registry:ui"
     }
   ],
   "cssVars": {
     "theme": {
-      "animate-polaroid-develop": "polaroid-develop 1.6s ease-out both"
+      "animate-photo-stack-develop": "photo-stack-develop 1.6s ease-out both"
     }
   },
   "css": {
-    "@keyframes polaroid-develop": {
+    "@keyframes photo-stack-develop": {
       "from": {
         "filter": "brightness(1.7) saturate(0.15) contrast(0.7) blur(2px)"
       },
@@ -45,7 +45,7 @@ export default defineItem({
     ],
     "extends": "All `<div>` props; `className` sets the width (the stack is 4:5).",
     "requirements": [
-      "`lucide-react` for the arrow icon. React 19 and Tailwind CSS v4. The CLI adds the `polaroid-develop` keyframes and `--animate-polaroid-develop`."
+      "`lucide-react` for the arrow icon. React 19 and Tailwind CSS v4. The CLI adds the `photo-stack-develop` keyframes and `--animate-photo-stack-develop`."
     ],
     "customization": [
       "Captions use system handwriting fonts (Segoe Print, Bradley Hand, Marker Felt) with a cursive fallback. Load a web font and change `HANDWRITING` for the same look everywhere."

@@ -1,6 +1,6 @@
 import { MagnifierLoupe } from "@/registry/default/ui/magnifier-loupe"
 
-// Photos: Unsplash (free under the Unsplash License).
+// Sample photos. Swap in your own.
 const photo = (id: string, w: number, h: number) => `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&auto=format&q=80`
 
 export default function MagnifierLoupeDemo() {

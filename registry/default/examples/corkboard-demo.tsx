@@ -1,6 +1,6 @@
 import { Corkboard, type CorkNote } from "@/registry/default/ui/corkboard"
 
-// Photos: Unsplash (free under the Unsplash License). The plan is made up.
+// Sample photos. Swap in your own. The plan is made up.
 const photo = (id: string) => `https://images.unsplash.com/photo-${id}?w=480&h=360&fit=crop&auto=format&q=80`
 
 const NOTES: CorkNote[] = [

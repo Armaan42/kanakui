@@ -3,7 +3,7 @@ import { Lock, Mic, WifiOff } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ChatThread } from "@/registry/default/ui/chat-thread"
 
-// Portrait: Unsplash (free under the Unsplash License). The app and people are made up.
+// Sample photos. Swap in your own. The app and people are made up.
 const AVATAR = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop&crop=faces&auto=format&q=80"
 
 const features = [
@@ -19,7 +19,7 @@ export function Hero13() {
       <div aria-hidden="true" className="absolute top-[12%] right-[4%] -z-10 size-[26rem] rounded-full bg-sky-400/15 blur-3xl" />
       <div className="mx-auto grid max-w-6xl items-center gap-14 px-4 py-20 sm:px-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:py-24">
         <div>
-          <p className="text-sm font-medium text-sky-700 dark:text-sky-400">Murmur · free for iOS and Android</p>
+          <p className="text-sm font-medium text-sky-700 dark:text-sky-400">Murmur · free on phone and desktop</p>
           <h1 className="mt-3 text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">Messages that feel like talking.</h1>
           <p className="mt-5 max-w-lg text-lg leading-8 text-muted-foreground">
             Murmur is a calm, fast messenger for the people you actually talk to: no ads, no feeds, just your conversations.
@@ -39,10 +39,10 @@ export function Hero13() {
           </ul>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button size="lg" asChild>
-              <a href="#">Download for iPhone</a>
+              <a href="#">Download the app</a>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <a href="#">Get it on Android</a>
+              <a href="#">Open in your browser</a>
             </Button>
           </div>
         </div>

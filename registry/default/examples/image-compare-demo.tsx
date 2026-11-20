@@ -1,6 +1,6 @@
 import { ImageCompare } from "@/registry/default/ui/image-compare"
 
-// Photo: Unsplash (free under the Unsplash License).
+// Sample photos. Swap in your own.
 const PHOTO = "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=750&fit=crop&auto=format&q=80"
 const ALT = "Snowy mountain peaks rising above a sea of clouds at sunset"
 

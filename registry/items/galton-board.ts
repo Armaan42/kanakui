@@ -1,10 +1,10 @@
 import { defineItem } from "../define.ts"
 
 export default defineItem({
-  "name": "plinko-board",
+  "name": "galton-board",
   "type": "registry:ui",
-  "title": "Plinko Board",
-  "description": "A Plinko board: balls bounce off the pegs into slots, and a big drop draws a bell curve.",
+  "title": "Galton Board",
+  "description": "A Galton board: balls bounce off the pegs into slots, and a big drop draws a bell curve.",
   "version": "0.1.0",
   "releasedAt": "2026-11-20",
   "categories": [
@@ -16,7 +16,7 @@ export default defineItem({
   ],
   "files": [
     {
-      "path": "registry/default/ui/plinko-board.tsx",
+      "path": "registry/default/ui/galton-board.tsx",
       "type": "registry:ui"
     }
   ],

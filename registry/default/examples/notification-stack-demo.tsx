@@ -2,7 +2,7 @@ import { Activity, CalendarDays, Mail, MessageCircle } from "lucide-react"
 
 import { NotificationStack } from "@/registry/default/ui/notification-stack"
 
-// Wallpaper and portraits: Unsplash (free under the Unsplash License). People are made up.
+// Sample photos. Swap in your own. People are made up.
 const WALLPAPER = "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=900&h=1100&fit=crop&auto=format&q=70"
 const face = (id: string) => `https://images.unsplash.com/photo-${id}?w=96&h=96&fit=crop&crop=faces&auto=format&q=80`
 

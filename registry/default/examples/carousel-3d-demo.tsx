@@ -1,6 +1,6 @@
 import { Carousel3d } from "@/registry/default/ui/carousel-3d"
 
-// Photos: Unsplash (free under the Unsplash License).
+// Sample photos. Swap in your own.
 const photo = (id: string) => `https://images.unsplash.com/photo-${id}?w=480&h=600&fit=crop&auto=format&q=75`
 
 const PLACES = [

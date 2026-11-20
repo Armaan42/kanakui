@@ -5,7 +5,7 @@ import { RotateCcw } from "lucide-react"
 
 import { EventTicket } from "@/registry/default/ui/event-ticket"
 
-// Photo: Unsplash (free under the Unsplash License). The event is made up.
+// Sample photos. Swap in your own. The event is made up.
 export default function EventTicketDemo() {
   const [ticket, setTicket] = React.useState(0)
   const [torn, setTorn] = React.useState(false)

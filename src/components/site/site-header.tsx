@@ -2,7 +2,9 @@ import Link from "next/link"
 
 import { UserMenu } from "@/components/site/account/user-menu"
 import { CommandMenu, type SearchGroup } from "@/components/site/command-menu"
-import { GitHubIcon, LogoMark } from "@/components/site/icons"
+import { Code } from "lucide-react"
+
+import { LogoMark } from "@/components/site/icons"
 import { MainNav } from "@/components/site/main-nav"
 import { MobileNav } from "@/components/site/mobile-nav"
 import { ThemeMenu } from "@/components/site/theme-menu"
@@ -72,10 +74,10 @@ export function SiteHeader() {
         <MainNav items={siteConfig.nav} className="max-md:hidden" />
         <div className="ml-auto flex items-center gap-0.5 sm:gap-1">
           <CommandMenu groups={searchGroups()} />
-          {/* On phones GitHub is in the menu panel. */}
+          {/* On phones the source link is in the menu panel. */}
           <Button asChild variant="ghost" size="icon" className="max-sm:hidden">
-            <a href={siteConfig.links.github} target="_blank" rel="noreferrer" aria-label="Source code on GitHub">
-              <GitHubIcon />
+            <a href={siteConfig.links.github} target="_blank" rel="noreferrer" aria-label="Source code">
+              <Code aria-hidden="true" />
             </a>
           </Button>
           {/* Below 360px there isn't room; Themes is in the menu panel. */}

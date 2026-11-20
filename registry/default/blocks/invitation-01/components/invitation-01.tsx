@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Envelope } from "@/registry/default/ui/envelope"
 
-// Photo: Unsplash (free under the Unsplash License). The couple and venue are made up.
+// Sample photos. Swap in your own. The couple and venue are made up.
 const VENUE = "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1000&h=560&fit=crop&auto=format&q=75"
 
 const schedule = [

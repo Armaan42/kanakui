@@ -1,6 +1,6 @@
 import { Marquee3d } from "@/registry/default/ui/marquee-3d"
 
-// Photos: Unsplash (free under the Unsplash License).
+// Sample photos. Swap in your own.
 const photo = (id: string) => `https://images.unsplash.com/photo-${id}?w=320&h=224&fit=crop&auto=format&q=70`
 
 const SHOTS = [
@@ -10,8 +10,8 @@ const SHOTS = [
   { id: "1476610182048-b716b8518aae", alt: "A waterfall over green cliffs" },
   { id: "1531366936337-7c912a4589a7", alt: "Northern lights over snow" },
   { id: "1504893524553-b855bce32c67", alt: "A river winding through a mossy canyon" },
-  { id: "1528360983277-13d401cdc186", alt: "A red paper lantern in a narrow alley" },
-  { id: "1540959733332-eab4deabeeaf", alt: "A neon-lit shopping street" },
+  { id: "1513407030348-c983a97b98d8", alt: "Tokyo Tower above the city at dusk" },
+  { id: "1464822759023-fed622ff2c3b", alt: "A wide valley below snow-capped mountains" },
 ]
 
 const tiles = [...SHOTS, ...SHOTS].map((shot, i) => (

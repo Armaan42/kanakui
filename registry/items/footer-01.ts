@@ -25,7 +25,7 @@ export default defineItem({
     ],
     customization: [
       "Edit the `columns` and `legal` arrays to change links. Replace each `href=\"#\"` with real URLs, or use `next/link` for internal pages.",
-      "Replace the square logo placeholder and the name “Acme” with your logo.",
+      "Replace the square logo placeholder and the name “Halcyon” with your logo.",
       "Update the copyright line, which is plain text so it never changes unexpectedly."
     ],
     accessibility: [

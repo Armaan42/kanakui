@@ -2,7 +2,7 @@ import { Marquee } from "@/registry/default/ui/marquee"
 
 // Placeholder wordmarks. Replace them with logos of customers who agreed to be
 // listed, e.g. <img src="/logos/x.svg" alt="X" className="h-6 w-auto" />.
-const logos = ["Northwind", "Contoso", "Fabrikam", "Tailspin", "Woodgrove", "Litware", "Adventure Works", "Proseware"]
+const logos = ["Northlight", "Kestrel", "Brightwater", "Tidewell", "Oakline", "Halden", "Ridgeway", "Paperkite"]
 
 /** A heading and a slowly scrolling row of customer logos with faded edges. */
 export function LogoCloud01() {

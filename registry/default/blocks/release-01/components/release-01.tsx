@@ -5,7 +5,7 @@ import * as React from "react"
 import { Button } from "@/components/ui/button"
 import { MusicEqualizer } from "@/registry/default/ui/music-equalizer"
 
-// Photo: Unsplash (free under the Unsplash License). The artist and album are made up.
+// Sample photos. Swap in your own. The artist and album are made up.
 const COVER = "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&h=800&fit=crop&auto=format&q=80"
 
 const tracks = [

@@ -14,7 +14,7 @@ const columns = [
   { title: "Legal", links: ["Privacy", "Terms", "DPA", "Security"] },
 ]
 
-const social = ["X", "LinkedIn", "GitHub", "YouTube"]
+const social = ["Newsletter", "Community", "Status", "RSS"]
 
 export function SaasLandingFooter() {
   const [subscribed, setSubscribed] = React.useState(false)

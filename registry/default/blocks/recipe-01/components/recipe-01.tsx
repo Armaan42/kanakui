@@ -6,7 +6,7 @@ import { Clock, Flame, Minus, Plus, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-// Photo: Unsplash (free under the Unsplash License).
+// Sample photos. Swap in your own.
 const PHOTO = "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=1000&h=1000&fit=crop&auto=format&q=80"
 const BASE_SERVINGS = 4
 

@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-// Photos: Unsplash (free under the Unsplash License). The studio and clients are made up.
+// Sample photos. Swap in your own. The studio and clients are made up.
 const photo = (id: string) => `https://images.unsplash.com/photo-${id}?w=900&h=700&fit=crop&auto=format&q=75`
 
 const projects = [

@@ -3,11 +3,11 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ArrowUpRight, Menu, X } from "lucide-react"
+import { ArrowUpRight, Code, Menu, X } from "lucide-react"
 import { Dialog as DialogPrimitive } from "radix-ui"
 
 import { UserAvatar } from "@/components/site/account/user-avatar"
-import { GitHubIcon, LogoMark } from "@/components/site/icons"
+import { LogoMark } from "@/components/site/icons"
 import { Button } from "@/components/ui/button"
 import { signOut, useSession } from "@/hooks/use-session"
 import { cn } from "@/lib/utils"
@@ -31,7 +31,7 @@ interface MobileNavProps {
 
 /**
  * The site menu on phones and small tablets: a full-screen panel with every
- * main section, the setup guides and GitHub. It's a modal dialog, so focus is
+ * main section, the setup guides and the source code. It's a modal dialog, so focus is
  * trapped inside and Escape closes it; following a link closes it too.
  */
 /** Sign in, or who's signed in with links to the account; hidden when accounts are off. */
@@ -157,8 +157,8 @@ export function MobileNav({ siteName, github, primary, guides, className }: Mobi
               rel="noreferrer"
               className="mt-8 inline-flex items-center gap-2 rounded-md text-base text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
             >
-              <GitHubIcon className="size-4" />
-              Source on GitHub
+              <Code aria-hidden="true" className="size-4" />
+              Source code
               <ArrowUpRight aria-hidden="true" className="size-4" />
             </a>
           </nav>

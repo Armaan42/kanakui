@@ -2,11 +2,11 @@ import { BedDouble, CalendarDays, MapPin, Train } from "lucide-react"
 
 import { BoardingPass } from "@/registry/default/ui/boarding-pass"
 
-// Photos: Unsplash (free under the Unsplash License). The trip and airline are made up.
+// Sample photos. Swap in your own. The trip and airline are made up.
 const photo = (id: string) => `https://images.unsplash.com/photo-${id}?w=400&h=300&fit=crop&auto=format&q=75`
 
 const days = [
-  { day: "Day 1–2", place: "Tokyo", plan: "Land at Haneda, ramen in Shinjuku, neon walk through Akihabara.", image: photo("1540959733332-eab4deabeeaf"), alt: "A neon-lit shopping street in Tokyo at night" },
+  { day: "Day 1–2", place: "Tokyo", plan: "Land at Haneda, ramen in Shinjuku, sunset from the Tokyo Tower deck.", image: photo("1513407030348-c983a97b98d8"), alt: "Tokyo Tower above the city at dusk" },
   { day: "Day 3", place: "Mount Fuji", plan: "Day trip to Lake Kawaguchi for the view, back by evening train.", image: photo("1490806843957-31f4c9a91c65"), alt: "Mount Fuji framed by cherry blossoms" },
   { day: "Day 4–5", place: "Kyoto", plan: "Shinkansen to Kyoto. Old streets of Higashiyama at dusk.", image: photo("1493976040374-85c8e12f0c0e"), alt: "A pagoda at the end of an old street in Kyoto" },
   { day: "Day 6", place: "Fushimi Inari", plan: "Early start to walk the torii gates before the crowds.", image: photo("1478436127897-769e1b3f0f36"), alt: "A tunnel of red torii gates" },

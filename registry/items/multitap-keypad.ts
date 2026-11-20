@@ -1,9 +1,9 @@
 import { defineItem } from "../define.ts"
 
 export default defineItem({
-  "name": "t9-keypad",
+  "name": "multitap-keypad",
   "type": "registry:ui",
-  "title": "T9 Keypad",
+  "title": "Multi-tap Keypad",
   "description": "An old phone keypad with multi-tap typing, sentence case and a 160-character countdown.",
   "version": "0.1.0",
   "releasedAt": "2026-11-20",
@@ -13,17 +13,17 @@ export default defineItem({
   ],
   "files": [
     {
-      "path": "registry/default/ui/t9-keypad.tsx",
+      "path": "registry/default/ui/multitap-keypad.tsx",
       "type": "registry:ui"
     }
   ],
   "cssVars": {
     "theme": {
-      "animate-t9-keypad-caret": "t9-keypad-caret 1s linear infinite"
+      "animate-multitap-keypad-caret": "multitap-keypad-caret 1s linear infinite"
     }
   },
   "css": {
-    "@keyframes t9-keypad-caret": {
+    "@keyframes multitap-keypad-caret": {
       "0%, 49%": {
         "opacity": "1"
       },

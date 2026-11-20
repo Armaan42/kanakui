@@ -6,8 +6,8 @@ import { CalendarDays, MapPin } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { EventTicket } from "@/registry/default/ui/event-ticket"
 
-// Photos: Unsplash (free under the Unsplash License). The festival and artists are made up.
-const BACKDROP = "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=1800&h=1100&fit=crop&auto=format&q=70"
+// Sample photos. Swap in your own. The festival and artists are made up.
+const BACKDROP = "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1800&h=1100&fit=crop&auto=format&q=70"
 const TICKET_PHOTO = "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=900&h=320&fit=crop&auto=format&q=75"
 
 const days = [

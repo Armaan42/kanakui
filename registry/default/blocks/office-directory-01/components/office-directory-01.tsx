@@ -5,7 +5,7 @@ import { ArrowDown, ArrowUp } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-// Photos: Unsplash (free under the Unsplash License). The building and tenants are made up.
+// Sample photos. Swap in your own. The building and tenants are made up.
 const photo = (id: string) => `https://images.unsplash.com/photo-${id}?w=1200&h=900&fit=crop&auto=format&q=80`
 
 const FLOORS = [
@@ -14,7 +14,7 @@ const FLOORS = [
   { label: "2", name: "Meeting rooms", about: "Six glass rooms for two to twelve people, booked at the front desk.", detail: "Rooms 2A–2F", src: photo("1497366754035-f200968a6e72"), alt: "Glass-walled meeting rooms along a polished corridor" },
   { label: "3", name: "Quiet lounge", about: "No calls and no meetings. Bring a book or a laptop and headphones.", detail: "Open to everyone", src: photo("1524758631624-e2822e304c36"), alt: "A light lounge with grey armchairs, a sofa and a black floor lamp" },
   { label: "4", name: "Fieldwork Studio", about: "A product design studio of forty people. Ring the bell by the door.", detail: "Suite 401", src: photo("1531973576160-7125cd663d86"), alt: "An open-plan office with long desks and strip lights on the ceiling" },
-  { label: "5", name: "Brightline", about: "A developer tools startup. Demo day is the last Friday of the month.", detail: "Suite 501", src: photo("1556761175-5973dc0f32e7"), alt: "A brick-walled office where a man talks to colleagues sitting on sofas" },
+  { label: "5", name: "Brightline", about: "A developer tools startup. Demo day is the last Friday of the month.", detail: "Suite 501", src: photo("1552664730-d307ca884978"), alt: "A team meeting in a bright office, with sticky notes on the wall" },
   { label: "6", name: "Coworking", about: "Hot desks by the day or the month, with lockers and phone booths.", detail: "Day passes at reception", src: photo("1522071820081-009f0129c71c"), alt: "Four people working on laptops around a wooden table" },
 ]
 

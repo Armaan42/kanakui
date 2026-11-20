@@ -39,7 +39,7 @@ export function Navbar01() {
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4 sm:px-6">
         <a href="#" className="flex items-center gap-2 font-semibold">
           <span aria-hidden="true" className="size-6 rounded-md bg-foreground" />
-          Acme
+          Halcyon
         </a>
         <nav aria-label="Main" className="hidden md:block">
           <ul className="flex items-center gap-1">

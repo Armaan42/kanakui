@@ -5,7 +5,7 @@ import { AccordionSmooth } from "@/registry/default/ui/accordion-smooth"
 
 /**
  * Honest answers only: every statement here is true of the current product.
- * When something changes (paid items, Figma files, accounts), change the answer.
+ * When something changes (paid items, design files, accounts), change the answer.
  */
 export function HomeFaq() {
   const ns = siteConfig.registry.namespace
@@ -58,8 +58,8 @@ export function HomeFaq() {
       content: `Yes. The ${license} license allows commercial use. It asks you to keep the copyright and license notice with the code.`,
     },
     {
-      id: "figma",
-      title: "Do templates include Figma files?",
+      id: "design-files",
+      title: "Do templates include design files?",
       content: "Not yet. Templates are code only for now: one command adds the page and every section in it.",
     },
     {

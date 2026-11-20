@@ -1,6 +1,6 @@
 import { ChatThread } from "@/registry/default/ui/chat-thread"
 
-// Portrait: Unsplash (free under the Unsplash License). The people are made up.
+// Sample photos. Swap in your own. The people are made up.
 export default function ChatThreadDemo() {
   return (
     <ChatThread

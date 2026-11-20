@@ -5,15 +5,15 @@ import { ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-export interface Polaroid {
+export interface InstantPhoto {
   src: string
   alt: string
   /** Handwritten-style caption under the photo. */
   caption?: string
 }
 
-interface PolaroidStackProps extends React.ComponentProps<"div"> {
-  photos: Polaroid[]
+interface PhotoStackProps extends React.ComponentProps<"div"> {
+  photos: InstantPhoto[]
 }
 
 const THROW_DISTANCE = 90
@@ -26,7 +26,7 @@ const HANDWRITING = '"Segoe Print", "Bradley Hand", "Marker Felt", "Chalkboard S
  * see the next, or use the "Next photo" button or the arrow keys. Each photo
  * develops as it reaches the top.
  */
-function PolaroidStack({ photos, className, ...props }: PolaroidStackProps) {
+function PhotoStack({ photos, className, ...props }: PhotoStackProps) {
   const [order, setOrder] = React.useState(() => photos.map((_, i) => i))
   const [drag, setDrag] = React.useState<{ x: number; y: number } | null>(null)
   const [thrown, setThrown] = React.useState<{ index: number; direction: number } | null>(null)
@@ -47,7 +47,7 @@ function PolaroidStack({ photos, className, ...props }: PolaroidStackProps) {
   const current = photos[top]
 
   return (
-    <div data-slot="polaroid-stack" className={cn("flex w-full max-w-xs flex-col items-center gap-6", className)} {...props}>
+    <div data-slot="photo-stack" className={cn("flex w-full max-w-xs flex-col items-center gap-6", className)} {...props}>
       <div
         className="relative aspect-[4/5] w-full touch-pan-y select-none"
         role="group"
@@ -112,7 +112,7 @@ function PolaroidStack({ photos, className, ...props }: PolaroidStackProps) {
                     src={photo.src}
                     alt={isTop ? photo.alt : ""}
                     draggable={false}
-                    className={cn("size-full object-cover", isTop && "animate-polaroid-develop motion-reduce:animate-none")}
+                    className={cn("size-full object-cover", isTop && "animate-photo-stack-develop motion-reduce:animate-none")}
                   />
                   <span aria-hidden="true" className="absolute inset-0 shadow-[inset_0_0_12px_rgb(0_0_0/0.25)]" />
                 </div>
@@ -143,4 +143,4 @@ function PolaroidStack({ photos, className, ...props }: PolaroidStackProps) {
   )
 }
 
-export { PolaroidStack }
+export { PhotoStack }

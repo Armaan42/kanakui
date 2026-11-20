@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 import { WeatherWidget } from "@/registry/default/ui/weather-widget"
 import { WorldClock } from "@/registry/default/ui/world-clock"
 
-// Cover: Unsplash (free under the Unsplash License). Track, events and reminders are made up.
+// Sample photos. Swap in your own. Track, events and reminders are made up.
 const COVER = "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?w=200&h=200&fit=crop&auto=format&q=80"
 
 const ZONES = [

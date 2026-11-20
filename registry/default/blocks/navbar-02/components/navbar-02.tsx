@@ -40,7 +40,7 @@ export function Navbar02({ currentHref = "#features" }: { currentHref?: string }
         <div className="flex h-14 items-center gap-4 pr-2 pl-4">
           <a href="#" className="flex items-center gap-2 font-semibold">
             <span aria-hidden="true" className="size-5 rounded-full bg-foreground" />
-            Acme
+            Halcyon
           </a>
           <nav aria-label="Main" className="mx-auto hidden md:block">
             <ul className="flex items-center gap-1">

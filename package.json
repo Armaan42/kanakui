@@ -17,7 +17,8 @@
     "registry:build": "npm run registry:generate && shadcn build && node scripts/registry.mts verify",
     "registry:test": "node scripts/test-registry-install.mts",
     "thumbnails": "node scripts/block-thumbnails.mts",
-    "favicons": "node scripts/favicons.mts"
+    "favicons": "node scripts/favicons.mts",
+    "assets:record": "node scripts/assets.mts"
   },
   "dependencies": {
     "@react-three/fiber": "^9.8.2",

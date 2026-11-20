@@ -1,6 +1,6 @@
 import { InstantCamera } from "@/registry/default/ui/instant-camera"
 
-// Photos: Unsplash (free under the Unsplash License).
+// Sample photos. Swap in your own.
 const photo = (id: string) => `https://images.unsplash.com/photo-${id}?w=500&h=500&fit=crop&auto=format&q=75`
 
 export default function InstantCameraDemo() {

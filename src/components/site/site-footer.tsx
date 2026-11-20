@@ -1,6 +1,8 @@
 import Link from "next/link"
 
-import { GitHubIcon, LogoMark } from "@/components/site/icons"
+import { Code } from "lucide-react"
+
+import { LogoMark } from "@/components/site/icons"
 import { siteConfig } from "@/config/site"
 import { getCategory } from "@/lib/registry"
 
@@ -58,7 +60,7 @@ export function SiteFooter() {
     {
       title: "Project",
       links: [
-        { title: "GitHub", href: github, external: true },
+        { title: "Source code", href: github, external: true },
         { title: "Report an issue", href: `${github}/issues`, external: true },
         { title: `${siteConfig.license.name} License`, href: siteConfig.license.url, external: true },
         { title: "Privacy Policy", href: "/privacy" },
@@ -81,8 +83,8 @@ export function SiteFooter() {
             React components, website blocks and templates in the open shadcn registry format. Copy the command, own the
             code.
           </p>
-          <a href={github} target="_blank" rel="noreferrer" aria-label="Source code on GitHub" className={`${linkClass} mt-5 inline-flex`}>
-            <GitHubIcon className="size-5" />
+          <a href={github} target="_blank" rel="noreferrer" aria-label="Source code" className={`${linkClass} mt-5 inline-flex`}>
+            <Code aria-hidden="true" className="size-5" />
           </a>
         </div>
 
@@ -120,7 +122,7 @@ export function SiteFooter() {
           <a href={siteConfig.license.url} target="_blank" rel="noreferrer" className={`${linkClass} underline underline-offset-4`}>
             {siteConfig.license.name} license
           </a>
-          . Photos in demos are from Unsplash.
+          .
         </p>
       </div>
     </footer>

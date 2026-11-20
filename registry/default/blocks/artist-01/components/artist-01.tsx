@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { VinylPlayer } from "@/registry/default/ui/vinyl-player"
 
-// Cover: Unsplash (free under the Unsplash License). The artist, album and shows are made up.
+// Sample photos. Swap in your own. The artist, album and shows are made up.
 const COVER = "https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=400&h=400&fit=crop&auto=format&q=80"
 
 const tracks = [

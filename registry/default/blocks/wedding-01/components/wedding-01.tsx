@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { PostageStamp } from "@/registry/default/ui/postage-stamp"
 import { WallCalendar } from "@/registry/default/ui/wall-calendar"
 
-// Photos: Unsplash (free under the Unsplash License). The couple and venue are made up.
+// Sample photos. Swap in your own. The couple and venue are made up.
 const photo = (id: string, width: number, height: number) => `https://images.unsplash.com/photo-${id}?w=${width}&h=${height}&fit=crop&auto=format&q=78`
 
 const CALENDAR_FILE = [

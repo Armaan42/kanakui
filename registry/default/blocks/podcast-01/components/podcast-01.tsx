@@ -5,9 +5,9 @@ import { Bookmark, ChevronDown } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { Rolodex, type RolodexCard } from "@/registry/default/ui/rolodex"
+import { CardFile, type FileCard } from "@/registry/default/ui/card-file"
 
-// Photo: Unsplash (free under the Unsplash License). The show and guests are made up.
+// Sample photos. Swap in your own. The show and guests are made up.
 const COVER = "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=640&h=640&fit=crop&auto=format&q=80"
 
 const episodes = [
@@ -17,7 +17,7 @@ const episodes = [
   { number: 39, title: "A piano in the desert", date: "Oct 22", length: "41 min", notes: "One tuner, one truck and four hundred kilometres of dirt road to keep a town's only piano in key." },
 ]
 
-const guests: RolodexCard[] = [
+const guests: FileCard[] = [
   { name: "Amara Diallo", role: "Radio producer", note: "Episode 37" },
   { name: "Elias Brandt", role: "Lighthouse keeper", note: "Episode 42" },
   { name: "Hugo Martin", role: "Master baker", note: "Episode 41" },
@@ -95,7 +95,7 @@ export function Podcast01() {
           <h3 id="podcast-01-guests" className="mb-4 font-medium">
             Guest file
           </h3>
-          <Rolodex cards={guests} defaultIndex={1} />
+          <CardFile cards={guests} defaultIndex={1} />
         </aside>
       </div>
     </section>

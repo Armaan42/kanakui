@@ -6,7 +6,7 @@ import { Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { BookCover, Bookshelf, type ShelfBook } from "@/registry/default/ui/bookshelf"
 
-// Portraits: Unsplash (free under the Unsplash License). The books, authors and reviewers are made up.
+// Sample photos. Swap in your own. The books, authors and reviewers are made up.
 const face = (id: string) => `https://images.unsplash.com/photo-${id}?w=80&h=80&fit=crop&crop=faces&auto=format&q=80`
 
 type Book = ShelfBook & { price: number; rating: number; blurb: string; review: { name: string; photo: string; text: string } }

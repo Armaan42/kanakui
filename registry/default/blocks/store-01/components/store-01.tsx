@@ -6,7 +6,7 @@ import { Check, Minus, Plus, RotateCcw, ShieldCheck, Truck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-// Photo: Unsplash (free under the Unsplash License). The product is made up.
+// Sample photos. Swap in your own. The product is made up.
 const PHOTO = "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&h=1200&fit=crop&auto=format&q=80"
 
 const views = [

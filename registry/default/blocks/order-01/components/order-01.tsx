@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { ReceiptPrinter } from "@/registry/default/ui/receipt-printer"
 
-// Photos: Unsplash (free under the Unsplash License). The shop and products are made up.
+// Sample photos. Swap in your own. The shop and products are made up.
 const photo = (id: string) => `https://images.unsplash.com/photo-${id}?w=200&h=200&fit=crop&auto=format&q=75`
 
 const items = [
@@ -91,12 +91,12 @@ export function Order01() {
 
         <div className="flex justify-center lg:pt-4">
           <ReceiptPrinter
-            store="Northwind Supply"
+            store="Northlight Supply"
             address="northwindsupply.com"
             date="16 Nov 2026, 09:41"
             orderId="#A-20419"
             taxRate={0.08}
-            paidWith="Visa •• 4821"
+            paidWith="Card •• 4821"
             items={items.map(({ name, quantity, price }) => ({ name, quantity, price }))}
           />
         </div>

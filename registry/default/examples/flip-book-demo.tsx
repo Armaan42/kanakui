@@ -1,6 +1,6 @@
 import { FlipBook } from "@/registry/default/ui/flip-book"
 
-// Photos: Unsplash (free under the Unsplash License).
+// Sample photos. Swap in your own.
 const photo = (id: string) => `https://images.unsplash.com/photo-${id}?w=600&h=480&fit=crop&auto=format&q=75`
 const HANDWRITING = '"Segoe Print", "Bradley Hand", "Marker Felt", "Chalkboard SE", cursive'
 
@@ -61,9 +61,9 @@ export default function FlipBookDemo() {
             key="4"
             number={4}
             day="Day five"
-            title="Neon goodbye"
-            image={photo("1540959733332-eab4deabeeaf")}
-            alt="A neon-lit shopping street at night"
+            title="City goodbye"
+            image={photo("1513407030348-c983a97b98d8")}
+            alt="Tokyo Tower above the city at dusk"
             text="Last night in Tokyo before the flight home. Already planning the autumn trip."
           />,
           <div key="back" className="flex h-full items-end justify-center bg-[#7a2e2a] p-[10%] text-[#f6e7d8]">

@@ -6,7 +6,7 @@ const faqs = [
   {
     question: "How long does setup take?",
     answer:
-      "Most teams send their first events in under ten minutes with our JavaScript, iOS, Android or React Native SDK. Autocapture records clicks, page views and form submits without extra code, and you can add custom events whenever you're ready.",
+      "Most teams send their first events in under ten minutes with our web, mobile or server SDKs. Autocapture records clicks, page views and form submits without extra code, and you can add custom events whenever you're ready.",
   },
   {
     question: "Will Pulsewise slow down my site or app?",

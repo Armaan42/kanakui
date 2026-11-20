@@ -4,10 +4,10 @@ import * as React from "react"
 import { motion } from "motion/react"
 import { Pause, Phone, PhoneOff, Play, SkipBack, SkipForward, Timer, X } from "lucide-react"
 
-import { DynamicIsland } from "@/registry/default/ui/dynamic-island"
+import { MorphingPill } from "@/registry/default/ui/morphing-pill"
 import { cn } from "@/lib/utils"
 
-// Cover and portrait: Unsplash (free under the Unsplash License). Track and caller are made up.
+// Sample photos. Swap in your own. Track and caller are made up.
 const COVER = "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?w=160&h=160&fit=crop&auto=format&q=80"
 const CALLER = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=96&h=96&fit=crop&crop=faces&auto=format&q=80"
 
@@ -129,13 +129,13 @@ const VIEWS = {
 
 type Mode = keyof typeof VIEWS
 
-export default function DynamicIslandDemo() {
+export default function MorphingPillDemo() {
   const [mode, setMode] = React.useState<Mode>("Music")
   const view = VIEWS[mode]
 
   return (
     <div className="flex min-h-72 w-full flex-col items-center gap-10">
-      <DynamicIsland key={mode} label={view.label} compact={view.compact} expanded={view.expanded} />
+      <MorphingPill key={mode} label={view.label} compact={view.compact} expanded={view.expanded} />
       <div role="group" aria-label="Island content" className="mt-auto flex gap-0.5 rounded-lg border p-0.5 text-xs">
         {(Object.keys(VIEWS) as Mode[]).map((m) => (
           <button

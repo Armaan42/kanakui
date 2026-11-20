@@ -6,7 +6,7 @@ import { PasscodePad } from "@/registry/default/ui/passcode-pad"
 
 // The device and place are made up. The demo passcode is 2580.
 const details = [
-  { icon: Laptop, label: "Device", value: "MacBook Pro · Safari" },
+  { icon: Laptop, label: "Device", value: "Work laptop · Web browser" },
   { icon: MapPin, label: "Location", value: "Lisbon, Portugal" },
   { icon: ShieldCheck, label: "Requested", value: "Just now" },
 ]

@@ -14,7 +14,7 @@ export default defineItem({
     "button"
   ],
   "internalDependencies": [
-    "rolodex"
+    "card-file"
   ],
   "dependencies": [
     "lucide-react"
@@ -29,7 +29,7 @@ export default defineItem({
     "props": [],
     "extends": "No props. The content is at the top of the file.",
     "requirements": [
-      "shadcn `button` and VenusUI `rolodex`. The CLI installs them. React 19 and Tailwind CSS v4."
+      "shadcn `button` and VenusUI `card-file`. The CLI installs them. React 19 and Tailwind CSS v4."
     ],
     "customization": [
       "Load `episodes` and `guests` from your feed.",

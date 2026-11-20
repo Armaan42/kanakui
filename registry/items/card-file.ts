@@ -1,9 +1,9 @@
 import { defineItem } from "../define.ts"
 
 export default defineItem({
-  "name": "rolodex",
+  "name": "card-file",
   "type": "registry:ui",
-  "title": "Rolodex",
+  "title": "Card File",
   "description": "A rotary card file that tumbles through contacts by scroll, drag, keys or letter tabs.",
   "version": "0.1.0",
   "releasedAt": "2026-11-19",
@@ -16,7 +16,7 @@ export default defineItem({
   ],
   "files": [
     {
-      "path": "registry/default/ui/rolodex.tsx",
+      "path": "registry/default/ui/card-file.tsx",
       "type": "registry:ui"
     }
   ],

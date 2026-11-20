@@ -1,6 +1,6 @@
 import { Marquee } from "@/registry/default/ui/marquee"
 
-const stack = ["Next.js", "React", "Tailwind CSS", "TypeScript", "Radix UI", "Motion", "Vercel", "Supabase"]
+const stack = ["Dark mode", "Keyboard friendly", "Screen reader tested", "Responsive", "Typed props", "Themeable", "Reduced motion", "Copy and own"]
 
 export default function MarqueeDemo() {
   return (

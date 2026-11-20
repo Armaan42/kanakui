@@ -65,7 +65,7 @@ export function SaasLandingDashboard({ className }: { className?: string }) {
   return (
     <div
       role="img"
-      aria-label="The Pulsewise overview dashboard: weekly active users up 12.4%, an activation funnel and an AI insight about an Android drop-off."
+      aria-label="The Pulsewise overview dashboard: weekly active users up 12.4%, an activation funnel and an AI insight about a mobile app drop-off."
       className={cn(
         "overflow-hidden rounded-xl border bg-card text-left text-card-foreground shadow-2xl shadow-black/10 ring-1 ring-foreground/5 select-none dark:shadow-black/40",
         className
@@ -85,7 +85,7 @@ export function SaasLandingDashboard({ className }: { className?: string }) {
         <div className="hidden flex-col gap-1 border-r bg-muted/20 p-3 md:flex">
           <div className="mb-2 flex items-center gap-2 rounded-md border bg-background px-2 py-1.5 text-xs font-medium">
             <span className="grid size-5 place-items-center rounded bg-saas-accent text-[10px] font-semibold text-white">A</span>
-            Acme Inc.
+            Halcyon Inc.
             <ChevronDown className="ml-auto size-3.5 text-muted-foreground" />
           </div>
           {nav.map(({ label, icon: Icon, active }) => (
@@ -200,7 +200,7 @@ export function SaasLandingDashboard({ className }: { className?: string }) {
               <Sparkles className="size-3.5" />
             </span>
             <p className="text-[12px] leading-5">
-              <span className="font-medium">Activation fell 6% on Android after v4.2.</span>{" "}
+              <span className="font-medium">Activation fell 6% in the mobile app after v4.2.</span>{" "}
               <span className="text-muted-foreground">
                 71% of the drop-offs happen on the notification permission screen. 214 sessions to watch.
               </span>

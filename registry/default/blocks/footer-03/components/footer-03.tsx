@@ -28,7 +28,7 @@ export function Footer03() {
             </nav>
           ))}
         </div>
-        <p className="mt-12 text-xs text-muted-foreground">© 2026 Acme Inc.</p>
+        <p className="mt-12 text-xs text-muted-foreground">© 2026 Halcyon Inc.</p>
       </div>
       <p
         aria-hidden="true"

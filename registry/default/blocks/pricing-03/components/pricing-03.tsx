@@ -7,7 +7,7 @@ const included = [
   "Every component and block",
   "All future updates",
   "Use in unlimited projects",
-  "Figma source files",
+  "Design source files",
   "Priority email support",
   "Commercial license",
 ]

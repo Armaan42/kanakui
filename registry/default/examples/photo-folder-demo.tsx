@@ -1,6 +1,6 @@
 import { PhotoFolder } from "@/registry/default/ui/photo-folder"
 
-// Photos: Unsplash (free under the Unsplash License).
+// Sample photos. Swap in your own.
 const photo = (id: string) => `https://images.unsplash.com/photo-${id}?w=480&h=600&fit=crop&auto=format&q=75`
 
 const FOLDERS = [
@@ -23,12 +23,12 @@ const FOLDERS = [
     ],
   },
   {
-    label: "Tokyo nights",
+    label: "Big cities",
     color: "#5f6b78",
     images: [
-      { src: photo("1528360983277-13d401cdc186"), alt: "A red paper lantern in a narrow alley at night" },
-      { src: photo("1540959733332-eab4deabeeaf"), alt: "A neon-lit shopping street full of people" },
-      { src: photo("1513407030348-c983a97b98d8"), alt: "Tokyo Tower above the city at twilight" },
+      { src: photo("1513407030348-c983a97b98d8"), alt: "Tokyo Tower above the city at dusk" },
+      { src: photo("1512453979798-5ea266f8880c"), alt: "Skyscrapers and highways in Dubai at sunrise" },
+      { src: photo("1486406146926-c627a92ad1ab"), alt: "Glass office towers seen from street level" },
     ],
   },
 ]

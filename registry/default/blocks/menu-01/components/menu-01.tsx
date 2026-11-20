@@ -4,7 +4,7 @@ import * as React from "react"
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-// Photos: Unsplash (free under the Unsplash License). The restaurant is made up.
+// Sample photos. Swap in your own. The restaurant is made up.
 const photo = (id: string) => `https://images.unsplash.com/photo-${id}?w=800&h=1000&fit=crop&auto=format&q=75`
 
 interface Dish {
