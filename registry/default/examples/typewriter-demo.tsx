@@ -1,10 +1,15 @@
+import { Search } from "lucide-react"
+
 import { Typewriter } from "@/registry/default/ui/typewriter"
 
 export default function TypewriterDemo() {
   return (
-    <p className="text-center text-3xl font-semibold tracking-tight">
-      Build{" "}
-      <Typewriter words={["landing pages", "dashboards", "design systems"]} className="text-muted-foreground" />
-    </p>
+    <div className="flex h-11 w-full max-w-md items-center gap-2.5 rounded-lg border bg-card px-3.5 text-sm shadow-xs">
+      <Search aria-hidden="true" className="size-4 shrink-0 text-muted-foreground" />
+      <span className="text-muted-foreground">
+        Try{" "}
+        <Typewriter words={["miso soup", "banana bread", "a quick dal", "cold brew"]} className="text-foreground" />
+      </span>
+    </div>
   )
 }

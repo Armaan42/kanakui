@@ -1,18 +1,23 @@
 import { CardStack } from "@/registry/default/ui/card-stack"
 
-const notes = ["Ship the beta", "Write the changelog", "Plan the launch", "Collect feedback"]
+const notes = [
+  { title: "Send the venue deposit", due: "Due today" },
+  { title: "Confirm catering numbers", due: "Due Thursday" },
+  { title: "Print name badges", due: "Due Friday" },
+  { title: "Book the photographer", due: "Next week" },
+]
 
 export default function CardStackDemo() {
   return (
     <CardStack
       label="Tasks"
-      items={notes.map((note, i) => ({
-        id: note,
-        label: note,
+      items={notes.map((note) => ({
+        id: note.title,
+        label: note.title,
         content: (
           <div className="flex h-full flex-col justify-between">
-            <span className="font-mono text-xs text-muted-foreground">Task {i + 1}</span>
-            <span className="text-xl font-semibold tracking-tight">{note}</span>
+            <span className="text-sm text-muted-foreground">{note.due}</span>
+            <span className="text-xl font-semibold tracking-tight">{note.title}</span>
           </div>
         ),
       }))}

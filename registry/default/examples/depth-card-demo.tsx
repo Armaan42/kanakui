@@ -9,11 +9,11 @@ export default function DepthCardDemo() {
   return (
     <DepthCard className="w-[min(26rem,calc(100vw-3rem))] rounded-2xl border bg-card p-6 text-card-foreground shadow-sm">
       <DepthCardItem depth={50}>
-        <h3 className="text-xl font-semibold tracking-tight">Lift every layer</h3>
+        <h3 className="text-xl font-semibold tracking-tight">Sunrise above the clouds</h3>
       </DepthCardItem>
       <DepthCardItem depth={60} className="mt-2">
         <p className="text-sm leading-6 text-muted-foreground">
-          Move your pointer over the card. Each layer has its own depth, so the photo rises above the text.
+          Six hut-to-hut routes in the Alps where you wake above the cloud line, with timings and what to pack.
         </p>
       </DepthCardItem>
       <DepthCardItem depth={100} className="relative mt-5">
@@ -36,7 +36,7 @@ export default function DepthCardDemo() {
         </DepthCardItem>
         <DepthCardItem depth={30} x={8}>
           <a href="#" className="inline-flex h-9 items-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/90">
-            Get started
+            Save route
           </a>
         </DepthCardItem>
       </div>
