@@ -23,6 +23,8 @@ import item_books_01 from "./items/books-01.ts"
 import item_bookshelf from "./items/bookshelf.ts"
 import item_border_beam from "./items/border-beam.ts"
 import item_bubble_wrap from "./items/bubble-wrap.ts"
+import item_call_support_01 from "./items/call-support-01.ts"
+import item_calm_break_01 from "./items/calm-break-01.ts"
 import item_camera_shutter from "./items/camera-shutter.ts"
 import item_card_stack from "./items/card-stack.ts"
 import item_carousel_3d from "./items/carousel-3d.ts"
@@ -128,6 +130,7 @@ import item_not_found_01 from "./items/not-found-01.ts"
 import item_notification_stack from "./items/notification-stack.ts"
 import item_number_stepper from "./items/number-stepper.ts"
 import item_number_ticker from "./items/number-ticker.ts"
+import item_office_directory_01 from "./items/office-directory-01.ts"
 import item_orbiting_circles from "./items/orbiting-circles.ts"
 import item_order_01 from "./items/order-01.ts"
 import item_otp_input from "./items/otp-input.ts"
@@ -211,6 +214,7 @@ import item_unlock_01 from "./items/unlock-01.ts"
 import item_use_pointer_position from "./items/use-pointer-position.ts"
 import item_use_scene_state from "./items/use-scene-state.ts"
 import item_vault_unlock_01 from "./items/vault-unlock-01.ts"
+import item_vending_pricing_01 from "./items/vending-pricing-01.ts"
 import item_vinyl_player from "./items/vinyl-player.ts"
 import item_volume_knob from "./items/volume-knob.ts"
 import item_wall_calendar from "./items/wall-calendar.ts"
@@ -244,6 +248,8 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_bookshelf,
   item_border_beam,
   item_bubble_wrap,
+  item_call_support_01,
+  item_calm_break_01,
   item_camera_shutter,
   item_card_stack,
   item_carousel_3d,
@@ -349,6 +355,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_notification_stack,
   item_number_stepper,
   item_number_ticker,
+  item_office_directory_01,
   item_orbiting_circles,
   item_order_01,
   item_otp_input,
@@ -432,6 +439,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_use_pointer_position,
   item_use_scene_state,
   item_vault_unlock_01,
+  item_vending_pricing_01,
   item_vinyl_player,
   item_volume_knob,
   item_wall_calendar,
