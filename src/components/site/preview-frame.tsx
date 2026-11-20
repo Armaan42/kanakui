@@ -33,20 +33,22 @@ interface PreviewFrameProps {
   title: string
   /** Taller frame for blocks (full page sections). */
   tall?: boolean
+  /** Page to frame. Defaults to the item's own preview, /view/<name>. */
+  path?: string
 }
 
 /**
  * Renders the component in an iframe (/view/<name>), so CSS breakpoints react
  * to the chosen device width exactly as they would in a real page.
  */
-export function PreviewFrame({ name, title, tall = false }: PreviewFrameProps) {
+export function PreviewFrame({ name, title, tall = false, path }: PreviewFrameProps) {
   const siteTheme = useSiteTheme()
   const [viewport, setViewport] = React.useState<ViewportId>("desktop")
   const [themeOverride, setThemeOverride] = React.useState<Theme | null>(null)
   const [reloadKey, setReloadKey] = React.useState(0)
 
   const theme = themeOverride ?? siteTheme
-  const src = `/view/${name}?theme=${theme}`
+  const src = `${path ?? `/view/${name}`}?theme=${theme}`
   const width = VIEWPORTS.find((v) => v.id === viewport)?.width ?? "100%"
 
   return (
