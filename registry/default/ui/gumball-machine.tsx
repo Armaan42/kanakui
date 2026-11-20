@@ -15,14 +15,14 @@ interface GumballMachineProps extends React.ComponentProps<"div"> {
 }
 
 const COLORS: Gumball[] = [
-  { name: "red", value: "#ef4444" },
-  { name: "orange", value: "#f97316" },
-  { name: "yellow", value: "#facc15" },
-  { name: "green", value: "#22c55e" },
-  { name: "blue", value: "#3b82f6" },
-  { name: "purple", value: "#a855f7" },
-  { name: "pink", value: "#f472b6" },
-  { name: "white", value: "#f5f5f4" },
+  { name: "cherry", value: "#c2342c" },
+  { name: "tangerine", value: "#de7a33" },
+  { name: "lemon", value: "#e6c25a" },
+  { name: "mint", value: "#9bc4a4" },
+  { name: "blueberry", value: "#5f7fa6" },
+  { name: "plum", value: "#7e4f78" },
+  { name: "rose", value: "#dfa39a" },
+  { name: "vanilla", value: "#efe8da" },
 ]
 
 /** Ball size, as a percentage of the globe's width. */
@@ -106,19 +106,19 @@ function GumballMachine({ count = 30, colors = COLORS, onDispense, className, ..
       ? "The machine is empty."
       : tray
         ? `A ${tray.gumball.name} gumball rolled out. ${left} left.`
-        : `Turn the crank for a gumball. ${left} left.`
+        : `${left} gumballs left.`
 
   return (
     <div data-slot="gumball-machine" className={cn("flex w-64 max-w-full flex-col items-center", className)} {...props}>
       {/* Cap. */}
       <div aria-hidden="true" className="relative z-10 -mb-3 flex flex-col items-center">
-        <span className="size-5 rounded-full bg-[radial-gradient(circle_at_35%_30%,#fecaca,#b91c1c_60%,#7f1d1d)]" />
-        <span className="-mt-1 h-7 w-24 rounded-t-full bg-linear-to-b from-red-500 to-red-800 shadow-[inset_0_2px_0_rgb(255_255_255/0.3)]" />
-        <span className="h-2 w-28 rounded-sm bg-linear-to-b from-red-700 to-red-950" />
+        <span className="size-5 rounded-full bg-[radial-gradient(circle_at_35%_30%,#f0b3a8,#9e2a22_60%,#4a0f0b)]" />
+        <span className="-mt-1 h-7 w-24 rounded-t-full bg-linear-to-b from-[#b3322a] to-[#6b1712] shadow-[inset_0_2px_0_rgb(255_255_255/0.25)]" />
+        <span className="h-2 w-28 rounded-sm bg-linear-to-b from-[#7a1a14] to-[#3a0b08]" />
       </div>
 
       {/* Globe. */}
-      <div aria-hidden="true" className="relative aspect-square w-full overflow-hidden rounded-full border-2 border-white/50 bg-sky-100/25 shadow-[inset_0_-10px_30px_rgb(0_0_0/0.15),inset_0_0_0_6px_rgb(255_255_255/0.15),0_10px_30px_-10px_rgb(0_0_0/0.3)] dark:bg-sky-100/10">
+      <div aria-hidden="true" className="relative aspect-square w-full overflow-hidden rounded-full border-2 border-white/50 bg-white/30 shadow-[inset_0_-10px_30px_rgb(0_0_0/0.15),inset_0_0_0_6px_rgb(255_255_255/0.15),0_10px_30px_-10px_rgb(0_0_0/0.3)] dark:bg-white/8">
         {Array.from({ length: total - next }, (_, i) => {
           const id = next + i
           const slot = SLOTS[i]
@@ -135,8 +135,8 @@ function GumballMachine({ count = 30, colors = COLORS, onDispense, className, ..
       </div>
 
       {/* Body. */}
-      <div className="relative -mt-4 flex h-44 w-[82%] flex-col items-center rounded-t-2xl rounded-b-[2rem] bg-linear-to-b from-red-500 via-red-700 to-red-900 pt-5 shadow-[0_18px_30px_-14px_rgb(0_0_0/0.6),inset_0_2px_0_rgb(255_255_255/0.3),inset_0_-8px_14px_rgb(0_0_0/0.3)]">
-        <span aria-hidden="true" className="absolute top-0 h-3 w-[86%] rounded-b-lg bg-red-950/50" />
+      <div className="relative -mt-4 flex h-44 w-[82%] flex-col items-center rounded-t-2xl rounded-b-[2rem] bg-linear-to-b from-[#b3322a] via-[#8c2019] to-[#5c120d] pt-5 shadow-[0_18px_30px_-14px_rgb(0_0_0/0.6),inset_0_2px_0_rgb(255_255_255/0.3),inset_0_-8px_14px_rgb(0_0_0/0.3)]">
+        <span aria-hidden="true" className="absolute top-0 h-3 w-[86%] rounded-b-lg bg-black/35" />
         <button
           ref={crankRef}
           type="button"
@@ -183,11 +183,11 @@ function GumballMachine({ count = 30, colors = COLORS, onDispense, className, ..
             style={{ rotate: `${turn}deg`, transition: spinning ? "rotate 700ms cubic-bezier(.45,.05,.35,1)" : "none" }}
           >
             <span className="absolute top-1/2 left-1/2 h-4 w-[92%] -translate-1/2 rounded-full bg-linear-to-b from-neutral-200 via-neutral-500 to-neutral-700 shadow-[0_2px_3px_rgb(0_0_0/0.4)]" />
-            <span className="absolute top-1/2 right-0 size-6 -translate-y-1/2 translate-x-1/3 rounded-full bg-[radial-gradient(circle_at_35%_30%,#fecaca,#dc2626_60%,#7f1d1d)] shadow-[0_2px_4px_rgb(0_0_0/0.45)]" />
+            <span className="absolute top-1/2 right-0 size-6 -translate-y-1/2 translate-x-1/3 rounded-full bg-[radial-gradient(circle_at_35%_30%,#6b6b70,#1c1c1f_60%,#09090b)] shadow-[0_2px_4px_rgb(0_0_0/0.45)]" />
           </span>
           <span aria-hidden="true" className="relative size-6 rounded-full bg-[radial-gradient(circle_at_35%_30%,#fafafa,#a3a3a3)] shadow-[0_1px_2px_rgb(0_0_0/0.5)]" />
         </button>
-        <span aria-hidden="true" className="mt-2 text-[10px] font-bold tracking-[0.25em] text-red-100/80">TURN</span>
+        <span aria-hidden="true" className="mt-2 text-[11px] font-medium text-white/70">25¢</span>
 
         {/* Chute. */}
         <div className="absolute bottom-4 h-14 w-20 overflow-hidden rounded-t-2xl rounded-b-md bg-linear-to-b from-neutral-950 to-neutral-800 shadow-[inset_0_4px_8px_rgb(0_0_0/0.8)]">
@@ -222,7 +222,7 @@ function GumballMachine({ count = 30, colors = COLORS, onDispense, className, ..
               setNext(0)
               setEaten(0)
             }}
-            className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full border px-3 text-sm outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50"
+            className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-md border bg-background px-3 text-sm shadow-xs outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50"
           >
             <RefreshCw aria-hidden="true" className="size-3.5" />
             Refill

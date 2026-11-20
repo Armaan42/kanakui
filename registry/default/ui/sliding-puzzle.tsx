@@ -39,7 +39,7 @@ const seeded = (seed: number) => () => {
 }
 
 const ART =
-  "radial-gradient(circle at 30% 28%, #fde68a 0 9%, transparent 9.5%), radial-gradient(circle at 70% 120%, #0f766e 0 38%, transparent 38.5%), radial-gradient(circle at 20% 115%, #115e59 0 32%, transparent 32.5%), linear-gradient(180deg, #fb923c 0%, #f43f5e 45%, #7c3aed 100%)"
+  "radial-gradient(circle at 30% 28%, #f3e2b8 0 9%, transparent 9.5%), radial-gradient(circle at 70% 120%, #4f6b55 0 38%, transparent 38.5%), radial-gradient(circle at 20% 115%, #34493b 0 32%, transparent 32.5%), linear-gradient(180deg, #e9c79a 0%, #c98a62 45%, #6f5a6e 100%)"
 
 /**
  * A sliding tile puzzle. Click a tile in the blank's row or column to slide
@@ -103,7 +103,7 @@ function SlidingPuzzle({ size = 4, src, alt = "", onSolve, className, ...props }
                 type="button"
                 onClick={() => slide(spot)}
                 aria-label={`Tile ${tile}`}
-                className="absolute p-0.5 outline-none transition-[left,top] duration-150 ease-out motion-reduce:transition-none [&:focus-visible>span]:ring-3 [&:focus-visible>span]:ring-sky-400"
+                className="absolute p-0.5 outline-none transition-[left,top] duration-150 ease-out motion-reduce:transition-none [&:focus-visible>span]:ring-3 [&:focus-visible>span]:ring-white"
                 style={{ width: `${100 / size}%`, height: `${100 / size}%`, left: `${((spot % size) * 100) / size}%`, top: `${(Math.floor(spot / size) * 100) / size}%` }}
               >
                 <span

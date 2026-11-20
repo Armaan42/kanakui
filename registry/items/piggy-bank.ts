@@ -4,7 +4,7 @@ export default defineItem({
   "name": "piggy-bank",
   "type": "registry:ui",
   "title": "Piggy Bank",
-  "description": "A see-through piggy bank with a savings goal: drop in coins, shake it, and break it open at the goal.",
+  "description": "A frosted-glass piggy bank with a savings goal: drop in coins, shake it, and break it open at the goal.",
   "version": "0.1.0",
   "releasedAt": "2026-11-20",
   "categories": [

@@ -16,7 +16,7 @@ type Flake = { id: number; x: number; y: number }
 const W = 400
 const H = 260
 const SAND = 232
-const COLORS = ["#f97316", "#facc15", "#38bdf8", "#f472b6", "#a3e635"]
+const COLORS = ["#e8742c", "#e9c46a", "#7fb3c8", "#d97b6c", "#cfd8c6"]
 
 /** Where the fish start: spread across the tank, the same every time. */
 const makeFish = (colors: string[]): Fish[] =>
@@ -116,8 +116,8 @@ function Aquarium({ fish: colors = COLORS, className, ...props }: AquariumProps)
         >
           <defs>
             <linearGradient id="aquarium-water" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor={day ? "#7dd3fc" : "#1e3a5f"} />
-              <stop offset="1" stopColor={day ? "#0369a1" : "#0b1726"} />
+              <stop offset="0" stopColor={day ? "#9cc7c4" : "#1d3340"} />
+              <stop offset="1" stopColor={day ? "#2f6b72" : "#0a161c"} />
             </linearGradient>
           </defs>
           <rect width={W} height={H} fill="url(#aquarium-water)" className="transition-[fill] duration-700" />
@@ -131,13 +131,13 @@ function Aquarium({ fish: colors = COLORS, className, ...props }: AquariumProps)
           ) : null}
           {/* Sand, rock and weed. */}
           <path d={`M0 ${SAND} C80 ${SAND - 10} 160 ${SAND + 6} 240 ${SAND - 4} S360 ${SAND - 8} 400 ${SAND} V${H} H0 Z`} fill="#d6c08f" />
-          <path d="M280 238 C285 214 320 206 338 220 C350 230 346 240 340 242 Z" fill="#64748b" />
+          <path d="M280 238 C285 214 320 206 338 220 C350 230 346 240 340 242 Z" fill="#6b6f6a" />
           {[40, 58, 350, 372].map((x, i) => (
             <path
               key={x}
               d={`M${x} ${SAND + 2} C${x - 10} ${SAND - 40} ${x + 12} ${SAND - 70} ${x - 2} ${SAND - 110 + i * 12}`}
               fill="none"
-              stroke={i % 2 ? "#15803d" : "#16a34a"}
+              stroke={i % 2 ? "#3f6b3a" : "#557f46"}
               strokeWidth="6"
               strokeLinecap="round"
               className="animate-aquarium-sway motion-reduce:animate-none"

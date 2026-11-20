@@ -21,7 +21,19 @@ interface PrizeWheelProps extends React.ComponentProps<"div"> {
 
 const SIZE = 200
 const C = SIZE / 2
-const R = SIZE / 2 - 6
+const R = SIZE / 2 - 9
+
+/** Dark or light label text, whichever reads better on the segment. */
+function labelOn(color: string) {
+  const hex = /^#([0-9a-f]{6})$/i.exec(color.trim())?.[1]
+  if (!hex) return "#ffffff"
+  const n = parseInt(hex, 16)
+  const [r, g, b] = [n >> 16, (n >> 8) & 255, n & 255].map((v) => {
+    const c = v / 255
+    return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
+  })
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.35 ? "#1c1c1f" : "#f7f4ee"
+}
 
 function slice(index: number, count: number) {
   const a0 = ((index / count) * 360 - 90) * (Math.PI / 180)
@@ -43,6 +55,7 @@ function PrizeWheel({ segments, pick, onResult, duration = 5200, className, ...p
   const [result, setResult] = React.useState<number | null>(null)
   const count = segments.length
   const step = 360 / count
+  const id = React.useId().replace(/[^a-zA-Z0-9_-]/g, "")
 
   // While spinning, tick the pointer each time a segment edge passes it.
   React.useEffect(() => {
@@ -93,33 +106,48 @@ function PrizeWheel({ segments, pick, onResult, duration = 5200, className, ...p
         <span
           ref={pointerRef}
           aria-hidden="true"
-          className="absolute -top-2 left-1/2 z-10 -ml-3 h-9 w-6 origin-[50%_20%] drop-shadow-md"
+          className="absolute -top-1.5 left-1/2 z-10 -ml-[11px] h-8 w-[22px] origin-[50%_28%] drop-shadow-[0_2px_2px_rgb(0_0_0/0.35)]"
         >
-          <svg viewBox="0 0 24 36" className="size-full">
-            <path d="M12 36 L2 8 A10 10 0 1 1 22 8 Z" className="fill-foreground" />
-            <circle cx="12" cy="9" r="4" className="fill-background" />
+          <svg viewBox="0 0 22 32" className="size-full">
+            <defs>
+              <linearGradient id={`${id}-pointer`} x1="0" x2="1">
+                <stop offset="0" stopColor="#f3dca4" />
+                <stop offset="0.5" stopColor="#c99a4b" />
+                <stop offset="1" stopColor="#8a6428" />
+              </linearGradient>
+            </defs>
+            <path d="M11 32 L2 9 A9 9 0 1 1 20 9 Z" fill={`url(#${id}-pointer)`} />
+            <circle cx="11" cy="9" r="3" fill="#3b2a10" />
           </svg>
         </span>
         {/* Wheel */}
         <div
           ref={wheelRef}
           aria-hidden="true"
-          className="size-full rounded-full shadow-[0_20px_40px_-20px_rgb(0_0_0/0.6)] motion-reduce:transition-none"
+          className="size-full rounded-full shadow-[0_24px_40px_-24px_rgb(0_0_0/0.7)] motion-reduce:transition-none"
           style={{ transform: `rotate(${rotation}deg)`, transition: `transform ${duration}ms cubic-bezier(0.12, 0.7, 0.12, 1)` }}
         >
           <svg viewBox={`0 0 ${SIZE} ${SIZE}`} className="size-full">
-            <circle cx={C} cy={C} r={C} className="fill-neutral-900 dark:fill-neutral-700" />
+            <defs>
+              <linearGradient id={`${id}-rim`} x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stopColor="#efd9a3" />
+                <stop offset="0.45" stopColor="#b88a3e" />
+                <stop offset="1" stopColor="#6e4f1f" />
+              </linearGradient>
+            </defs>
+            <circle cx={C} cy={C} r={C} fill={`url(#${id}-rim)`} />
+            <circle cx={C} cy={C} r={C - 4} fill="#141416" />
             {segments.map((s, i) => (
               <g key={s.label + i}>
-                <path d={slice(i, count)} fill={s.color} stroke="white" strokeOpacity={0.6} strokeWidth={1} />
+                <path d={slice(i, count)} fill={s.color} stroke="#141416" strokeWidth={0.75} />
                 <text
                   x={C}
                   y={C - R * 0.62}
                   textAnchor="middle"
                   dominantBaseline="middle"
                   transform={`rotate(${i * step + step / 2} ${C} ${C})`}
-                  className="fill-white text-[9px] font-bold"
-                  style={{ paintOrder: "stroke", stroke: "rgb(0 0 0 / 0.25)", strokeWidth: 2 }}
+                  fill={labelOn(s.color)}
+                  className="text-[8.5px] font-semibold"
                 >
                   {s.label}
                 </text>
@@ -128,7 +156,7 @@ function PrizeWheel({ segments, pick, onResult, duration = 5200, className, ...p
             {/* Pegs on the rim */}
             {segments.map((_, i) => {
               const a = ((i / count) * 360 - 90) * (Math.PI / 180)
-              return <circle key={i} cx={C + (R - 3) * Math.cos(a)} cy={C + (R - 3) * Math.sin(a)} r={2.2} className="fill-amber-200" />
+              return <circle key={i} cx={C + (R + 1) * Math.cos(a)} cy={C + (R + 1) * Math.sin(a)} r={2} fill="#f3dca4" stroke="#6e4f1f" strokeWidth={0.5} />
             })}
           </svg>
         </div>
@@ -137,13 +165,20 @@ function PrizeWheel({ segments, pick, onResult, duration = 5200, className, ...p
           type="button"
           onClick={spin}
           disabled={spinning}
-          className="absolute top-1/2 left-1/2 grid size-[26%] -translate-1/2 place-items-center rounded-full bg-foreground text-sm font-bold text-background shadow-lg ring-4 ring-background outline-none focus-visible:ring-ring/50 disabled:cursor-wait"
+          className="absolute top-1/2 left-1/2 grid size-[24%] -translate-1/2 place-items-center rounded-full bg-[radial-gradient(circle_at_35%_30%,#fbf8f2,#e3dccd)] text-sm font-semibold text-neutral-900 shadow-[0_4px_10px_rgb(0_0_0/0.35),inset_0_-2px_0_rgb(0_0_0/0.08)] ring-[3px] ring-[#b88a3e] outline-none focus-visible:ring-ring disabled:cursor-wait"
         >
           {spinning ? "…" : "Spin"}
         </button>
       </div>
-      <p aria-live="polite" className="min-h-6 text-center font-medium">
-        {result !== null ? `You won: ${segments[result].label}!` : spinning ? "Spinning…" : ""}
+      <p aria-live="polite" className="min-h-6 text-center text-sm">
+        {result !== null ? (
+          <>
+            <span className="text-muted-foreground">You won </span>
+            <span className="font-semibold">{segments[result].label}</span>
+          </>
+        ) : spinning ? (
+          <span className="text-muted-foreground">Spinning…</span>
+        ) : null}
       </p>
     </div>
   )

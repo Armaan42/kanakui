@@ -135,7 +135,7 @@ function DeckOfCards({ className, ...props }: React.ComponentProps<"div">) {
         </button>
       </div>
       <p role="status" className="text-sm">
-        {hand.length ? `${handName(hand)}: ${hand.map(nameOf).join(", ")}.` : riffles ? "Shuffled. Deal a hand." : "A fresh deck, in order. Shuffle first for a fair hand."}
+        {hand.length ? `${handName(hand)}: ${hand.map(nameOf).join(", ")}.` : riffles ? "Shuffled." : "52 cards, in order."}
       </p>
     </div>
   )

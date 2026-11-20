@@ -13,13 +13,12 @@ interface PlinkoBoardProps extends React.ComponentProps<"div"> {
   onLand?: (slot: number) => void
 }
 
-type Ball = { id: number; path: { x: number; y: number }[]; start: number; slot: number; color: string }
+type Ball = { id: number; path: { x: number; y: number }[]; start: number; slot: number }
 
 const SPACING = 30
 const TOP = 46
 const ROW = 32
 const STEP = 120
-const COLORS = ["#f43f5e", "#f59e0b", "#10b981", "#3b82f6", "#a855f7"]
 
 /**
  * A Plinko board. Drop balls and watch them bounce off the pegs into the
@@ -31,11 +30,12 @@ function PlinkoBoard({ rows = 9, slots: labels, onLand, className, ...props }: P
   const height = TOP + rows * ROW + 70
   const [tally, setTally] = React.useState<number[]>(() => Array(count).fill(0))
   const [flash, setFlash] = React.useState<number | null>(null)
-  const [drawn, setDrawn] = React.useState<{ id: number; x: number; y: number; color: string }[]>([])
+  const [drawn, setDrawn] = React.useState<{ id: number; x: number; y: number }[]>([])
   const balls = React.useRef<Ball[]>([])
   const nextId = React.useRef(0)
   const frame = React.useRef(0)
   const timers = React.useRef<number[]>([])
+  const id = React.useId().replace(/[^a-zA-Z0-9_-]/g, "")
 
   React.useEffect(
     () => () => {
@@ -68,7 +68,7 @@ function PlinkoBoard({ rows = 9, slots: labels, onLand, className, ...props }: P
       setFlash(last)
       landed.forEach((ball) => onLand?.(ball.slot))
     }
-    setDrawn(balls.current.map((ball) => ({ id: ball.id, color: ball.color, ...position(ball, now) })))
+    setDrawn(balls.current.map((ball) => ({ id: ball.id, ...position(ball, now) })))
     frame.current = balls.current.length ? requestAnimationFrame(tick) : 0
   }
 
@@ -83,7 +83,7 @@ function PlinkoBoard({ rows = 9, slots: labels, onLand, className, ...props }: P
     path.push({ x: path[path.length - 1].x, y: height - 26 })
     nextId.current += 1
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    balls.current.push({ id: nextId.current, path, start: performance.now() - (still ? path.length * STEP : 0), slot: (offset + rows) / 2, color: COLORS[nextId.current % COLORS.length] })
+    balls.current.push({ id: nextId.current, path, start: performance.now() - (still ? path.length * STEP : 0), slot: (offset + rows) / 2 })
     if (!frame.current) frame.current = requestAnimationFrame(tick)
   }
 
@@ -96,34 +96,52 @@ function PlinkoBoard({ rows = 9, slots: labels, onLand, className, ...props }: P
 
   return (
     <div data-slot="plinko-board" className={cn("flex w-full max-w-sm flex-col gap-4", className)} {...props}>
-      <div className="rounded-2xl bg-linear-to-b from-indigo-900 to-slate-950 p-3 shadow-[0_20px_34px_-18px_rgb(0_0_0/0.8)]">
+      <div className="rounded-2xl bg-[linear-gradient(160deg,#efe4cf,#dccaa8)] p-3 shadow-[0_20px_34px_-20px_rgb(0_0_0/0.7),inset_0_1px_0_rgb(255_255_255/0.6),inset_0_0_0_1px_rgb(120_90_50/0.25)]">
         <svg viewBox={`0 0 ${width} ${height}`} className="w-full" role="img" aria-label={`Plinko board, ${total} balls dropped`}>
+          <defs>
+            <radialGradient id={`${id}-brass`} cx="0.35" cy="0.3" r="0.8">
+              <stop offset="0" stopColor="#fbeec4" />
+              <stop offset="0.5" stopColor="#c99a4b" />
+              <stop offset="1" stopColor="#6e4f1f" />
+            </radialGradient>
+            <radialGradient id={`${id}-steel`} cx="0.35" cy="0.3" r="0.75">
+              <stop offset="0" stopColor="#ffffff" />
+              <stop offset="0.3" stopColor="#d4d4d8" />
+              <stop offset="0.75" stopColor="#5f5f66" />
+              <stop offset="1" stopColor="#27272a" />
+            </radialGradient>
+          </defs>
           {Array.from({ length: rows }, (_, row) =>
-            Array.from({ length: row + 3 }, (_, i) => <circle key={`${row}-${i}`} cx={pegX(row, i)} cy={TOP + row * ROW} r="3.4" fill="#e2e8f0" />)
+            Array.from({ length: row + 3 }, (_, i) => (
+              <g key={`${row}-${i}`}>
+                <ellipse cx={pegX(row, i) + 1} cy={TOP + row * ROW + 2} rx="3.4" ry="2.4" fill="rgb(80 55 20 / 0.25)" />
+                <circle cx={pegX(row, i)} cy={TOP + row * ROW} r="3.2" fill={`url(#${id}-brass)`} />
+              </g>
+            ))
           )}
           {Array.from({ length: count }, (_, slot) => {
             const x = slotX(slot)
             const bar = (tally[slot] / tallest) * 34
             return (
               <g key={slot}>
-                <rect x={x - SPACING / 2 + 2} y={height - 48} width={SPACING - 4} height="44" rx="4" fill={flash === slot ? "#facc15" : "rgb(255 255 255 / 0.08)"} className="transition-[fill] duration-300" />
-                <rect x={x - SPACING / 2 + 6} y={height - 8 - bar} width={SPACING - 12} height={bar} rx="2" fill="rgb(255 255 255 / 0.35)" />
-                <text x={x} y={height - 36} textAnchor="middle" fontSize="9" fontWeight="700" fill={flash === slot ? "#1e1b4b" : "#cbd5e1"}>
+                <rect x={x - SPACING / 2 + 2} y={height - 48} width={SPACING - 4} height="44" rx="3" fill={flash === slot ? "#e2531b" : "#3a2c1c"} className="transition-[fill] duration-300" />
+                <rect x={x - SPACING / 2 + 6} y={height - 8 - bar} width={SPACING - 12} height={bar} rx="1.5" fill="rgb(255 240 210 / 0.3)" />
+                <text x={x} y={height - 36} textAnchor="middle" fontSize="9" fontWeight="600" fill={flash === slot ? "#ffffff" : "#e9dcc4"}>
                   {labels?.[slot] ?? tally[slot]}
                 </text>
               </g>
             )
           })}
           {drawn.map((ball) => (
-            <circle key={ball.id} cx={ball.x} cy={ball.y} r="6" fill={ball.color} stroke="white" strokeWidth="1.2" />
+            <circle key={ball.id} cx={ball.x} cy={ball.y} r="6" fill={`url(#${id}-steel)`} />
           ))}
         </svg>
       </div>
       <div className="flex flex-wrap items-center gap-2">
-        <button type="button" onClick={drop} className="h-10 rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground outline-none hover:bg-primary/90 focus-visible:ring-3 focus-visible:ring-ring/50">
+        <button type="button" onClick={drop} className="h-9 rounded-md bg-primary px-3 text-sm font-medium text-primary-foreground outline-none hover:bg-primary/90 focus-visible:ring-3 focus-visible:ring-ring/50">
           Drop a ball
         </button>
-        <button type="button" onClick={() => dropMany(20)} className="h-10 rounded-full border px-4 text-sm outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50">
+        <button type="button" onClick={() => dropMany(20)} className="h-9 rounded-md border bg-background px-3 text-sm shadow-xs outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50">
           Drop 20
         </button>
         <button
@@ -133,13 +151,13 @@ function PlinkoBoard({ rows = 9, slots: labels, onLand, className, ...props }: P
             setTally(Array(count).fill(0))
             setFlash(null)
           }}
-          className="ml-auto grid size-10 place-items-center rounded-full border text-muted-foreground outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50"
+          className="ml-auto grid size-9 place-items-center rounded-md border bg-background text-muted-foreground shadow-xs outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50"
         >
           <RotateCcw aria-hidden="true" className="size-4" />
         </button>
       </div>
       <p role="status" className="text-sm text-muted-foreground">
-        {total ? `${total} dropped. Most landed in slot ${tally.indexOf(tallest) + 1}.` : "Drop a ball to start."}
+        {total ? `${total} dropped. Most landed in slot ${tally.indexOf(tallest) + 1}.` : "No balls dropped yet."}
       </p>
     </div>
   )

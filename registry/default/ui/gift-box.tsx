@@ -10,12 +10,12 @@ interface GiftBoxProps extends React.ComponentProps<"div"> {
   code: string
   /** What the code gets you, e.g. "15% off your next order". */
   reward: string
-  /** Box color: any CSS color. The ribbon stays gold. */
+  /** Box color: any CSS color. The ribbon stays ivory. */
   color?: string
   onOpen?: () => void
 }
 
-const CONFETTI_COLORS = ["#f43f5e", "#f59e0b", "#10b981", "#3b82f6", "#a855f7", "#facc15"]
+const CONFETTI_COLORS = ["#f2ede3", "#d4a645", "#c46a4a", "#7f9a83", "#1f1f22", "#e8d9b8"]
 /** Stable pseudo-random numbers in [0, 1), so every render places the confetti the same way. */
 const spread = (i: number, salt: number) => {
   const n = Math.sin(i * 12.9898 + salt * 78.233) * 43758.5453
@@ -33,7 +33,7 @@ const burst = (i: number) => {
  * confetti bursts out and a card with a coupon code rises from the box,
  * with a copy button. With reduced motion there's no confetti.
  */
-function GiftBox({ code, reward, color = "oklch(0.62 0.2 15)", onOpen, className, style, ...props }: GiftBoxProps) {
+function GiftBox({ code, reward, color = "#24382d", onOpen, className, style, ...props }: GiftBoxProps) {
   const [open, setOpen] = React.useState(false)
   const [copied, setCopied] = React.useState(false)
 
@@ -64,10 +64,10 @@ function GiftBox({ code, reward, color = "oklch(0.62 0.2 15)", onOpen, className
           open ? "-translate-y-[118%] opacity-100 delay-200" : "translate-y-6 opacity-0"
         )}
       >
-        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">Your gift</p>
+        <p className="text-sm text-muted-foreground">Your gift</p>
         <p className="mt-1 font-semibold text-balance">{reward}</p>
         <div className="mt-3 flex items-center justify-center gap-2">
-          <code className="rounded-md border border-dashed bg-muted px-3 py-1.5 font-mono text-sm font-semibold tracking-widest">{code}</code>
+          <code className="rounded-md border border-dashed bg-muted px-3 py-1.5 font-mono text-sm font-semibold tracking-wider">{code}</code>
           <button
             type="button"
             onClick={copy}
@@ -118,8 +118,8 @@ function GiftBox({ code, reward, color = "oklch(0.62 0.2 15)", onOpen, className
         className="relative z-30 h-40 w-48 cursor-pointer rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50 aria-disabled:cursor-default"
       >
         {/* Box */}
-        <span aria-hidden="true" className="absolute inset-x-2 top-10 bottom-0 rounded-b-md bg-(--box) shadow-[inset_0_-12px_20px_rgb(0_0_0/0.15),0_18px_30px_-16px_rgb(0_0_0/0.5)]">
-          <span className="absolute inset-y-0 left-1/2 w-7 -translate-x-1/2 bg-linear-to-r from-amber-300 via-amber-200 to-amber-400" />
+        <span aria-hidden="true" className="absolute inset-x-2 top-10 bottom-0 rounded-b-md bg-(--box) shadow-[inset_0_-12px_20px_rgb(0_0_0/0.2),inset_0_1px_0_rgb(255_255_255/0.08),0_18px_30px_-16px_rgb(0_0_0/0.5)]">
+          <span className="absolute inset-y-0 left-1/2 w-7 -translate-x-1/2 bg-linear-to-r from-[#d9d0bd] via-[#fbf8f1] to-[#d9d0bd] shadow-[0_0_0_0.5px_rgb(0_0_0/0.08)]" />
         </span>
         {/* Lid with bow */}
         <span
@@ -132,16 +132,15 @@ function GiftBox({ code, reward, color = "oklch(0.62 0.2 15)", onOpen, className
           )}
         >
           <span className="absolute inset-0 rounded-md bg-(--box-dark) shadow-md">
-            <span className="absolute inset-y-0 left-1/2 w-7 -translate-x-1/2 bg-linear-to-r from-amber-300 via-amber-200 to-amber-400" />
+            <span className="absolute inset-y-0 left-1/2 w-7 -translate-x-1/2 bg-linear-to-r from-[#d9d0bd] via-[#fbf8f1] to-[#d9d0bd] shadow-[0_0_0_0.5px_rgb(0_0_0/0.08)]" />
           </span>
           <span className="absolute bottom-[85%] left-1/2 h-10 w-24 -translate-x-1/2">
-            <span className="absolute bottom-0 left-0 h-9 w-11 rotate-[-25deg] rounded-[50%_50%_40%_60%] border-[7px] border-amber-300" />
-            <span className="absolute right-0 bottom-0 h-9 w-11 rotate-[25deg] rounded-[50%_50%_60%_40%] border-[7px] border-amber-300" />
-            <span className="absolute bottom-0 left-1/2 size-5 -translate-x-1/2 rounded-full bg-amber-400" />
+            <span className="absolute bottom-0 left-0 h-9 w-11 rotate-[-25deg] rounded-[50%_50%_40%_60%] border-[7px] border-[#efe8da] shadow-[0_1px_2px_rgb(0_0_0/0.2)]" />
+            <span className="absolute right-0 bottom-0 h-9 w-11 rotate-[25deg] rounded-[50%_50%_60%_40%] border-[7px] border-[#efe8da] shadow-[0_1px_2px_rgb(0_0_0/0.2)]" />
+            <span className="absolute bottom-0 left-1/2 size-5 -translate-x-1/2 rounded-full bg-[#e4dccb] shadow-[0_1px_2px_rgb(0_0_0/0.3)]" />
           </span>
         </span>
       </button>
-      <p className="mt-4 text-sm text-muted-foreground">{open ? "Enjoy!" : "Tap the gift to open it"}</p>
     </div>
   )
 }

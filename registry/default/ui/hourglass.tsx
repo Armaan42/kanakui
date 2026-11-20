@@ -93,7 +93,7 @@ function Hourglass({ duration = 60, onDone, className, ...props }: HourglassProp
         {format(turns === 0 ? duration : left)}
       </p>
       <p aria-live="polite" className="-mt-3 text-xs text-muted-foreground">
-        {running ? "Running" : turns > 0 && left <= 0.05 ? "Time’s up. Turn it over." : "Press the glass to start"}
+        {running ? "Running" : turns > 0 && left <= 0.05 ? "Time’s up" : "Ready"}
       </p>
     </div>
   )

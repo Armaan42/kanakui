@@ -23,7 +23,7 @@ export default defineItem({
         "name": "color",
         "type": "string",
         "description": "Body colour.",
-        "default": "\"#0d9488\""
+        "default": "\"#4a4e55\""
       },
       {
         "name": "friction",

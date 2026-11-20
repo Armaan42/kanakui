@@ -115,7 +115,6 @@ function WindChimes({ notes = PENTATONIC, sound = true, className, ...props }: W
         <Wind aria-hidden="true" className="size-4" />
         {breezy ? "Breezy…" : "Let the breeze in"}
       </button>
-      <p className="text-center text-sm text-muted-foreground">Brush across the tubes to ring them.</p>
     </div>
   )
 }

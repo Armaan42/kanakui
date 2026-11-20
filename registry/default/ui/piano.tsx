@@ -173,7 +173,7 @@ function Piano({ octaves = 2, startOctave = 4, sound = true, onNote, className, 
         </div>
       </div>
       <p aria-live="polite" className="min-h-5 text-sm text-muted-foreground">
-        {last ? `Last note: ${last}` : "Press a key, or focus the piano and play from your keyboard."}
+        {last ? `Last note: ${last}` : ""}
       </p>
     </div>
   )

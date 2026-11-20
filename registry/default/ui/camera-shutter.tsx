@@ -138,7 +138,7 @@ function CameraShutter({
         <svg viewBox="0 0 200 200" role="img" aria-label={`Lens iris set to f/${stop}`} className="size-full">
           <defs>
             <radialGradient id={`${id}-glass`} cx="42%" cy="36%" r="72%">
-              <stop offset="0" stopColor="#6d5bd0" />
+              <stop offset="0" stopColor="#4a4470" />
               <stop offset="0.42" stopColor="#123a4c" />
               <stop offset="1" stopColor="#030712" />
             </radialGradient>

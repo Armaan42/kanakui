@@ -206,10 +206,10 @@ function ZenGarden({ defaultStones = STONES, maxStones = 7, className, ...props 
   const full = stones.length >= maxStones
   const hint =
     tool === "rake"
-      ? "Drag across the sand to rake it."
+      ? "Raking"
       : full
-        ? "The tray is full. Tap a stone to lift it."
-        : "Tap the sand to place a stone, or a stone to lift it."
+        ? `Tray full: ${stones.length} of ${maxStones} stones`
+        : `${stones.length} of ${maxStones} stones`
 
   return (
     <div data-slot="zen-garden" className={cn("flex w-full max-w-xl flex-col gap-4", className)} {...props}>

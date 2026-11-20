@@ -14,7 +14,7 @@ export default defineItem({
       { name: "images", type: "{ src: string; alt: string }[]", description: "Photos in the folder. Up to five fan out; the count includes all of them." },
       { name: "label", type: "string", description: "Folder name, shown under it and used as its accessible name." },
       { name: "description", type: "string", description: "Second line under the name. Defaults to the number of photos." },
-      { name: "color", type: "string", default: "oklch(0.7 0.14 245)", description: "Folder color: any CSS color. The back and the lighter top of the flap are mixed from it." },
+      { name: "color", type: "string", default: "\"#d8b878\"", description: "Folder color: any CSS color. The back and the lighter top of the flap are mixed from it." },
       { name: "open", type: "boolean", description: "Controlled open state. Leave unset to open on hover and toggle on click." },
       { name: "onOpenChange", type: "(open: boolean) => void", description: "Called when hovering or clicking opens or closes the folder." },
     ],

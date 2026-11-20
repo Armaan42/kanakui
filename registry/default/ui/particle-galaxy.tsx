@@ -166,7 +166,7 @@ function Galaxy({
 function ParticleGalaxy({
   count = 40000,
   arms = 4,
-  colors = ["#ffb48f", "#c084fc", "#38bdf8"],
+  colors = ["#ffd9a8", "#e8b98a", "#8ea3c4"],
   speed = 0.06,
   followPointer = true,
   label = "Spiral galaxy of glowing particles",

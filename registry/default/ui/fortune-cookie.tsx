@@ -96,9 +96,7 @@ function FortuneCookie({ fortunes = FORTUNES, onOpen, className, ...props }: For
             <p className="font-serif text-base leading-snug">{fortune.text}</p>
             <p className="mt-2 font-mono text-xs tracking-wider text-red-700">Lucky numbers {fortune.numbers.join(" ")}</p>
           </div>
-        ) : (
-          <p className="pt-3 text-center text-sm text-muted-foreground">Tap the cookie to crack it open.</p>
-        )}
+        ) : null}
       </div>
 
       {open ? (

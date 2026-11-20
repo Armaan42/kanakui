@@ -11,7 +11,8 @@ interface AbacusProps extends Omit<React.ComponentProps<"div">, "onChange"> {
   onValueChange?: (value: number) => void
 }
 
-const BEAD_COLORS = ["#b45309", "#be123c", "#047857", "#1d4ed8", "#6d28d9", "#c2410c", "#0f766e", "#a21caf"]
+const WALNUT = "radial-gradient(ellipse at 50% 30%, #8a5236, #4a2516 70%, #2c140b)"
+const BOXWOOD = "radial-gradient(ellipse at 50% 30%, #f2dcae, #c79a5a 70%, #8a6430)"
 
 /**
  * A soroban abacus. Each rod is one digit: the top bead counts five, the
@@ -30,13 +31,13 @@ function Abacus({ rods = 6, defaultValue = 2026, onValueChange, className, ...pr
 
   return (
     <div data-slot="abacus" className={cn("w-full max-w-md", className)} {...props}>
-      <div className="rounded-xl bg-[linear-gradient(180deg,#78350f,#92400e)] p-2.5 shadow-[0_16px_26px_-14px_rgb(0_0_0/0.6)]">
+      <div className="rounded-xl bg-[linear-gradient(180deg,#3d2417,#28170e)] p-2.5 shadow-[0_16px_26px_-14px_rgb(0_0_0/0.6)]">
         <div className="relative flex justify-around rounded-md bg-[#fbf3e4] px-2 py-3 dark:bg-[#2a2118]">
-          <span aria-hidden="true" className="absolute inset-x-0 top-[31%] h-2 bg-[#78350f]" />
+          <span aria-hidden="true" className="absolute inset-x-0 top-[31%] h-2 bg-[#3d2417]" />
           {digits.map((digit, rod) => {
             const five = digit >= 5
             const ones = digit % 5
-            const color = BEAD_COLORS[rod % BEAD_COLORS.length]
+            const color = (rods - 1 - rod) % 3 === 0 ? BOXWOOD : WALNUT
             return (
               <div
                 key={rod}
@@ -54,7 +55,7 @@ function Abacus({ rods = 6, defaultValue = 2026, onValueChange, className, ...pr
                 }}
                 className="relative flex h-52 w-9 flex-col items-center rounded-full outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
               >
-                <span aria-hidden="true" className="absolute inset-y-0 left-1/2 w-1 -translate-x-1/2 rounded-full bg-neutral-400" />
+                <span aria-hidden="true" className="absolute inset-y-0 left-1/2 w-1 -translate-x-1/2 rounded-full bg-[linear-gradient(90deg,#9a8f80,#d8cfbf,#9a8f80)]" />
                 {/* Heaven bead (5) */}
                 <span
                   aria-hidden="true"

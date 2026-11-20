@@ -49,7 +49,7 @@ function PhotoFolder({
   images,
   label,
   description,
-  color = "oklch(0.7 0.14 245)",
+  color = "#d8b878",
   open: openProp,
   onOpenChange,
   className,

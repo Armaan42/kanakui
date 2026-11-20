@@ -5,14 +5,14 @@ export default function PrizeWheelDemo() {
     <PrizeWheel
       className="w-[min(20rem,calc(100vw-3rem))]"
       segments={[
-        { label: "10% off", color: "#f43f5e" },
-        { label: "Free tote", color: "#f59e0b" },
-        { label: "5% off", color: "#10b981" },
-        { label: "Free ship", color: "#3b82f6" },
-        { label: "20% off", color: "#a855f7" },
-        { label: "Sticker", color: "#14b8a6" },
-        { label: "15% off", color: "#ec4899" },
-        { label: "Mystery", color: "#6366f1" },
+        { label: "10% off", color: "#1f1f22" },
+        { label: "Free tote", color: "#f2ede3" },
+        { label: "5% off", color: "#1f1f22" },
+        { label: "Free ship", color: "#f2ede3" },
+        { label: "20% off", color: "#e2531b" },
+        { label: "Stickers", color: "#f2ede3" },
+        { label: "15% off", color: "#1f1f22" },
+        { label: "Mystery", color: "#f2ede3" },
       ]}
     />
   )

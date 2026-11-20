@@ -87,7 +87,7 @@ function RubberStamp({ text = "APPROVED", ink = "#c2410c", children, onStamp, cl
           Clean sheet
         </button>
         <span role="status" className="ml-auto text-xs text-muted-foreground">
-          {marks.length ? `Stamped ${marks.length} ${marks.length === 1 ? "time" : "times"}` : "Click the sheet to stamp it"}
+          {marks.length ? `Stamped ${marks.length} ${marks.length === 1 ? "time" : "times"}` : "Not stamped yet"}
         </span>
       </div>
     </div>
