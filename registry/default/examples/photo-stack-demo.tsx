@@ -1,11 +1,11 @@
-import { PolaroidStack } from "@/registry/default/ui/polaroid-stack"
+import { PhotoStack } from "@/registry/default/ui/photo-stack"
 
-// Photos: Unsplash (free under the Unsplash License).
+// Sample photos. Swap in your own.
 const photo = (id: string) => `https://images.unsplash.com/photo-${id}?w=600&h=600&fit=crop&auto=format&q=80`
 
-export default function PolaroidStackDemo() {
+export default function PhotoStackDemo() {
   return (
-    <PolaroidStack
+    <PhotoStack
       className="w-[min(18rem,calc(100vw-4rem))]"
       photos={[
         { src: photo("1493976040374-85c8e12f0c0e"), alt: "A pagoda at the end of an old street in Kyoto at dusk", caption: "Kyoto, golden hour" },

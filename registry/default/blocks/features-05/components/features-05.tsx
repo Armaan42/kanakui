@@ -25,7 +25,7 @@ export function Features05() {
         </div>
         <div className="relative mx-auto flex size-80 items-center justify-center sm:size-96">
           <span className="relative z-10 flex size-16 items-center justify-center rounded-2xl border bg-foreground font-semibold text-background">
-            Acme
+            Halcyon
           </span>
           <OrbitingCircles radius={80} duration={20}>
             <Node icon={Database} label="Database" />

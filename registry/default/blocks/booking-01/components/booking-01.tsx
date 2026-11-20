@@ -6,7 +6,7 @@ import { BedDouble, Check, Star, Waves, Wifi } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { WallCalendar, type CalendarSelection } from "@/registry/default/ui/wall-calendar"
 
-// Photos: Unsplash (free under the Unsplash License). The hotel is made up.
+// Sample photos. Swap in your own. The hotel is made up.
 const photo = (id: string, width: number, height: number) => `https://images.unsplash.com/photo-${id}?w=${width}&h=${height}&fit=crop&auto=format&q=75`
 
 const RATE = 240

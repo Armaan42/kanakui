@@ -33,12 +33,12 @@ export default defineItem({
     requirements: [
       "shadcn `button` and `input`, and `lucide-react`. The CLI installs them.",
       "React 19 and Tailwind CSS v4, with a `cn` helper at `@/lib/utils`. The CLI adds the template’s two brand colors to your `globals.css`.",
-      "An internet connection for the photos, which load from Unsplash’s image CDN.",
+      "An internet connection for the sample photos, which load from a remote image CDN.",
     ],
     customization: [
       "Render `<SaasLanding />` from `app/page.tsx`, or render single sections such as `<SaasLandingPricing />` on other pages.",
       "Pulsewise and its customers are made up. Change the name and mark in `saas-landing-logo.tsx`, then the copy in each section file.",
-      "Photos are free Unsplash images listed in `saas-landing-media.ts`. Swap in your own photos there, and keep the `alt` text accurate.",
+      "The sample photos are listed in `saas-landing-media.ts`. Swap in your own photos there, and keep the `alt` text accurate.",
       "To serve photos through `next/image`, add `images.unsplash.com` to `images.remotePatterns` in `next.config.ts`, or move your own photos into `public/`.",
       "The hero dashboard (`saas-landing-dashboard.tsx`) is HTML, so it follows your theme. Replace it with a screenshot of your product when you have one.",
       "Plans and prices are in `saas-landing-pricing.tsx`. Prices are per month in USD, with a yearly price per plan.",

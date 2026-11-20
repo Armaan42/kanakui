@@ -1,10 +1,10 @@
 import { defineItem } from "../define.ts"
 
 export default defineItem({
-  "name": "dynamic-island",
+  "name": "morphing-pill",
   "type": "registry:ui",
-  "title": "Dynamic Island",
-  "description": "A black pill that morphs into a larger panel on hover or click, like a phone's dynamic island.",
+  "title": "Morphing Pill",
+  "description": "A black pill that morphs into a larger panel on hover or click, like a phone's live status pill.",
   "version": "0.1.0",
   "releasedAt": "2026-11-16",
   "categories": [
@@ -13,7 +13,7 @@ export default defineItem({
   ],
   "files": [
     {
-      "path": "registry/default/ui/dynamic-island.tsx",
+      "path": "registry/default/ui/morphing-pill.tsx",
       "type": "registry:ui"
     }
   ],

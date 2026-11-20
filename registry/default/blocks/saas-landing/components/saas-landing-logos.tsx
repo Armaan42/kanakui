@@ -1,6 +1,6 @@
 /** Customer logos. These brands are made up; put your customers' logos here (with their permission). */
 const customers = [
-  { name: "Northwind", mark: <path d="M4 20 12 4l8 16h-5l-3-6-3 6Z" /> },
+  { name: "Northlight", mark: <path d="M4 20 12 4l8 16h-5l-3-6-3 6Z" /> },
   { name: "Brightloop", mark: <path d="M12 3a9 9 0 1 0 9 9h-4a5 5 0 1 1-5-5Z" /> },
   { name: "Kestrel", mark: <path d="M3 12 12 3l9 9-9 9Zm9-4-4 4 4 4 4-4Z" fillRule="evenodd" /> },
   { name: "Fernway", mark: <path d="M12 2c4 4 6 8 6 12a6 6 0 0 1-12 0c0-4 2-8 6-12Z" /> },

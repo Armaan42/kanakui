@@ -3,7 +3,7 @@ import { Droplets, Gem, Ruler, Watch } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { MagnifierLoupe } from "@/registry/default/ui/magnifier-loupe"
 
-// Photo: Unsplash (free under the Unsplash License). The watch and brand are made up.
+// Sample photos. Swap in your own. The watch and brand are made up.
 const PHOTO = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1600&h=1200&fit=crop&auto=format&q=85"
 
 const specs = [

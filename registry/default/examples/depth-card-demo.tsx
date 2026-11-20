@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react"
 
 import { DepthCard, DepthCardItem } from "@/registry/default/ui/depth-card"
 
-// Photo: Unsplash (free under the Unsplash License).
+// Sample photos. Swap in your own.
 const PHOTO = "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&h=560&fit=crop&auto=format&q=80"
 
 export default function DepthCardDemo() {

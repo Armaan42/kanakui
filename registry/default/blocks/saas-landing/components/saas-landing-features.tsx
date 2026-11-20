@@ -44,7 +44,7 @@ const moreFeatures = [
   { icon: Zap, title: "Real-time", text: "Events show up in charts within seconds, so you can watch a launch as it happens." },
   { icon: Database, title: "Warehouse sync", text: "Two-way sync with your data warehouse keeps one source of truth for every team." },
   { icon: ShieldCheck, title: "Private by default", text: "Inputs are masked, IPs are dropped and data can stay in the EU. SOC 2 Type II audited." },
-  { icon: BellRing, title: "Smart alerts", text: "Get a Slack message when a funnel step or a key metric moves more than usual." },
+  { icon: BellRing, title: "Smart alerts", text: "Get a message in your team chat when a funnel step or a key metric moves more than usual." },
   { icon: Users, title: "Team spaces", text: "Shared dashboards, comments and saved views keep product, design and growth aligned." },
 ]
 
@@ -98,7 +98,7 @@ export function SaasLandingFeatures() {
                 </div>
               ))}
               <p className="rounded-md bg-red-500/10 px-3 py-2 text-xs text-red-700 dark:text-red-300">
-                Biggest drop-off: 41% leave at “Entered card”, mostly on mobile Safari.
+                Biggest drop-off: 41% leave at “Entered card”, mostly on mobile browsers.
               </p>
             </div>
           </Card>
@@ -152,7 +152,7 @@ export function SaasLandingFeatures() {
                 </span>
                 <div className="min-w-0">
                   <p className="truncate font-medium">jonas.k@fernway.io</p>
-                  <p className="truncate text-[10px] text-muted-foreground">Berlin · Chrome on macOS · 2 days ago</p>
+                  <p className="truncate text-[10px] text-muted-foreground">Berlin · Desktop browser · 2 days ago</p>
                 </div>
                 <span className="ml-auto shrink-0 rounded-full bg-red-500/10 px-2 py-0.5 text-[10px] font-medium text-red-700 dark:text-red-400">
                   Rage click

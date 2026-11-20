@@ -4,7 +4,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-interface T9KeypadProps extends React.ComponentProps<"div"> {
+interface MultitapKeypadProps extends React.ComponentProps<"div"> {
   defaultValue?: string
   /** Characters allowed, counted down on the screen like an old text message. */
   maxLength?: number
@@ -24,7 +24,7 @@ const KEYS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "0", "#"]
  * a moment (or press another key) to lock it in. * deletes and # changes
  * between sentence case, lower case, capitals and numbers.
  */
-function T9Keypad({ defaultValue = "", maxLength = 160, delay = 900, onValueChange, className, ...props }: T9KeypadProps) {
+function MultitapKeypad({ defaultValue = "", maxLength = 160, delay = 900, onValueChange, className, ...props }: MultitapKeypadProps) {
   const [text, setText] = React.useState(defaultValue)
   const [pending, setPending] = React.useState<{ key: string; index: number } | null>(null)
   const [mode, setMode] = React.useState<Mode>("Abc")
@@ -94,7 +94,7 @@ function T9Keypad({ defaultValue = "", maxLength = 160, delay = 900, onValueChan
 
   return (
     <div
-      data-slot="t9-keypad"
+      data-slot="multitap-keypad"
       onKeyDown={(event) => {
         const key = event.key === "Backspace" ? "*" : event.key
         if (!KEYS.includes(key) || event.repeat) return
@@ -115,7 +115,7 @@ function T9Keypad({ defaultValue = "", maxLength = 160, delay = 900, onValueChan
           <output aria-live="polite" aria-label="Message" className="mt-1 line-clamp-4 text-sm leading-[1.15rem] break-words">
             {text}
             {preview ? <span className="bg-neutral-900 text-[#c8d6a6]">{preview}</span> : null}
-            <span aria-hidden="true" className="animate-t9-keypad-caret motion-reduce:animate-none">
+            <span aria-hidden="true" className="animate-multitap-keypad-caret motion-reduce:animate-none">
               ▏
             </span>
           </output>
@@ -143,4 +143,4 @@ function T9Keypad({ defaultValue = "", maxLength = 160, delay = 900, onValueChan
   )
 }
 
-export { T9Keypad }
+export { MultitapKeypad }

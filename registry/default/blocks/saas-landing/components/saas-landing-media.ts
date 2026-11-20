@@ -1,20 +1,19 @@
 /**
- * Photos used by the template. All are from Unsplash (https://unsplash.com),
- * free to use under the Unsplash License, and loaded from Unsplash's image
- * CDN. Replace them with your own photos before you launch.
+ * Sample photos used by the template, loaded from a remote image CDN.
+ * Replace them with your own photos before you launch.
  */
-function unsplash(id: string, width: number, height: number, faces = false) {
+function photo(id: string, width: number, height: number, faces = false) {
   const crop = faces ? "&crop=faces" : ""
   return `https://images.unsplash.com/photo-${id}?w=${width}&h=${height}&fit=crop${crop}&auto=format&q=80`
 }
 
 export function portrait(id: string, size = 96) {
-  return unsplash(id, size, size, true)
+  return photo(id, size, size, true)
 }
 
 export const photos = {
-  caseStudy: unsplash("1600880292203-757bb62b4baf", 1200, 900),
-  cta: unsplash("1522071820081-009f0129c71c", 1600, 900),
+  caseStudy: photo("1600880292203-757bb62b4baf", 1200, 900),
+  cta: photo("1522071820081-009f0129c71c", 1600, 900),
 }
 
 /** Faces in the hero's "rated by" row. */

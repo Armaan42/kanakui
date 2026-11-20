@@ -4,7 +4,7 @@ import * as React from "react"
 
 import { PostageStamp } from "@/registry/default/ui/postage-stamp"
 
-// Photos: Unsplash (free under the Unsplash License).
+// Sample photos. Swap in your own.
 const photo = (id: string) => `https://images.unsplash.com/photo-${id}?w=420&h=525&fit=crop&auto=format&q=75`
 
 const places = [
@@ -13,7 +13,7 @@ const places = [
   { title: "Venice", country: "Italy", value: "€1.30", date: "27 JUN 26", image: photo("1523906834658-6e24ef2386f9"), alt: "The Rialto Bridge over the Grand Canal", tilt: "rotate-2" },
   { title: "Kyoto", country: "Japan", value: "¥110", date: "08 APR 26", image: photo("1493976040374-85c8e12f0c0e"), alt: "A pagoda at the end of an old street in Kyoto", tilt: "-rotate-1" },
   { title: "Dubai", country: "UAE", value: "5 AED", date: "14 FEB 26", image: photo("1512453979798-5ea266f8880c"), alt: "The Dubai skyline and motorways at sunrise", tilt: "rotate-1" },
-  { title: "Tokyo", country: "Japan", value: "¥140", date: "11 APR 26", image: photo("1540959733332-eab4deabeeaf"), alt: "A neon-lit shopping street in Tokyo at night", tilt: "-rotate-2" },
+  { title: "Tokyo", country: "Japan", value: "¥140", date: "11 APR 26", image: photo("1513407030348-c983a97b98d8"), alt: "Tokyo Tower above the city at dusk", tilt: "-rotate-2" },
 ]
 
 /** A travel collection: press each stamp to postmark the places you've been. */

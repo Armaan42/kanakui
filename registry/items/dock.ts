@@ -4,7 +4,7 @@ export default defineItem({
   name: "dock",
   type: "registry:ui",
   title: "Dock",
-  description: "A row of icons that magnify as the mouse approaches, like the macOS dock.",
+  description: "A row of icons that magnify as the mouse approaches, then settle back.",
   version: "0.1.0",
   releasedAt: "2026-11-10",
   featured: true,

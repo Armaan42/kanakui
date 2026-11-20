@@ -5,16 +5,16 @@ import { Palette, Power } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-type LavaColor = { name: string; wax: string; highlight: string; top: string; bottom: string }
+type WaxColor = { name: string; wax: string; highlight: string; top: string; bottom: string }
 
-interface LavaLampProps extends React.ComponentProps<"div"> {
-  colors?: LavaColor[]
+interface MotionLampProps extends React.ComponentProps<"div"> {
+  colors?: WaxColor[]
   defaultColor?: number
   defaultOn?: boolean
-  onColorChange?: (color: LavaColor) => void
+  onColorChange?: (color: WaxColor) => void
 }
 
-const COLORS: LavaColor[] = [
+const COLORS: WaxColor[] = [
   { name: "Molten", wax: "#ff4d1a", highlight: "#ffb347", top: "#4a0d3a", bottom: "#b8205a" },
   { name: "Lagoon", wax: "#22d3ee", highlight: "#a5f3fc", top: "#0b1e4f", bottom: "#1d4ed8" },
   { name: "Lime", wax: "#a3e635", highlight: "#ecfccb", top: "#052e2b", bottom: "#0f766e" },
@@ -33,24 +33,24 @@ const BLOBS = [
 ]
 
 /**
- * A rocket-shaped lava lamp. Wax blobs rise, stretch and fall back, merging
+ * A rocket-shaped motion lamp. Wax blobs rise, stretch and fall back, merging
  * where they touch. Switch it off to let the wax set, or change the colour.
  */
-function LavaLamp({ colors = COLORS, defaultColor = 0, defaultOn = true, onColorChange, className, ...props }: LavaLampProps) {
+function MotionLamp({ colors = COLORS, defaultColor = 0, defaultOn = true, onColorChange, className, ...props }: MotionLampProps) {
   const [index, setIndex] = React.useState(defaultColor)
   const [on, setOn] = React.useState(defaultOn)
   const id = React.useId().replace(/[^a-zA-Z0-9_-]/g, "")
   const color = colors[index % colors.length]
 
   return (
-    <div data-slot="lava-lamp" className={cn("flex w-52 max-w-full flex-col items-center gap-5", className)} {...props}>
+    <div data-slot="motion-lamp" className={cn("flex w-52 max-w-full flex-col items-center gap-5", className)} {...props}>
       <div className="relative">
         <span
           aria-hidden="true"
           className="absolute inset-x-[-30%] top-[22%] bottom-[18%] rounded-full blur-3xl transition-opacity duration-1000"
           style={{ background: color.bottom, opacity: on ? 0.45 : 0 }}
         />
-        <svg role="img" aria-label={`Lava lamp, ${color.name}, ${on ? "on" : "off"}`} viewBox="0 0 120 320" className="relative h-80 w-auto">
+        <svg role="img" aria-label={`Motion lamp, ${color.name}, ${on ? "on" : "off"}`} viewBox="0 0 120 320" className="relative h-80 w-auto">
           <defs>
             <filter id={`${id}-goo`} x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
@@ -88,7 +88,7 @@ function LavaLamp({ colors = COLORS, defaultColor = 0, defaultOn = true, onColor
                   cx={blob.x}
                   cy={226}
                   r={blob.r}
-                  className="animate-lava-lamp-rise motion-reduce:animate-none"
+                  className="animate-motion-lamp-rise motion-reduce:animate-none"
                   style={
                     {
                       "--rise": `${blob.rise}px`,
@@ -151,5 +151,5 @@ function LavaLamp({ colors = COLORS, defaultColor = 0, defaultOn = true, onColor
   )
 }
 
-export { LavaLamp }
-export type { LavaColor }
+export { MotionLamp }
+export type { WaxColor }

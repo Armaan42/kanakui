@@ -34,9 +34,9 @@ const testimonials = [
     photo: "1472099645785-5658abf4ff4e",
   },
   {
-    quote: "AI Insights flagged an Android regression before our crash reporting did. It's like having an analyst on every squad.",
+    quote: "AI Insights flagged a mobile app regression before our crash reporting did. It's like having an analyst on every squad.",
     name: "Amara Osei",
-    role: "Product Manager, Northwind",
+    role: "Product Manager, Northlight",
     photo: "1580489944761-15a19d654956",
   },
   {

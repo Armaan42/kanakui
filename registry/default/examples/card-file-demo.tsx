@@ -1,8 +1,8 @@
-import { Rolodex } from "@/registry/default/ui/rolodex"
+import { CardFile } from "@/registry/default/ui/card-file"
 
-export default function RolodexDemo() {
+export default function CardFileDemo() {
   return (
-    <Rolodex
+    <CardFile
       cards={[
         { name: "Amara Diallo", role: "Radio producer", phone: "+1 555 0142", email: "amara@example.com" },
         { name: "Elias Brandt", role: "Lighthouse keeper", phone: "+1 555 0188", note: "Call after the storm" },

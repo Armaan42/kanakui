@@ -1,10 +1,10 @@
 import { defineItem } from "../define.ts"
 
 export default defineItem({
-  "name": "lava-lamp",
+  "name": "motion-lamp",
   "type": "registry:ui",
-  "title": "Lava Lamp",
-  "description": "A rocket lava lamp whose wax blobs rise, stretch and merge, with a power switch and four colours.",
+  "title": "Motion Lamp",
+  "description": "A rocket motion lamp whose wax blobs rise, stretch and merge, with a power switch and four colours.",
   "version": "0.1.0",
   "releasedAt": "2026-11-20",
   "categories": [
@@ -16,17 +16,17 @@ export default defineItem({
   ],
   "files": [
     {
-      "path": "registry/default/ui/lava-lamp.tsx",
+      "path": "registry/default/ui/motion-lamp.tsx",
       "type": "registry:ui"
     }
   ],
   "cssVars": {
     "theme": {
-      "animate-lava-lamp-rise": "lava-lamp-rise 15s ease-in-out infinite"
+      "animate-motion-lamp-rise": "motion-lamp-rise 15s ease-in-out infinite"
     }
   },
   "css": {
-    "@keyframes lava-lamp-rise": {
+    "@keyframes motion-lamp-rise": {
       "0%, 100%": {
         "transform": "translate(0, 0) scale(1)"
       },
@@ -42,7 +42,7 @@ export default defineItem({
     "props": [
       {
         "name": "colors",
-        "type": "LavaColor[]",
+        "type": "WaxColor[]",
         "description": "Palettes: `wax`, `highlight`, and the liquid’s `top` and `bottom` colours."
       },
       {
@@ -59,7 +59,7 @@ export default defineItem({
       },
       {
         "name": "onColorChange",
-        "type": "(color: LavaColor) => void",
+        "type": "(color: WaxColor) => void",
         "description": "Called when the colour changes."
       }
     ],

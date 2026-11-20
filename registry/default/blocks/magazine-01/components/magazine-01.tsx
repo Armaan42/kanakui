@@ -1,4 +1,4 @@
-// Photos: Unsplash (free under the Unsplash License). The story and people are made up.
+// Sample photos. Swap in your own. The story and people are made up.
 const photo = (id: string, width: number, height: number) => `https://images.unsplash.com/photo-${id}?w=${width}&h=${height}&fit=crop&auto=format&q=78`
 
 /** A long-form magazine story: full-width opener, drop cap, pull quote and inset photo. */

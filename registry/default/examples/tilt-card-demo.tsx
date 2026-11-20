@@ -1,6 +1,6 @@
 import { TiltCard } from "@/registry/default/ui/tilt-card"
 
-// Photo: Unsplash (free under the Unsplash License). The product is made up.
+// Sample photos. Swap in your own. The product is made up.
 const PHOTO = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=720&h=520&fit=crop&auto=format&q=80"
 
 export default function TiltCardDemo() {

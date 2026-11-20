@@ -5,7 +5,7 @@ import { RotateCcw } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-interface PlinkoBoardProps extends React.ComponentProps<"div"> {
+interface GaltonBoardProps extends React.ComponentProps<"div"> {
   /** Rows of pegs. There's one more slot than rows. */
   rows?: number
   /** Labels for the slots, left to right. */
@@ -21,10 +21,10 @@ const ROW = 32
 const STEP = 120
 
 /**
- * A Plinko board. Drop balls and watch them bounce off the pegs into the
+ * A Galton board. Drop balls and watch them bounce off the pegs into the
  * slots; drop a lot and the tally draws a bell curve.
  */
-function PlinkoBoard({ rows = 9, slots: labels, onLand, className, ...props }: PlinkoBoardProps) {
+function GaltonBoard({ rows = 9, slots: labels, onLand, className, ...props }: GaltonBoardProps) {
   const count = rows + 1
   const width = count * SPACING + 20
   const height = TOP + rows * ROW + 70
@@ -95,9 +95,9 @@ function PlinkoBoard({ rows = 9, slots: labels, onLand, className, ...props }: P
   const tallest = Math.max(1, ...tally)
 
   return (
-    <div data-slot="plinko-board" className={cn("flex w-full max-w-sm flex-col gap-4", className)} {...props}>
+    <div data-slot="galton-board" className={cn("flex w-full max-w-sm flex-col gap-4", className)} {...props}>
       <div className="rounded-2xl bg-[linear-gradient(160deg,#efe4cf,#dccaa8)] p-3 shadow-[0_20px_34px_-20px_rgb(0_0_0/0.7),inset_0_1px_0_rgb(255_255_255/0.6),inset_0_0_0_1px_rgb(120_90_50/0.25)]">
-        <svg viewBox={`0 0 ${width} ${height}`} className="w-full" role="img" aria-label={`Plinko board, ${total} balls dropped`}>
+        <svg viewBox={`0 0 ${width} ${height}`} className="w-full" role="img" aria-label={`Galton board, ${total} balls dropped`}>
           <defs>
             <radialGradient id={`${id}-brass`} cx="0.35" cy="0.3" r="0.8">
               <stop offset="0" stopColor="#fbeec4" />
@@ -163,4 +163,4 @@ function PlinkoBoard({ rows = 9, slots: labels, onLand, className, ...props }: P
   )
 }
 
-export { PlinkoBoard }
+export { GaltonBoard }

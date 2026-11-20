@@ -1,6 +1,6 @@
 import { FilmStrip } from "@/registry/default/ui/film-strip"
 
-// Photos: Unsplash (free under the Unsplash License).
+// Sample photos. Swap in your own.
 const photo = (id: string) => `https://images.unsplash.com/photo-${id}?w=900&h=600&fit=crop&auto=format&q=75`
 
 export default function FilmStripDemo() {

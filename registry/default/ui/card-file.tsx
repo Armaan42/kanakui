@@ -5,7 +5,7 @@ import { ChevronDown, ChevronUp, Mail, Phone } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-export interface RolodexCard {
+export interface FileCard {
   name: string
   role?: string
   phone?: string
@@ -13,10 +13,10 @@ export interface RolodexCard {
   note?: string
 }
 
-interface RolodexProps extends Omit<React.ComponentProps<"div">, "onChange"> {
-  cards: RolodexCard[]
+interface CardFileProps extends Omit<React.ComponentProps<"div">, "onChange"> {
+  cards: FileCard[]
   defaultIndex?: number
-  onCardChange?: (card: RolodexCard, index: number) => void
+  onCardChange?: (card: FileCard, index: number) => void
 }
 
 const AHEAD = 4
@@ -28,7 +28,7 @@ const mod = (value: number, by: number) => ((value % by) + by) % by
  * A rotary card file. Scroll, drag, press the arrow keys or jump with the
  * letter tabs, and the cards tumble over the drum.
  */
-function Rolodex({ cards, defaultIndex = 0, onCardChange, className, ...props }: RolodexProps) {
+function CardFile({ cards, defaultIndex = 0, onCardChange, className, ...props }: CardFileProps) {
   const [position, setPosition] = React.useState(defaultIndex)
   const drum = React.useRef<HTMLDivElement>(null)
   const drag = React.useRef<{ y: number; base: number } | null>(null)
@@ -69,7 +69,7 @@ function Rolodex({ cards, defaultIndex = 0, onCardChange, className, ...props }:
   }, [goTo])
 
   return (
-    <div data-slot="rolodex" className={cn("flex w-full max-w-md items-center gap-2", className)} {...props}>
+    <div data-slot="card-file" className={cn("flex w-full max-w-md items-center gap-2", className)} {...props}>
       <div role="group" aria-label="Jump to letter" className="flex max-h-72 shrink-0 flex-col flex-wrap gap-0.5">
         {letters.map((letter) => {
           const active = card.name[0].toUpperCase() === letter
@@ -180,4 +180,4 @@ function Rolodex({ cards, defaultIndex = 0, onCardChange, className, ...props }:
   )
 }
 
-export { Rolodex }
+export { CardFile }

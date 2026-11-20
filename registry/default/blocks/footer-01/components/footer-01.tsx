@@ -27,7 +27,7 @@ export function Footer01() {
           <div className="space-y-3 lg:col-span-2">
             <a href="#" className="inline-flex items-center gap-2 font-semibold">
               <span aria-hidden="true" className="size-6 rounded-md bg-foreground" />
-              Acme
+              Halcyon
             </a>
             <p className="max-w-xs text-sm text-muted-foreground">
               One sentence about your company. Keep it short and specific.
@@ -51,7 +51,7 @@ export function Footer01() {
         </div>
 
         <div className="mt-12 flex flex-col gap-4 border-t pt-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 Acme Inc. All rights reserved.</p>
+          <p>© 2026 Halcyon Inc. All rights reserved.</p>
           <ul className="flex flex-wrap gap-x-5 gap-y-2">
             {legal.map((link) => (
               <li key={link}>

@@ -12,7 +12,7 @@ import { Matchbox } from "@/registry/default/ui/matchbox"
 import { PostageStamp } from "@/registry/default/ui/postage-stamp"
 import { VinylPlayer } from "@/registry/default/ui/vinyl-player"
 
-// Photos: Unsplash (free under the Unsplash License).
+// Sample photos. Swap in your own.
 const photo = (id: string, w: number, h = w) => `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&auto=format&q=75`
 
 interface DeskItemProps {

@@ -1,6 +1,6 @@
 import { FilmStrip, type FilmFrame } from "@/registry/default/ui/film-strip"
 
-// Photos: Unsplash (free under the Unsplash License). The photographer is made up.
+// Sample photos. Swap in your own. The photographer is made up.
 const photo = (id: string) => `https://images.unsplash.com/photo-${id}?w=900&h=600&fit=crop&auto=format&q=75`
 
 const frames: FilmFrame[] = [

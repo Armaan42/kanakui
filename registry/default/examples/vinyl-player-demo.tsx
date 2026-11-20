@@ -1,6 +1,6 @@
 import { VinylPlayer } from "@/registry/default/ui/vinyl-player"
 
-// Cover: Unsplash (free under the Unsplash License). Artist and track are made up.
+// Sample photos. Swap in your own. Artist and track are made up.
 export default function VinylPlayerDemo() {
   return (
     <VinylPlayer

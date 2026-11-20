@@ -29,6 +29,7 @@ import item_call_support_01 from "./items/call-support-01.ts"
 import item_calm_break_01 from "./items/calm-break-01.ts"
 import item_camera_shutter from "./items/camera-shutter.ts"
 import item_candle from "./items/candle.ts"
+import item_card_file from "./items/card-file.ts"
 import item_card_stack from "./items/card-stack.ts"
 import item_carousel_3d from "./items/carousel-3d.ts"
 import item_cassette_player from "./items/cassette-player.ts"
@@ -61,7 +62,6 @@ import item_dot_pattern from "./items/dot-pattern.ts"
 import item_dots_loader from "./items/dots-loader.ts"
 import item_dotted_globe from "./items/dotted-globe.ts"
 import item_drum_machine from "./items/drum-machine.ts"
-import item_dynamic_island from "./items/dynamic-island.ts"
 import item_envelope from "./items/envelope.ts"
 import item_event_01 from "./items/event-01.ts"
 import item_event_ticket from "./items/event-ticket.ts"
@@ -86,6 +86,7 @@ import item_footer_02 from "./items/footer-02.ts"
 import item_footer_03 from "./items/footer-03.ts"
 import item_fortune_cookie from "./items/fortune-cookie.ts"
 import item_gallery_01 from "./items/gallery-01.ts"
+import item_galton_board from "./items/galton-board.ts"
 import item_game_night_01 from "./items/game-night-01.ts"
 import item_gift_box from "./items/gift-box.ts"
 import item_giveaway_01 from "./items/giveaway-01.ts"
@@ -118,7 +119,6 @@ import item_keyboard from "./items/keyboard.ts"
 import item_kitchen_timer from "./items/kitchen-timer.ts"
 import item_label_maker from "./items/label-maker.ts"
 import item_lamp from "./items/lamp.ts"
-import item_lava_lamp from "./items/lava-lamp.ts"
 import item_led_ticker from "./items/led-ticker.ts"
 import item_light_switch_panel from "./items/light-switch-panel.ts"
 import item_like_button from "./items/like-button.ts"
@@ -137,7 +137,10 @@ import item_meteors from "./items/meteors.ts"
 import item_metronome from "./items/metronome.ts"
 import item_microscope from "./items/microscope.ts"
 import item_moon_phase from "./items/moon-phase.ts"
+import item_morphing_pill from "./items/morphing-pill.ts"
 import item_morse_key from "./items/morse-key.ts"
+import item_motion_lamp from "./items/motion-lamp.ts"
+import item_multitap_keypad from "./items/multitap-keypad.ts"
 import item_music_box from "./items/music-box.ts"
 import item_music_equalizer from "./items/music-equalizer.ts"
 import item_navbar_01 from "./items/navbar-01.ts"
@@ -165,11 +168,10 @@ import item_passcode_pad from "./items/passcode-pad.ts"
 import item_password_input from "./items/password-input.ts"
 import item_pendulum_wave from "./items/pendulum-wave.ts"
 import item_photo_folder from "./items/photo-folder.ts"
+import item_photo_stack from "./items/photo-stack.ts"
 import item_piano from "./items/piano.ts"
 import item_piggy_bank from "./items/piggy-bank.ts"
-import item_plinko_board from "./items/plinko-board.ts"
 import item_podcast_01 from "./items/podcast-01.ts"
-import item_polaroid_stack from "./items/polaroid-stack.ts"
 import item_portfolio_01 from "./items/portfolio-01.ts"
 import item_postage_stamp from "./items/postage-stamp.ts"
 import item_pricing_01 from "./items/pricing-01.ts"
@@ -192,7 +194,6 @@ import item_retro_tv from "./items/retro-tv.ts"
 import item_reveal_card from "./items/reveal-card.ts"
 import item_ripple_background from "./items/ripple-background.ts"
 import item_ripple_button from "./items/ripple-button.ts"
-import item_rolodex from "./items/rolodex.ts"
 import item_rotary_phone from "./items/rotary-phone.ts"
 import item_rotating_words from "./items/rotating-words.ts"
 import item_rubber_stamp from "./items/rubber-stamp.ts"
@@ -227,7 +228,6 @@ import item_stepper from "./items/stepper.ts"
 import item_sticky_notes from "./items/sticky-notes.ts"
 import item_store_01 from "./items/store-01.ts"
 import item_sundial from "./items/sundial.ts"
-import item_t9_keypad from "./items/t9-keypad.ts"
 import item_tag_input from "./items/tag-input.ts"
 import item_take_a_number from "./items/take-a-number.ts"
 import item_tape_measure from "./items/tape-measure.ts"
@@ -294,6 +294,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_calm_break_01,
   item_camera_shutter,
   item_candle,
+  item_card_file,
   item_card_stack,
   item_carousel_3d,
   item_cassette_player,
@@ -326,7 +327,6 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_dots_loader,
   item_dotted_globe,
   item_drum_machine,
-  item_dynamic_island,
   item_envelope,
   item_event_01,
   item_event_ticket,
@@ -351,6 +351,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_footer_03,
   item_fortune_cookie,
   item_gallery_01,
+  item_galton_board,
   item_game_night_01,
   item_gift_box,
   item_giveaway_01,
@@ -383,7 +384,6 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_kitchen_timer,
   item_label_maker,
   item_lamp,
-  item_lava_lamp,
   item_led_ticker,
   item_light_switch_panel,
   item_like_button,
@@ -402,7 +402,10 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_metronome,
   item_microscope,
   item_moon_phase,
+  item_morphing_pill,
   item_morse_key,
+  item_motion_lamp,
+  item_multitap_keypad,
   item_music_box,
   item_music_equalizer,
   item_navbar_01,
@@ -430,11 +433,10 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_password_input,
   item_pendulum_wave,
   item_photo_folder,
+  item_photo_stack,
   item_piano,
   item_piggy_bank,
-  item_plinko_board,
   item_podcast_01,
-  item_polaroid_stack,
   item_portfolio_01,
   item_postage_stamp,
   item_pricing_01,
@@ -457,7 +459,6 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_reveal_card,
   item_ripple_background,
   item_ripple_button,
-  item_rolodex,
   item_rotary_phone,
   item_rotating_words,
   item_rubber_stamp,
@@ -492,7 +493,6 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_sticky_notes,
   item_store_01,
   item_sundial,
-  item_t9_keypad,
   item_tag_input,
   item_take_a_number,
   item_tape_measure,

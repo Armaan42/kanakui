@@ -22,7 +22,7 @@ interface ReceiptPrinterProps extends React.ComponentProps<"div"> {
   /** Intl currency code. */
   currency?: string
   locale?: string
-  /** e.g. "Visa •• 4821". */
+  /** e.g. "Card •• 4821". */
   paidWith?: string
   orderId?: string
   /** e.g. "16 Nov 2026, 09:41". */

@@ -1,8 +1,7 @@
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Code } from "lucide-react"
 
 import { BeamRain } from "@/components/home/beam-rain"
-import { GitHubIcon } from "@/components/site/icons"
 import { siteConfig } from "@/config/site"
 
 /** The closing call to action, with falling beams. Follows the site theme. */
@@ -40,8 +39,8 @@ export function HomeCta() {
               rel="noreferrer"
               className="mt-6 inline-flex items-center gap-1.5 rounded-sm text-sm text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
             >
-              <GitHubIcon className="size-4" />
-              Star on GitHub
+              <Code aria-hidden="true" className="size-4" />
+              View the source
             </a>
           </div>
         </div>

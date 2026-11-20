@@ -2,7 +2,7 @@ import { BorderBeam } from "@/registry/default/ui/border-beam"
 import { Marquee } from "@/registry/default/ui/marquee"
 import { NumberTicker } from "@/registry/default/ui/number-ticker"
 
-const integrations = ["GitHub", "Slack", "Linear", "Figma", "Notion", "Stripe", "Vercel", "Discord"]
+const integrations = ["Git hosting", "Team chat", "Issue tracker", "Design files", "Docs and wikis", "Payments", "Hosting", "Help desk"]
 
 /**
  * Bento grid built from live components: a counter, a scrolling integrations

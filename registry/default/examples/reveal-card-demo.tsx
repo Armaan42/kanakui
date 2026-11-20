@@ -1,6 +1,6 @@
 import { RevealCard } from "@/registry/default/ui/reveal-card"
 
-// Photo: Unsplash (free under the Unsplash License). The listing is made up.
+// Sample photos. Swap in your own. The listing is made up.
 const PHOTO = "https://images.unsplash.com/photo-1542718610-a1d656d1884c?w=800&h=600&fit=crop&auto=format&q=80"
 
 export default function RevealCardDemo() {

@@ -1,6 +1,6 @@
 // Placeholder wordmarks. Replace with logos of customers who agreed to be listed,
 // e.g. <img src="/logos/x.svg" alt="X" className="h-7 w-auto" />.
-const logos = ["Northwind", "Contoso", "Fabrikam", "Tailspin", "Woodgrove", "Litware", "Proseware", "Wingtip"]
+const logos = ["Northlight", "Kestrel", "Brightwater", "Tidewell", "Oakline", "Halden", "Paperkite", "Copperleaf"]
 
 /** A static grid of customer logos with hairline dividers: two columns on phones, four on desktops. */
 export function LogoCloud02() {

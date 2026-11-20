@@ -4,7 +4,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-interface DynamicIslandProps extends Omit<React.ComponentProps<"div">, "children"> {
+interface MorphingPillProps extends Omit<React.ComponentProps<"div">, "children"> {
   /** What the small pill shows. Not interactive: the pill itself is the toggle. */
   compact: React.ReactNode
   /** What the island shows when expanded. May include buttons. */
@@ -27,7 +27,7 @@ interface Size {
  * between them while they crossfade. Hover or click to open; move away,
  * press Escape or click outside to close.
  */
-function DynamicIsland({
+function MorphingPill({
   compact,
   expanded,
   label,
@@ -36,7 +36,7 @@ function DynamicIsland({
   onOpenChange,
   className,
   ...props
-}: DynamicIslandProps) {
+}: MorphingPillProps) {
   const [hovered, setHovered] = React.useState(false)
   const [pinned, setPinned] = React.useState(defaultOpen)
   const open = openProp ?? (hovered || pinned)
@@ -100,7 +100,7 @@ function DynamicIsland({
   return (
     <div
       ref={rootRef}
-      data-slot="dynamic-island"
+      data-slot="morphing-pill"
       data-open={open || undefined}
       className={cn("flex justify-center", className)}
       onPointerEnter={(event) => event.pointerType !== "touch" && setHovered(true)}
@@ -144,4 +144,4 @@ function DynamicIsland({
   )
 }
 
-export { DynamicIsland }
+export { MorphingPill }

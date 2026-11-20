@@ -15,7 +15,7 @@ export function Testimonials03() {
         </blockquote>
         <figcaption className="mt-8 text-sm">
           <span className="font-medium">Ananya Iyer</span>
-          <span className="text-muted-foreground"> · Head of Growth, Northwind</span>
+          <span className="text-muted-foreground"> · Head of Growth, Northlight</span>
         </figcaption>
         <div className="mt-8 flex items-center gap-3 text-sm text-muted-foreground">
           <AvatarStack people={others} max={5} size={32} />
