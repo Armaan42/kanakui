@@ -27,8 +27,14 @@
   --animate-marquee-vertical: marquee-vertical var(--marquee-duration) linear infinite;
   --animate-matchbox-flicker: matchbox-flicker 0.5s ease-in-out infinite;
   --animate-meteor: meteor 5s linear infinite;
+  --animate-metronome-swing: metronome-swing 1s ease-in-out infinite;
   --animate-music-box-twang: music-box-twang 0.5s ease-out;
+  --animate-neon-sign-boot: neon-sign-boot 1.2s linear both;
+  --animate-neon-sign-buzz: neon-sign-buzz 6s linear infinite;
   --animate-orbit: orbit 24s linear infinite;
+  --animate-pager-buzz: pager-buzz 0.5s linear 2;
+  --animate-pager-blink: pager-blink 1s linear infinite;
+  --animate-pager-scroll: pager-scroll 6s ease-in-out infinite alternate;
   --animate-paper-shredder-feed: paper-shredder-feed 1.6s ease-in forwards;
   --animate-paper-shredder-strip: paper-shredder-strip 1.5s ease-out 0.5s both;
   --animate-polaroid-develop: polaroid-develop 1.6s ease-out both;
@@ -41,20 +47,30 @@
   --animate-rubber-stamp-handle: rubber-stamp-handle 0.3s ease-out;
   --color-saas-primary: var(--saas-primary);
   --color-saas-accent: var(--saas-accent);
+  --animate-service-bell-wobble: service-bell-wobble 0.6s ease-out;
   --animate-shimmer: shimmer 2.5s linear infinite;
   --animate-skeleton-shimmer: skeleton-shimmer 1.6s ease-in-out infinite;
   --animate-sketch-pad-shake: sketch-pad-shake 0.5s ease-in-out;
   --animate-snow-globe-shake: snow-globe-shake 0.6s ease-in-out;
   --animate-snow-globe-fall: snow-globe-fall 6s linear infinite;
   --animate-sparkle: sparkle 1.8s ease-in-out infinite;
+  --animate-t9-keypad-caret: t9-keypad-caret 1s linear infinite;
+  --animate-take-a-number-tear: take-a-number-tear 0.5s cubic-bezier(.3,1.3,.5,1) both;
+  --animate-theremin-scroll: theremin-scroll 1.2s linear infinite;
+  --animate-ticket-punch-chad: ticket-punch-chad 0.9s ease-in forwards;
   --animate-typewriter-machine-strike: typewriter-machine-strike 0.12s ease-out;
   --animate-typewriter-caret: typewriter-caret 1s steps(1) infinite;
   --animate-vending-pricing-01-drop: vending-pricing-01-drop 1.1s cubic-bezier(.5,0,.75,0) forwards;
   --animate-vending-pricing-01-coil: vending-pricing-01-coil 0.3s linear infinite;
   --animate-vending-pricing-01-land: vending-pricing-01-land 0.45s cubic-bezier(.3,1.5,.5,1) both;
   --animate-wall-calendar-flip: wall-calendar-flip 0.45s ease-out both;
+  --animate-wax-seal-pour: wax-seal-pour 0.6s cubic-bezier(.3,1.4,.5,1) both;
+  --animate-wax-seal-stamp: wax-seal-stamp 0.9s ease-in-out both;
+  --animate-wax-seal-left: wax-seal-left 0.8s ease-in forwards;
+  --animate-wax-seal-right: wax-seal-right 0.8s ease-in forwards;
   --animate-weather-drift: weather-drift 40s linear infinite;
   --animate-weather-fall: weather-fall 1s linear infinite;
+  --animate-wind-chimes-swing: wind-chimes-swing 1.4s ease-out;
 }
 :root {
   --saas-primary: oklch(0.511 0.262 276.966);
@@ -323,6 +339,14 @@
     opacity: 0;
   }
 }
+@keyframes metronome-swing {
+  0%, 100% {
+    transform: rotate(-24deg);
+  }
+  50% {
+    transform: rotate(24deg);
+  }
+}
 @keyframes music-box-twang {
   0% {
     transform: rotate(0deg);
@@ -343,12 +367,76 @@
     transform: rotate(0deg);
   }
 }
+@keyframes neon-sign-boot {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  12% {
+    opacity: 0.2;
+  }
+  20% {
+    opacity: 1;
+  }
+  24% {
+    opacity: 0.3;
+  }
+  30%, 100% {
+    opacity: 1;
+  }
+}
+@keyframes neon-sign-buzz {
+  0%, 88%, 100% {
+    opacity: 1;
+  }
+  89% {
+    opacity: 0.2;
+  }
+  90% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 0.15;
+  }
+  94% {
+    opacity: 1;
+  }
+}
 @keyframes orbit {
   0% {
     transform: rotate(calc(var(--orbit-angle) * 1deg)) translateY(calc(var(--orbit-radius) * 1px)) rotate(calc(var(--orbit-angle) * -1deg));
   }
   100% {
     transform: rotate(calc(var(--orbit-angle) * 1deg + 360deg)) translateY(calc(var(--orbit-radius) * 1px)) rotate(calc(var(--orbit-angle) * -1deg - 360deg));
+  }
+}
+@keyframes pager-buzz {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 50%, 90% {
+    transform: translateX(-3px);
+  }
+  30%, 70% {
+    transform: translateX(3px);
+  }
+}
+@keyframes pager-blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0.2;
+  }
+}
+@keyframes pager-scroll {
+  0%, 15% {
+    transform: translateX(0);
+  }
+  85%, 100% {
+    transform: translateX(calc(-100% + 11.5rem));
   }
 }
 @keyframes paper-shredder-feed {
@@ -446,6 +534,26 @@
     transform: translateY(14px);
   }
 }
+@keyframes service-bell-wobble {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-3deg) scaleY(0.97);
+  }
+  40% {
+    transform: rotate(2.5deg);
+  }
+  60% {
+    transform: rotate(-1.5deg);
+  }
+  80% {
+    transform: rotate(0.8deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
 @keyframes shimmer {
   from {
     background-position: 200% 0;
@@ -524,6 +632,42 @@
     transform: rotateX(0deg);
   }
 }
+@keyframes t9-keypad-caret {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+@keyframes take-a-number-tear {
+  from {
+    transform: translateY(-50px) rotate(6deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+@keyframes theremin-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-200px);
+  }
+}
+@keyframes ticket-punch-chad {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(70px) rotate(160deg);
+    opacity: 0;
+  }
+}
 @keyframes typewriter-machine-strike {
   0% {
     transform: translateY(2px) scale(.96);
@@ -582,6 +726,44 @@
     opacity: 1;
   }
 }
+@keyframes wax-seal-pour {
+  from {
+    transform: scale(0.2);
+    opacity: 0.6;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes wax-seal-stamp {
+  0% {
+    transform: translateY(-80px);
+    opacity: 0;
+  }
+  25% {
+    transform: translateY(-80px);
+    opacity: 1;
+  }
+  50%, 65% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-90px);
+    opacity: 0;
+  }
+}
+@keyframes wax-seal-left {
+  to {
+    transform: translate(-14px, 18px) rotate(-18deg);
+  }
+}
+@keyframes wax-seal-right {
+  to {
+    transform: translate(14px, 22px) rotate(16deg);
+  }
+}
 @keyframes weather-drift {
   from {
     transform: translateX(-110%);
@@ -601,5 +783,25 @@
   to {
     transform: translateY(380px);
     opacity: 0.2;
+  }
+}
+@keyframes wind-chimes-swing {
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(7deg);
+  }
+  35% {
+    transform: rotate(-5deg);
+  }
+  55% {
+    transform: rotate(3deg);
+  }
+  75% {
+    transform: rotate(-1.5deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }
