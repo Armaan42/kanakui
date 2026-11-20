@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises"
 import path from "node:path"
 
+import { usageExamples, type UsageExampleInfo } from "@/__registry__/usage"
 import { entriesCss } from "@/registry/css"
 import { highlightCode, languageForPath, type CodeLanguage } from "@/lib/highlight"
 import { getInstalledFiles, getInternalDependencies, getPreviewableItem } from "@/lib/registry"
@@ -77,6 +78,32 @@ export async function getUsageExample(name: string): Promise<CodeFile | null> {
   } catch {
     return null
   }
+}
+
+/** A real-world example: its title and description, the exact code it renders, and what to install. */
+export interface UsageExample extends UsageExampleInfo {
+  file: CodeFile
+  /** Every VenusUI item the example imports, the component itself first. */
+  installs: string[]
+}
+
+/**
+ * The component's real-world examples ("See it in action"). The code is the
+ * file the preview renders, with imports rewritten to installed paths and the
+ * `meta` export (title and description, already shown above the code) removed.
+ */
+export async function getUsageExamples(name: string): Promise<UsageExample[]> {
+  "use cache"
+  const examples = usageExamples[name] ?? []
+  return Promise.all(
+    examples.map(async (example) => {
+      const raw = await readProjectFile(`registry/default/usage/${name}--${example.slug}.tsx`)
+      const code = raw.replace(/export\s+const\s+meta\s*=\s*\{[^}]*\}\n*/, "")
+      const used = [...code.matchAll(/["']@\/registry\/default\/ui\/([a-z0-9-]+)["']/g)].map((m) => m[1])
+      const installs = [name, ...new Set(used.filter((n) => n !== name))]
+      return { ...example, installs, file: await toCodeFile(`${example.slug}.tsx`, toInstalledSource(code)) }
+    })
+  )
 }
 
 /** CSS the item and its dependencies add to the global stylesheet, or null if none. */

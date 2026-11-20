@@ -11,6 +11,7 @@ import { BulletList, DocsSection, InlineText, PropsTable } from "@/components/si
 import { InstallTabs } from "@/components/site/install-tabs"
 import { PreviewFrame } from "@/components/site/preview-frame"
 import { TemplateGrid } from "@/components/site/template-card"
+import { UsageExamples } from "@/components/site/usage-examples"
 import { Badge } from "@/components/ui/badge"
 import { registrySetupCommandByUrl, siteConfig } from "@/config/site"
 import { formatDate } from "@/lib/format"
@@ -25,7 +26,7 @@ import {
   kindOf,
   type ItemKind,
 } from "@/lib/registry"
-import { getUsageExample } from "@/lib/source"
+import { getUsageExample, getUsageExamples } from "@/lib/source"
 
 const TYPE_LABEL: Record<string, string> = {
   "registry:hook": "Hook",
@@ -78,6 +79,8 @@ export async function ItemPage({ item, kind }: { item: RegistryEntry; kind: Item
   // The item's main file in the public repo (blocks and templates list their entry file first).
   const sourcePath = item.files[0]?.path
   const usage = await getUsageExample(item.name)
+  // Real-world examples ("See it in action"); components only, and hidden until one exists.
+  const inAction = kind === "components" ? await getUsageExamples(item.name) : []
   const troubleshooting = [...(docs?.troubleshooting ?? []), ...COMMON_TROUBLESHOOTING]
 
   const toc = [
@@ -158,6 +161,20 @@ export async function ItemPage({ item, kind }: { item: RegistryEntry; kind: Item
       <section aria-label="Preview">
         <PreviewFrame name={item.name} title={item.title} tall={kind !== "components"} />
       </section>
+
+      {inAction.length ? (
+        <UsageExamples
+          name={item.name}
+          title={item.title}
+          examples={inAction.map(({ slug, title, description, file, installs }) => ({
+            slug,
+            title,
+            description,
+            file,
+            installCommand: `npx shadcn@latest add ${installs.map((n) => `${siteConfig.registry.namespace}/${n}`).join(" ")}`,
+          }))}
+        />
+      ) : null}
 
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_15rem]">
         <div className="min-w-0 space-y-12">
