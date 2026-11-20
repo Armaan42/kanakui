@@ -49,7 +49,7 @@ export default defineItem({
       "Keep labels short (about 10 characters) so they fit the segments."
     ],
     "accessibility": [
-      "“Spin” is a button; the result is announced (“You won: 10% off!”).",
+      "“Spin” is a button; the result is announced (“You won 10% off”).",
       "With reduced motion the result shows straight away."
     ],
     "troubleshooting": [

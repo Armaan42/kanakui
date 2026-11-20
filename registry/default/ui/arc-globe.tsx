@@ -367,8 +367,8 @@ function ArcGlobe({
   pulseSpeed = 1,
   dots = 16000,
   dotSize = 2.4,
-  arcColors = ["#a78bfa", "#22d3ee"],
-  atmosphereColor = "#6d5dfc",
+  arcColors = ["#ea580c", "#f59e0b"],
+  atmosphereColor = "#94a3b8",
   label = "Globe with routes between cities",
   className,
 }: ArcGlobeProps) {

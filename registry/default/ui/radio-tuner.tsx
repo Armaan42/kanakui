@@ -82,7 +82,7 @@ function RadioTuner({ stations, min = 88, max = 108, defaultFrequency = 92.4, on
           <p aria-live="polite" className="truncate font-mono text-sm text-amber-100">
             {frequency.toFixed(1)} MHz {tuned ? `· ${tuned.name}` : "· …hiss…"}
           </p>
-          <p className="truncate text-xs text-amber-200/70">{tuned?.genre ?? "Turn the knob to find a station"}</p>
+          <p className="truncate text-xs text-amber-200/70">{tuned?.genre ?? "Between stations"}</p>
         </div>
         <button
           type="button"

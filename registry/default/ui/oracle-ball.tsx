@@ -100,7 +100,7 @@ function OracleBall({ answers = ANSWERS, onAnswer, className, ...props }: Oracle
       </button>
 
       <p role="status" className="min-h-5 text-center text-sm">
-        {shaking ? "Shaking…" : answer ? `${question.trim() ? `“${question.trim()}” ` : ""}${answer}.` : "Shake the ball for an answer."}
+        {shaking ? "Shaking…" : answer ? `${question.trim() ? `“${question.trim()}” ` : ""}${answer}.` : ""}
       </p>
     </div>
   )

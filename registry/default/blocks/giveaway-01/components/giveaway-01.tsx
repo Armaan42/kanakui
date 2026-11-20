@@ -8,14 +8,14 @@ import { Input } from "@/components/ui/input"
 import { PrizeWheel, type WheelSegment } from "@/registry/default/ui/prize-wheel"
 
 const segments: WheelSegment[] = [
-  { label: "10% off", color: "#f43f5e" },
-  { label: "Free tote", color: "#f59e0b" },
-  { label: "5% off", color: "#10b981" },
-  { label: "Free ship", color: "#3b82f6" },
-  { label: "20% off", color: "#a855f7" },
-  { label: "Sticker", color: "#14b8a6" },
-  { label: "15% off", color: "#ec4899" },
-  { label: "Mystery", color: "#6366f1" },
+  { label: "10% off", color: "#1f1f22" },
+  { label: "Free tote", color: "#f2ede3" },
+  { label: "5% off", color: "#1f1f22" },
+  { label: "Free ship", color: "#f2ede3" },
+  { label: "20% off", color: "#e2531b" },
+  { label: "Stickers", color: "#f2ede3" },
+  { label: "15% off", color: "#1f1f22" },
+  { label: "Mystery", color: "#f2ede3" },
 ]
 
 const rules = ["One spin per person, this weekend only.", "Prizes apply to orders over $30.", "Your code arrives by email and lasts 14 days."]
@@ -28,14 +28,13 @@ export function Giveaway01() {
 
   return (
     <section aria-labelledby={`${id}-title`} className="relative isolate overflow-hidden py-24 sm:py-28">
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_30%_40%,rgb(244_63_94/0.12),transparent),radial-gradient(50%_50%_at_80%_60%,rgb(99_102_241/0.12),transparent)]" />
       <div className="mx-auto grid max-w-5xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2">
         <div className="flex justify-center">
           <PrizeWheel className="w-[min(22rem,calc(100vw-3rem))]" segments={segments} onResult={(s) => setPrize(s.label)} />
         </div>
 
         <div>
-          <p className="inline-flex items-center gap-2 text-sm font-medium text-rose-600 dark:text-rose-400">
+          <p className="inline-flex items-center gap-2 text-sm font-medium text-orange-700 dark:text-orange-400">
             <Gift aria-hidden="true" className="size-4" /> Weekend giveaway
           </p>
           <h2 id={`${id}-title`} className="mt-3 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
@@ -45,7 +44,7 @@ export function Giveaway01() {
           <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
             {rules.map((rule) => (
               <li key={rule} className="flex gap-2">
-                <span aria-hidden="true" className="mt-2 size-1.5 shrink-0 rounded-full bg-rose-500" />
+                <span aria-hidden="true" className="mt-2 size-1.5 shrink-0 rounded-full bg-orange-600" />
                 {rule}
               </li>
             ))}

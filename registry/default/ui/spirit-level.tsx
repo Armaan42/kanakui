@@ -58,14 +58,14 @@ function SpiritLevel({ defaultAngle = 4, range = 12, onAngleChange, className, .
           set(angle + move)
         }}
         style={{ rotate: `${angle}deg` }}
-        className="relative flex h-14 w-full cursor-grab touch-none items-center justify-center rounded-md bg-linear-to-b from-sky-500 to-sky-700 shadow-[0_10px_18px_-10px_rgb(0_0_0/0.6),inset_0_1px_0_rgb(255_255_255/0.35)] outline-none transition-[rotate] duration-150 select-none focus-visible:ring-3 focus-visible:ring-ring/50 active:cursor-grabbing motion-reduce:transition-none"
+        className="relative flex h-14 w-full cursor-grab touch-none items-center justify-center rounded-md bg-linear-to-b from-[#e7e7ea] via-[#b9b9bf] to-[#8e8e95] shadow-[0_10px_18px_-10px_rgb(0_0_0/0.6),inset_0_1px_0_rgb(255_255_255/0.7),inset_0_-1px_0_rgb(0_0_0/0.2)] outline-none transition-[rotate] duration-150 select-none focus-visible:ring-3 focus-visible:ring-ring/50 active:cursor-grabbing motion-reduce:transition-none"
       >
-        <span aria-hidden="true" className="absolute inset-y-2 left-3 w-6 rounded-sm bg-sky-900/40" />
-        <span aria-hidden="true" className="absolute inset-y-2 right-3 w-6 rounded-sm bg-sky-900/40" />
+        <span aria-hidden="true" className="absolute inset-y-2 left-3 w-6 rounded-sm bg-[#2b2b2e] shadow-[inset_0_1px_2px_rgb(0_0_0/0.6)]" />
+        <span aria-hidden="true" className="absolute inset-y-2 right-3 w-6 rounded-sm bg-[#2b2b2e] shadow-[inset_0_1px_2px_rgb(0_0_0/0.6)]" />
         {/* The vial */}
         <span
           aria-hidden="true"
-          className={cn("relative h-8 w-40 overflow-hidden rounded-full border-2 border-neutral-800/60 transition-colors duration-300", level ? "bg-lime-300" : "bg-yellow-200")}
+          className={cn("relative h-8 w-40 overflow-hidden rounded-full border border-neutral-900/50 shadow-[inset_0_2px_4px_rgb(0_0_0/0.2)] transition-colors duration-300", level ? "bg-[#cfe08a]" : "bg-[#e9e3a6]")}
         >
           <span className="absolute inset-y-0 left-[calc(50%-1.6rem)] w-px bg-neutral-800/70" />
           <span className="absolute inset-y-0 left-[calc(50%+1.6rem)] w-px bg-neutral-800/70" />
@@ -75,8 +75,8 @@ function SpiritLevel({ defaultAngle = 4, range = 12, onAngleChange, className, .
           />
         </span>
       </div>
-      <p aria-live="polite" className="font-mono text-sm tabular-nums">
-        {level ? <span className="font-semibold text-lime-600 dark:text-lime-400">Level</span> : `${Math.abs(angle).toFixed(1)}°`}
+      <p aria-live="polite" className="text-sm tabular-nums">
+        {level ? <span className="font-semibold">Level</span> : <span className="text-muted-foreground">{Math.abs(angle).toFixed(1)}° off level</span>}
       </p>
     </div>
   )

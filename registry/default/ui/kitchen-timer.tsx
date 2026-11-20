@@ -111,7 +111,7 @@ function KitchenTimer({ max = 60, defaultMinutes = 0, onDone, className, ...prop
         {String(minutes).padStart(2, "0")}:{String(rest).padStart(2, "0")}
       </p>
       <p aria-live="polite" className="-mt-3 min-h-4 text-xs text-muted-foreground">
-        {ringing ? "Ring ring! Time’s up." : running ? "Ticking…" : "Twist the dial to set it"}
+        {ringing ? "Time’s up" : running ? "Ticking" : "Not set"}
       </p>
     </div>
   )

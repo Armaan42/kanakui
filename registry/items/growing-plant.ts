@@ -71,7 +71,7 @@ export default defineItem({
         "name": "bloom",
         "type": "string",
         "description": "Petal colour.",
-        "default": "\"#f472b6\""
+        "default": "\"#d98c7a\""
       },
       {
         "name": "onBloom",

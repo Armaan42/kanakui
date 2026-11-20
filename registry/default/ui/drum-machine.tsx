@@ -203,7 +203,6 @@ function DrumMachine({ defaultPattern = BEAT, defaultTempo = 100, sound = true, 
           ))}
         </div>
       </div>
-      <p className="mt-3 text-xs text-stone-700">Tap a pad to add or remove a hit. Each column is a sixteenth note.</p>
     </div>
   )
 }

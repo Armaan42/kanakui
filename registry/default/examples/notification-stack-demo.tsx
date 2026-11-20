@@ -3,14 +3,14 @@ import { Activity, CalendarDays, Mail, MessageCircle } from "lucide-react"
 import { NotificationStack } from "@/registry/default/ui/notification-stack"
 
 // Wallpaper and portraits: Unsplash (free under the Unsplash License). People are made up.
-const WALLPAPER = "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?w=900&h=1100&fit=crop&auto=format&q=70"
+const WALLPAPER = "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=900&h=1100&fit=crop&auto=format&q=70"
 const face = (id: string) => `https://images.unsplash.com/photo-${id}?w=96&h=96&fit=crop&crop=faces&auto=format&q=80`
 
 export default function NotificationStackDemo() {
   return (
     <div
       className="flex w-[min(24rem,calc(100vw-3rem))] flex-col rounded-[2rem] bg-cover bg-center p-4 pt-10 pb-24 shadow-xl"
-      style={{ backgroundImage: `url(${WALLPAPER})` }}
+      style={{ backgroundImage: `linear-gradient(rgb(0 0 0 / 0.45), rgb(0 0 0 / 0.15) 45%, rgb(0 0 0 / 0.35)), url(${WALLPAPER})` }}
     >
       <p className="text-center text-5xl font-light tracking-tight text-white/95 tabular-nums">9:41</p>
       <p className="mb-8 text-center text-sm font-medium text-white/80">Monday, 16 November</p>

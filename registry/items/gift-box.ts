@@ -56,8 +56,8 @@ export default defineItem({
       {
         "name": "color",
         "type": "string",
-        "default": "oklch(0.62 0.2 15)",
-        "description": "Box color: any CSS color; the lid is a shade darker and the ribbon stays gold."
+        "default": "\"#24382d\"",
+        "description": "Box color: any CSS color; the lid is a shade darker and the ribbon stays ivory."
       },
       {
         "name": "onOpen",

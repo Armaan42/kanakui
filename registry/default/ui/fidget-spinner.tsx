@@ -49,7 +49,7 @@ function Body({ color, id }: { color: string; id: string }) {
  * A fidget spinner. Flick it with the pointer (or press Spin) and it keeps
  * turning on its bearings, slowing down until it stops. Shows the RPM.
  */
-function FidgetSpinner({ color = "#0d9488", friction = 1, className, ...props }: FidgetSpinnerProps) {
+function FidgetSpinner({ color = "#4a4e55", friction = 1, className, ...props }: FidgetSpinnerProps) {
   const [rpm, setRpm] = React.useState(0)
   const svg = React.useRef<SVGSVGElement>(null)
   const rotor = React.useRef<SVGGElement>(null)
@@ -164,11 +164,11 @@ function FidgetSpinner({ color = "#0d9488", friction = 1, className, ...props }:
         <button
           type="button"
           onClick={() => flick(1400)}
-          className="h-10 rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground outline-none hover:bg-primary/90 focus-visible:ring-3 focus-visible:ring-ring/50"
+          className="h-9 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground outline-none hover:bg-primary/90 focus-visible:ring-3 focus-visible:ring-ring/50"
         >
           Spin
         </button>
-        <p className="font-mono text-sm text-muted-foreground tabular-nums">{rpm} RPM</p>
+        <p className="text-sm text-muted-foreground tabular-nums">{rpm} RPM</p>
       </div>
     </div>
   )

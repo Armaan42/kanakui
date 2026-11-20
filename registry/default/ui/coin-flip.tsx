@@ -59,7 +59,7 @@ function CoinFlip({ heads = "Heads", tails = "Tails", onFlip, className, ...prop
         Flip
       </button>
       <p role="status" className="font-mono text-xs text-muted-foreground tabular-nums">
-        {tosses ? `${side === "heads" ? heads : tails}. ${heads} ${tally.heads} · ${tails} ${tally.tails}` : "Call it in the air"}
+        {tosses ? `${side === "heads" ? heads : tails}. ${heads} ${tally.heads} · ${tails} ${tally.tails}` : "No flips yet"}
       </p>
     </div>
   )

@@ -139,7 +139,7 @@ function RotaryPhone({ maxDigits = 10, sound = true, onNumberChange, onCall, cla
       ? `${format(number)}. That's the whole number.`
       : number
         ? `Dialled ${format(number)}`
-        : "Put a finger in a hole and turn the dial to the metal stop."
+        : "No number dialled"
 
   return (
     <div data-slot="rotary-phone" className={cn("flex w-72 max-w-full flex-col items-center gap-5", className)} {...props}>
