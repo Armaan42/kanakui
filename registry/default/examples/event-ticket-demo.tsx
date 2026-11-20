@@ -27,7 +27,7 @@ export default function EventTicketDemo() {
         }}
       />
       <p className="flex items-center gap-3 text-sm text-muted-foreground">
-        {torn ? "Enjoy the show!" : "Drag the stub to tear it off."}
+        {torn ? "Enjoy the show!" : null}
         {torn ? (
           <button
             type="button"

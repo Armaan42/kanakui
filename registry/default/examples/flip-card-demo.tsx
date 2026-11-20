@@ -7,9 +7,9 @@ export default function FlipCardDemo() {
       flipLabel="Show plan details"
       front={
         <div className="flex h-full flex-col justify-between">
-          <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">Team plan</p>
+          <p className="text-sm font-medium text-muted-foreground">Team plan</p>
           <p className="text-4xl font-semibold tracking-tight">$79<span className="text-base font-normal text-muted-foreground">/month</span></p>
-          <p className="text-sm text-muted-foreground">Hover, or press the button to flip.</p>
+          <p className="text-sm text-muted-foreground">For teams of up to 10, billed monthly.</p>
         </div>
       }
       back={

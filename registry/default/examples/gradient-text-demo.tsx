@@ -2,13 +2,11 @@ import { GradientText } from "@/registry/default/ui/gradient-text"
 
 export default function GradientTextDemo() {
   return (
-    <div className="space-y-4 text-center">
-      <h2 className="text-4xl font-semibold tracking-tight">
-        <GradientText>Quietly animated headline</GradientText>
+    <div className="max-w-md text-center">
+      <h2 className="text-4xl font-semibold tracking-tight text-balance">
+        Annual plans are <GradientText>20% off</GradientText> until 31 January
       </h2>
-      <p className="text-2xl font-semibold">
-        <GradientText colors={["#6366f1", "#06b6d4", "#10b981"]}>With your own colors</GradientText>
-      </p>
+      <p className="mt-3 text-sm text-muted-foreground">Switch any time from Settings, then Billing.</p>
     </div>
   )
 }
