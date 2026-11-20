@@ -13,13 +13,19 @@ interface NumberTickerProps extends Omit<React.ComponentProps<"span">, "children
   duration?: number
   /** Digits after the decimal point. */
   decimals?: number
-  /** BCP 47 locale for formatting, e.g. `en-IN`. Defaults to the visitor's locale. */
+  /**
+   * BCP 47 locale for formatting, e.g. `en-IN`. Defaults to the visitor's locale,
+   * applied right after hydration so the server and the first client render match.
+   */
   locale?: string
   /** Extra `Intl.NumberFormat` options, e.g. `{ style: "currency", currency: "USD" }`. */
   formatOptions?: Intl.NumberFormatOptions
 }
 
 const easeOutExpo = (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t))
+
+/** Used on the server and for the first client render when no `locale` is passed, so both produce the same text. */
+const HYDRATION_LOCALE = "en-US"
 
 /**
  * Counts from `from` to `value` the first time it scrolls into view.
@@ -37,14 +43,23 @@ function NumberTicker({
   ...props
 }: NumberTickerProps) {
   const ref = React.useRef<HTMLSpanElement>(null)
+  // The visitor's locale is only known in the browser; switch to it after hydration.
+  const [visitorLocale, setVisitorLocale] = React.useState<string | null>(null)
+  React.useEffect(() => {
+    if (locale) return
+    const id = setTimeout(() => setVisitorLocale(navigator.language), 0)
+    return () => clearTimeout(id)
+  }, [locale])
+  const resolvedLocale = locale ?? visitorLocale ?? HYDRATION_LOCALE
+
   const format = React.useMemo(() => {
-    const formatter = new Intl.NumberFormat(locale, {
+    const formatter = new Intl.NumberFormat(resolvedLocale, {
       minimumFractionDigits: decimals,
       maximumFractionDigits: decimals,
       ...formatOptions,
     })
     return (n: number) => formatter.format(n)
-  }, [locale, decimals, formatOptions])
+  }, [resolvedLocale, decimals, formatOptions])
 
   React.useEffect(() => {
     const node = ref.current
