@@ -36,6 +36,7 @@ import item_coin_flip from "./items/coin-flip.ts"
 import item_compose_refs from "./items/compose-refs.ts"
 import item_contact_01 from "./items/contact-01.ts"
 import item_copy_button from "./items/copy-button.ts"
+import item_corkboard from "./items/corkboard.ts"
 import item_credit_01 from "./items/credit-01.ts"
 import item_credit_card_form from "./items/credit-card-form.ts"
 import item_cta_01 from "./items/cta-01.ts"
@@ -52,6 +53,7 @@ import item_dock from "./items/dock.ts"
 import item_dot_pattern from "./items/dot-pattern.ts"
 import item_dots_loader from "./items/dots-loader.ts"
 import item_dotted_globe from "./items/dotted-globe.ts"
+import item_drum_machine from "./items/drum-machine.ts"
 import item_dynamic_island from "./items/dynamic-island.ts"
 import item_envelope from "./items/envelope.ts"
 import item_event_01 from "./items/event-01.ts"
@@ -70,6 +72,7 @@ import item_flip_book from "./items/flip-book.ts"
 import item_flip_card from "./items/flip-card.ts"
 import item_floating_label_input from "./items/floating-label-input.ts"
 import item_focus_timer_01 from "./items/focus-timer-01.ts"
+import item_folding_map from "./items/folding-map.ts"
 import item_footer_01 from "./items/footer-01.ts"
 import item_footer_02 from "./items/footer-02.ts"
 import item_footer_03 from "./items/footer-03.ts"
@@ -103,8 +106,10 @@ import item_invitation_01 from "./items/invitation-01.ts"
 import item_kbd from "./items/kbd.ts"
 import item_keyboard from "./items/keyboard.ts"
 import item_kitchen_timer from "./items/kitchen-timer.ts"
+import item_label_maker from "./items/label-maker.ts"
 import item_lamp from "./items/lamp.ts"
 import item_lava_lamp from "./items/lava-lamp.ts"
+import item_led_ticker from "./items/led-ticker.ts"
 import item_light_switch_panel from "./items/light-switch-panel.ts"
 import item_like_button from "./items/like-button.ts"
 import item_login_01 from "./items/login-01.ts"
@@ -119,12 +124,15 @@ import item_marquee from "./items/marquee.ts"
 import item_matchbox from "./items/matchbox.ts"
 import item_menu_01 from "./items/menu-01.ts"
 import item_meteors from "./items/meteors.ts"
+import item_metronome from "./items/metronome.ts"
 import item_morse_key from "./items/morse-key.ts"
 import item_music_box from "./items/music-box.ts"
 import item_music_equalizer from "./items/music-equalizer.ts"
 import item_navbar_01 from "./items/navbar-01.ts"
 import item_navbar_02 from "./items/navbar-02.ts"
+import item_neon_sign from "./items/neon-sign.ts"
 import item_newtons_cradle from "./items/newtons-cradle.ts"
+import item_nixie_tubes from "./items/nixie-tubes.ts"
 import item_noise_background from "./items/noise-background.ts"
 import item_not_found_01 from "./items/not-found-01.ts"
 import item_notification_stack from "./items/notification-stack.ts"
@@ -133,13 +141,16 @@ import item_number_ticker from "./items/number-ticker.ts"
 import item_office_directory_01 from "./items/office-directory-01.ts"
 import item_orbiting_circles from "./items/orbiting-circles.ts"
 import item_order_01 from "./items/order-01.ts"
+import item_oscilloscope from "./items/oscilloscope.ts"
 import item_otp_input from "./items/otp-input.ts"
+import item_pager from "./items/pager.ts"
 import item_paper_shredder from "./items/paper-shredder.ts"
 import item_particle_galaxy from "./items/particle-galaxy.ts"
 import item_particle_wave from "./items/particle-wave.ts"
 import item_passcode_pad from "./items/passcode-pad.ts"
 import item_password_input from "./items/password-input.ts"
 import item_photo_folder from "./items/photo-folder.ts"
+import item_piano from "./items/piano.ts"
 import item_podcast_01 from "./items/podcast-01.ts"
 import item_polaroid_stack from "./items/polaroid-stack.ts"
 import item_portfolio_01 from "./items/portfolio-01.ts"
@@ -158,6 +169,7 @@ import item_rating from "./items/rating.ts"
 import item_receipt_printer from "./items/receipt-printer.ts"
 import item_recipe_01 from "./items/recipe-01.ts"
 import item_release_01 from "./items/release-01.ts"
+import item_retro_calculator from "./items/retro-calculator.ts"
 import item_retro_grid from "./items/retro-grid.ts"
 import item_retro_tv from "./items/retro-tv.ts"
 import item_reveal_card from "./items/reveal-card.ts"
@@ -175,7 +187,9 @@ import item_scratch_card from "./items/scratch-card.ts"
 import item_scroll_device from "./items/scroll-device.ts"
 import item_scroll_progress from "./items/scroll-progress.ts"
 import item_segmented_control from "./items/segmented-control.ts"
+import item_service_bell from "./items/service-bell.ts"
 import item_shimmer_button from "./items/shimmer-button.ts"
+import item_signature_pad from "./items/signature-pad.ts"
 import item_size_guide_01 from "./items/size-guide-01.ts"
 import item_skeleton_shimmer from "./items/skeleton-shimmer.ts"
 import item_sketch_pad from "./items/sketch-pad.ts"
@@ -194,7 +208,9 @@ import item_status_dot from "./items/status-dot.ts"
 import item_stepper from "./items/stepper.ts"
 import item_sticky_notes from "./items/sticky-notes.ts"
 import item_store_01 from "./items/store-01.ts"
+import item_t9_keypad from "./items/t9-keypad.ts"
 import item_tag_input from "./items/tag-input.ts"
+import item_take_a_number from "./items/take-a-number.ts"
 import item_tape_measure from "./items/tape-measure.ts"
 import item_team_01 from "./items/team-01.ts"
 import item_terminal from "./items/terminal.ts"
@@ -203,7 +219,9 @@ import item_testimonials_02 from "./items/testimonials-02.ts"
 import item_testimonials_03 from "./items/testimonials-03.ts"
 import item_text_3d from "./items/text-3d.ts"
 import item_text_reveal from "./items/text-reveal.ts"
+import item_theremin from "./items/theremin.ts"
 import item_thermostat from "./items/thermostat.ts"
+import item_ticket_punch from "./items/ticket-punch.ts"
 import item_tilt_card from "./items/tilt-card.ts"
 import item_timeline from "./items/timeline.ts"
 import item_toggle_switch from "./items/toggle-switch.ts"
@@ -218,9 +236,11 @@ import item_vending_pricing_01 from "./items/vending-pricing-01.ts"
 import item_vinyl_player from "./items/vinyl-player.ts"
 import item_volume_knob from "./items/volume-knob.ts"
 import item_wall_calendar from "./items/wall-calendar.ts"
+import item_wax_seal from "./items/wax-seal.ts"
 import item_weather_widget from "./items/weather-widget.ts"
 import item_wedding_01 from "./items/wedding-01.ts"
 import item_widgets_01 from "./items/widgets-01.ts"
+import item_wind_chimes from "./items/wind-chimes.ts"
 import item_wireframe_orb from "./items/wireframe-orb.ts"
 import item_world_clock from "./items/world-clock.ts"
 import item_zen_garden from "./items/zen-garden.ts"
@@ -261,6 +281,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_compose_refs,
   item_contact_01,
   item_copy_button,
+  item_corkboard,
   item_credit_01,
   item_credit_card_form,
   item_cta_01,
@@ -277,6 +298,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_dot_pattern,
   item_dots_loader,
   item_dotted_globe,
+  item_drum_machine,
   item_dynamic_island,
   item_envelope,
   item_event_01,
@@ -295,6 +317,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_flip_card,
   item_floating_label_input,
   item_focus_timer_01,
+  item_folding_map,
   item_footer_01,
   item_footer_02,
   item_footer_03,
@@ -328,8 +351,10 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_kbd,
   item_keyboard,
   item_kitchen_timer,
+  item_label_maker,
   item_lamp,
   item_lava_lamp,
+  item_led_ticker,
   item_light_switch_panel,
   item_like_button,
   item_login_01,
@@ -344,12 +369,15 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_matchbox,
   item_menu_01,
   item_meteors,
+  item_metronome,
   item_morse_key,
   item_music_box,
   item_music_equalizer,
   item_navbar_01,
   item_navbar_02,
+  item_neon_sign,
   item_newtons_cradle,
+  item_nixie_tubes,
   item_noise_background,
   item_not_found_01,
   item_notification_stack,
@@ -358,13 +386,16 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_office_directory_01,
   item_orbiting_circles,
   item_order_01,
+  item_oscilloscope,
   item_otp_input,
+  item_pager,
   item_paper_shredder,
   item_particle_galaxy,
   item_particle_wave,
   item_passcode_pad,
   item_password_input,
   item_photo_folder,
+  item_piano,
   item_podcast_01,
   item_polaroid_stack,
   item_portfolio_01,
@@ -383,6 +414,7 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_receipt_printer,
   item_recipe_01,
   item_release_01,
+  item_retro_calculator,
   item_retro_grid,
   item_retro_tv,
   item_reveal_card,
@@ -400,7 +432,9 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_scroll_device,
   item_scroll_progress,
   item_segmented_control,
+  item_service_bell,
   item_shimmer_button,
+  item_signature_pad,
   item_size_guide_01,
   item_skeleton_shimmer,
   item_sketch_pad,
@@ -419,7 +453,9 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_stepper,
   item_sticky_notes,
   item_store_01,
+  item_t9_keypad,
   item_tag_input,
+  item_take_a_number,
   item_tape_measure,
   item_team_01,
   item_terminal,
@@ -428,7 +464,9 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_testimonials_03,
   item_text_3d,
   item_text_reveal,
+  item_theremin,
   item_thermostat,
+  item_ticket_punch,
   item_tilt_card,
   item_timeline,
   item_toggle_switch,
@@ -443,9 +481,11 @@ export const itemDefinitions: RegistryItemDefinition[] = [
   item_vinyl_player,
   item_volume_knob,
   item_wall_calendar,
+  item_wax_seal,
   item_weather_widget,
   item_wedding_01,
   item_widgets_01,
+  item_wind_chimes,
   item_wireframe_orb,
   item_world_clock,
   item_zen_garden,
