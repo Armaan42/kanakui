@@ -20,10 +20,10 @@ const tracks = [
 ]
 
 const shows = [
-  { date: "14 Mar", day: "Sat", city: "London", venue: "The Roundhouse", status: "few-left" },
-  { date: "18 Mar", day: "Wed", city: "Paris", venue: "La Cigale", status: "on-sale" },
-  { date: "21 Mar", day: "Sat", city: "Berlin", venue: "Columbia Theater", status: "sold-out" },
-  { date: "25 Mar", day: "Wed", city: "Amsterdam", venue: "Paradiso", status: "on-sale" },
+  { date: "14 Mar", day: "Sat", city: "London", venue: "The Engine Shed", status: "few-left" },
+  { date: "18 Mar", day: "Wed", city: "Paris", venue: "Salle Lumière", status: "on-sale" },
+  { date: "21 Mar", day: "Sat", city: "Berlin", venue: "Halle am Fluss", status: "sold-out" },
+  { date: "25 Mar", day: "Wed", city: "Amsterdam", venue: "De Lichtfabriek", status: "on-sale" },
 ] as const
 
 /** An artist section: the record on a turntable, the tracklist and upcoming shows. */
