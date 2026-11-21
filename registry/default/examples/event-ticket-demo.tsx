@@ -18,7 +18,7 @@ export default function EventTicketDemo() {
         event="Golden Hour Live: Mara Lune"
         date="Sat, 14 Mar 2026"
         time="Doors 19:00"
-        venue="The Roundhouse, Hall B"
+        venue="The Engine Shed, Hall B"
         seat="Floor · General admission"
         code="GHL-0314-8842"
         image={{

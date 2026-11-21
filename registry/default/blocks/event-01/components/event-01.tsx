@@ -62,7 +62,7 @@ export function Event01() {
               <CalendarDays aria-hidden="true" className="size-4" /> 14–15 March 2026
             </span>
             <span className="inline-flex items-center gap-2">
-              <MapPin aria-hidden="true" className="size-4" /> The Roundhouse, London
+              <MapPin aria-hidden="true" className="size-4" /> The Engine Shed, London
             </span>
           </div>
 
@@ -125,7 +125,7 @@ export function Event01() {
             event="Golden Hour Festival: weekend pass"
             date="14–15 Mar 2026"
             time="Gates 14:00"
-            venue="The Roundhouse, London"
+            venue="The Engine Shed, London"
             seat="Weekend · All stages"
             code="GHF-WKND-2026"
             image={{ src: TICKET_PHOTO, alt: "A crowd with raised hands under golden stage lights" }}
