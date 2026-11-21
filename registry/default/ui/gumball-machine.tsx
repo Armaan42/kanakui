@@ -68,7 +68,9 @@ function GumballMachine({ count = 30, colors = COLORS, onDispense, className, ..
 
   React.useEffect(() => () => window.clearTimeout(timer.current), [])
 
-  const colorOf = (id: number) => colors[(id * 5 + 3) % colors.length]
+  // Step through the colours by a stride that shares no factor with their count, so every colour turns up.
+  const stride = [5, 7, 11, 13].find((step) => colors.length % step !== 0) ?? 1
+  const colorOf = (id: number) => colors[(id * stride + 3) % colors.length]
   const left = total - next
 
   const dispense = () => {
